@@ -64,11 +64,11 @@ The platform supports three distinct delivery methods, with automatic failover b
 
 ## Direct MX (Port 25)
 
-Connects directly to the victim's mail server with full domain spoofing capability. No sending limits beyond IP reputation. The primary sender domain observed was `pablotechnostore.com`.
+Connects directly to the victim's mail server with full domain spoofing capability. No sending limits beyond IP reputation. The primary sender domain observed was `pablotechnostore[.]com`.
 
 ## Office 365 SMTP Relay
 
-Uses `smtp.office365.com:587` with compromised O365 accounts. Display-name spoofing only, since O365 enforces FROM address matching. This method achieves the highest inbox rate for O365-to-O365 delivery. The recovered credentials were `business@pablotechnostore.com` with password `@31checkmain@`.
+Uses `smtp.office365.com:587` with O365 accounts. The framework allowed for Display-name spoofing only, since O365 enforces FROM address matching. This method achieves the highest inbox rate for O365-to-O365 delivery. 
 
 ## Microsoft Graph API
 
@@ -239,7 +239,7 @@ Across **16,284 lines** of JavaScript spread over 38 source files, the code exhi
 // ─── Scan single domain's MX records ────────────────────────────────────────
 ```
 
-**Emoji in source code strings** appears **99 times** across the codebase, used heavily in `console.log` output, Telegram messages, and UI elements. The license bot alone uses over 40 distinct emoji characters in its output strings (`💀`, `✅`, `🆕`, `🔑`, `💻`, `🌐`, `📊`, `🧠`, `⚡`, etc.). While emoji in user-facing output is a deliberate design choice, the density and consistency here mirrors the output style of prompted LLMs, which favour emoji-heavy terminal output.
+**Emoji in source code strings** appears **99 times** across the codebase, used heavily in `console.log` output, Telegram messages, and UI elements. The license bot alone uses over 40 distinct emoji characters in its output strings (`💀`, `✅`, `🆕`, `🔑`, `💻`, `🌐`, `📊`, `🧠`, `⚡`, etc.). 
 
 ## What This Means
 
@@ -247,7 +247,7 @@ None of this diminishes the platform's operational capability. The attack chain 
 
 # Conclusion
 
-This marks another step in the evolution of Phishing-as-a-Service platforms. What makes UPMI notable is the addition of collective intelligence gathering across licensed operators, where every campaign improves evasion effectiveness for the entire network. Combined with Cloudflare Turnstile CAPTCHA gates that block automated analysis, AES-256-GCM encrypted URLs unique to each recipient, and Evilginx-based MFA bypass.
+This marks another step in the evolution of Phishing-as-a-Service platforms. What makes UPMI notable is the AI-assisted development, which included collective intelligence gathering across licensed operators, where every campaign improves evasion effectiveness for the entire network. Combined with Cloudflare Turnstile CAPTCHA gates that block automated analysis, AES-256-GCM encrypted URLs unique to each recipient, and Evilginx-based MFA bypass.
 
 The exposed master server gave us full visibility into the developer's operation, including their licensing model, intelligence sharing infrastructure, operator dashboard, and the credentials tying it all together. We hope sharing this analysis helps defenders detect and disrupt campaigns leveraging this platform.
 
