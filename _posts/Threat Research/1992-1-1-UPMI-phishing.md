@@ -2,7 +2,7 @@
 title: "UpYours: Inside the UPMI Phishing-as-a-Service Platform"
 classes: wide
 header:
-  teaser: /assets/images/UPMI-AiTM-toolkit/logo.png
+  teaser: /assets/images/UPMI/logo.png
 ribbon: black
 description: "Source code analysis of a fully-featured AiTM phishing platform with collective intelligence, licensing system and exposed credentials"
 categories:
@@ -92,15 +92,15 @@ RSA-2048 DKIM private keys were maintained for six sender domains: `bowhead-tran
 
 Operators purchasing access to UPMI receive a web dashboard branded **"Xverginia - Evilginx Session Manager"**. The login page for version 4.1 lists `@andrew_z12` as the contact for license renewal and support.
 
-[![1](/assets/images/UPMI-AiTM-toolkit/XverginiaLogin.png)](/assets/images/UPMI-AiTM-toolkit/XverginiaLogin.png){: .align-center .img-border}
+[![1](/assets/images/UPMI/XverginiaLogin.png){: .align-center .img-border}](/assets/images/UPMI/XverginiaLogin.png)
 <p class="figure-caption">Xverginia 4.1 dashboard login page</p>
 
 The dashboard provides visibility into visitors, active sessions, and real-time notifications when session tokens are successfully stolen. Configuration is focused on two areas: Telegram channel and bot token for notifications, and Evilginx management including enabling/disabling phishing lures and changing phishing URLs.
 
-[![1](/assets/images/UPMI-AiTM-toolkit/LureMenu.png)](/assets/images/UPMI-AiTM-toolkit/LureMenu.png){: .align-center .img-border}
+[![1](/assets/images/UPMI/LureMenu.png){: .align-center .img-border}](/assets/images/UPMI/LureMenu.png)
 <p class="figure-caption">Xverginia 4.1 dashboard lure configuration</p>
 
-[![1](/assets/images/UPMI-AiTM-toolkit/TelegramSettings.png)](/assets/images/UPMI-AiTM-toolkit/TelegramSettings.png){: .align-center .img-border}
+[![1](/assets/images/UPMI/TelegramSettings.png){: .align-center .img-border}](/assets/images/UPMI/TelegramSettings.png)
 <p class="figure-caption">Xverginia 4.1 dashboard Telegram settings</p>
 
 ## Dashboard Licensing
@@ -111,10 +111,10 @@ The dashboard has its own licensing system, separate from the mailer, using port
 
 Censys queries for hosts running "Express" software containing "Xverginia" returned **40 results** at time of writing. These include what appear to be newer versions of the dashboard with a different design and obfuscated source code, deployed on port 2030.
 
-[![1](/assets/images/UPMI-AiTM-toolkit/NewVersion.png)](/assets/images/UPMI-AiTM-toolkit/NewVersion.png){: .align-center .img-border}
+[![1](/assets/images/UPMI/NewVersion.png){: .align-center .img-border}](/assets/images/UPMI/NewVersion.png)
 <p class="figure-caption">New Xverginia version login page, on port 2030</p>
 
-[![1](/assets/images/UPMI-AiTM-toolkit/SourceObfuscation.png)](/assets/images/UPMI-AiTM-toolkit/SourceObfuscation.png){: .align-center .img-border}
+[![1](/assets/images/UPMI/SourceObfuscation.png){: .align-center .img-border}](/assets/images/UPMI/SourceObfuscation.png)
 <p class="figure-caption">New Xverginia version obfuscated source code</p>
 
 # Evasion and Anti-Analysis
@@ -139,7 +139,7 @@ Tracking pixels and click redirects are routed through a Cloudflare Worker. The 
 
 The LinkShield intermediate page presents a Cloudflare Turnstile CAPTCHA before redirecting to the Evilginx lure. This blocks all automated URL detonation sandboxes from ever reaching the actual phishing page. Microsoft Safe Links, Proofpoint, and similar products cannot get past this gate.
 
-[![1](/assets/images/UPMI-AiTM-toolkit/LinkShield.png)](/assets/images/UPMI-AiTM-toolkit/LinkShield.png){: .align-center .img-border}
+[![1](/assets/images/UPMI/LinkShield.png){: .align-center .img-border}](/assets/images/UPMI/LinkShield.png)
 <p class="figure-caption">LinkShield Telegram notification</p>
 
 ## Content Randomization
@@ -174,7 +174,7 @@ The developer has pre-loaded `knowledge-base.js` with extensive intelligence on 
 
 The system automatically selects the optimal delivery method per target domain based on this intelligence. O365 targets get the O365 relay (same-ecosystem trust). Proofpoint targets get the O365 relay for Microsoft reputation. cPanel and GoDaddy targets get Port 25 direct delivery to save relay quota for harder targets.
 
-[![1](/assets/images/UPMI-AiTM-toolkit/DomainRotated.png)](/assets/images/UPMI-AiTM-toolkit/DomainRotated.png){: .align-center .img-border}
+[![1](/assets/images/UPMI/DomainRotated.png){: .align-center .img-border}](/assets/images/UPMI/DomainRotated.png)
 <p class="figure-caption">Domain rotation and standby domain count Telegram notification</p>
 
 # Phishing Templates
