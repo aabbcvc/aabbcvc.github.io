@@ -145,7 +145,7 @@ Within the emails themselves are the phishing links - which is managed purely by
 
 From the website, it lists the below features:
 
-[![1](/assets/images/UPMI/9.png){: .align-center .img-border}](/assets/images/UPMI/9.png)
+[![1](/assets/images/UPMI/10.png){: .align-center .img-border}](/assets/images/UPMI/10.png)
 <p class="figure-caption">LinkShield Features</p>
 
 Every phishing link is encrypted with AES-256-GCM using a shared secret between the sender and the LinkShield decryption server. The encrypted payload contains the destination URL, a timestamp, the recipient email, and a random nonce. No automated scanner can determine the destination without the decryption key. The shared encryption secret recovered from the source: `qVLPQpK8d6xseWkQRw0S2u/mNUrTT/XRZUh4qCfoeCw=`
