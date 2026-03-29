@@ -32,9 +32,18 @@ We observed campaigns using UPMI's platform as early as March 12, 2026. Hardcode
 
 The full attack chain is explicitly documented in the threat actor's own `knowledge-base.js`:
 
-[![1](/assets/images/UPMI/1.png){: .align-center .img-border}](/assets/images/UPMI/1.png)
-<p class="figure-caption">Attack Chain</p>
-
+```js
+attackChain: [
+  '1. MX Sender sends email (Gmail API / O365 relay / Port 25 direct)',
+  '2. Email body contains encrypted link → go.docviewportal.com/d/TOKEN',
+  '3. LinkShield decrypts AES-256 token → extracts target URL + recipient',
+  '4. Turnstile CAPTCHA verification (blocks all scanners)',
+  '5. Redirect to Evilginx lure → webmail.tms.ac/...',
+  '6. Evilginx reverse-proxies Microsoft login page',
+  '7. Target enters credentials → Evilginx captures username + password + session token',
+  '8. Session token = full account access (bypasses MFA)',
+]
+```
 # Sending Infrastructure (MX Sender)
 
 The platform supports three distinct delivery methods, with automatic failover between them. 
