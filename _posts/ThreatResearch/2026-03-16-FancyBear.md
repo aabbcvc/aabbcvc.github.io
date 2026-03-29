@@ -15,6 +15,7 @@ redirect_from:
   - /threat research/FancyBear/   
 ---
 
+
 # Overview
 
 On March 11th 2026, our friends at Hunt.io published an analysis into a campaign they track as [Operation Roundish](https://hunt.io/blog/operation-roundish-apt28-roundcube-exploitation), based on an exposed open-directory scanned on 13th January 2026. This archive is available on the Hunt.io platform. 
