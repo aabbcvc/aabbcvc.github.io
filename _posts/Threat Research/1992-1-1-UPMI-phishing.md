@@ -407,13 +407,9 @@ The exposed master server gave us full visibility into the developer's operation
 | **Resource Development** | [T1585.002](https://attack.mitre.org/techniques/T1585/002/) | Establish Accounts: Email Accounts | Multiple sender accounts across O365 and custom domains |
 | **Resource Development** | [T1608.005](https://attack.mitre.org/techniques/T1608/005/) | Stage Capabilities: Link Target | LinkShield decryption server + Evilginx reverse-proxy infrastructure |
 | **Resource Development** | [T1588.002](https://attack.mitre.org/techniques/T1588/002/) | Obtain Capabilities: Tool | Evilginx reverse-proxy framework for credential and session token harvesting |
-| **Reconnaissance** | [T1589.002](https://attack.mitre.org/techniques/T1589/002/) | Gather Victim Identity: Email Addresses | Lead lists (`Leads-20k.txt`), OSINT recon module (`osint-recon.js`) |
 | **Reconnaissance** | [T1596.002](https://attack.mitre.org/techniques/T1596/002/) | Search Open Technical Databases: DNS/Passive DNS | Automated DMARC/SPF/MX scanning per target domain before sending |
-| **Initial Access** | [T1566.001](https://attack.mitre.org/techniques/T1566/001/) | Phishing: Spearphishing Attachment | HTML attachment with blurred document preview requiring login |
-| **Initial Access** | [T1566.002](https://attack.mitre.org/techniques/T1566/002/) | Phishing: Spearphishing Link | AES-256-GCM encrypted per-recipient phishing links |
 | **Credential Access** | [T1557.001](https://attack.mitre.org/techniques/T1557/001/) | Adversary-in-the-Middle | Evilginx reverse-proxy intercepts credentials and live session tokens (MFA bypass) |
 | **Credential Access** | [T1539](https://attack.mitre.org/techniques/T1539/) | Steal Web Session Cookie | Evilginx captures live session tokens providing full account access |
-| **Defense Evasion** | [T1497.001](https://attack.mitre.org/techniques/T1497/001/) | Virtualization/Sandbox Evasion | Turnstile CAPTCHA gate, scanner IP detection, bot user-agent filtering |
 | **Defense Evasion** | [T1027](https://attack.mitre.org/techniques/T1027/) | Obfuscated Files or Information | AES-256-GCM encrypted core modules, encrypted URL tokens |
 | **Command and Control** | [T1071.001](https://attack.mitre.org/techniques/T1071/001/) | Application Layer Protocol: Web Protocols | HTTPS for licensing, intelligence sync, and LinkShield |
 | **Command and Control** | [T1102](https://attack.mitre.org/techniques/T1102/) | Web Service | Telegram for license management, campaign alerts, and remote kill switch |
