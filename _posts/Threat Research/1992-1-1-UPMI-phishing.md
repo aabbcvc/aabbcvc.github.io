@@ -214,6 +214,19 @@ For *Google Workspace* targets, the opposite strategy applies, all `X-MS-*` head
 
 For *Proofpoint* targets, tracked images are removed and URL count is minimised, reducing surface area for Proofpoint's URL detonation engine.
 
+**Automated Domain Rotation**
+
+Sending domains are managed through a pool defined in `sender-domains.txt`, with one entry per line:
+
+`name|email|helo|dkim_domain|dkim_selector|dkim_key_path`
+
+The sender cycles through the pool in round-robin order - each email increments an index counter, so consecutive emails rotate across all domains in the pool. The DKIM private key for each domain is loaded automatically at startup from `dkim-keys/<domain>/private.pem`.
+
+`health-monitor.js` runs on a 30-minute interval, checking every sending domain and IP against 15 blacklists sources. If a listing is detected, a Telegram alert fires immediately instructing the operator to swap the domain out. The operator then removes the burned entry from `sender-domains.txt` and adds a replacement:
+
+[![1](/assets/images/UPMI/DomainRotated.png){: .align-center .img-border}](/assets/images/UPMI/DomainRotated.png)
+<p class="figure-caption">Domain rotation and standby domain count Telegram notification</p>
+
 # License and Remote Control
 
 ## Architecture
@@ -249,9 +262,6 @@ The data collected per target domain includes mail filter type (Proofpoint, Mime
 The developer has pre-loaded `knowledge-base.js` with extensive intelligence on mail security vendors, rating each on a difficulty scale of 1-10. Proofpoint scores a 9, with notes that clean business emails bypass ML scoring and that DKIM from real domains get reputation boosts. GoDaddy scores a 3, with notes that it has almost no content filtering and no URL scanning.
 
 The system automatically selects the optimal delivery method per target domain based on this intelligence. O365 targets get the O365 relay (same-ecosystem trust). Proofpoint targets get the O365 relay for Microsoft reputation. cPanel and GoDaddy targets get Port 25 direct delivery to save relay quota for harder targets.
-
-[![1](/assets/images/UPMI/DomainRotated.png){: .align-center .img-border}](/assets/images/UPMI/DomainRotated.png)
-<p class="figure-caption">Domain rotation and standby domain count Telegram notification</p>
 
 # Phishing Templates
 
