@@ -11,8 +11,8 @@ tags:
   - Threat Research
 toc: true
 redirect_from:
-  - /threat%20research/FancyBear/
-  - /threat research/FancyBear/  
+  - /threat%20research/DPRK-Crypto-Heist/
+  - /threat research/DPRK-Crypto-Heist/
 ---
 
 # Korean Crypto Theft

@@ -10,6 +10,9 @@ categories:
 tags:
   - Threat Research
 toc: true
+redirect_from:
+  - /threat%20research/UPMI-phishing/
+  - /threat research/UPMI-phishing/
 ---
 
 # Overview
