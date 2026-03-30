@@ -12,7 +12,7 @@ tags:
 toc: true
 redirect_from:
   - /threat%20research/FancyBear/
-  - /threat research/FancyBear/   
+  - /threat research/FancyBear/
 ---
 
 
