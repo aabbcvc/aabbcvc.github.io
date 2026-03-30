@@ -4,7 +4,7 @@ classes: wide
 header:
   teaser: /assets/images/UPMI/logo.png
 ribbon: black
-description: "Source code analysis of a fully-featured AiTM phishing platform with collective intelligence, licensing system and exposed credentials"
+description: "Analysis of a fully-featured AiTM phishing platform with collective intelligence & licensing system"
 categories:
   - Threat Research
 tags:
@@ -22,11 +22,11 @@ Ctrl-Alt-Intel researchers identified and analysed the full source code of an AI
 [![1](/assets/images/UPMI/8.png){: .align-center .img-border}](/assets/images/UPMI/8.png)
 <p class="figure-caption">UPMI ULTIMATE panel</p>
 
-This was developed intended to be sold with licensed deployments - indicating Phishing-as-a-Service buisness model. The platform was complete a remote kill switch and a collective intelligence system where every deployed instance feeds campaign telemetry back to the developer. Every operator's successes and failures attempts to improve evasion effectiveness for all operators.
+This was developed intended to be sold with licensed deployments - indicating Phishing-as-a-Service buisness model. The platform was complete with a remote kill and a collective intelligence system where every deployed instance feeds campaign telemetry back to the developer. Every operator's successes and failures *attempt* to improve evasion effectiveness for all operators.
 
-The platform provides an end-to-end capablities: phishing email composition and delivery, link obfuscation, Cloudflare Turnstile CAPTCHA gates to block automated analysis, and final redirection to Evilginx reverse-proxy pages that capture credentials and **live session tokens, bypassing MFA entirely**.
+The platform provides an end-to-end capablities: phishing email composition and delivery, link obfuscation, automated domain rotation, Cloudflare Turnstile CAPTCHA gates to block automated analysis, and final redirection to Evilginx reverse-proxy pages that capture credentials and **live session tokens, bypassing MFA entirely**.
 
-We observed campaigns using UPMI's platform as early as March 12, 2026. Hardcoded credentials for the operator dashboard, SMTP accounts, Azure AD applications, and the developer's Telegram bot token were all recovered from the source code.
+We observed developers testing UPMI's platform as early as March 12, 2026. Hardcoded credentials for the operator dashboard, SMTP accounts, Azure AD applications, and the developer's Telegram bot token were all recovered from the source code.
 
 # Attack Chain
 
