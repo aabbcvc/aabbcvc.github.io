@@ -9,7 +9,7 @@ layout: default
 {% endif %}
 
 <div id="main" role="main">
-  <article class="page wide-page" itemscope itemtype="https://schema.org/CreativeWork">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
     {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
     {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
@@ -27,7 +27,7 @@ layout: default
               <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
             {% endif %}
             {% if page.read_time %}
-              <span class="meta-sep">&middot;</span>
+              <span class="meta-dot">&middot;</span>
               <span><i class="far fa-clock" aria-hidden="true"></i> {% include read-time.html %}</span>
             {% endif %}
           </div>
@@ -70,18 +70,18 @@ layout: default
   </article>
 
   {% if page.id and page.related and site.related_posts.size > 0 %}
-    <div class="page__related wide-related">
+    <div class="page__related">
       <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}</h4>
-      <div class="grid__wrapper">
+      <div class="related-grid">
         {% for post in site.related_posts limit:4 %}
           {% include archive-single.html type="grid" %}
         {% endfor %}
       </div>
     </div>
   {% elsif page.id and page.related %}
-    <div class="page__related wide-related">
+    <div class="page__related">
       <h4 class="page__related-title">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}</h4>
-      <div class="grid__wrapper">
+      <div class="related-grid">
         {% for post in site.posts limit:4 %}
           {% if post.id == page.id %}
             {% continue %}
