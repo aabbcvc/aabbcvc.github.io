@@ -235,11 +235,11 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: true
+      author_profile: false
       read_time: true
       comments: false
       share: false
-      related: false
+      related: true
   # Threat Research posts - use /research/ prefix in URLs
   - scope:
       path: "_posts/Threat Research"

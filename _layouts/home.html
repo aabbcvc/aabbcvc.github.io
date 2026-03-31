@@ -1,10 +1,17 @@
 ---
-layout: archive
+layout: default
 ---
 
-{{ content }}
+<div class="home-hero">
+  <div class="home-hero__inner">
+    <img src="{{ '/assets/images/site_data/img.png' | relative_url }}" alt="{{ site.title }}" class="home-hero__logo">
+    <h1 class="home-hero__title">{{ site.title }}</h1>
+    <p class="home-hero__tagline">{{ site.description }}</p>
+    <p class="home-hero__sub">Independent threat intelligence research &mdash; exposing adversary infrastructure, tooling, and operations.</p>
+  </div>
+</div>
 
-<h3 class="archive__subtitle">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h3>
+{{ content }}
 
 {% if paginator %}
   {% assign posts = paginator.posts %}
@@ -12,8 +19,68 @@ layout: archive
   {% assign posts = site.posts %}
 {% endif %}
 
-{% for post in posts %}
-  {% include archive-single.html %}
-{% endfor %}
+{% assign featured_post = posts | first %}
+{% assign remaining_posts = posts | slice: 1, 100 %}
+
+{% if featured_post %}
+<div class="home-content">
+
+  <section class="home-featured">
+    <h2 class="section-heading">Latest Research</h2>
+    <a href="{{ featured_post.url | relative_url }}" class="featured-card">
+      {% if featured_post.header.teaser %}
+        <div class="featured-card__image" style="background-image: url('{{ featured_post.header.teaser }}')"></div>
+      {% endif %}
+      <div class="featured-card__body">
+        <span class="featured-card__category">{{ featured_post.categories | first }}</span>
+        <h3 class="featured-card__title">{{ featured_post.title | markdownify | remove: "<p>" | remove: "</p>" }}</h3>
+        {% if featured_post.description %}
+          <p class="featured-card__excerpt">{{ featured_post.description | truncate: 200 }}</p>
+        {% elsif featured_post.excerpt %}
+          <p class="featured-card__excerpt">{{ featured_post.excerpt | strip_html | truncate: 200 }}</p>
+        {% endif %}
+        <div class="featured-card__meta">
+          <time datetime="{{ featured_post.date | date_to_xmlschema }}">{{ featured_post.date | date: "%B %-d, %Y" }}</time>
+          <span class="meta-sep">&middot;</span>
+          {% assign words = featured_post.content | number_of_words %}
+          {% assign mins = words | divided_by: 170 %}
+          {% if mins < 1 %}{% assign mins = 1 %}{% endif %}
+          <span>{{ mins }} min read</span>
+        </div>
+      </div>
+    </a>
+  </section>
+
+  {% if remaining_posts.size > 0 %}
+  <section class="home-posts">
+    <h2 class="section-heading">All Research</h2>
+    <div class="posts-grid">
+      {% for post in remaining_posts %}
+        <a href="{{ post.url | relative_url }}" class="post-card">
+          <div class="post-card__body">
+            <span class="post-card__category">{{ post.categories | first }}</span>
+            <h3 class="post-card__title">{{ post.title | markdownify | remove: "<p>" | remove: "</p>" }}</h3>
+            {% if post.description %}
+              <p class="post-card__excerpt">{{ post.description | truncate: 120 }}</p>
+            {% elsif post.excerpt %}
+              <p class="post-card__excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+            {% endif %}
+            <div class="post-card__meta">
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+              <span class="meta-sep">&middot;</span>
+              {% assign words = post.content | number_of_words %}
+              {% assign mins = words | divided_by: 170 %}
+              {% if mins < 1 %}{% assign mins = 1 %}{% endif %}
+              <span>{{ mins }} min read</span>
+            </div>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+</div>
+{% endif %}
 
 {% include paginator.html %}
