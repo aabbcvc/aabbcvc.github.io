@@ -32,10 +32,9 @@ In the second blog we will analyse:
 
 # Claude's Supply Chain Attack
 
-On 18th March 2026, [@ice_wzl_cyber](https://x.com/ice_wzl_cyber) identified an open-directory 
+On 18th March 2026, [@ice_wzl_cyber](https://x.com/ice_wzl_cyber) identified an open-directory: 
 
-
-published details of a supply chain compromise affecting BuddyBoss, a popular WordPress plugin and theme used by thousands of websites globally. Within the threat actor's exposed open-directory, we recovered a Claude Code session log (`oldconv.txt`) that captured the attack in real time: a French-speaking threat actor directing Claude through every stage of the supply chain compromise.
+....
 
 The conversation is conducted entirely in French, with the threat actor issuing short, direct instructions and Claude responding with code, analysis, and operational guidance. We've translated and analysed the key exchanges below.
 
