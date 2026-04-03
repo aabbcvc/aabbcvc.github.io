@@ -43,7 +43,6 @@ The conversation is conducted entirely in French, with the threat actor issuing 
 [![1](/assets/images/buddyboss/9.png){: .align-center .img-border}](/assets/images/buddyboss/9.png)
 <p class="figure-caption">Breaking down the kill-chain</p>
 
-
 ## Understanding the Upload Mechanism
 
 The session opens with a failed attempt. Claude had been trying to upload the backdoored ZIP to the Caseproof Mothership (`licenses.caseproof.com`) using `cloudscraper`, a Python library designed to bypass Cloudflare browser checks. The upload times out after 90 seconds. Cloudflare was blocking the multipart file upload.

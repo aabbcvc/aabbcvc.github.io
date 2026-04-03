@@ -40,6 +40,9 @@ Although the Claude Code session transcript was not complete, and we only observ
 
 > The threat actor had a server-side C2 listener that captured all victim telemetry, allowing us to ascertain the near complete kill-chain
 
+[![1](/assets/images/buddyboss/10.png){: .align-center .img-border}](/assets/images/buddyboss/10.png)
+<p class="figure-caption">CI/CD secret exfiltration</p>
+
 # CI/CD Pipeline Compromise
 
 ## The Malicious Workflow
