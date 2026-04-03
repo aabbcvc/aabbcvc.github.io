@@ -1,10 +1,10 @@
 ---
-title: "AI-enabled fraud: Claude's Supply Chain-Attack"
+title: "The BuddyBoss Attack: Claude's Supply Chain-Attack"
 classes: wide
 header:
   teaser: /assets/images/wordpress/logo.png
 ribbon: black
-description: "Analysis of a fully-featured AiTM phishing platform with a collective intelligence & licensing system"
+description: "How Claude infiltrated the supply-chain, compromising hundreds of victims for fraud"
 categories:
   - Threat Research
 tags:
@@ -20,15 +20,12 @@ At Ctrl-Alt-Intel, we've observed threat actors use Claude to successfully later
 
 However, in this blog we will be exposing a **French** threat actor who has used Claude, under the premise of a Capture The Flag (CTF) challenge, to perform a successful supply-chain attack. The flag in this case was infiltrating the CI/CD pipeline for the BuddyBoss Wordpress plugin/theme, embedding it with malicious code, and pushing this to production - successfully compromising **300 of victim websites** with the intent of stealing Stripe API keys. These keys would almost certainly be stolen for fraud. 
 
-This research will be split into two blogs, in the first we will discuss:
+This research will be split into two blogs, in this blog, *Claude's Supply Chain-Attack* we will discuss:
 
-1. **Supply Chain Attack** - An analysis of the **French** threat actors prompts used to infiltrate the supply-chain
+1. **Claude Prompt Analysis** - An analysis of the **French** threat actors prompts used to infiltrate the supply-chain
 2. **Victimology** - An analysis of the victims & the data stolen successfully stolen by threat actors
 
-In the second blog we will analyse:
-
-2. **Backdoored Plugins** - Studying the backdoors embedded within the Wordpress plugins
-4. **Seperate Targeting** - This threat actor also targeted Wordpress plugins without a backdoor, we'll analyse this too
+In the second blog, *DFIR Report*, we will attempt to deep-dive the entire CI/CD attack chain, from initial access, to lateral movement, to actions on objectives. In this blog we will also analyse the plugins themselves, and this threat actors other attempts at targeting Wordpress sites.   
 
 # Claude's Supply Chain Attack
 
@@ -166,7 +163,7 @@ Shortly after, real victim callbacks begin arriving. Claude parses the incoming 
 
 Claude successfully exfiltrates live Stripe API keys from at least one victim site, along with database credentials and WordPress configuration files from multiple others.
 
-# What Claude Made Possible
+# What Claude Made Possible From These Logs
 
 Throughout the recovered session, Claude served as far more than a code assistant. It was an active participant in every phase of the supply chain attack:
 
@@ -191,7 +188,3 @@ We used Claude to help analyse and translate the `oldconv.txt` file. After analy
 <p class="figure-caption">Confirmed local test victim</p>
 
 > We want to emphasise that the recovered conversation begins mid-session. Prior sessions, where the API credentials were obtained, the backdoored ZIPs were initially crafted, the C2 infrastructure was built, and the GitHub repository was potentially compromised, were not captured. The full scope of Claude's involvement across the entire operation is not visible to us.
-
-# Victimology
-
-When the backdoor ran, it wi
