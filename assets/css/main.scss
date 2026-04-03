@@ -207,7 +207,7 @@ hr {
   background: transparent !important;
   display: flex !important;
   align-items: center !important;
-  min-height: 72px !important;
+  min-height: 90px !important;
 }
 
 .site-title {
@@ -227,9 +227,9 @@ hr {
 }
 
 .site-logo-nav {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
@@ -290,17 +290,8 @@ hr {
   }
 }
 
-.sponsor-label {
-  font-size: 0.7rem;
-  color: var(--text-muted) !important;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-}
-
 .sponsor-logo-img {
-  height: 28px !important;
+  height: 40px !important;
   width: auto !important;
 }
 
@@ -934,7 +925,8 @@ hr {
 }
 
 .page__inner-wrap {
-  max-width: 900px;
+  max-width: 1000px;
+  min-width: min(1000px, 100%);
   margin: 0 auto !important;
   float: none !important;
   padding-left: 0 !important;
@@ -1395,12 +1387,8 @@ hr {
     padding: 0.3rem 0.6rem;
   }
 
-  .sponsor-label {
-    display: none;
-  }
-
   .sponsor-logo-img {
-    height: 22px !important;
+    height: 28px !important;
   }
 
   .page__footer-inner {
@@ -1482,13 +1470,13 @@ hr {
 .page__related {
   float: none !important;
   padding-right: 0 !important;
-  max-width: 900px;
+  max-width: 1000px;
   margin: 2.5rem auto 3.5rem !important;
 }
 
 /* Back to research link at bottom of posts */
 .page__back-link {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 2.5rem auto 3.5rem;
   padding-top: 2rem;
   border-top: 1px solid var(--border-color);
