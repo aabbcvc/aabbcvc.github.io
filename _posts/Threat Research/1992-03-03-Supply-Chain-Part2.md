@@ -38,7 +38,7 @@ All findings in this analysis are derived from the threat actor's own C2 server,
 
 Although the Claude Code session transcript was not complete, and we only observed the latter end of the attack (from **Supply Chain Injection**), based on speed, we likely believe Claude Code was also responsible for the the CI/CD exfiltration, lateral movement and credential theft. 
 
-> The threat actor had a server-side C2 listener that captured all information 
+> The threat actor had a server-side C2 listener that captured all victim telemetry, allowing us to ascertain the near complete kill-chain
 
 # CI/CD Pipeline Compromise
 
