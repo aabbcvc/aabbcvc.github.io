@@ -1,10 +1,10 @@
 ---
-title: "From CI/CD to CDN: Anatomy of a WordPress Supply Chain Attack"
+title: "The BuddyBoss Attack: Supply-Chain Incident Report"
 classes: wide
 header:
   teaser: /assets/images/wordpress/logo2.png
 ribbon: black
-description: "How a French threat actor weaponised GitHub Actions, pivoted through BuddyBoss infrastructure, and pushed backdoored plugins to hundreds of WordPress sites"
+description: "Reconstructing the complete kill-chain"
 categories:
   - Threat Research
 tags:
