@@ -1,5 +1,5 @@
 ---
-title: "The BuddyBoss Attack: Supply-Chain Incident"
+title: "The BuddyBoss Attack: Full Incident Analysis"
 classes: wide
 header:
   teaser: /assets/images/wordpress/logo2.png
