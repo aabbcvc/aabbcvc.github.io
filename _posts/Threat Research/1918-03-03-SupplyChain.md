@@ -18,7 +18,7 @@ Threat actors are increasingly using commercial AI tooling to perform successful
 
 At Ctrl-Alt-Intel, we've observed threat actors using Anthrophic's Claude to enable cyber attacks against real world victims. Threat actors used Claude Code to compromise multiple government departments, providing instructions on performing lateral movement, privilege escalation and the exfiltration of data. The use of Claude additionally allowed the threat actors to orchestrate novel attack chains against American universities located within the Middle East. 
 
-Within this blog, we will focus on a French threat actor who has used Claude to perform a successful supply-chain attack against the BuddyBoss WordPress ecosystem. BuddyBoss is a WordPress-based platform for building online communities and learning sites, often used by businesses to sell courses and memberships through integrations with payment processors. It's plugins are used by tens of thousands of websites. Using Claude chat logs obtained from the threat actor's infrastructure, we walk through the supply-chain attack which resulted in the compromised 240+ victim websites before being disrupted. 
+Within this blog, we will focus on a French threat actor who has used Claude to perform a successful supply-chain attack against the BuddyBoss WordPress ecosystem. BuddyBoss is a WordPress-based platform for building online communities and learning sites, often used by businesses to sell courses and memberships through integrations with payment processors. It's plugins are used by tens of thousands of websites. Using Claude chat logs obtained from the threat actor's infrastructure, we walk through the supply-chain attack which resulted in the compromised 250+ victim websites before being disrupted. 
 
 This research will be split into two blogs, in this blog, *Claude's Supply Chain-Attack* we will discuss:
 
@@ -173,7 +173,6 @@ Claude successfully exfiltrates live Stripe API keys from at least one victim si
 
 # What Claude Made Possible From These Logs
 
-
 * **Reverse-engineering** the BuddyBoss update mechanism from stolen source code
 * **Strategising** the attack approach when direct methods failed
 * **Discovering** the Cloudflare bypass by probing Heroku origin IPs
@@ -195,3 +194,13 @@ We used Claude to help analyse and translate the `oldconv.txt` file. After analy
 <p class="figure-caption">Confirmed local test victim</p>
 
 > We want to emphasise that the recovered conversation begins mid-session. Prior sessions, where the API credentials were obtained, the backdoored ZIPs were initially crafted, the C2 infrastructure was built, and the GitHub repository was potentially compromised, were not captured. The full scope of Claude's involvement across the entire operation is not visible to us.
+
+# Victimology
+
+From the C2 loot export, we identified callbacks from 246 unique victim Wordpress websites, with the majority compromised via wp-cron, WordPress's automatic update mechanism. Each callback exfiltrated the site's full database credentials, WordPress authentication keys and salts, admin session cookies, user counts by role, active plugin inventories, and server environment variables. Every callback was forwarded in real time to the threat actor's Telegram. 2,026 individual alerts were logged.
+
+BuddyBoss is marketed for online communities, courses, and membership platforms. The victim pool reflects this: education and LMS platforms running LearnDash, e-commerce sites with WooCommerce and Stripe, healthcare and wellness communities, membership and SaaS platforms, non-profits, and job boards.
+
+The largest single site had **116,164 registered users**. Over **16 GB of stolen .sql databases were recovered** from the C2, alongside Stripe live API keys, full `wp-config.php` files, and WordPress admin session tokens. Victims spanned the United States, Canada, the United Kingdom, Australia, mainland Europe, Africa, and Asia-Pacific, hosted across dozens of independent providers from GoDaddy to WP Engine to self-managed VPS infrastructure.
+
+Multiple victims were running Wordfence and Patchstack. Neither detected the attack. The malicious code arrived through the same trusted update channel as every legitimate release. WordPress checked for updates, found a new version on the official Caseproof CDN, and installed it. Every step was "correct" by the platform's own logic. The sites that were compromised fastest were the ones following best practices: auto-updates enabled, current PHP, current WordPress, security plugins active. They did everything right and were punished for it. Removing the backdoored plugin is not remediation. Full remediation requires rotating every database password, regenerating all WordPress salts, invalidating all sessions, and auditing for secondary persistence. For sites whose .sql dumps are already in the threat actor's hands, the damage is done.
