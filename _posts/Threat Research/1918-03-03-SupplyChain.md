@@ -1,10 +1,10 @@
 ---
-title: "The BuddyBoss Attack: Claude's Supply Chain-Attack"
+title: "The BuddyBoss Attack: Claude's Supply-Chain Attack"
 classes: wide
 header:
   teaser: /assets/images/wordpress/logo.png
 ribbon: black
-description: "How Claude infiltrated the supply-chain, compromising hundreds of victims for fraud"
+description: "How Claude infiltrated the supply-chain, compromising 200+ websites for fraud"
 categories:
   - Threat Research
 tags:
@@ -22,7 +22,7 @@ Within this blog, we will focus on a French threat actor who has used Claude to 
 
 sing Claude chat logs obtained from the threat actor's infrastructure, we walk through the supply-chain attack which resulted in the compromise of 246 victim websites before being disrupted. The Wordpress targeting was significant: over **16 GB of stolen .sql databases**, over **150k user accounts exposed**, and live **Stripe payment API keys** were stolen by the threat actor. Victims spanned education platforms, e-commerce sites, healthcare communities, and membership providers across multiple continents, many of which were running active security plugins that did not detect the compromise.
 
-This research will be split into two blogs, in this blog, *Claude's Supply Chain-Attack* we will discuss:
+This research will be split into two blogs, in this blog, *Claude's Supply-Chain Attack* we will discuss:
 
 1. **Claude Prompt Analysis** - An analysis of the **French** threat actors prompts used to infiltrate the supply-chain
 2. **Victimology** - An analysis of the victims & the data stolen successfully stolen by threat actors

@@ -4,7 +4,7 @@ classes: wide
 header:
   teaser: /assets/images/wordpress/logo2.png
 ribbon: black
-description: "Reconstructing the complete kill-chain"
+description: "Reconstructing the complete kill-chain of the BuddyBoss Attack"
 categories:
   - Threat Research
 tags:
