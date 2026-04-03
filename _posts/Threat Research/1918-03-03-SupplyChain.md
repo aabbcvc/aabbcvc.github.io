@@ -20,7 +20,7 @@ At Ctrl-Alt-Intel, we've observed threat actors using Anthrophic's Claude to ena
 
 Within this blog, we will focus on a French threat actor who has used Claude to perform a successful supply-chain attack against the BuddyBoss WordPress ecosystem. BuddyBoss is a WordPress-based platform for building online communities and learning sites, often used by businesses to sell courses and memberships through integrations with payment processors. Its plugins are used by tens of thousands of websites.
 
-sing Claude chat logs obtained from the threat actor's infrastructure, we walk through the supply-chain attack which resulted in the compromise of 246 victim websites before being disrupted. The Wordpress targeting was significant: over **16 GB of stolen .sql databases**, over **150k user accounts exposed**, and live **Stripe payment API keys** were stolen by the threat actor. Victims spanned education platforms, e-commerce sites, healthcare communities, and membership providers across multiple continents, many of which were running active security plugins that did not detect the compromise.
+Analysing Claude chat logs obtained from the threat actor's infrastructure, we walk through the supply-chain attack which resulted in the compromise of 246 victim websites before being disrupted. The Wordpress targeting was significant: over **16 GB of stolen .sql databases**, over **150k user accounts exposed**, and live **Stripe payment API keys** were stolen by the threat actor. Victims spanned education platforms, e-commerce sites, healthcare communities, and membership providers across multiple continents, many of which were running active security plugins that did not detect the compromise.
 
 This research will be split into two blogs, in this blog, *Claude's Supply-Chain Attack* we will discuss:
 
@@ -38,7 +38,7 @@ This supply chain attack was first reported publicly by [Cybernews](https://cybe
 
 From 19/03/2026 07:06 UTC, we independently disclosed to Buddyboss, Caseproof, and company linked on the Caseproof website - "Memberpress". We never receieved a response. 
 
-The conversation is conducted entirely in French, with the threat actor issuing short, direct instructions and Claude responding with code, analysis, and operational guidance. We've translated and analysed the key exchanges below.
+The prompts and responses are conducted entirely in French, with the threat actor issuing short, direct instructions and Claude responding with code, analysis, and operational guidance. We've translated and analysed the key exchanges below.
 
 > The recovered conversation log begins mid-session. The threat actor had already, in a prior Claude session not captured here, obtained API credentials for the Caseproof Mothership, prepared backdoored BuddyBoss ZIP files, set up C2 infrastructure, and attempted initial uploads that were blocked by Cloudflare. What we are analysing is the breakthrough moment where they bypass Cloudflare and achieve full deployment. We do not have complete visibility into the full scope of this operation.
 
@@ -206,3 +206,7 @@ BuddyBoss is marketed for online communities, courses, and membership platforms.
 The largest single site had **116,164 registered users**. Over **16 GB of stolen .sql databases were recovered** from the C2, alongside Stripe live API keys, full `wp-config.php` files, and WordPress admin session tokens. Victims spanned the United States, Canada, the United Kingdom, Australia, mainland Europe, Africa, and Asia-Pacific, hosted across dozens of independent providers from GoDaddy to WP Engine to self-managed VPS infrastructure.
 
 Multiple victims were running Wordfence and Patchstack. Neither detected the attack. The malicious code arrived through the same trusted update channel as every legitimate release. WordPress checked for updates, found a new version on the official Caseproof CDN, and installed it. Every step was "correct" by the platform's own logic. The sites that were compromised fastest were the ones following best practices: auto-updates enabled, current PHP, current WordPress, security plugins active. They did everything right and were punished for it. Removing the backdoored plugin is not remediation. Full remediation requires rotating every database password, regenerating all WordPress salts, invalidating all sessions, and auditing for secondary persistence. For sites whose .sql dumps are already in the threat actor's hands, **the damage is done**.
+
+---
+
+If you managed to read to the end of this, we hope you'll like our [Full Incident Analysis](https://ctrlaltintel.com/research/BuddyBoss-2).

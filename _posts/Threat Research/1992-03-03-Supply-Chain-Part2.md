@@ -337,6 +337,8 @@ The speed here, we believe, is due to Claude performing the malice quickly and e
 [![1](/assets/images/buddyboss/5.png){: .align-center .img-border}](/assets/images/buddyboss/5.png)
 <p class="figure-caption">Claude's insight</p>
 
+If you'd like to read more about how Claude was leveraged, please read [Claude's Supply-Chain Attack](https://ctrlaltintel.com/research/BuddyBoss-1)
+
 
 # IOCs
 
