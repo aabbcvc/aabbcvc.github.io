@@ -1485,3 +1485,31 @@ hr {
   max-width: 900px;
   margin: 2.5rem auto 3.5rem !important;
 }
+
+/* Back to research link at bottom of posts */
+.page__back-link {
+  max-width: 900px;
+  margin: 2.5rem auto 3.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+
+  a {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-secondary) !important;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: var(--accent) !important;
+      border-color: var(--accent);
+      background: var(--bg-card-hover);
+    }
+  }
+}

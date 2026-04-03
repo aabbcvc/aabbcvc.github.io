@@ -239,7 +239,7 @@ defaults:
       read_time: true
       comments: false
       share: false
-      related: true
+      related: false
   # Threat Research posts - use /research/ prefix in URLs
   - scope:
       path: "_posts/Threat Research"
