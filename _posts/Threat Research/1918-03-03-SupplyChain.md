@@ -40,6 +40,10 @@ The conversation is conducted entirely in French, with the threat actor issuing 
 
 > The recovered conversation log begins mid-session. The threat actor had already, in a prior Claude session not captured here, obtained API credentials for the Caseproof Mothership, prepared backdoored BuddyBoss ZIP files, set up C2 infrastructure, and attempted initial uploads that were blocked by Cloudflare. What we are analysing is the breakthrough moment where they bypass Cloudflare and achieve full deployment. We do not have complete visibility into the full scope of this operation.
 
+[![1](/assets/images/buddyboss/9.png){: .align-center .img-border}](/assets/images/buddyboss/9.png)
+<p class="figure-caption">Breaking down the kill-chain</p>
+
+
 ## Understanding the Upload Mechanism
 
 The session opens with a failed attempt. Claude had been trying to upload the backdoored ZIP to the Caseproof Mothership (`licenses.caseproof.com`) using `cloudscraper`, a Python library designed to bypass Cloudflare browser checks. The upload times out after 90 seconds. Cloudflare was blocking the multipart file upload.

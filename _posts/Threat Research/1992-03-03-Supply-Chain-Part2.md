@@ -14,9 +14,9 @@ toc: true
 
 # Overview
 
-In [Part 1](link-to-part-1) of this research, we analysed a recovered Claude Code session log that captured a French-speaking threat actor directing Claude through the final stage of a supply chain attack: bypassing Cloudflare, uploading backdoored BuddyBoss plugins to the production licensing server, and exploiting victim WordPress sites in real time.
+In [Part 1](https://ctrlaltintel.com/research/BuddyBoss-1) of this research, we analysed a recovered Claude Code session log that captured a French-speaking threat actor directing Claude through the final stage of a supply chain attack: bypassing Cloudflare, uploading backdoored BuddyBoss plugins to the production licensing server, and exploiting victim WordPress sites in real time.
 
-That blog focused on **how Claude made the supply chain injection possible**. This blog focuses on **everything else**: how the threat actor (likely assisted by Claude) obtained initial access, weaponised GitHub Actions to steal CI/CD secrets, laterally moved through BuddyBoss's infrastructure, escalated to root on an AWS server, and ultimately pushed backdoored updates to hundreds of customer sites.
+That blog focused on **how Claude made the supply chain injection possible**. This blog focuses on **everything else**: how the threat actor (assisted by Claude) obtained initial access, weaponised GitHub Actions to steal CI/CD secrets, laterally moved through BuddyBoss's infrastructure, escalated to root on an AWS server, and ultimately pushed backdoored updates to hundreds of customer sites.
 
 All findings in this analysis are derived from the threat actor's own C2 server, which was left as an open directory. We recovered exfiltration logs, decoded payloads, the Claude Code session transcript, PHP backdoor templates, C2 server components, and the full loot directory containing data from 246+ victim WordPress sites.
 
@@ -36,7 +36,7 @@ All findings in this analysis are derived from the threat actor's own C2 server,
 
 **Total time from first CI/CD exfiltration to first victim callback: 2 hours 54 minutes.**
 
-Although the Claude Code session transcript was not complete, and we only observed the latter end of the attack (from **Supply Chain Injection**), based on speed, we likely believe Claude Code was also responsible for the the CI/CD exfiltration, lateral movement and credential theft. 
+Although the Claude Code session transcript was not complete, and we only observed the latter end of the attack (from **Supply Chain Injection**), based on speed, standardised scripts & C2 telemetry, we likely believe Claude Code was also responsible for the the CI/CD exfiltration, lateral movement and credential theft. 
 
 > The threat actor had a server-side C2 listener that captured all victim telemetry, allowing us to ascertain the near complete kill-chain
 
@@ -50,6 +50,9 @@ We know this because the C2 server logged the inbound exfiltration callbacks. Ea
 
 The workflow was named **"Platform Compatibility Check"**, a deliberately innocuous name designed to blend in with legitimate CI/CD activity.
 
+[![1](/assets/images/buddyboss/8.png){: .align-center .img-border}](/assets/images/buddyboss/8.png)
+<p class="figure-caption">CI/CD secret exfiltration</p>
+
 **What Was Exfiltrated**
 
 Three repositories called back to distinct C2 endpoints within 3 minutes of each other:
@@ -58,7 +61,7 @@ Three repositories called back to distinct C2 endpoints within 3 minutes of each
 |------------|-----------|-------------|------------|-----------------|
 | 16:24:35 | 20.168.118.82 | `/gh_secrets` | `buddyboss-platform-pro` | GitHub token, Claude Code OAuth token, full runner environment |
 | 16:26:46 | 145.132.102.248 | `/csr_secrets` | `buddyboss/csr-tool` | Ed25519 SSH private key, SSH credentials for Hetzner server, GitHub token |
-| 16:27:02 | 13.83.166.228 | `/api_secrets` | (likely `buddyboss/api-build`) | `appcenter_key`, database credentials, Redis credentials, SSH key |
+| 16:27:02 | 13.83.166.228 | `/api_secrets` | Unknown | `appcenter_key`, database credentials, Redis credentials, SSH key |
 
 Each repository had a **different C2 endpoint** and exfiltrated **different secrets**. 
 
