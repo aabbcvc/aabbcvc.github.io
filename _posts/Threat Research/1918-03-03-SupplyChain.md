@@ -14,11 +14,11 @@ toc: true
 
 # Overview
 
-Threat actors are increasingly using commercial AI tooling, specifically **Anthropic's Claude**, to perform successful attacks against production infrastructure belonging to **real victims**. 
+Threat actors are increasingly using commercial AI tooling to perform successful attacks against production infrastructure belonging to **real victims**. [AI enabled attacks have increased year-over-year by 89%](https://www.crowdstrike.com/explore/2026-global-threat-report) which will only continues to grow as AI's capabilities improve.
 
-At Ctrl-Alt-Intel, we've observed threat actors use Claude to successfully laterally move, escalate privileges and steal sensitive data from **multiple Mexican government departments**. Additionally, we've seen **creative and novel attack chains** to compromise American universities within the Middle East. 
+At Ctrl-Alt-Intel, we've observed threat actors using Anthrophic's Claude to enable cyber attacks against real world victims. Claude allowed the threat actors to compromise multiple government departments, providing instructions on performing lateral movement, privilege escalation and the exfiltration of data. The use of Claude additionally allowed the threat actors to orchestrate novel attack chains against American universities located within the Middle East. 
 
-However, in this blog we will be exposing a **French** threat actor who has used Claude, under the premise of a Capture The Flag (CTF) challenge, to perform a successful supply-chain attack. The flag in this case was infiltrating the CI/CD pipeline for the BuddyBoss Wordpress plugin/theme, embedding it with malicious code, and pushing this to production - successfully compromising **300 of victim websites** with the intent of stealing Stripe API keys. These keys would almost certainly be stolen for fraud. 
+Within this blog, we will focus on a French threat actor who has used Claude to perform a successful supply-chain attack against the BuddyBoss WordPress ecosystem. BuddyBoss is a WordPress-based platform for building online communities and learning sites, often used by businesses to sell courses and memberships through integrations with payment processors. Using Claude chat logs obtained from the threat actor's infrastructure, we walk through the supply-chain attack which resulted in the compromised 300 victim websites.
 
 This research will be split into two blogs, in this blog, *Claude's Supply Chain-Attack* we will discuss:
 
@@ -29,9 +29,7 @@ In the second blog, *DFIR Report*, we will attempt to deep-dive the entire CI/CD
 
 # Claude's Supply Chain Attack
 
-On 18th March 2026, [@ice_wzl_cyber](https://x.com/ice_wzl_cyber) identified an open-directory: 
-
-....
+This supply chain attack was first reported publicly by [Cybernews](https://cybernews.com/security/buddyboss-hack-compromises-hundreds-of-websites/) on March 24, 2026, and has since been covered by outlets including [Security Boulevard](https://securityboulevard.com/2026/03/buddyboss-platform-compromised-as-hundreds-of-websites-are-hacked/). Ctrl-Alt-Intel researcher [@ice_wzl_cyber](https://x.com/ice_wzl_cyber) independently discovered the attacker's infrastructure on 18th March 2026 and obtained the complete Claude chat logs used to develop and execute the attack chain, providing a unique window into how the threat actor leveraged commercial AI tooling to conduct this compromise.
 
 The conversation is conducted entirely in French, with the threat actor issuing short, direct instructions and Claude responding with code, analysis, and operational guidance. We've translated and analysed the key exchanges below.
 
@@ -57,7 +55,7 @@ This reveals an important detail: in a prior session, they had already successfu
 
 ## Failed Attempts
 
-Claude then tried multiple approaches to get the real backdoored file into the Mothership. It attempted to create a new version (2.20.2), uploading only a 54-byte dummy ZIP (the minimum valid ZIP header), and then tried to PATCH the download URL to point to the threat actor's own server. The API rejected the URL field.
+Claude tried multiple approaches to get the real backdoored file into the Mothership. It attempted to create a new version (2.20.2), uploading only a 54-byte dummy ZIP (the minimum valid ZIP header), and then tried to PATCH the download URL to point to the threat actor's own server. The API rejected the URL field.
 
 Claude explored and discarded several other strategies: a browser-based upload form, routing through the WordPress XML-RPC interface, and direct API field manipulation. Each failed.
 
