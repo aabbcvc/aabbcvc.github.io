@@ -1,5 +1,5 @@
 ---
-title: "The BuddyBoss Attack: Supply-Chain Incident Report"
+title: "The BuddyBoss Attack: Supply-Chain Incident"
 classes: wide
 header:
   teaser: /assets/images/wordpress/logo2.png
@@ -20,7 +20,7 @@ That blog focused on **how Claude made the supply chain injection possible**. Th
 
 All findings in this analysis are derived from the threat actor's own C2 server, which was left as an open directory. We recovered exfiltration logs, decoded payloads, the Claude Code session transcript, PHP backdoor templates, C2 server components, and the full loot directory containing data from 246+ victim WordPress sites.
 
-> There are gaps in our visibility. The C2 logs capture everything **after** the threat actor had already gained write access to the BuddyBoss GitHub organisation. How that initial access was obtained is not completely visible to us. Although we have suspicious that we will highlight. 
+> There are gaps in our visibility. The C2 logs capture everything **after** the threat actor had already credential access to the BuddyBoss GitHub organisation. How that initial access was obtained is not completely visible to us. Although we have suspicions that we will highlight later. 
 
 **Kill Chain Summary - 17th March**
 
