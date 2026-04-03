@@ -30,6 +30,34 @@
    -------------------------------------------------------------------------- */
 
 :root,
+[data-theme="midnight"] {
+  --bg-primary: #060918;
+  --bg-secondary: #0c1028;
+  --bg-elevated: #141938;
+  --bg-card: #0e1230;
+  --bg-card-hover: #161c42;
+  --text-primary: #d8ddf0;
+  --text-secondary: #8890b0;
+  --text-muted: #555e80;
+  --accent: #7c6aff;
+  --accent-secondary: #a78bfa;
+  --accent-hover: #9580ff;
+  --border-color: rgba(124,106,255,0.08);
+  --border-hover: rgba(124,106,255,0.18);
+  --shadow-card: 0 2px 8px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,106,255,0.06);
+  --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.6), 0 0 0 1px rgba(124,106,255,0.12);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.7);
+  --code-bg: #080b20;
+  --masthead-bg: rgba(6,9,24,0.95);
+  --hero-bg: #060918;
+  --footer-bg: #040614;
+  --tag-bg: rgba(124,106,255,0.1);
+  --tag-text: #a78bfa;
+  --selection-bg: rgba(124,106,255,0.25);
+  --carousel-gradient-left: linear-gradient(to right, #060918, transparent);
+  --carousel-gradient-right: linear-gradient(to left, #060918, transparent);
+}
+
 [data-theme="dark"] {
   --bg-primary: #0a0a0f;
   --bg-secondary: #12121a;
@@ -84,34 +112,6 @@
   --selection-bg: rgba(0,102,204,0.15);
   --carousel-gradient-left: linear-gradient(to right, #f8f9fb, transparent);
   --carousel-gradient-right: linear-gradient(to left, #f8f9fb, transparent);
-}
-
-[data-theme="midnight"] {
-  --bg-primary: #060918;
-  --bg-secondary: #0c1028;
-  --bg-elevated: #141938;
-  --bg-card: #0e1230;
-  --bg-card-hover: #161c42;
-  --text-primary: #d8ddf0;
-  --text-secondary: #8890b0;
-  --text-muted: #555e80;
-  --accent: #7c6aff;
-  --accent-secondary: #a78bfa;
-  --accent-hover: #9580ff;
-  --border-color: rgba(124,106,255,0.08);
-  --border-hover: rgba(124,106,255,0.18);
-  --shadow-card: 0 2px 8px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,106,255,0.06);
-  --shadow-card-hover: 0 8px 24px rgba(0,0,0,0.6), 0 0 0 1px rgba(124,106,255,0.12);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.7);
-  --code-bg: #080b20;
-  --masthead-bg: rgba(6,9,24,0.95);
-  --hero-bg: #060918;
-  --footer-bg: #040614;
-  --tag-bg: rgba(124,106,255,0.1);
-  --tag-text: #a78bfa;
-  --selection-bg: rgba(124,106,255,0.25);
-  --carousel-gradient-left: linear-gradient(to right, #060918, transparent);
-  --carousel-gradient-right: linear-gradient(to left, #060918, transparent);
 }
 
 [data-theme="emerald"] {
