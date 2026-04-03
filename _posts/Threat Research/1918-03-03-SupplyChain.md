@@ -2,7 +2,7 @@
 title: "The BuddyBoss Attack: Claude's Supply-Chain Attack"
 classes: wide
 header:
-  teaser: /assets/images/wordpress/logo.png
+  teaser: /assets/images/buddyboss/logo1.png
 ribbon: black
 description: "How Claude infiltrated the supply-chain, compromising 200+ websites for fraud"
 categories:
@@ -16,7 +16,7 @@ toc: true
 
 Threat actors are increasingly using commercial AI tooling to perform successful attacks against production infrastructure belonging to **real victims**. [AI enabled attacks have increased year-over-year by 89%](https://www.crowdstrike.com/explore/2026-global-threat-report) which will only continues to grow as AI's capabilities improve.
 
-At Ctrl-Alt-Intel, we've observed threat actors using Anthrophic's Claude to enable cyber attacks against real world victims. Threat actors used Claude Code to compromise multiple government departments, providing instructions on performing lateral movement, privilege escalation and the exfiltration of data. The use of Claude additionally allowed the threat actors to orchestrate novel attack chains against American universities located within the Middle East. 
+At Ctrl-Alt-Intel, we've observed threat actors using Anthrophic's Claude to enable cyber attacks against real world victims. Threat actors used Claude Code to compromise **multiple government departments**, providing instructions on performing lateral movement, privilege escalation and the exfiltration of data. The use of Claude additionally allowed the threat actors to orchestrate **novel attack chains against American universities** located within the Middle East. 
 
 Within this blog, we will focus on a French threat actor who has used Claude to perform a successful supply-chain attack against the BuddyBoss WordPress ecosystem. BuddyBoss is a WordPress-based platform for building online communities and learning sites, often used by businesses to sell courses and memberships through integrations with payment processors. Its plugins are used by tens of thousands of websites.
 
