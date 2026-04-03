@@ -338,24 +338,23 @@ The speed here, we believe, is due to Claude performing the malice quickly and e
 <p class="figure-caption">Claude's insight</p>
 
 
-| Platform Plugin | `bp-loader.php` | `ddda12b545a7b817883641421cf6a213f4c5100effa40cdb55018efce11bbe42` | 19,144 bytes |
-| Theme | `functions.php` | `5027a0e77eca13a5cc120d3e37262c4073452569ad341cd1558051b5a91ce144` | 8,375 bytes |
-
-
-
-
 # IOCs
 
 | Type | Value | Context |
 |------|-------|---------|
 | IPv4 | `195.178.110[.]242` | Primary C2 server (exfiltration receiver + reverse shell listener) |
-
-| GET Parameter | `bp_compat_check` | Platform backdoor trigger |
+| File | `bp-loader.php` | Platform plugin backdoor |
+| SHA256 | `ddda12b545a7b817883641421cf6a213f4c5100effa40cdb55018efce11bbe42` | `bp-loader.php` |
+| File | `functions.php` | Theme backdoor |
+| SHA256 | `5027a0e77eca13a5cc120d3e37262c4073452569ad341cd1558051b5a91ce144` | `functions.php` |
+| File | `buddyboss-platform-pro.php` | Standalone backdoor with upload capability |
+| GET Parameter | `bb_platform_debug` | Platform backdoor trigger |
 | GET Parameter | `bb_theme_compat` | Theme backdoor trigger |
 | Auth Token | `a9f2c8e1` | Shared authentication key across all backdoor variants |
 | File | `bp-compatibility.php` | Standalone webshell (v2.20.4) |
 | Workflow Name | `Platform Compatibility Check` | Name of the malicious GitHub Actions workflow |
 
+The malicious PHP modules have been added to our [Github](https://github.com/ctrlaltint3l/intelligence/tree/main/BuddyBoss/Backdoor).
 
 # MITRE ATT&CK
 
@@ -366,18 +365,16 @@ The speed here, we believe, is due to Claude performing the malice quickly and e
 | **Execution** | [T1059.004](https://attack.mitre.org/techniques/T1059/004/) | Command and Scripting Interpreter: Unix Shell | Reverse shell via `proc_open('/bin/bash')`, command exec via `shell_exec()` |
 | **Persistence** | [T1098.004](https://attack.mitre.org/techniques/T1098/004/) | Account Manipulation: SSH Authorized Keys | `ctf-pivot` Ed25519 key planted in `/root/.ssh/authorized_keys` on AWS server |
 | **Persistence** | [T1505.003](https://attack.mitre.org/techniques/T1505/003/) | Server Software Component: Web Shell | PHP backdoor with exec, eval, file read/write capabilities embedded in WordPress plugin/theme |
-| **Privilege Escalation** | [T1548.003](https://attack.mitre.org/techniques/T1548/003/) | Abuse Elevation Control Mechanism: Sudo | Escalated from `deployment` to `root` on AWS via sudo |
+| **Privilege Escalation** | [T1548.003](https://attack.mitre.org/techniques/T1548/003/) | Abuse Elevation Control Mechanism: Sudo | Escalated from `deployment` to `root` on AWS via `sudo` |
 | **Defense Evasion** | [T1036.005](https://attack.mitre.org/techniques/T1036/005/) | Masquerading: Match Legitimate Name | Workflow named "Platform Compatibility Check"; backdoor disguised as "telemetry for usage analytics" |
 | **Defense Evasion** | [T1027](https://attack.mitre.org/techniques/T1027/) | Obfuscated Files or Information | Base64 encoding of exfiltrated data and command parameters |
-| **Defense Evasion** | [T1090.002](https://attack.mitre.org/techniques/T1090/002/) | Proxy: External Proxy | Heroku origin IP bypass of Cloudflare WAF |
 | **Credential Access** | [T1552.001](https://attack.mitre.org/techniques/T1552/001/) | Unsecured Credentials: Credentials in Files | CI/CD secrets, `.env` files, `wp-config.php` extraction |
 | **Credential Access** | [T1552.004](https://attack.mitre.org/techniques/T1552/004/) | Unsecured Credentials: Private Keys | Ed25519 SSH key stolen from `csr-tool` CI/CD secrets |
 | **Credential Access** | [T1528](https://attack.mitre.org/techniques/T1528/) | Steal Application Access Token | GitHub PAT, GitLab PAT, Caseproof `appcenter_key`, Apple App Store Connect credentials |
 | **Discovery** | [T1018](https://attack.mitre.org/techniques/T1018/) | Remote System Discovery | `/deep_recon` file enumeration on Hetzner; `/root_recon` on AWS |
 | **Discovery** | [T1087.001](https://attack.mitre.org/techniques/T1087/001/) | Account Discovery: Local Account | `id`, `whoami`, SSH key enumeration on all compromised hosts |
-| **Lateral Movement** | [T1021.004](https://attack.mitre.org/techniques/T1021/004/) | Remote Services: SSH | C2 to Hetzner (stolen key); C2 to AWS (stolen password); AWS to victim sites |
+| **Lateral Movement** | [T1021.004](https://attack.mitre.org/techniques/T1021/004/) | Remote Services: SSH | C2 to Hetzner (stolen key); C2 to AWS (stolen password); SSH keys from victim sites|
 | **Collection** | [T1005](https://attack.mitre.org/techniques/T1005/) | Data from Local System | Database credentials, WordPress keys, environment variables, Laravel `.env` files |
 | **Exfiltration** | [T1041](https://attack.mitre.org/techniques/T1041/) | Exfiltration Over C2 Channel | All data exfiltrated via HTTP POST to C2 at `195.178.110[.]242:8443` |
-| **Exfiltration** | [T1020](https://attack.mitre.org/techniques/T1020/) | Automated Exfiltration | Non-blocking auto-exfil on first WordPress page load after plugin activation |
+| **Exfiltration** | [T1020](https://attack.mitre.org/techniques/T1020/) | Automated Exfiltration | Non-blocking auto-exfil on first WordPress page load after plugin activation, during Github Actions |
 | **Command and Control** | [T1071.001](https://attack.mitre.org/techniques/T1071/001/) | Application Layer Protocol: Web Protocols | HTTP-based C2 for exfiltration and command execution |
-| **Command and Control** | [T1102](https://attack.mitre.org/techniques/T1102/) | Web Service | Telegram bot for real-time C2 notifications |
