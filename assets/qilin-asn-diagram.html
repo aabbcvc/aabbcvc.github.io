@@ -3,28 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Qilin Affiliate — ASN Infrastructure Overlap</title>
+<title>Qilin Affiliate — ASN Infrastructure</title>
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
+  html, body, #root {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
     background: #080c12;
-    color: #e2e8f0;
     font-family: 'Courier New', monospace;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    color: #e2e8f0;
   }
 </style>
 </head>
 <body>
 <div id="root"></div>
 <script type="text/babel">
-const { useState } = React;
+const { useState, useRef, useCallback, useEffect } = React;
 
 // ── ASN accent colours ───────────────────────────────────────────────────────
 const ASN_COLOR = {
@@ -34,7 +32,7 @@ const ASN_COLOR = {
   "AS 149440": "#fb923c",
 };
 
-// ── Data ────────────────────────────────────────────────────────────────────
+// ── Data ─────────────────────────────────────────────────────────────────────
 const ASNs = [
   {
     id: "AS 395092",
@@ -103,21 +101,22 @@ const ASNs = [
   }
 ];
 
-// ── Connections ──────────────────────────────────────────────────────────────
+// ── Connections ───────────────────────────────────────────────────────────────
 const CONNECTIONS = [
-  { from: "194.59.30.9",    to: "31.57.147.229", label: "Sliver cfg" },
-  { from: "194.59.30.9",    to: "31.57.38.155",  label: "Sliver cfg" },
-  { from: "79.110.49.146",  to: "23.27.140.108", label: "Sliver cfg" },
-  { from: "79.110.49.146",  to: "23.27.143.170", label: "Sliver cfg" },
-  { from: "194.59.30.9",    to: "79.110.49.146", label: "rev-shell CB" },
-  { from: "185.196.11.235", to: "194.59.30.9",   label: "file overlap" },
-  { from: "144.208.127.61",  to: "185.208.158.147", label: "serverPOST.py" },
-  { from: "185.208.158.147", to: "185.196.11.235",  label: "serverPOST.py" },
-  { from: "144.208.127.61",  to: "185.196.11.235",  label: "serverPOST.py" },
+  { from: "194.59.30.9",    to: "31.57.147.229",  label: "Sliver cfg" },
+  { from: "194.59.30.9",    to: "31.57.38.155",   label: "Sliver cfg" },
+  { from: "79.110.49.146",  to: "23.27.140.108",  label: "Sliver cfg" },
+  { from: "79.110.49.146",  to: "23.27.143.170",  label: "Sliver cfg" },
+  { from: "194.59.30.9",    to: "79.110.49.146",  label: "rev-shell CB" },
+  { from: "185.196.11.235", to: "194.59.30.9",    label: "file overlap" },
+  { from: "144.208.127.61", to: "185.208.158.147", label: "serverPOST.py" },
+  { from: "185.208.158.147","to": "185.196.11.235", label: "serverPOST.py" },
+  { from: "144.208.127.61", to: "185.196.11.235",  label: "serverPOST.py" },
 ];
 
-// ── Layout ───────────────────────────────────────────────────────────────────
+// ── Canvas layout ─────────────────────────────────────────────────────────────
 const W = 1100, H = 680;
+const NODE_R = 36;
 
 const ASN_BOXES = {
   "AS 395092": { x: 60,  y: 60,  w: 220, h: 150 },
@@ -125,8 +124,6 @@ const ASN_BOXES = {
   "AS 399486": { x: 60,  y: 290, w: 470, h: 320 },
   "AS 149440": { x: 610, y: 290, w: 440, h: 320 },
 };
-
-const NODE_R = 36;
 
 const IP_POS = {
   "144.208.127.61":  { x: 175, y: 140 },
@@ -140,7 +137,7 @@ const IP_POS = {
   "23.27.143.170":   { x: 785, y: 510 },
 };
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// ── Helpers ────────────────────────────────────────────────────────────────────
 function curvePath(from, to) {
   const p1 = IP_POS[from], p2 = IP_POS[to];
   if (!p1 || !p2) return "";
@@ -154,7 +151,7 @@ function asnOfIP(ip) {
   return ASNs.find(a => a.ips.some(i => i.ip === ip))?.id;
 }
 
-// ── Tooltip ───────────────────────────────────────────────────────────────────
+// ── Tooltip ────────────────────────────────────────────────────────────────────
 function Tooltip({ ip, onClose }) {
   if (!ip) return null;
   const allIPs = ASNs.flatMap(a => a.ips);
@@ -209,10 +206,10 @@ function Tooltip({ ip, onClose }) {
         {outgoing.length > 0 && (
           <div style={{ marginTop:14 }}>
             <div style={{ fontSize:9, color:"#334155", marginBottom:6, textTransform:"uppercase", letterSpacing:"0.1em" }}>References →</div>
-            {outgoing.map(c => (
-              <div key={c.to} style={{ fontSize:11, marginBottom:4, display:"flex", gap:8, alignItems:"center" }}>
-                <span style={{ color:"#334155", fontSize:9 }}>[{c.label}]</span>
-                <code style={{ color: ASN_COLOR[asnOfIP(c.to)] || "#94a3b8" }}>{c.to}</code>
+            {outgoing.map(conn => (
+              <div key={conn.to} style={{ fontSize:11, marginBottom:4, display:"flex", gap:8, alignItems:"center" }}>
+                <span style={{ color:"#334155", fontSize:9 }}>[{conn.label}]</span>
+                <code style={{ color: ASN_COLOR[asnOfIP(conn.to)] || "#94a3b8" }}>{conn.to}</code>
               </div>
             ))}
           </div>
@@ -220,10 +217,10 @@ function Tooltip({ ip, onClose }) {
         {incoming.length > 0 && (
           <div style={{ marginTop:14 }}>
             <div style={{ fontSize:9, color:"#334155", marginBottom:6, textTransform:"uppercase", letterSpacing:"0.1em" }}>Referenced by ←</div>
-            {incoming.map(c => (
-              <div key={c.from} style={{ fontSize:11, marginBottom:4, display:"flex", gap:8, alignItems:"center" }}>
-                <span style={{ color:"#334155", fontSize:9 }}>[{c.label}]</span>
-                <code style={{ color: ASN_COLOR[asnOfIP(c.from)] || "#94a3b8" }}>{c.from}</code>
+            {incoming.map(conn => (
+              <div key={conn.from} style={{ fontSize:11, marginBottom:4, display:"flex", gap:8, alignItems:"center" }}>
+                <span style={{ color:"#334155", fontSize:9 }}>[{conn.label}]</span>
+                <code style={{ color: ASN_COLOR[asnOfIP(conn.from)] || "#94a3b8" }}>{conn.from}</code>
               </div>
             ))}
           </div>
@@ -233,10 +230,52 @@ function Tooltip({ ip, onClose }) {
   );
 }
 
-// ── App ───────────────────────────────────────────────────────────────────────
+// ── App ────────────────────────────────────────────────────────────────────────
 function App() {
-  const [activeIP, setActiveIP] = useState(null);
-  const [hoverIP,  setHoverIP]  = useState(null);
+  const [activeIP,   setActiveIP]   = useState(null);
+  const [hoverIP,    setHoverIP]    = useState(null);
+  const [transform,  setTransform]  = useState({ x: 0, y: 0, scale: 1 });
+  const dragging = useRef(false);
+  const lastPos  = useRef({ x: 0, y: 0 });
+  const svgRef   = useRef(null);
+
+  // Centre on mount
+  useEffect(() => {
+    setTransform({
+      x: (window.innerWidth  - W) / 2,
+      y: (window.innerHeight - H) / 2,
+      scale: 1,
+    });
+  }, []);
+
+  const onWheel = useCallback(e => {
+    e.preventDefault();
+    const factor = e.deltaY < 0 ? 1.1 : 0.91;
+    const rect   = svgRef.current.getBoundingClientRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    setTransform(t => {
+      const newScale = Math.min(Math.max(t.scale * factor, 0.25), 6);
+      const ratio    = newScale / t.scale;
+      return { scale: newScale, x: mx - ratio * (mx - t.x), y: my - ratio * (my - t.y) };
+    });
+  }, []);
+
+  const onMouseDown = useCallback(e => {
+    if (e.button !== 0) return;
+    dragging.current = true;
+    lastPos.current  = { x: e.clientX, y: e.clientY };
+  }, []);
+
+  const onMouseMove = useCallback(e => {
+    if (!dragging.current) return;
+    const dx = e.clientX - lastPos.current.x;
+    const dy = e.clientY - lastPos.current.y;
+    lastPos.current = { x: e.clientX, y: e.clientY };
+    setTransform(t => ({ ...t, x: t.x + dx, y: t.y + dy }));
+  }, []);
+
+  const onMouseUp   = useCallback(() => { dragging.current = false; }, []);
 
   const connectedToHover = new Set(
     CONNECTIONS
@@ -244,58 +283,38 @@ function App() {
       .flatMap(c => [c.from, c.to])
   );
 
+  const { x, y, scale } = transform;
+
   return (
-    <div style={{ width:"100vw", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24 }}>
+    <div style={{ width:"100vw", height:"100vh", overflow:"hidden", background:"#080c12", position:"relative" }}>
+      <svg
+        ref={svgRef}
+        width="100%" height="100%"
+        style={{ display:"block", cursor: dragging.current ? "grabbing" : "grab", userSelect:"none" }}
+        onWheel={onWheel}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+      >
+        <defs>
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"
+            patternTransform={`translate(${x % 40},${y % 40}) scale(${scale})`}>
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0b1829" strokeWidth={0.5 / scale}/>
+          </pattern>
+          <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <polygon points="0 0, 7 3.5, 0 7" fill="#2d4a6b"/>
+          </marker>
+          <marker id="arr-hi" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+            <polygon points="0 0, 7 3.5, 0 7" fill="#64748b"/>
+          </marker>
+        </defs>
 
-      {/* Title */}
-      <div style={{ marginBottom:18, textAlign:"center" }}>
-        <div style={{ fontSize:11, color:"#334155", letterSpacing:"0.18em", textTransform:"uppercase", marginBottom:5 }}>Ctrl-Alt-Intel · Threat Research</div>
-        <h1 style={{ fontSize:19, fontWeight:700, color:"#e2e8f0", letterSpacing:"0.04em" }}>Qilin Affiliate — C2 Infrastructure by ASN</h1>
-      </div>
+        {/* Infinite grid background */}
+        <rect width="100%" height="100%" fill="url(#grid)"/>
 
-      {/* Legend */}
-      <div style={{ display:"flex", gap:22, marginBottom:18, fontSize:11, color:"#64748b", alignItems:"center", flexWrap:"wrap", justifyContent:"center" }}>
-        {Object.entries(ASN_COLOR).map(([asn, c]) => (
-          <div key={asn} style={{ display:"flex", alignItems:"center", gap:6 }}>
-            <div style={{ width:10, height:10, borderRadius:"50%", background:c, boxShadow:`0 0 6px ${c}99` }}></div>
-            <span style={{ color:"#94a3b8" }}>{asn}</span>
-          </div>
-        ))}
-        <div style={{ width:1, height:14, background:"#1e293b" }}></div>
-        <div style={{ display:"flex", alignItems:"center", gap:7 }}>
-          <svg width="28" height="10" style={{ display:"block" }}>
-            <line x1="0" y1="5" x2="28" y2="5" stroke="#334155" strokeWidth="1.5" strokeDasharray="4 3"/>
-            <polygon points="24,2 28,5 24,8" fill="#334155"/>
-          </svg>
-          <span>Sliver config / pivot</span>
-        </div>
-        <div style={{ fontSize:10, color:"#334155" }}>· Click any node for details</div>
-      </div>
-
-      {/* Diagram */}
-      <div style={{
-        background:"#060d18",
-        border:"1px solid #0f1e33",
-        borderRadius:10,
-        overflow:"hidden",
-        boxShadow:"0 4px 60px #0009",
-        maxWidth:"100%",
-      }}>
-        <svg viewBox={`0 0 ${W} ${H}`} style={{ display:"block", width:"min(1100px, 96vw)", height:"auto" }}>
-          <defs>
-            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0b1829" strokeWidth="0.5"/>
-            </pattern>
-            <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-              <polygon points="0 0, 7 3.5, 0 7" fill="#2d4a6b"/>
-            </marker>
-            <marker id="arr-hi" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
-              <polygon points="0 0, 7 3.5, 0 7" fill="#64748b"/>
-            </marker>
-          </defs>
-
-          {/* Background */}
-          <rect width={W} height={H} fill="url(#grid)"/>
+        {/* Zoomable / pannable content */}
+        <g transform={`translate(${x},${y}) scale(${scale})`}>
 
           {/* ASN boxes */}
           {ASNs.map(asn => {
@@ -305,7 +324,6 @@ function App() {
               <g key={asn.id}>
                 <rect x={b.x} y={b.y} width={b.w} height={b.h}
                   rx={7} fill={c + "09"} stroke={c + "30"} strokeWidth="1.5"/>
-                {/* ASN label */}
                 <rect x={b.x + 12} y={b.y - 11} width={84} height={22} rx={4}
                   fill={c + "25"} stroke={c + "55"} strokeWidth="1"/>
                 <text x={b.x + 54} y={b.y + 6}
@@ -313,7 +331,6 @@ function App() {
                   fontFamily="'Courier New', monospace" fontWeight="700"
                   fill={c} letterSpacing="0.05em"
                 >{asn.id}</text>
-                {/* IP count */}
                 <text x={b.x + b.w - 10} y={b.y + 18}
                   textAnchor="end" fontSize="9"
                   fontFamily="'Courier New', monospace" fill={c + "55"}
@@ -324,28 +341,29 @@ function App() {
 
           {/* Connection lines */}
           {CONNECTIONS.map((conn, i) => {
-            const p = curvePath(conn.from, conn.to);
+            const p    = curvePath(conn.from, conn.to);
             const isHi = hoverIP && (conn.from === hoverIP || conn.to === hoverIP);
             const fade = hoverIP && !isHi;
+            const p1   = IP_POS[conn.from], p2 = IP_POS[conn.to];
+            let lx = 0, ly = 0;
+            if (p1 && p2) {
+              const dx = p2.x - p1.x, dy = p2.y - p1.y;
+              lx = (p1.x + p2.x) / 2 - dy * 0.22 + dx * 0.12;
+              ly = (p1.y + p2.y) / 2 + dx * 0.22 + dy * 0.12;
+            }
             return (
-              <g key={i} style={{ transition:"opacity 0.15s" }} opacity={fade ? 0.08 : 1}>
+              <g key={i} style={{ transition:"opacity 0.15s" }} opacity={fade ? 0.06 : 1}>
                 <path d={p} fill="none"
                   stroke={isHi ? "#64748b" : "#1a3050"}
                   strokeWidth={isHi ? 1.5 : 1}
                   strokeDasharray="5 4"
                   markerEnd={isHi ? "url(#arr-hi)" : "url(#arr)"}
                 />
-                {isHi && (() => {
-                  const p1 = IP_POS[conn.from], p2 = IP_POS[conn.to];
-                  const dx = p2.x-p1.x, dy = p2.y-p1.y;
-                  const lx = (p1.x+p2.x)/2 - dy*0.22 + dx*0.12;
-                  const ly = (p1.y+p2.y)/2 + dx*0.22 + dy*0.12;
-                  return (
-                    <text x={lx} y={ly} textAnchor="middle" fontSize="8"
-                      fontFamily="'Courier New', monospace" fill="#475569"
-                    >{conn.label}</text>
-                  );
-                })()}
+                {isHi && (
+                  <text x={lx} y={ly} textAnchor="middle" fontSize="8"
+                    fontFamily="'Courier New', monospace" fill="#475569"
+                  >{conn.label}</text>
+                )}
               </g>
             );
           })}
@@ -353,33 +371,30 @@ function App() {
           {/* IP Nodes */}
           {ASNs.flatMap(asn =>
             asn.ips.map(ipData => {
-              const pos = IP_POS[ipData.ip];
+              const pos    = IP_POS[ipData.ip];
               if (!pos) return null;
               const c      = ASN_COLOR[asn.id];
               const isHov  = hoverIP  === ipData.ip;
-              const isActive = activeIP === ipData.ip;
+              const isAct  = activeIP === ipData.ip;
               const fade   = hoverIP && hoverIP !== ipData.ip && !connectedToHover.has(ipData.ip);
 
               return (
                 <g key={ipData.ip}
                   style={{ cursor:"pointer", transition:"opacity 0.15s" }}
-                  opacity={fade ? 0.2 : 1}
-                  onClick={() => setActiveIP(ipData.ip)}
+                  opacity={fade ? 0.18 : 1}
+                  onClick={e => { e.stopPropagation(); setActiveIP(ipData.ip); }}
                   onMouseEnter={() => setHoverIP(ipData.ip)}
                   onMouseLeave={() => setHoverIP(null)}
                 >
-                  {/* Outer glow */}
-                  {(isHov || isActive) && (
+                  {(isHov || isAct) && (
                     <circle cx={pos.x} cy={pos.y} r={NODE_R + 8}
                       fill="none" stroke={c} strokeWidth="1" opacity="0.3"/>
                   )}
-                  {/* Node */}
                   <circle cx={pos.x} cy={pos.y} r={NODE_R}
                     fill={c + "16"}
                     stroke={c}
-                    strokeWidth={isHov || isActive ? 2 : 1.5}
+                    strokeWidth={isHov || isAct ? 2 : 1.5}
                   />
-                  {/* IP text — single line, scaled to fit */}
                   <text
                     x={pos.x} y={pos.y + 4}
                     textAnchor="middle"
@@ -387,9 +402,7 @@ function App() {
                     fontFamily="'Courier New', monospace"
                     fill={c}
                     fontWeight="600"
-                    letterSpacing="0"
                   >{ipData.ip}</text>
-                  {/* Date underneath node */}
                   {ipData.date && (
                     <text x={pos.x} y={pos.y + NODE_R + 14}
                       textAnchor="middle" fontSize="8"
@@ -400,10 +413,15 @@ function App() {
               );
             })
           )}
-        </svg>
-      </div>
+        </g>
+      </svg>
 
-
+      {/* Zoom hint */}
+      <div style={{
+        position:"fixed", bottom:18, right:20,
+        fontSize:10, color:"#1e3a5f", fontFamily:"monospace",
+        letterSpacing:"0.06em", pointerEvents:"none",
+      }}>scroll to zoom · drag to pan</div>
 
       <Tooltip ip={activeIP} onClose={() => setActiveIP(null)} />
     </div>
