@@ -291,7 +291,6 @@ function App() {
         ref={svgRef}
         width="100%" height="100%"
         style={{ display:"block", cursor: dragging.current ? "grabbing" : "grab", userSelect:"none" }}
-        onWheel={onWheel}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
@@ -416,12 +415,41 @@ function App() {
         </g>
       </svg>
 
-      {/* Zoom hint */}
+      {/* Zoom controls */}
       <div style={{
-        position:"fixed", bottom:18, right:20,
+        position:"fixed", bottom:20, right:20,
+        display:"flex", flexDirection:"column", gap:4,
+        zIndex:50,
+      }}>
+        {[
+          { label:"+", action: () => setTransform(t => ({ ...t, scale: Math.min(t.scale * 1.2, 6) })) },
+          { label:"⟳", action: () => setTransform({ x:(window.innerWidth-W)/2, y:(window.innerHeight-H)/2, scale:1 }) },
+          { label:"−", action: () => setTransform(t => ({ ...t, scale: Math.max(t.scale * 0.83, 0.25) })) },
+        ].map(btn => (
+          <button key={btn.label} onClick={btn.action} style={{
+            width:32, height:32,
+            background:"#0d1724",
+            border:"1px solid #1e3a5f",
+            borderRadius:5,
+            color:"#64748b",
+            fontSize: btn.label === "⟳" ? 14 : 18,
+            lineHeight:1,
+            cursor:"pointer",
+            display:"flex", alignItems:"center", justifyContent:"center",
+            fontFamily:"monospace",
+            transition:"border-color 0.15s, color 0.15s",
+          }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor="#38bdf8"; e.currentTarget.style.color="#38bdf8"; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor="#1e3a5f"; e.currentTarget.style.color="#64748b"; }}
+          >{btn.label}</button>
+        ))}
+      </div>
+      {/* Pan hint */}
+      <div style={{
+        position:"fixed", bottom:18, left:20,
         fontSize:10, color:"#1e3a5f", fontFamily:"monospace",
         letterSpacing:"0.06em", pointerEvents:"none",
-      }}>scroll to zoom · drag to pan</div>
+      }}>drag to pan</div>
 
       <Tooltip ip={activeIP} onClose={() => setActiveIP(null)} />
     </div>
