@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qilin Affiliate — ASN Infrastructure Overlap</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #080c12;
+    color: #e2e8f0;
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState } = React;
+
+// ── ASN accent colours ───────────────────────────────────────────────────────
+const ASN_COLOR = {
+  "AS 395092": "#38bdf8",
+  "AS 42624":  "#a78bfa",
+  "AS 399486": "#34d399",
+  "AS 149440": "#fb923c",
+};
+
+// ── Data ────────────────────────────────────────────────────────────────────
+const ASNs = [
+  {
+    id: "AS 395092",
+    ips: [
+      {
+        ip: "144.208.127.61",
+        date: "2025-10-29",
+        context: "Open-directory archived by Hunt.io on 2025-10-29. Contained serverPOST.py — a Flask exfiltration handler for receiving stolen VPN configs. File overlap with 185.208.158.147 and 185.196.11.235."
+      }
+    ]
+  },
+  {
+    id: "AS 42624",
+    ips: [
+      {
+        ip: "185.208.158.147",
+        date: "2025-08-28",
+        context: "Earliest archived open-directory (Hunt.io, 2025-08-28). Contained serverPOST.py — a Flask exfiltration handler for receiving stolen VPN configs. File overlap with 144.208.127.61 and 185.196.11.235. Establishes the affiliate's activity back to at least August 2025."
+      },
+      {
+        ip: "185.196.11.235",
+        date: "2026-01-12",
+        context: "Open-directory archived 2026-01-12. Contained significant file overlap with 194.59.30.9, the Qilin binary 'kruss', and serverPOST.py — a Flask exfiltration handler for receiving stolen VPN configs."
+      }
+    ]
+  },
+  {
+    id: "AS 399486",
+    ips: [
+      {
+        ip: "194.59.30.9",
+        date: "2025-12-14",
+        context: "Primary staging server identified 2025-12-14. Exposed Qilin binaries (qusar, tron, sssd), Sliver C2 client configs pointing to 31.57.147.229 and 31.57.38.155, WatchGuard PoC exploits, VPN configs, and a Python reverse shell calling back to 79.110.49.146."
+      },
+      {
+        ip: "79.110.49.146",
+        date: "2026-03-05",
+        context: "First observed December 2025 as the reverse-shell callback IP embedded in events.py on 194.59.30.9. Three months later (2026-03-05) this same IP exposed its own open-directory, revealing new Sliver configs for 23.27.140.108 and 23.27.143.170."
+      },
+      {
+        ip: "31.57.147.229",
+        date: null,
+        context: "Sliver C2 server. Its client config file (client_31.57.147.229.cfg) was recovered from the 194.59.30.9 open-directory. The config could allow direct authentication to this Sliver C2 server."
+      }
+    ]
+  },
+  {
+    id: "AS 149440",
+    ips: [
+      {
+        ip: "23.27.140.108",
+        date: null,
+        context: "Sliver C2 server. Config recovered from the 79.110.49.146 open-directory (March 2026). Also referenced in the January 2026 open-directory, indicating sustained use across multiple campaigns."
+      },
+      {
+        ip: "31.57.38.155",
+        date: null,
+        context: "Sliver C2 server. Client config (vcenter_31.57.38.155.cfg) recovered from 194.59.30.9 — the 'vcenter' prefix suggests targeting of VMware vCenter environments."
+      },
+      {
+        ip: "23.27.143.170",
+        date: null,
+        context: "Sliver C2 server. Config recovered from the 79.110.49.146 open-directory (March 2026)."
+      }
+    ]
+  }
+];
+
+// ── Connections ──────────────────────────────────────────────────────────────
+const CONNECTIONS = [
+  { from: "194.59.30.9",    to: "31.57.147.229", label: "Sliver cfg" },
+  { from: "194.59.30.9",    to: "31.57.38.155",  label: "Sliver cfg" },
+  { from: "79.110.49.146",  to: "23.27.140.108", label: "Sliver cfg" },
+  { from: "79.110.49.146",  to: "23.27.143.170", label: "Sliver cfg" },
+  { from: "194.59.30.9",    to: "79.110.49.146", label: "rev-shell CB" },
+  { from: "185.196.11.235", to: "194.59.30.9",   label: "file overlap" },
+  { from: "144.208.127.61",  to: "185.208.158.147", label: "serverPOST.py" },
+  { from: "185.208.158.147", to: "185.196.11.235",  label: "serverPOST.py" },
+  { from: "144.208.127.61",  to: "185.196.11.235",  label: "serverPOST.py" },
+];
+
+// ── Layout ───────────────────────────────────────────────────────────────────
+const W = 1100, H = 680;
+
+const ASN_BOXES = {
+  "AS 395092": { x: 60,  y: 60,  w: 220, h: 150 },
+  "AS 42624":  { x: 370, y: 60,  w: 310, h: 220 },
+  "AS 399486": { x: 60,  y: 290, w: 470, h: 320 },
+  "AS 149440": { x: 610, y: 290, w: 440, h: 320 },
+};
+
+const NODE_R = 36;
+
+const IP_POS = {
+  "144.208.127.61":  { x: 175, y: 140 },
+  "185.208.158.147": { x: 460, y: 138 },
+  "185.196.11.235":  { x: 570, y: 228 },
+  "194.59.30.9":     { x: 180, y: 390 },
+  "79.110.49.146":   { x: 310, y: 500 },
+  "31.57.147.229":   { x: 430, y: 440 },
+  "23.27.140.108":   { x: 700, y: 385 },
+  "31.57.38.155":    { x: 870, y: 385 },
+  "23.27.143.170":   { x: 785, y: 510 },
+};
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+function curvePath(from, to) {
+  const p1 = IP_POS[from], p2 = IP_POS[to];
+  if (!p1 || !p2) return "";
+  const dx = p2.x - p1.x, dy = p2.y - p1.y;
+  const cx = (p1.x + p2.x) / 2 - dy * 0.22;
+  const cy = (p1.y + p2.y) / 2 + dx * 0.22;
+  return `M ${p1.x} ${p1.y} Q ${cx} ${cy} ${p2.x} ${p2.y}`;
+}
+
+function asnOfIP(ip) {
+  return ASNs.find(a => a.ips.some(i => i.ip === ip))?.id;
+}
+
+// ── Tooltip ───────────────────────────────────────────────────────────────────
+function Tooltip({ ip, onClose }) {
+  if (!ip) return null;
+  const allIPs = ASNs.flatMap(a => a.ips);
+  const data   = allIPs.find(i => i.ip === ip);
+  const asn    = ASNs.find(a => a.ips.some(i => i.ip === ip));
+  if (!data) return null;
+  const c = ASN_COLOR[asn.id];
+  const outgoing = CONNECTIONS.filter(c => c.from === ip);
+  const incoming = CONNECTIONS.filter(c => c.to   === ip);
+
+  return (
+    <div style={{
+      position: "fixed", inset: 0,
+      display: "flex", alignItems: "center", justifyContent: "center",
+      background: "rgba(0,0,0,0.7)", zIndex: 100,
+    }} onClick={onClose}>
+      <div onClick={e => e.stopPropagation()} style={{
+        background: "#0d1724",
+        border: `1px solid ${c}44`,
+        borderTop: `2px solid ${c}`,
+        borderRadius: 8,
+        padding: "22px 26px",
+        minWidth: 360,
+        maxWidth: 480,
+        boxShadow: `0 0 50px #0009, 0 0 20px ${c}18`,
+      }}>
+        <div style={{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", marginBottom:14 }}>
+          <div>
+            <code style={{ fontSize:16, color:"#e2e8f0", letterSpacing:"0.05em", display:"block", marginBottom:4 }}>{data.ip}</code>
+            <span style={{
+              fontSize:10, color:c, background: c+"18",
+              border:`1px solid ${c}44`, borderRadius:3,
+              padding:"1px 7px", fontFamily:"monospace", letterSpacing:"0.06em"
+            }}>{asn.id}</span>
+          </div>
+          <button onClick={onClose} style={{
+            background:"none", border:"none", color:"#475569",
+            cursor:"pointer", fontSize:18, lineHeight:1, padding:"0 0 0 16px"
+          }}>✕</button>
+        </div>
+
+        {data.date && (
+          <div style={{ fontSize:11, color:"#475569", marginBottom:12, fontFamily:"monospace" }}>
+            First observed: <span style={{ color:"#64748b" }}>{data.date}</span>
+          </div>
+        )}
+
+        <p style={{ fontSize:12, color:"#94a3b8", lineHeight:1.65, marginBottom: (outgoing.length||incoming.length) ? 16 : 0 }}>
+          {data.context}
+        </p>
+
+        {outgoing.length > 0 && (
+          <div style={{ marginTop:14 }}>
+            <div style={{ fontSize:9, color:"#334155", marginBottom:6, textTransform:"uppercase", letterSpacing:"0.1em" }}>References →</div>
+            {outgoing.map(c => (
+              <div key={c.to} style={{ fontSize:11, marginBottom:4, display:"flex", gap:8, alignItems:"center" }}>
+                <span style={{ color:"#334155", fontSize:9 }}>[{c.label}]</span>
+                <code style={{ color: ASN_COLOR[asnOfIP(c.to)] || "#94a3b8" }}>{c.to}</code>
+              </div>
+            ))}
+          </div>
+        )}
+        {incoming.length > 0 && (
+          <div style={{ marginTop:14 }}>
+            <div style={{ fontSize:9, color:"#334155", marginBottom:6, textTransform:"uppercase", letterSpacing:"0.1em" }}>Referenced by ←</div>
+            {incoming.map(c => (
+              <div key={c.from} style={{ fontSize:11, marginBottom:4, display:"flex", gap:8, alignItems:"center" }}>
+                <span style={{ color:"#334155", fontSize:9 }}>[{c.label}]</span>
+                <code style={{ color: ASN_COLOR[asnOfIP(c.from)] || "#94a3b8" }}>{c.from}</code>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+// ── App ───────────────────────────────────────────────────────────────────────
+function App() {
+  const [activeIP, setActiveIP] = useState(null);
+  const [hoverIP,  setHoverIP]  = useState(null);
+
+  const connectedToHover = new Set(
+    CONNECTIONS
+      .filter(c => c.from === hoverIP || c.to === hoverIP)
+      .flatMap(c => [c.from, c.to])
+  );
+
+  return (
+    <div style={{ width:"100vw", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", padding:24 }}>
+
+      {/* Title */}
+      <div style={{ marginBottom:18, textAlign:"center" }}>
+        <div style={{ fontSize:11, color:"#334155", letterSpacing:"0.18em", textTransform:"uppercase", marginBottom:5 }}>Ctrl-Alt-Intel · Threat Research</div>
+        <h1 style={{ fontSize:19, fontWeight:700, color:"#e2e8f0", letterSpacing:"0.04em" }}>Qilin Affiliate — C2 Infrastructure by ASN</h1>
+      </div>
+
+      {/* Legend */}
+      <div style={{ display:"flex", gap:22, marginBottom:18, fontSize:11, color:"#64748b", alignItems:"center", flexWrap:"wrap", justifyContent:"center" }}>
+        {Object.entries(ASN_COLOR).map(([asn, c]) => (
+          <div key={asn} style={{ display:"flex", alignItems:"center", gap:6 }}>
+            <div style={{ width:10, height:10, borderRadius:"50%", background:c, boxShadow:`0 0 6px ${c}99` }}></div>
+            <span style={{ color:"#94a3b8" }}>{asn}</span>
+          </div>
+        ))}
+        <div style={{ width:1, height:14, background:"#1e293b" }}></div>
+        <div style={{ display:"flex", alignItems:"center", gap:7 }}>
+          <svg width="28" height="10" style={{ display:"block" }}>
+            <line x1="0" y1="5" x2="28" y2="5" stroke="#334155" strokeWidth="1.5" strokeDasharray="4 3"/>
+            <polygon points="24,2 28,5 24,8" fill="#334155"/>
+          </svg>
+          <span>Sliver config / pivot</span>
+        </div>
+        <div style={{ fontSize:10, color:"#334155" }}>· Click any node for details</div>
+      </div>
+
+      {/* Diagram */}
+      <div style={{
+        background:"#060d18",
+        border:"1px solid #0f1e33",
+        borderRadius:10,
+        overflow:"hidden",
+        boxShadow:"0 4px 60px #0009",
+        maxWidth:"100%",
+      }}>
+        <svg viewBox={`0 0 ${W} ${H}`} style={{ display:"block", width:"min(1100px, 96vw)", height:"auto" }}>
+          <defs>
+            <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+              <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#0b1829" strokeWidth="0.5"/>
+            </pattern>
+            <marker id="arr" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <polygon points="0 0, 7 3.5, 0 7" fill="#2d4a6b"/>
+            </marker>
+            <marker id="arr-hi" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto">
+              <polygon points="0 0, 7 3.5, 0 7" fill="#64748b"/>
+            </marker>
+          </defs>
+
+          {/* Background */}
+          <rect width={W} height={H} fill="url(#grid)"/>
+
+          {/* ASN boxes */}
+          {ASNs.map(asn => {
+            const b = ASN_BOXES[asn.id];
+            const c = ASN_COLOR[asn.id];
+            return (
+              <g key={asn.id}>
+                <rect x={b.x} y={b.y} width={b.w} height={b.h}
+                  rx={7} fill={c + "09"} stroke={c + "30"} strokeWidth="1.5"/>
+                {/* ASN label */}
+                <rect x={b.x + 12} y={b.y - 11} width={84} height={22} rx={4}
+                  fill={c + "25"} stroke={c + "55"} strokeWidth="1"/>
+                <text x={b.x + 54} y={b.y + 6}
+                  textAnchor="middle" fontSize="10.5"
+                  fontFamily="'Courier New', monospace" fontWeight="700"
+                  fill={c} letterSpacing="0.05em"
+                >{asn.id}</text>
+                {/* IP count */}
+                <text x={b.x + b.w - 10} y={b.y + 18}
+                  textAnchor="end" fontSize="9"
+                  fontFamily="'Courier New', monospace" fill={c + "55"}
+                >{asn.ips.length} IP{asn.ips.length > 1 ? "s" : ""}</text>
+              </g>
+            );
+          })}
+
+          {/* Connection lines */}
+          {CONNECTIONS.map((conn, i) => {
+            const p = curvePath(conn.from, conn.to);
+            const isHi = hoverIP && (conn.from === hoverIP || conn.to === hoverIP);
+            const fade = hoverIP && !isHi;
+            return (
+              <g key={i} style={{ transition:"opacity 0.15s" }} opacity={fade ? 0.08 : 1}>
+                <path d={p} fill="none"
+                  stroke={isHi ? "#64748b" : "#1a3050"}
+                  strokeWidth={isHi ? 1.5 : 1}
+                  strokeDasharray="5 4"
+                  markerEnd={isHi ? "url(#arr-hi)" : "url(#arr)"}
+                />
+                {isHi && (() => {
+                  const p1 = IP_POS[conn.from], p2 = IP_POS[conn.to];
+                  const dx = p2.x-p1.x, dy = p2.y-p1.y;
+                  const lx = (p1.x+p2.x)/2 - dy*0.22 + dx*0.12;
+                  const ly = (p1.y+p2.y)/2 + dx*0.22 + dy*0.12;
+                  return (
+                    <text x={lx} y={ly} textAnchor="middle" fontSize="8"
+                      fontFamily="'Courier New', monospace" fill="#475569"
+                    >{conn.label}</text>
+                  );
+                })()}
+              </g>
+            );
+          })}
+
+          {/* IP Nodes */}
+          {ASNs.flatMap(asn =>
+            asn.ips.map(ipData => {
+              const pos = IP_POS[ipData.ip];
+              if (!pos) return null;
+              const c      = ASN_COLOR[asn.id];
+              const isHov  = hoverIP  === ipData.ip;
+              const isActive = activeIP === ipData.ip;
+              const fade   = hoverIP && hoverIP !== ipData.ip && !connectedToHover.has(ipData.ip);
+
+              return (
+                <g key={ipData.ip}
+                  style={{ cursor:"pointer", transition:"opacity 0.15s" }}
+                  opacity={fade ? 0.2 : 1}
+                  onClick={() => setActiveIP(ipData.ip)}
+                  onMouseEnter={() => setHoverIP(ipData.ip)}
+                  onMouseLeave={() => setHoverIP(null)}
+                >
+                  {/* Outer glow */}
+                  {(isHov || isActive) && (
+                    <circle cx={pos.x} cy={pos.y} r={NODE_R + 8}
+                      fill="none" stroke={c} strokeWidth="1" opacity="0.3"/>
+                  )}
+                  {/* Node */}
+                  <circle cx={pos.x} cy={pos.y} r={NODE_R}
+                    fill={c + "16"}
+                    stroke={c}
+                    strokeWidth={isHov || isActive ? 2 : 1.5}
+                  />
+                  {/* IP text — single line, scaled to fit */}
+                  <text
+                    x={pos.x} y={pos.y + 4}
+                    textAnchor="middle"
+                    fontSize="8.5"
+                    fontFamily="'Courier New', monospace"
+                    fill={c}
+                    fontWeight="600"
+                    letterSpacing="0"
+                  >{ipData.ip}</text>
+                  {/* Date underneath node */}
+                  {ipData.date && (
+                    <text x={pos.x} y={pos.y + NODE_R + 14}
+                      textAnchor="middle" fontSize="8"
+                      fontFamily="'Courier New', monospace" fill="#334155"
+                    >{ipData.date}</text>
+                  )}
+                </g>
+              );
+            })
+          )}
+        </svg>
+      </div>
+
+
+
+      <Tooltip ip={activeIP} onClose={() => setActiveIP(null)} />
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
