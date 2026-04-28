@@ -238,6 +238,7 @@ function App() {
   const dragging = useRef(false);
   const lastPos  = useRef({ x: 0, y: 0 });
   const svgRef   = useRef(null);
+  const pinch    = useRef(null); // { dist, cx, cy } for two-finger zoom
 
   // Centre on mount
   useEffect(() => {
@@ -277,6 +278,67 @@ function App() {
 
   const onMouseUp   = useCallback(() => { dragging.current = false; }, []);
 
+  // ── Touch handlers (mobile pan + pinch-zoom) ─────────────────────────────
+  const onTouchStart = useCallback(e => {
+    if (e.touches.length === 1) {
+      dragging.current = true;
+      lastPos.current  = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      pinch.current    = null;
+    } else if (e.touches.length === 2) {
+      dragging.current = false;
+      const [a, b] = e.touches;
+      const dx = b.clientX - a.clientX, dy = b.clientY - a.clientY;
+      pinch.current = {
+        dist: Math.hypot(dx, dy),
+        cx: (a.clientX + b.clientX) / 2,
+        cy: (a.clientY + b.clientY) / 2,
+      };
+    }
+  }, []);
+
+  const onTouchMove = useCallback(e => {
+    if (e.touches.length === 1 && dragging.current) {
+      e.preventDefault();
+      const t  = e.touches[0];
+      const dx = t.clientX - lastPos.current.x;
+      const dy = t.clientY - lastPos.current.y;
+      lastPos.current = { x: t.clientX, y: t.clientY };
+      setTransform(tr => ({ ...tr, x: tr.x + dx, y: tr.y + dy }));
+    } else if (e.touches.length === 2 && pinch.current) {
+      e.preventDefault();
+      const [a, b] = e.touches;
+      const dx = b.clientX - a.clientX, dy = b.clientY - a.clientY;
+      const newDist = Math.hypot(dx, dy);
+      const cx = (a.clientX + b.clientX) / 2;
+      const cy = (a.clientY + b.clientY) / 2;
+      const factor = newDist / pinch.current.dist;
+      const rect   = svgRef.current.getBoundingClientRect();
+      const mx = cx - rect.left, my = cy - rect.top;
+      setTransform(tr => {
+        const newScale = Math.min(Math.max(tr.scale * factor, 0.25), 6);
+        const ratio    = newScale / tr.scale;
+        return {
+          scale: newScale,
+          x: mx - ratio * (mx - tr.x) + (cx - pinch.current.cx),
+          y: my - ratio * (my - tr.y) + (cy - pinch.current.cy),
+        };
+      });
+      pinch.current = { dist: newDist, cx, cy };
+    }
+  }, []);
+
+  const onTouchEnd = useCallback(e => {
+    if (e.touches.length === 0) {
+      dragging.current = false;
+      pinch.current    = null;
+    } else if (e.touches.length === 1) {
+      // Pinch ended but one finger remains — resume panning from it
+      pinch.current   = null;
+      dragging.current = true;
+      lastPos.current  = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }
+  }, []);
+
   const connectedToHover = new Set(
     CONNECTIONS
       .filter(c => c.from === hoverIP || c.to === hoverIP)
@@ -290,11 +352,15 @@ function App() {
       <svg
         ref={svgRef}
         width="100%" height="100%"
-        style={{ display:"block", cursor: dragging.current ? "grabbing" : "grab", userSelect:"none" }}
+        style={{ display:"block", cursor: dragging.current ? "grabbing" : "grab", userSelect:"none", touchAction:"none" }}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
         onMouseLeave={onMouseUp}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        onTouchCancel={onTouchEnd}
       >
         <defs>
           <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"
@@ -449,7 +515,7 @@ function App() {
         position:"fixed", bottom:18, left:20,
         fontSize:10, color:"#1e3a5f", fontFamily:"monospace",
         letterSpacing:"0.06em", pointerEvents:"none",
-      }}>drag to pan</div>
+      }}>drag / swipe to pan · pinch to zoom</div>
 
       <Tooltip ip={activeIP} onClose={() => setActiveIP(null)} />
     </div>
