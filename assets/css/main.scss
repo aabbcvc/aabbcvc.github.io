@@ -1029,13 +1029,15 @@ hr {
 
   table {
     border-collapse: collapse;
-    width: 100%;
-    margin: 1.5rem 0;
+    width: auto;
+    max-width: 100%;
+    margin: 1.5rem auto;
     font-size: 0.9rem;
 
     th, td {
       border: 1px solid var(--border-color);
       padding: 0.65rem 0.9rem;
+      text-align: center;
     }
     th { background: var(--bg-secondary); font-weight: 600; }
     tr:nth-child(even) { background: var(--bg-secondary); }
