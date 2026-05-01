@@ -230,6 +230,26 @@ function Tooltip({ ip, onClose }) {
   );
 }
 
+// ── Sanitize + clamp so the diagram can never disappear off-screen ───────────
+function clampTransform(t) {
+  let { x, y, scale } = t;
+  // Reject NaN / Infinity → reset to identity-ish
+  if (!Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(scale) || scale <= 0) {
+    return { x: 0, y: 0, scale: 1 };
+  }
+  scale = Math.min(Math.max(scale, 0.25), 6);
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const cw = W * scale, ch = H * scale;
+  // Require that at least MARGIN px of the content stays inside the viewport
+  // on every side, so the user always has something to grab.
+  const M = Math.min(120, Math.min(vw, vh) * 0.4);
+  const minX = M - cw, maxX = vw - M;
+  const minY = M - ch, maxY = vh - M;
+  x = Math.min(Math.max(x, minX), maxX);
+  y = Math.min(Math.max(y, minY), maxY);
+  return { x, y, scale };
+}
+
 // ── App ────────────────────────────────────────────────────────────────────────
 function App() {
   const [activeIP,   setActiveIP]   = useState(null);
@@ -240,14 +260,23 @@ function App() {
   const svgRef   = useRef(null);
   const pinch    = useRef(null); // { dist, cx, cy } for two-finger zoom
 
-  // Centre on mount
+  // Always run state updates through the clamp.
+  const updateTransform = useCallback(updater => {
+    setTransform(prev => clampTransform(typeof updater === "function" ? updater(prev) : updater));
+  }, []);
+
+  // Centre on mount + clamp on resize so rotation/orientation can't strand the diagram.
   useEffect(() => {
-    setTransform({
+    const recentre = () => updateTransform({
       x: (window.innerWidth  - W) / 2,
       y: (window.innerHeight - H) / 2,
       scale: 1,
     });
-  }, []);
+    recentre();
+    const onResize = () => updateTransform(t => t); // re-clamp without changing intent
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, [updateTransform]);
 
   const onWheel = useCallback(e => {
     e.preventDefault();
@@ -255,12 +284,12 @@ function App() {
     const rect   = svgRef.current.getBoundingClientRect();
     const mx = e.clientX - rect.left;
     const my = e.clientY - rect.top;
-    setTransform(t => {
-      const newScale = Math.min(Math.max(t.scale * factor, 0.25), 6);
+    updateTransform(t => {
+      const newScale = t.scale * factor;
       const ratio    = newScale / t.scale;
       return { scale: newScale, x: mx - ratio * (mx - t.x), y: my - ratio * (my - t.y) };
     });
-  }, []);
+  }, [updateTransform]);
 
   const onMouseDown = useCallback(e => {
     if (e.button !== 0) return;
@@ -273,8 +302,8 @@ function App() {
     const dx = e.clientX - lastPos.current.x;
     const dy = e.clientY - lastPos.current.y;
     lastPos.current = { x: e.clientX, y: e.clientY };
-    setTransform(t => ({ ...t, x: t.x + dx, y: t.y + dy }));
-  }, []);
+    updateTransform(t => ({ ...t, x: t.x + dx, y: t.y + dy }));
+  }, [updateTransform]);
 
   const onMouseUp   = useCallback(() => { dragging.current = false; }, []);
 
@@ -284,12 +313,16 @@ function App() {
       dragging.current = true;
       lastPos.current  = { x: e.touches[0].clientX, y: e.touches[0].clientY };
       pinch.current    = null;
-    } else if (e.touches.length === 2) {
+    } else if (e.touches.length >= 2) {
       dragging.current = false;
       const [a, b] = e.touches;
       const dx = b.clientX - a.clientX, dy = b.clientY - a.clientY;
+      const dist = Math.hypot(dx, dy);
+      // Guard: if fingers land at exactly the same pixel, refuse to start a pinch
+      // (would cause divide-by-zero next frame).
+      if (dist < 1) { pinch.current = null; return; }
       pinch.current = {
-        dist: Math.hypot(dx, dy),
+        dist,
         cx: (a.clientX + b.clientX) / 2,
         cy: (a.clientY + b.clientY) / 2,
       };
@@ -303,29 +336,35 @@ function App() {
       const dx = t.clientX - lastPos.current.x;
       const dy = t.clientY - lastPos.current.y;
       lastPos.current = { x: t.clientX, y: t.clientY };
-      setTransform(tr => ({ ...tr, x: tr.x + dx, y: tr.y + dy }));
-    } else if (e.touches.length === 2 && pinch.current) {
+      updateTransform(tr => ({ ...tr, x: tr.x + dx, y: tr.y + dy }));
+    } else if (e.touches.length >= 2 && pinch.current) {
       e.preventDefault();
       const [a, b] = e.touches;
       const dx = b.clientX - a.clientX, dy = b.clientY - a.clientY;
       const newDist = Math.hypot(dx, dy);
+      if (newDist < 1) return; // guard against divide-by-zero
       const cx = (a.clientX + b.clientX) / 2;
       const cy = (a.clientY + b.clientY) / 2;
-      const factor = newDist / pinch.current.dist;
-      const rect   = svgRef.current.getBoundingClientRect();
+      // Snapshot prev pinch state into LOCALS — `pinch.current` mutates below
+      // and the setState updater may run later (React batching), seeing the new value.
+      const prevDist = pinch.current.dist;
+      const prevCx   = pinch.current.cx;
+      const prevCy   = pinch.current.cy;
+      const factor   = newDist / prevDist;
+      const rect     = svgRef.current.getBoundingClientRect();
       const mx = cx - rect.left, my = cy - rect.top;
-      setTransform(tr => {
-        const newScale = Math.min(Math.max(tr.scale * factor, 0.25), 6);
+      pinch.current  = { dist: newDist, cx, cy };
+      updateTransform(tr => {
+        const newScale = tr.scale * factor;
         const ratio    = newScale / tr.scale;
         return {
           scale: newScale,
-          x: mx - ratio * (mx - tr.x) + (cx - pinch.current.cx),
-          y: my - ratio * (my - tr.y) + (cy - pinch.current.cy),
+          x: mx - ratio * (mx - tr.x) + (cx - prevCx),
+          y: my - ratio * (my - tr.y) + (cy - prevCy),
         };
       });
-      pinch.current = { dist: newDist, cx, cy };
     }
-  }, []);
+  }, [updateTransform]);
 
   const onTouchEnd = useCallback(e => {
     if (e.touches.length === 0) {
@@ -333,7 +372,7 @@ function App() {
       pinch.current    = null;
     } else if (e.touches.length === 1) {
       // Pinch ended but one finger remains — resume panning from it
-      pinch.current   = null;
+      pinch.current    = null;
       dragging.current = true;
       lastPos.current  = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     }
@@ -488,9 +527,9 @@ function App() {
         zIndex:50,
       }}>
         {[
-          { label:"+", action: () => setTransform(t => ({ ...t, scale: Math.min(t.scale * 1.2, 6) })) },
-          { label:"⟳", action: () => setTransform({ x:(window.innerWidth-W)/2, y:(window.innerHeight-H)/2, scale:1 }) },
-          { label:"−", action: () => setTransform(t => ({ ...t, scale: Math.max(t.scale * 0.83, 0.25) })) },
+          { label:"+", action: () => updateTransform(t => ({ ...t, scale: t.scale * 1.2 })) },
+          { label:"⟳", action: () => updateTransform({ x:(window.innerWidth-W)/2, y:(window.innerHeight-H)/2, scale:1 }) },
+          { label:"−", action: () => updateTransform(t => ({ ...t, scale: t.scale * 0.83 })) },
         ].map(btn => (
           <button key={btn.label} onClick={btn.action} style={{
             width:32, height:32,
