@@ -174,7 +174,7 @@ Restart=always
 RestartSec=10
 ```
 
-# Exfiltration
+# Pivoting to Exfiltration
 
 Ctrl-Alt-Intel recovered evidence, including commands ran and custom scripts, of the threat actor referencing the private IP address `10.16.13.88`:
 
