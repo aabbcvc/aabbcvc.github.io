@@ -52,7 +52,7 @@ So the attacker is not “logging in normally”. They are forging the session s
 Ctrl-Alt-Intel assess an unknown threat actor, operating from the IP address `95.111.250[.]175` has interactively attempted exploitation of CVE-2026-41940 against primarily:
 
 * Philipines & Laos Government/Military domains
-* MSPs & hosting providers in Philipines, USA, Canada & South Africa
+* MSPs & hosting providers 
 
 Unlike the tradecraft discussed in our blog, this threat actor relied on open-source POCs for exploitation:
 
