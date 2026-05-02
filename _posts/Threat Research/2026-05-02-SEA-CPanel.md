@@ -4,7 +4,7 @@ classes: wide
 header:
   teaser: /assets/images/cpanel/raw.png
 ribbon: black
-description: "Exposed C2 server highlights opportunistic exploitation of CVE-2026-41940 and novel vulnerability chains against South-East Asian military & hosting providers"
+description: "Exposed C2 server highlights opportunistic exploitation of CVE-2026-41940 and novel exploitation chains against South-East Asian military & hosting providers"
 categories:
   - Threat Research
 tags:
