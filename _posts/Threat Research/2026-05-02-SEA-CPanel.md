@@ -14,24 +14,15 @@ toc: true
 
 # Overview
 
-On April 29th 2026, [watchTowr Labs](https://labs.watchtowr.com/the-internet-is-falling-down-falling-down-falling-down-cpanel-whm-authentication-bypass-cve-2026-41940/) published research on **CVE-2026-41940**, a critical authentication bypass in **cPanel & WHM**. Within days, reporting from [Censys](https://censys.com/blog/the-cpanel-situation-is/) and others made clear that exploitation had rapidly moved from disclosure to in-the-wild abuse.
+On April 29th 2026, [watchTowr Labs](https://labs.watchtowr.com/the-internet-is-falling-down-falling-down-falling-down-cpanel-whm-authentication-bypass-cve-2026-41940/) published research on **CVE-2026-41940**, a critical authentication bypass in **cPanel & WHM**. Within days, reporting from [Censys](https://censys.com/blog/the-cpanel-situation-is/) and [Ctrl-Alt-Intel](https://x.com/ctrlaltintel/status/2050143909209317439?s=20) made clear that exploitation had rapidly moved from disclosure to in-the-wild abuse.
 
 On 2nd May 2026, Ctrl-Alt-Intel identified an exposed attacker staging server that provided direct visibility into one such operation. From this infrastructure, we observed an unknown threat actor interactively targeting **government and military entities in South-East Asia**, alongside a smaller set of **MSPs and hosting providers** in the Philippines, Laos, Canada, South Africa, and the United States. The actor relied heavily on public proof-of-concept code for **CVE-2026-41940**.
 
-However, the server did not just expose opportunistic cPanel exploitation. It also contained a separate **custom exploit chain** for an Indonesian defence-sector training portal, alongside evidence of **earlier exfiltration of Chinese railway-sector data**. 
+Exposed threat actor data also detailed a separate **custom exploit chain** for an Indonesian defence-sector training portal, alongside evidence of **earlier exfiltration of Chinese railway-sector data**. 
 
 That Chinese data is significant in its own right. The exfiltrated corpus was centered on the **China Railway Society Electrification Committee** and related railway electrification organisations. Although the committee itself does not appear to be a government ministry or formal CCP organ, it sits within the **China Railway Society**, a body that explicitly describes itself as a bridge between the **Party, government, and railway scientific and technical workers**. 
 
 The stolen files map technical, organisational, and personal information from a railway electrification ecosystem that is closely linked to China’s **state rail infrastructure and CCP-aligned science governance structures**.
-
-
-# Overview
-
-On April 29th, [watchTowr Labs](https://labs.watchtowr.com/the-internet-is-falling-down-falling-down-falling-down-cpanel-whm-authentication-bypass-cve-2026-41940/) publish a blog discussing cPanel authentication bypass (CVE-2026-41940). Following [Censys' blog on the cPanel situation](https://censys.com/blog/the-cpanel-situation-is/), it's clear the industry has started to observe active and mass exploitation in the wild. Ctrl-Alt-Intel has [already tweeted](https://x.com/ctrlaltintel/status/2050143909209317439?s=20) about observing the Bangladeshi education sector targeted with CVE-2026-41940 exploits yesterday.
-
-On the 2nd May, Ctrl-Alt-Intel has identified an unknown threat actor leverage CVE-2026-41940 to target Government and Military entities in South East Asia. Additionally, we assess this threat actor has also leveraged different web-app vulnerabilities to achieve initial access. 
-
-Finally, from analysis of exfiltrated files, this threat actor likely stolen signficant data relating to the China Railway Society Electrification Committee and related railway electrification organisations. 
 
 # CVE-2026-41940 (cPanel) 
 
@@ -221,7 +212,7 @@ Ctrl-Alt-Intel is not attributing this campaign to any specific threat actor or 
 
 # Conclusion
 
-The exposed infrastructure examined in this blog provides a useful view into a threat actor that combined **speed, opportunism, and persistence**. Within days of public disclosure, the actor had operationalised open-source tooling for **CVE-2026-41940** and was interactively testing it against **South-East Asian government and military entities**, as well as internet-facing hosting infrastructure. At the same time, the recovered server also contained a separate custom exploit chain for an **Indonesian** defence-sector web portal.
+The exposed infrastructure examined in this blog provides a useful view into a threat actor that combined **speed, opportunism, and persistence**. Within days of public disclosure, the actor had leveraged open-source tooling for **CVE-2026-41940** and was interactively testing it against **South-East Asian government and military entities**, as well as internet-facing hosting infrastructure. At the same time, the recovered server also contained a separate custom exploit chain for an **Indonesian** defence-sector web portal.
 
 Ctrl-Alt-Intel found the activity prior to **CPanel**/**CVE-2026-41940** most interesting. The actor built a durable access layer using **OpenVPN**, **Ligolo**, **systemd persistence**, and then used that access to pivot into an internal network and exfiltrate a substantial corpus of Chinese railway-sector documents.
 
