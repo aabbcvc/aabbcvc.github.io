@@ -158,7 +158,7 @@ Restart=always
 RestartSec=10
 ```
 
-# Pivoting -> Exfiltration
+# Exfiltration
 
 Ctrl-Alt-Intel recovered evidence, including commands ran and custom scripts, of the threat actor referencing the private IP address `10.16.13.88`:
 
@@ -235,3 +235,22 @@ Although we do not make a firm attribution, the combination of victimology, post
 | `1` | File Name | Linux ELF reverse-connect / pivot payload recovered alongside the custom exploit chain |
 | `1CFEADF01D24182362887B7C5F683E8BDB0E84CDDCE03E3B7564B2D9AB5D15CF` | SHA-256 | `1` |
 
+# MITRE ATT&CK
+
+| Tactic | ID | Technique | Observed Usage |
+|---|---|---|---|
+| **Resource Development** | [T1583.003](https://attack.mitre.org/techniques/T1583/003/) | Acquire Infrastructure: Virtual Private Server | VPS at `95.111.250[.]175` used to host OpenVPN, payload staging, reverse shell infrastructure, and pivot tooling |
+| **Resource Development** | [T1588.005](https://attack.mitre.org/techniques/T1588/005/) | Obtain Capabilities: Exploits | Public PoCs for **CVE-2026-41940** were operationalised against exposed WHM targets |
+| **Resource Development** | [T1588.002](https://attack.mitre.org/techniques/T1588/002/) | Obtain Capabilities: Tool | Open-source tooling including **Ligolo-ng**, **OpenVPN**, and `lftp` used for pivoting and exfiltration |
+| **Initial Access** | [T1190](https://attack.mitre.org/techniques/T1190/) | Exploit Public-Facing Application | Exploitation of internet-facing cPanel/WHM instances and a separate authenticated SQL injection chain in a defence-sector portal |
+| **Initial Access** | [T1078](https://attack.mitre.org/techniques/T1078/) | Valid Accounts | Hardcoded valid credentials used to access the targeted training portal before SQLi exploitation |
+| **Execution** | [T1059.004](https://attack.mitre.org/techniques/T1059/004/) | Command and Scripting Interpreter: Unix Shell | PostgreSQL `COPY ... TO PROGRAM` abused to execute shell commands on the application host |
+| **Execution** | [T1059.001](https://attack.mitre.org/techniques/T1059/001/) | Command and Scripting Interpreter: PowerShell | `init.ps1` provided a reverse PowerShell shell to the attacker VPS |
+| **Persistence** | [T1543.002](https://attack.mitre.org/techniques/T1543/002/) | Create or Modify System Process: Systemd Service | Masqueraded `systemd-update.service` created to maintain a persistent reverse-connect Linux tunnel |
+| **Defense Evasion** | [T1036](https://attack.mitre.org/techniques/T1036/) | Masquerading | Hidden paths and benign-looking names such as `.netmon`, `systemd-helper`, and `systemd-update.service` used to disguise persistence |
+| **Discovery** | [T1046](https://attack.mitre.org/techniques/T1046/) | Network Service Discovery | Internal host validation via `ping`, `telnet`, `ssh`, and recovered target lists across `10.16.0.0/16` |
+| **Lateral Movement** | [T1021.004](https://attack.mitre.org/techniques/T1021/004/) | Remote Services: SSH | Root SSH access obtained to internal host `10.16.13[.]88` |
+| **Command and Control** | [T1572](https://attack.mitre.org/techniques/T1572/) | Protocol Tunneling | **OpenVPN** and **Ligolo** chained together to tunnel operator traffic into an internal victim network |
+| **Command and Control** | [T1090](https://attack.mitre.org/techniques/T1090/) | Proxy | Ligolo used as a reverse tunnelling / routed proxy layer for internal pivoting |
+| **Collection** | [T1005](https://attack.mitre.org/techniques/T1005/) | Data from Local System | Technical documents, meeting packs, and financial spreadsheets collected from internal file paths |
+| **Exfiltration** | [T1048](https://attack.mitre.org/techniques/T1048/) | Exfiltration Over Alternative Protocol | Bulk document theft performed over SFTP using a custom `lftp` mirroring script; file theft from the web portal also performed via application-mediated retrieval |
