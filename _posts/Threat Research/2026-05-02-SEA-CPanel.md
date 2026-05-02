@@ -2,7 +2,7 @@
 title: "South-East Asian Military Entities Targeted via cPanel (CVE-2026-41940)"
 classes: wide
 header:
-  teaser: /assets/images/cpanel/raw.png
+  teaser: /assets/images/cpanel/logo.png
 ribbon: black
 description: "Exposed C2 server highlights opportunistic exploitation of CVE-2026-41940 and novel exploitation chains against South-East Asian military & hosting providers"
 categories:
