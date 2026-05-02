@@ -20,7 +20,7 @@ On 2nd May 2026, Ctrl-Alt-Intel identified an exposed attacker staging server th
 
 Exposed threat actor data also detailed a separate **custom exploit chain** for an Indonesian defence-sector training portal, alongside evidence of **earlier exfiltration of Chinese railway-sector data**. 
 
-That Chinese data is significant in its own right. The exfiltrated corpus was centered on the **China Railway Society Electrification Committee** and related railway electrification organisations. Although the committee itself does not appear to be a government ministry or formal CCP organ, it sits within the **China Railway Society**, a body that explicitly describes itself as a bridge between the **Party, government, and railway scientific and technical workers**. 
+The exfiltrated data was centered on the **China Railway Society Electrification Committee** and related railway electrification organisations. Although the committee itself does not appear to be a government ministry or formal CCP organ, it sits within the **China Railway Society**, a body that explicitly describes itself as a bridge between the **Party, government, and railway scientific and technical workers**. 
 
 The stolen files map technical, organisational, and personal information from a railway electrification ecosystem that is closely linked to China’s **state rail infrastructure and CCP-aligned science governance structures**.
 
