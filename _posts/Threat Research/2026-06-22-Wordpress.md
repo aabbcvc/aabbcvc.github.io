@@ -14,7 +14,7 @@ toc: true
 
 # Overview
 
-Found on the Hunt.io platform, an exposed Linux working directory provided a detailed record of a mass web-exploitation operation active in June 2026:
+Found on the [Hunt.io](https://hunt.io/) platform, an exposed Linux working directory provided a detailed record of a mass web-exploitation operation active in June 2026:
 
 [![1](/assets/images/wp2/1.png){: .align-center .img-border}](/assets/images/wp2/1.png)
 <p class="figure-caption">AttackCapture™</p>
