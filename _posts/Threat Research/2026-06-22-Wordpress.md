@@ -23,7 +23,7 @@ The collection held target lists IPs and URLs from FOFA, custom vulnerability sc
 
 Across 18 documented scanner runs, the operator generated 850k+ attempt records against 442k+ deduplicated vulnerability–site pairs. 
 
-Across all surviving evidence, **25,195 unique normalised sites carry confirmed or validated compromise evidence**. To validate whether your website was targeted, compromised or suspected, please see our [Exposure Checker](https://ctrlaltintel.com/Exposure)
+Across all surviving evidence, **25,195 unique normalised sites carry confirmed or validated compromise evidence**. To validate whether your website was targeted, compromised or suspected, please see our [Exposure Checker](https://ctrlaltintel.com/research/Exposure)
 
 Read together, the files describe a repeatable workflow:
 
