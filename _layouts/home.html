@@ -4,89 +4,75 @@ layout: default
 
 {{ content }}
 
-<!-- Hero Section -->
-<section class="home-hero">
-  <div class="home-hero__inner">
-    <p class="home-hero__eyebrow">Threat Research</p>
-    <h1 class="home-hero__title">Where Threats<br><span class="home-hero__accent">Get Dissected</span></h1>
-    <p class="home-hero__sub">Collaborative research investigating adversary operations, reversing malware, and tracking threat infrastructure.</p>
+<!-- Hero -->
+<section class="hero">
+  <div class="container hero__inner">
+    <p class="eyebrow">// Threat Research</p>
+    <h1 class="hero__title">Where threats<br><span class="accent-text">get dissected.</span></h1>
+    <p class="hero__sub">Collaborative research investigating adversary operations, reversing malware, and tracking threat infrastructure.</p>
+    <div class="hero__stats">
+      <span><strong>{{ site.posts | size }}</strong> reports published</span>
+      <span><strong>{{ site.tags | size }}</strong> topics tracked</span>
+      <span>last drop <strong>{{ site.posts.first.date | date: "%Y-%m-%d" }}</strong></span>
+    </div>
   </div>
 </section>
 
-<!-- Popular Research — Horizontal Scroll Carousel -->
-{% assign all_posts = site.posts %}
+<!-- Featured research carousel -->
 {% assign featured_slugs = site.data.featured %}
-
 {% if featured_slugs and featured_slugs.size > 0 %}
-<section class="home-carousel-section">
-  <div class="home-carousel-header">
-    <h2 class="home-carousel-title">Popular Research</h2>
+<section class="carousel-section container" data-carousel>
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">// Featured</p>
+      <h2>Popular research</h2>
+    </div>
     <div class="carousel-nav">
-      <button class="carousel-btn carousel-btn--prev" aria-label="Scroll left" type="button">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      <button class="carousel-btn" type="button" data-carousel-prev aria-label="Scroll left">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
       </button>
-      <button class="carousel-btn carousel-btn--next" aria-label="Scroll right" type="button">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      <button class="carousel-btn" type="button" data-carousel-next aria-label="Scroll right">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </button>
     </div>
   </div>
-  <div class="home-carousel" id="trendingCarousel">
-    <div class="home-carousel__track">
-      {% for item in featured_slugs %}
-        {% assign match = nil %}
-        {% for post in all_posts %}
-          {% if post.slug == item.slug %}
-            {% assign match = post %}
-            {% break %}
-          {% endif %}
-        {% endfor %}
-        {% if match %}
-          {% if match.header.teaser %}
-            {% assign teaser = match.header.teaser %}
-          {% else %}
-            {% assign teaser = site.teaser %}
-          {% endif %}
-          <a href="{{ match.url | relative_url }}" class="carousel-card">
-            {% if teaser %}
-            <div class="carousel-card__img">
-              <img src="{{ teaser | relative_url }}" alt="{{ match.title | strip_html }}" loading="lazy">
-            </div>
-            {% endif %}
-            <div class="carousel-card__body">
-              <span class="carousel-card__tag">{{ match.categories | first }}</span>
-              <h3 class="carousel-card__title">{{ match.title | markdownify | remove: "<p>" | remove: "</p>" }}</h3>
-              <p class="carousel-card__desc">{{ match.description | default: match.excerpt | strip_html | truncate: 100 }}</p>
-              <div class="carousel-card__meta">
-                <time datetime="{{ match.date | date_to_xmlschema }}">{{ match.date | date: "%b %-d, %Y" }}</time>
-                <span class="meta-dot">&middot;</span>
-                {% assign words = match.content | number_of_words %}
-                {% assign mins = words | divided_by: 170 %}
-                {% if mins < 1 %}{% assign mins = 1 %}{% endif %}
-                <span>{{ mins }} min read</span>
-              </div>
-            </div>
-          </a>
+  <div class="carousel">
+    {% for item in featured_slugs %}
+      {% assign match = nil %}
+      {% for post in site.posts %}
+        {% if post.slug == item.slug %}
+          {% assign match = post %}
+          {% break %}
         {% endif %}
       {% endfor %}
-    </div>
+      {% if match %}
+        {% include post-card.html post=match %}
+      {% endif %}
+    {% endfor %}
   </div>
 </section>
 {% endif %}
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var track = document.querySelector('.home-carousel__track');
-  var prevBtn = document.querySelector('.carousel-btn--prev');
-  var nextBtn = document.querySelector('.carousel-btn--next');
-  if (!track || !prevBtn || !nextBtn) return;
-
-  var scrollAmount = 340;
-
-  nextBtn.addEventListener('click', function() {
-    track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  });
-  prevBtn.addEventListener('click', function() {
-    track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-  });
-});
-</script>
+<!-- All research -->
+<section class="posts-section container" id="research">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">// Archive</p>
+      <h2>All research</h2>
+    </div>
+  </div>
+  <div class="posts-toolbar">
+    <div class="search-box">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="search" id="postSearch" placeholder="Search reports, tags, actors&hellip;" autocomplete="off" aria-label="Search reports">
+      <kbd>/</kbd>
+    </div>
+    <div class="tag-chips" id="tagChips" aria-label="Filter by tag"></div>
+  </div>
+  <div class="post-grid" id="postList">
+    {% for post in site.posts %}
+      {% include post-card.html post=post reveal=true %}
+    {% endfor %}
+  </div>
+  <p class="no-results" id="noResults" hidden>// no matching reports_</p>
+</section>

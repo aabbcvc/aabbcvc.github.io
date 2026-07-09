@@ -2,23 +2,35 @@
 layout: default
 ---
 
-{% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
-  {% include page__hero.html %}
-{% elsif page.header.video.id and page.header.video.provider %}
-  {% include page__hero_video.html %}
-{% endif %}
+<div class="container archive-page">
+  <header class="page-head">
+    <p class="eyebrow">// Index</p>
+    <h1 id="page-title">{{ page.title }}</h1>
+    <p class="page-head__sub">{{ site.posts | size }} reports &middot; newest first</p>
+  </header>
 
-{% if page.url != "/" and site.breadcrumbs %}
-  {% unless paginator %}
-    {% include breadcrumbs.html %}
-  {% endunless %}
-{% endif %}
+  {{ content }}
 
-<div id="main" role="main">
-  <div class="archive wide-archive">
-    {% unless page.header.overlay_color or page.header.overlay_image %}
-      <h1 id="page-title" class="page__title">{{ page.title }}</h1>
-    {% endunless %}
-    {{ content }}
+  <div class="posts-toolbar">
+    <div class="search-box">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="search" id="postSearch" placeholder="Search reports, tags, actors&hellip;" autocomplete="off" aria-label="Search reports">
+      <kbd>/</kbd>
+    </div>
   </div>
+
+  <ul class="post-rows" id="postList">
+    {% for post in site.posts %}
+      <li class="post-row"
+          data-title="{{ post.title | strip_html | downcase | escape }}"
+          data-tags="{% for t in post.tags %}{{ t | downcase | escape }}{% unless forloop.last %},{% endunless %}{% endfor %}">
+        <a href="{{ post.url | relative_url }}">
+          <span class="post-row__date">{{ post.date | date: "%Y-%m-%d" }}</span>
+          <span class="post-row__title">{{ post.title | markdownify | remove: "<p>" | remove: "</p>" }}</span>
+          <span class="post-row__arrow">&rarr;</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+  <p class="no-results" id="noResults" hidden>// no matching reports_</p>
 </div>

@@ -1,6 +1,8 @@
 # main links
 main:
   - title: "Research"
-    url: /categories/#research
+    url: /research/
+  - title: "Tags"
+    url: /tags/
   - title: "About"
     url: /about/

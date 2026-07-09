@@ -1,28 +1,30 @@
 ---
-layout: archive
+layout: default
 ---
 
-{{ content }}
+<div class="container archive-page">
+  <header class="page-head">
+    <p class="eyebrow">// Categories</p>
+    <h1 id="page-title">{{ page.title }}</h1>
+  </header>
 
-{% assign categories_max = 0 %}
-{% for category in site.categories %}
-  {% if category[1].size > categories_max %}
-    {% assign categories_max = category[1].size %}
-  {% endif %}
-{% endfor %}
+  {{ content }}
 
-{% for i in (1..categories_max) reversed %}
-  {% for category in site.categories %}
-    {% if category[1].size == i %}
-      <section id="{{ category[0] | slugify | downcase }}" class="taxonomy__section">
-        <h2 class="archive__subtitle">{{ category[0] }} <span class="taxonomy__count">({{ i }})</span></h2>
-        <div class="category-grid">
-          {% for post in category.last %}
-            {% include archive-single.html type=page.entries_layout %}
-          {% endfor %}
-        </div>
-        <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
-      </section>
-    {% endif %}
+  {% assign sorted_categories = site.categories | sort %}
+  {% for category in sorted_categories %}
+    <section id="{{ category[0] | slugify }}" class="taxonomy-section">
+      <h2>{{ category[0] }} <span class="taxonomy-count">{{ category[1].size }}</span></h2>
+      <ul class="post-rows">
+        {% for post in category[1] %}
+          <li class="post-row">
+            <a href="{{ post.url | relative_url }}">
+              <span class="post-row__date">{{ post.date | date: "%Y-%m-%d" }}</span>
+              <span class="post-row__title">{{ post.title | markdownify | remove: "<p>" | remove: "</p>" }}</span>
+              <span class="post-row__arrow">&rarr;</span>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
   {% endfor %}
-{% endfor %}
+</div>

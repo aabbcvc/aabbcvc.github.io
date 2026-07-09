@@ -2,74 +2,76 @@
 layout: default
 ---
 
-{% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
-  {% include page__hero.html %}
-{% elsif page.header.video.id and page.header.video.provider %}
-  {% include page__hero_video.html %}
-{% endif %}
+<article class="post" itemscope itemtype="https://schema.org/CreativeWork">
+  {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
+  {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
 
-<div id="main" role="main">
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-    {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-    {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
-    {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
-
-    <div class="page__inner-wrap">
-      {% unless page.header.overlay_color or page.header.overlay_image %}
-        <header class="page__header-wide">
+  <header class="post-hero">
+    <div class="container container--narrow">
+      <p class="post-hero__crumbs">
+        <a href="{{ '/' | relative_url }}">~</a><span class="crumb-sep">/</span>{% if page.categories.size > 0 %}<a href="{{ '/research/' | relative_url }}">research</a>{% else %}<span>{{ page.title | strip_html | slugify }}</span>{% endif %}
+      </p>
+      {% if page.title %}
+        <h1 class="post-hero__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>
+      {% endif %}
+      {% if page.date %}
+        <div class="post-hero__meta">
+          <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+          <span class="meta-dot">&middot;</span>
+          {% assign words = content | number_of_words %}
+          {% assign mins = words | divided_by: site.words_per_minute %}
+          {% if mins < 1 %}{% assign mins = 1 %}{% endif %}
+          <span>{{ mins }} min read</span>
           {% if page.categories.size > 0 %}
-            <span class="page__category-label">{{ page.categories | first }}</span>
+            <span class="meta-dot">&middot;</span>
+            <span>{{ page.categories | first }}</span>
           {% endif %}
-          {% if page.title %}<h1 id="page-title" class="page__title" itemprop="headline">{{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}</h1>{% endif %}
-          <div class="page__header-meta">
-            {% if page.date %}
-              <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
-            {% endif %}
-            {% if page.read_time %}
-              <span class="meta-dot">&middot;</span>
-              <span><i class="far fa-clock" aria-hidden="true"></i> {% include read-time.html %}</span>
-            {% endif %}
-          </div>
-        </header>
-      {% endunless %}
-
-      <section class="page__content" itemprop="text">
-        {% if page.toc %}
-          <aside class="sidebar__right {% if page.toc_sticky %}sticky{% endif %}">
-            <nav class="toc">
-              <header><h4 class="nav__title"><i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> {{ page.toc_label | default: site.data.ui-text[site.locale].toc_label | default: "On this page" }}</h4></header>
-              {% include toc.html sanitize=true html=content h_min=1 h_max=4 class="toc__menu" %}
-            </nav>
-          </aside>
-        {% endif %}
-        {{ content }}
-        {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
-      </section>
-
-      <footer class="page__meta">
-        {% if site.data.ui-text[site.locale].meta_label %}
-          <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
-        {% endif %}
-        {% include page__taxonomy.html %}
-        {% if page.last_modified_at %}
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }}</strong> <time datetime="{{ page.last_modified_at | date: "%Y-%m-%d" }}">{{ page.last_modified_at | date: "%B %-d, %Y" }}</time></p>
-        {% elsif page.date %}
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }}</strong> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time></p>
-        {% endif %}
-      </footer>
-
-      {% if page.share %}{% include social-share.html %}{% endif %}
-
-      {% include post_pagination.html %}
+        </div>
+      {% endif %}
+      {% if page.tags.size > 0 %}
+        <div class="post-hero__tags">
+          {% for tag in page.tags %}
+            <a class="chip" href="{{ '/tags/' | relative_url }}#{{ tag | slugify }}">{{ tag }}</a>
+          {% endfor %}
+        </div>
+      {% endif %}
     </div>
+  </header>
 
-    {% if jekyll.environment == 'production' and site.comments.provider and page.comments %}
-      {% include comments.html %}
-    {% endif %}
-  </article>
-
-  <div class="page__back-link">
-    <a href="{{ '/categories/#research' | relative_url }}">&larr; View all research</a>
+  <div class="post-shell container" id="postShell">
+    <div class="post-content" id="postContent" itemprop="text">
+      {{ content }}
+    </div>
+    <aside class="post-toc" id="postToc" hidden aria-label="Table of contents">
+      <div class="post-toc__inner">
+        <p class="post-toc__label">On this page</p>
+        <nav id="tocNav"></nav>
+      </div>
+    </aside>
   </div>
-</div>
+
+  <footer class="post-footer container container--narrow">
+    {% if page.previous or page.next %}
+      <nav class="post-nav" aria-label="Post navigation">
+        {% if page.previous %}
+          <a class="post-nav__card" href="{{ page.previous.url | relative_url }}">
+            <span class="post-nav__label">&larr; Older</span>
+            <span class="post-nav__title">{{ page.previous.title | markdownify | remove: "<p>" | remove: "</p>" }}</span>
+          </a>
+        {% endif %}
+        {% if page.next %}
+          <a class="post-nav__card post-nav__card--next" href="{{ page.next.url | relative_url }}">
+            <span class="post-nav__label">Newer &rarr;</span>
+            <span class="post-nav__title">{{ page.next.title | markdownify | remove: "<p>" | remove: "</p>" }}</span>
+          </a>
+        {% endif %}
+      </nav>
+    {% endif %}
+    {% if page.categories.size > 0 %}
+      <a class="back-link" href="{{ '/research/' | relative_url }}">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        View all research
+      </a>
+    {% endif %}
+  </footer>
+</article>
