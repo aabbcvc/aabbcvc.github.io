@@ -67,7 +67,10 @@ Data from the 2012 VK breach contains an account associated with the email addre
 * Faculty: `Информатики и систем управления` (Informatics and Control Systems)
 * Speciality: `Информационная безопасность` (Information Security)
 
-The account listed Information Security as *Obrezko*'s university speciality as early as 2012. 
+The account listed Information Security as *Obrezko*'s university speciality as early as 2012. We can recover a photo of *Ozbreko* from his public Kaggle account:
+
+[![1](/assets/images/vb/12.png){: .align-center .img-border}](/assets/images/vb/12.png)
+<p class="figure-caption">Ozbreko Kaggle Profile</p>
 
 ## Ministry of Emergency Situations (EMERCOM)
 
