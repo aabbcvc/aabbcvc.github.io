@@ -170,10 +170,19 @@
       h.appendChild(a);
     });
 
-    // Copy buttons on code blocks
-    postContent.querySelectorAll("div.highlighter-rouge, figure.highlight").forEach(function (block) {
-      var pre = block.querySelector("pre");
-      if (!pre) return;
+    // Copy buttons and expand/collapse controls on code blocks
+    postContent.querySelectorAll("pre").forEach(function (pre, index) {
+      var block = pre.closest("div.highlighter-rouge, figure.highlight");
+
+      // Kramdown normally provides one of the wrappers above. Keep indented or
+      // hand-authored Markdown code blocks consistent if it does not.
+      if (!block) {
+        block = document.createElement("div");
+        block.className = "code-block";
+        pre.parentNode.insertBefore(block, pre);
+        block.appendChild(pre);
+      }
+
       var btn = document.createElement("button");
       btn.type = "button";
       btn.className = "code-copy";
@@ -192,6 +201,38 @@
           .catch(function () {});
       });
       block.appendChild(btn);
+
+      // Keep shorter examples fully visible. Longer snippets begin as a
+      // preview and can be opened without navigating away from the post.
+      if (pre.scrollHeight > 360) {
+        var codeId = "post-code-" + (index + 1);
+        var toggleRow = document.createElement("div");
+        var toggle = document.createElement("button");
+
+        pre.id = pre.id || codeId;
+        block.classList.add("code-collapsible", "is-collapsed");
+        toggleRow.className = "code-toggle-row";
+        toggle.type = "button";
+        toggle.className = "code-toggle";
+        toggle.textContent = "expand code";
+        toggle.setAttribute("aria-controls", pre.id);
+        toggle.setAttribute("aria-expanded", "false");
+
+        toggle.addEventListener("click", function () {
+          var isCollapsed = block.classList.toggle("is-collapsed");
+          toggle.textContent = isCollapsed ? "expand code" : "collapse code";
+          toggle.setAttribute("aria-expanded", String(!isCollapsed));
+
+          // If a reader collapses from the end of a very long snippet, keep
+          // the shortened block in view instead of leaving them below it.
+          if (isCollapsed && block.getBoundingClientRect().bottom < 0) {
+            block.scrollIntoView({ block: "center" });
+          }
+        });
+
+        toggleRow.appendChild(toggle);
+        block.appendChild(toggleRow);
+      }
     });
 
     // Table of contents (h2/h3) + scrollspy
