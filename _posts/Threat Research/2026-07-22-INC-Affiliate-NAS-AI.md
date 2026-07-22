@@ -1,5 +1,5 @@
 ---
-title: "INC Ransomware affiliate encrypts NAS Devices"
+title: "INC Ransomware affiliate targets ESXi & NAS Devices in AD environments"
 classes: wide
 ribbon: black
 description: "Exposed operator tooling shows an INC affiliate using likely LLM-generated scripts to enumerate, pivot, and deploy ransomware against network storage"
@@ -97,7 +97,7 @@ for query in (
         print(message.get("body", {}).get("content", "")[:800])
 ```
 
-The output was designed for interactive triage rather than bulk exfiltration alone. It printed the sender, subject, timestamp, and a body preview, allowing the affiliate to convert ordinary IT correspondence into a list of systems, administrators, network changes, and likely access paths. Related scripts extended the same Graph workflow to OneDrive, SharePoint, and email attachments.
+Recovered spreadsheets and planning documents reference ESXi host moves, NetApp power-down tasks, remote access, backup weakness, firewalls, and SD-WAN/VPN dependencies. By the time the operator moved into WinRM and storage APIs, much of the environment had already been mapped in the victim’s own paperwork.
 
 After reaching an internal Windows server, another script embedded PowerShell inside a minimal Python WinRM wrapper. The original contained a real host, domain administrator credentials, and victim-specific search terms; these have been removed below.
 
@@ -137,7 +137,7 @@ The resulting discovery covered:
 
 # Lateral Movement
 
-A compromised domain administrator account was used over WinRM to control an internal Windows server. From there, the affiliate treated legitimate management interfaces as a lateral-movement fabric.
+A compromised domain administrator account was used over WinRM to control an internal Windows server. 
 
 The recovered scripts used or attempted to use:
 
@@ -151,8 +151,6 @@ The recovered scripts used or attempted to use:
 The affiliate exported the Active Directory database together with the `SAM`, `SECURITY`, and `SYSTEM` registry hives. Receiver logs recorded successful uploads of all four artefacts to affiliate-controlled infrastructure. 
 
 The management-plane targeting was unusually broad. Scripts granted a compromised identity the global `Administrator` role in vCenter, attempted to reset appliance and SSO credentials, enabled or checked ESXi remote access, queried backup credentials, and modified NetApp export policies. OceanStor scripts cycled through authentication and enumeration approaches while attempting to avoid or recover from account lockouts.
-
-No vulnerability exploit is proven by this collection. The observed workflow was dominated by valid credentials, remote administration, and built-in APIs. This distinction matters: patching alone would not have stopped an affiliate already holding privileged identities and access to trusted management paths.
 
 # vCenter / ESXi Targeting
 
@@ -222,22 +220,7 @@ requests.put(
 )
 ```
 
-The source only attempted the root-password change if an earlier API request showed appliance-level access. No corresponding response log survives, so the password reset and shell changes cannot be treated as confirmed outcomes from source code alone.
-
 Other scripts tried to reach the same objective through VMware Guest Operations. `vc_reset.py` located the vCenter Server Appliance as a VM, tested compromised accounts for guest authentication, and prepared commands to reset both the operating-system `root` account and the SSO administrator. `vc_pwreset.py` explored session tickets, SAML authentication, VIX, and the Extension Manager, but retained comments acknowledging that several approaches could not proceed without valid guest credentials.
-
-`vc_snap_reset.py` then attempted a more invasive route: creating a quiesced snapshot of the vCenter appliance so its base virtual disk could potentially be accessed from an ESXi host.
-
-```python
-snapshot = vcenter_vm.CreateSnapshot_Task(
-    name="pw-reset-temp",
-    description="temp",
-    memory=False,
-    quiesce=True,
-)
-```
-
-The snapshot action was implemented in the script, but the recovered file stops after checking the task result. It does not contain the later disk-mount or password-modification stages described in its comments, and no surviving output confirms that the snapshot was created.
 
 ## ESXi Remote Access
 
@@ -262,7 +245,7 @@ for host in hosts.view:
             firewall.EnableRuleset(id=ruleset.key)
 ```
 
-This would give the affiliate an additional administrative path to a hypervisor and its datastores. The recovered payload archive also contained an INC ESXi encryptor capable of stopping virtual machines and removing snapshots. However, the directory does not prove that this ESXi payload was transferred to or executed on a victim hypervisor. The Python evidence establishes targeting and attempted management-plane changes, not completed ESXi encryption.
+This would give the affiliate an additional administrative path to a hypervisor and its datastores. The recovered payload archive also contained an INC ESXi encryptor capable of stopping virtual machines and removing snapshots. However, the directory does not prove that this ESXi payload was transferred to or executed on a victim hypervisor. 
 
 # Pivoting / C2
 
@@ -291,8 +274,6 @@ netsh advfirewall firewall add rule \
 
 session.run_ps(powershell)
 ```
-
-This was not a sophisticated bespoke C2 implant. It was a disposable Python wrapper around legitimate Windows networking features. That simplicity made the pivot fast to deploy, easy to alter, and less dependent on getting a custom binary through endpoint controls.
 
 Separate scripts staged an HTTP receiver on affiliate infrastructure and pushed the domain database and registry hives to it. The corresponding log recorded successful HTTP responses for each upload. The collection also contained evidence of a live VPN session using compromised credentials, showing that the affiliate retained an additional route into the environment while the working directory was exposed.
 
@@ -370,8 +351,6 @@ session.run_ps(powershell)
 
 The executable's interface matches the recovered INC sample: `fast`, `medium`, and `slow` modes, plus a directory argument. The Windows binary was written in Rust and contained functionality for recursive local and network-share encryption, selective fast encryption, process and service termination, shadow-copy removal, and exclusions for selected system and security-software paths. The same archive included payloads for Linux, ESXi, and numerous processor architectures, demonstrating that the affiliate had access to a broader cross-platform impact kit.
 
-There is an important evidential limit. The scripts and surrounding status checks confirm ransomware deployment and attempts to verify running `locker.exe` processes. 
-
 # Assessing the Use of AI
 
 We assess with **high confidence** that the INC affiliate used an LLM to create and modify much of the Python-based operational tooling.
@@ -391,22 +370,11 @@ Several scripts preserve a running conversation with the code. Comments propose 
 
 These comments matter because they mirror the actual file sequence. Scripts with names containing `auth`, `try2`, `open`, `fix`, `final`, and `super` show the LLM iterating through API paths, authentication formats, and privilege changes as earlier approaches failed.
 
-## Consistent scaffolding across unrelated technologies
+# Conclusion
 
-The scripts covered Microsoft Graph, Active Directory, DPAPI, WinRM, pyVmomi, ESXi protocols, SSH, NetApp ONTAP, Huawei OceanStor, Veeam, SMB, and Windows networking. Despite this breadth, they repeatedly used the same structure:
-
-* constants and credentials hardcoded at the top;
-* certificate validation disabled;
-* a large PowerShell or API request block embedded in Python;
-* broad exception handling;
-* output truncated to a few hundred or thousand characters;
-* immediate top-level execution with no reusable entry point or test harness.
-
-Thirty-four of the 52 recovered Python files created WinRM sessions, while none used a conventional `if __name__ == "__main__"` entry point. This is consistent with an operator repeatedly prompting for a script to answer the next question, rather than engineering a stable intrusion framework.
+The exposed open-directory provided visibility into a successful ransomware operation from the affiliates own machine. 
 
 # Detection Opportunities
-
-The affiliate's reliance on legitimate administration creates strong cross-plane detection opportunities. Defenders should correlate identity, endpoint, network, cloud, virtualisation, storage, and backup telemetry rather than looking only for an encryptor hash.
 
 High-value behaviours from this case include:
 
@@ -422,7 +390,7 @@ High-value behaviours from this case include:
 * a burst of SMB drive mappings immediately before multiple encryptor processes start;
 * `INC-README.txt` or files carrying the INC extension appearing across mapped shares.
 
-Two non-victim-specific hashes can be shared safely:
+# IOCs
 
 | Artefact | SHA-256 |
 |---|---|
@@ -448,18 +416,3 @@ Two non-victim-specific hashes can be shared safely:
 | Impact | T1486 | Data Encrypted for Impact | INC encryptor launched against five mapped NAS shares |
 | Impact | T1490 / T1489 | Inhibit System Recovery / Service Stop | Capabilities present in the recovered INC payload |
 
-# Conclusion
-
-This intrusion shows how an INC affiliate can combine a mature RaaS payload with disposable, likely LLM-generated operational code. The encryptor supplied the impact; the Python scripts supplied the connective tissue between stolen cloud access, Active Directory, management planes, tunnels, and NAS shares.
-
-AI did not need to discover a novel vulnerability or operate autonomously to change the campaign. Its likely value was speed: it let the affiliate move across unfamiliar products, generate wrappers for legitimate APIs, react to failures, and turn newly recovered information into the next script.
-
-The same evidence also exposes the limits of that approach. The scripts were brittle, heavily hardcoded, noisy, and filled with discarded ideas. Those weaknesses create detection opportunities—but only if defenders monitor the administrative interfaces the affiliate abused. By the time `locker.exe` appeared, the decisive compromises had already happened in identity, cloud, virtualisation, storage, and backup systems.
-
-The central lesson is not that AI replaced the ransomware operator. It is that AI likely made one affiliate faster across the entire intrusion lifecycle.
-
-# References
-
-* [ACSC, CERT Tonga, and NCSC — INC Ransom Affiliate Model Enabling Targeting of Critical Networks](https://www.cyber.gov.au/about-us/view-all-content/alerts-and-advisories/inc-ransom-affiliate-model-enabling-targeting-of-critical-networks)
-* [MITRE ATT&CK — INC Ransom, G1032](https://attack.mitre.org/groups/G1032/)
-* [MITRE ATT&CK — INC Ransomware, S1139](https://attack.mitre.org/software/S1139/)
