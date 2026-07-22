@@ -1,5 +1,5 @@
 ---
-title: "INC Affiliate Targets NAS Devices with Likely AI-Assisted Tooling"
+title: "INC Ransomware affiliate encrypts NAS Devices"
 classes: wide
 ribbon: black
 description: "Exposed operator tooling shows an INC affiliate using likely LLM-generated scripts to enumerate, pivot, and deploy ransomware against network storage"
@@ -12,20 +12,29 @@ toc: true
 
 # Overview
 
-Ctrl-Alt-Intel researchers recovered an exposed operator working directory containing evidence of an active ransomware intrusion against a technology organisation. The collection linked cloud-data theft, Active Directory compromise, internal tunnelling, attacks against storage and virtualisation management planes, and the deployment of an INC encryptor against network-attached storage (NAS).
+Using the [Hunt.io](https://hunt.io/) platform, Ctrl-Alt-Intel researchers discovered an exposed operator working directory containing evidence of an active ransomware intrusion against a Chinese technology organisation. The collection linked cloud-data theft, Active Directory compromise, internal tunnelling, attacks against storage and virtualisation management planes, and the deployment of an INC encryptor against network-attached storage (NAS).
 
-We assess with **high confidence** that the server belongs to an **INC Ransom affiliate**. The exposed open-directory contained multiple INC ransomware binaries, alongside scripts, tooling and exfiltrated victim data that can be directly linked to a recent INC Ransom victim - a Chinese victim `v-silicon[.]com`. 
+[![1](/assets/images/inc/1.png){: .align-center .img-border}](/assets/images/iot/1.png)
+<p class="figure-caption">Hunt.io</p>
 
-The most interesting part of the collection was not the INC ransomware binaries. More than 50 Python scripts wrapped Microsoft Graph, WinRM, VMware, storage, backup, SSH, and Windows administration interfaces into short, single-purpose workflows. We assess with **high confidence** that a Large Language Model (LLM) was used to generate a substantial portion of this operator tooling.
+We assess with **high confidence** that the server belongs to an **INC Ransom affiliate**. The exposed open-directory contained multiple INC ransomware binaries, alongside scripts, tooling and exfiltrated victim data that can be directly linked to a recent INC Ransom victim - the Chinese company `v-silicon[.]com`:
 
-The recovered evidence supports the following sequence:
+[![1](/assets/images/inc/2.png){: .align-center .img-border}](/assets/images/iot/2.png)
+<p class="figure-caption">ransomwre.live v-silicon.com victim</p>
 
-1. Access cloud mail and storage using compromised identities.
-2. Recover network diagrams, administrative guides, asset exports, and credentials.
-3. Use a Windows server as a WinRM-controlled pivot into Active Directory and management networks.
-4. Extract the domain database and registry hives, then target virtualisation, backup, and storage platforms.
-5. Create internal forwards to otherwise unreachable management services.
-6. Map NAS shares to the pivot and launch the INC Windows encryptor against each drive.
+More than 50 Python scripts wrapped Microsoft Graph, WinRM, VMware, storage, backup, SSH, and Windows administration interfaces into short, single-purpose workflows. We assess that the affiliate leveraged Large Language Model (LLM) to generate a significant amounts of operator tooling that was leveraged in the intrusion.
+
+# Intrusion Summary
+
+From the recovered tooling, scripts, artifacts and exfiltrated data was found on the IP address `213.176.114[.]6`. From this, we assess the INC Ransom affiliate did the following:
+
+* Access the internal network via GlobalProtect VPN
+* Access cloud mail and storage using compromised identities.
+* Recover network diagrams, administrative guides, asset exports, and credentials.
+* Use a Windows server as a WinRM-controlled pivot into Active Directory and management networks.
+* Extract the domain database and registry hives, then target virtualisation, backup, and storage platforms.
+* Create internal forwards to otherwise unreachable management services.
+* Map NAS shares to the pivot and launch the INC Windows encryptor against each drive.
 
 # Enumeration / Discovery
 
