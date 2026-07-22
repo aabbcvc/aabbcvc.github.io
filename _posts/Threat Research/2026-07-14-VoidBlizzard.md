@@ -2,7 +2,7 @@
 title: "Burnt by Burgers: Highlighting Void Blizzard's Russian State Links"
 classes: wide
 header:
-  teaser: /assets/images/vb/logo.jpg
+  teaser: /assets/images/vb/logo.png
 ribbon: black
 description: "OSINT analysis of Denis Obrezko & the Void Blizzard threat group"
 categories:
