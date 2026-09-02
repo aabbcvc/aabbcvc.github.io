@@ -11,6 +11,32 @@
   var year = document.getElementById("footerYear");
   if (year) year.textContent = new Date().getFullYear();
 
+  var typewriter = document.querySelector("[data-typewriter]");
+  if (typewriter && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    var typewriterLines = Array.prototype.slice.call(typewriter.querySelectorAll("[data-typewriter-line]"));
+    var typewriterText = typewriterLines.map(function (line) { return line.textContent; });
+    var typewriterCaret = document.createElement("i");
+    typewriterCaret.className = "typewriter-caret";
+    typewriterCaret.setAttribute("aria-hidden", "true");
+    typewriterLines.forEach(function (line) { line.textContent = ""; });
+
+    function typeLine(lineIndex, characterIndex) {
+      var line = typewriterLines[lineIndex];
+      var target = typewriterText[lineIndex];
+      line.textContent = target.slice(0, characterIndex);
+      line.appendChild(typewriterCaret);
+      if (characterIndex < target.length) {
+        window.setTimeout(function () { typeLine(lineIndex, characterIndex + 1); }, 52);
+      } else if (lineIndex < typewriterLines.length - 1) {
+        window.setTimeout(function () { typeLine(lineIndex + 1, 0); }, 220);
+      } else {
+        window.setTimeout(function () { typewriterCaret.remove(); }, 650);
+      }
+    }
+
+    window.setTimeout(function () { typeLine(0, 0); }, 180);
+  }
+
   var reveals = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
     var revealObserver = new IntersectionObserver(function (entries) {
