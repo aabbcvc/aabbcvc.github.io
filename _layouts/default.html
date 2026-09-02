@@ -18,17 +18,18 @@
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header" id="siteHeader">
       <div class="shell nav">
-        <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        <div class="brand-lockup">
+          <a class="sponsor-link" href="https://hunt.io/" target="_blank" rel="noopener noreferrer" title="Hunt.io">
+            <img class="sponsor-logo-img" src="{{ '/assets/images/Huntio.png' | relative_url }}" alt="Sponsored by Hunt.io" width="543" height="218">
+          </a>
+          <a class="brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+        </div>
         <div class="nav-actions">
           <nav class="navlinks" aria-label="Primary navigation">
             {% for link in site.data.navigation.main %}
               <a href="{{ link.url | relative_url }}">{{ link.title }}</a>
             {% endfor %}
           </nav>
-          <a class="sponsor-link" href="https://hunt.io/" target="_blank" rel="noopener noreferrer" title="Hunt.io">
-            <img class="sponsor-logo-img" src="{{ '/assets/images/Huntio.png' | relative_url }}" alt="Sponsored by Hunt.io" width="543" height="218">
-          </a>
-          <span class="theme-dots" aria-hidden="true"><i></i><i></i><i></i></span>
         </div>
       </div>
     </header>
