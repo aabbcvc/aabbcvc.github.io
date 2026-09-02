@@ -2,6 +2,8 @@
 title: "INC Ransomware affiliate targets ESXi & NAS Devices in AD environments"
 classes: wide
 ribbon: black
+header:
+  teaser: /assets/images/inc/logo.png
 description: "Exposed operator tooling shows an INC affiliate using likely LLM-generated scripts to enumerate, pivot, and deploy ransomware against network storage"
 categories:
   - Threat Research
@@ -14,13 +16,13 @@ toc: true
 
 Using the [Hunt.io](https://hunt.io/) platform, Ctrl-Alt-Intel researchers discovered an exposed operator working directory containing evidence of an active ransomware intrusion against a Chinese technology organisation. The collection linked cloud-data theft, Active Directory compromise, internal tunnelling, attacks against storage and virtualisation management planes, and the deployment of an INC encryptor against network-attached storage (NAS).
 
-[![1](/assets/images/inc/1.png){: .align-center .img-border}](/assets/images/iot/1.png)
+[![1](/assets/images/inc/1.png){: .align-center .img-border}](/assets/images/inc/1.png)
 <p class="figure-caption">Hunt.io</p>
 
 We assess with **high confidence** that the server belongs to an **INC Ransom affiliate**. The exposed open-directory contained multiple INC ransomware binaries, alongside scripts, tooling and exfiltrated victim data that can be directly linked to a recent INC Ransom victim - the Chinese company `v-silicon[.]com`:
 
-[![1](/assets/images/inc/2.png){: .align-center .img-border}](/assets/images/iot/2.png)
-<p class="figure-caption">ransomwre.live v-silicon.com victim</p>
+[![1](/assets/images/inc/2.png){: .align-center .img-border}](/assets/images/inc/2.png)
+<p class="figure-caption">ransomware.live v-silicon.com victim</p>
 
 More than 50 Python scripts wrapped Microsoft Graph, WinRM, VMware, storage, backup, SSH, and Windows administration interfaces into short, single-purpose workflows. We assess that the affiliate leveraged Large Language Model (LLM) to generate a significant amounts of operator tooling that was leveraged in the intrusion.
 
