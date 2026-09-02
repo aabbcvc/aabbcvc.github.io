@@ -15,6 +15,15 @@ layout: default
     <h2>Featured Articles</h2>
     <a class="section-link" href="{{ '/research/' | relative_url }}">View all research <span aria-hidden="true">→</span></a>
   </div>
+  <form class="research-toolbar" action="{{ '/research/' | relative_url }}" method="get" role="search">
+    <label class="research-search" for="featuredSearch">
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+      <span class="sr-only">Search all research</span>
+      <input id="featuredSearch" data-global-search name="q" type="search" placeholder="Search every article…" autocomplete="off">
+      <kbd>/</kbd>
+    </label>
+    <p class="search-count">Search all {{ site.posts | size }} reports</p>
+  </form>
   <div class="research-grid">
     {% for item in site.data.featured %}
       {% assign featured_post = site.posts | where: 'slug', item.slug | first %}

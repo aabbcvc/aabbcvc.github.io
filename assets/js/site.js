@@ -27,6 +27,7 @@
   }
 
   var search = document.getElementById("researchSearch");
+  var shortcutSearch = search || document.querySelector("[data-global-search]");
   var research = document.getElementById("researchGrid");
   var count = document.getElementById("searchCount");
   var empty = document.getElementById("searchEmpty");
@@ -71,21 +72,29 @@
   }
 
   if (search && research) {
+    var initialQuery = new URLSearchParams(window.location.search).get("q") || "";
+    if (initialQuery) {
+      search.value = initialQuery;
+      filterResearch();
+    }
     var searchIndex = loadSearchIndex();
     search.addEventListener("input", filterResearch);
     searchIndex.then(function () {
       if (search.value.trim()) filterResearch();
     });
+  }
+
+  if (shortcutSearch) {
     document.addEventListener("keydown", function (event) {
       var tag = document.activeElement && document.activeElement.tagName;
       if (event.key === "/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(tag || "")) {
         event.preventDefault();
-        search.focus();
+        shortcutSearch.focus();
       }
-      if (event.key === "Escape" && document.activeElement === search) {
-        search.value = "";
-        filterResearch();
-        search.blur();
+      if (event.key === "Escape" && document.activeElement === shortcutSearch) {
+        shortcutSearch.value = "";
+        if (search && research) filterResearch();
+        shortcutSearch.blur();
       }
     });
   }
