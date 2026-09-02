@@ -26,6 +26,49 @@
     reveals.forEach(function (element) { element.classList.add("is-visible"); });
   }
 
+  var search = document.getElementById("researchSearch");
+  var research = document.getElementById("researchGrid");
+  var count = document.getElementById("searchCount");
+  var empty = document.getElementById("searchEmpty");
+
+  function filterResearch() {
+    if (!search || !research) return;
+    var query = search.value.trim().toLowerCase();
+    var terms = query.split(/\s+/).filter(Boolean);
+    var visible = 0;
+
+    research.querySelectorAll(".research-card").forEach(function (card) {
+      var haystack = [
+        card.getAttribute("data-search-title") || "",
+        card.getAttribute("data-search-description") || "",
+        card.getAttribute("data-search-category") || "",
+        card.getAttribute("data-search-tags") || ""
+      ].join(" ");
+      var matches = terms.every(function (term) { return haystack.indexOf(term) !== -1; });
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    });
+
+    if (count) count.textContent = visible;
+    if (empty) empty.hidden = visible !== 0;
+  }
+
+  if (search && research) {
+    search.addEventListener("input", filterResearch);
+    document.addEventListener("keydown", function (event) {
+      var tag = document.activeElement && document.activeElement.tagName;
+      if (event.key === "/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(tag || "")) {
+        event.preventDefault();
+        search.focus();
+      }
+      if (event.key === "Escape" && document.activeElement === search) {
+        search.value = "";
+        filterResearch();
+        search.blur();
+      }
+    });
+  }
+
   var content = document.getElementById("postContent");
   if (!content) return;
 

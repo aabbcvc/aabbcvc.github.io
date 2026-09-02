@@ -83,6 +83,20 @@ button, input { font: inherit; }
 .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; padding: 74px 0 26px; }
 .section-head h2 { margin: 0; font-size: 27px; line-height: 1.15; letter-spacing: -.035em; }
 .section-head p { margin: 0; color: #76867f; font-size: 13px; }
+.research-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 0 0 30px; }
+.research-search {
+  display: flex; align-items: center; width: min(100%, 520px); height: 48px;
+  color: #75847d; background: rgba(13, 24, 21, .74); border: 1px solid var(--line);
+  transition: color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.research-search:focus-within { color: var(--accent); border-color: rgba(80, 212, 157, .48); box-shadow: 0 0 0 3px rgba(80, 212, 157, .07); }
+.research-search svg { flex: 0 0 auto; margin-left: 16px; }
+.research-search input { min-width: 0; flex: 1; height: 100%; padding: 0 12px; color: var(--text); background: transparent; border: 0; outline: 0; font-size: 14px; }
+.research-search input::placeholder { color: #66766f; }
+.research-search kbd { margin-right: 13px; padding: 2px 7px; color: #66766f; background: #09120f; border: 1px solid var(--line); font: 11px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.search-count { margin: 0; color: var(--quiet); font-size: 12px; white-space: nowrap; }
+.search-empty { margin: 48px 0 0; color: #73827b; font: 13px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; text-align: center; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 .research-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 28px; }
 .research-card { min-width: 0; }
 .cover {
@@ -208,6 +222,9 @@ button, input { font: inherit; }
   .hero h1 { font-size: clamp(43px, 14vw, 68px); }
   .lede { font-size: 16px; }
   .section-head { padding-top: 54px; }
+  .research-toolbar { align-items: stretch; flex-direction: column; margin-bottom: 26px; }
+  .research-search { width: 100%; }
+  .search-count { align-self: flex-end; }
   .research-grid { grid-template-columns: 1fr; gap: 42px; }
   .card-copy h3 { font-size: 20px; }
   .story-hero { min-height: 620px; align-items: end; }
