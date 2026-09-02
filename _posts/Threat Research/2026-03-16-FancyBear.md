@@ -2,7 +2,7 @@
 title: "FancyBear Exposed: Major OPSEC Blunder Inside Russian Espionage Ops"
 classes: wide
 header:
-  teaser: /assets/images/fancy/logo.png
+  teaser: /assets/images/covers/fancybear.png
 ribbon: black
 description: "FancyBear's OPSEC failure gives Ctrl-Alt-Intel rare visibility inside Russian espionage operations"
 categories:

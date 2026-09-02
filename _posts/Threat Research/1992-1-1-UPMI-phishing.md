@@ -2,7 +2,7 @@
 title: "Inside the UPMI Phishing-as-a-Service Platform"
 classes: wide
 header:
-  teaser: /assets/images/UPMI/logo.png
+  teaser: /assets/images/covers/upmi-phishing.png
 ribbon: black
 description: "Analysis of a fully-featured AiTM phishing platform with collective intelligence & licensing system"
 categories:

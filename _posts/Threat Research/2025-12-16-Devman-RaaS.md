@@ -2,7 +2,7 @@
 title: "How not to run a RaaS Operation"
 classes: wide
 header:
-  teaser: /assets/images/devman/logo.jpg
+  teaser: /assets/images/covers/devman-raas.png
 ribbon: black
 description: "Lessons in OPSEC from a sloppy RaaS"
 categories:

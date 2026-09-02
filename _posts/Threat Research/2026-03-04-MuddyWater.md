@@ -2,7 +2,7 @@
 title: "MuddyWater Exposed: Inside an Iranian APT operation"
 classes: wide
 header:
-  teaser: /assets/images/muddy/logo.png
+  teaser: /assets/images/covers/muddywater.png
 ribbon: black
 description: "MuddyWater espionage campaign exposed"
 categories:

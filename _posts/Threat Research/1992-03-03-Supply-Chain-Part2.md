@@ -2,7 +2,7 @@
 title: "The BuddyBoss Attack: Full Incident Analysis"
 classes: wide
 header:
-  teaser: /assets/images/wordpress/logo2.png
+  teaser: /assets/images/covers/buddyboss-incident.png
 ribbon: black
 description: "Reconstructing the complete kill-chain of the BuddyBoss Attack"
 categories:

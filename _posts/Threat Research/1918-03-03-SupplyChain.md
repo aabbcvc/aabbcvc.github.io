@@ -2,7 +2,7 @@
 title: "The BuddyBoss Attack: Claude's Supply-Chain Attack"
 classes: wide
 header:
-  teaser: /assets/images/buddyboss/logo1.png
+  teaser: /assets/images/covers/buddyboss-ai.png
 ribbon: black
 description: "How Claude infiltrated the supply-chain, compromising 200+ websites for fraud"
 categories:

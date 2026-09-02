@@ -2,7 +2,7 @@
 title: "Chinese actor compromises thousands of Wordpress sites"
 classes: wide
 header:
-  teaser: /assets/images/wp2/logo.jpg
+  teaser: /assets/images/covers/wordpress-compromise.png
 ribbon: black
 description: "Open-directories exposes mass exploitation of web-applications globally"
 categories:

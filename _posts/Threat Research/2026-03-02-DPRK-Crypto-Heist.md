@@ -2,7 +2,7 @@
 title: "Investigating Suspected DPRK-Linked Crypto Intrusions"
 classes: wide
 header:
-  teaser: /assets/images/crypto/logo.png
+  teaser: /assets/images/covers/dprk-crypto.png
 ribbon: black
 description: "A suspected DPRK-associated actor compromises crypto orgs, pillaging cloud environments, stealing proprietary exchange software and source code."
 categories:

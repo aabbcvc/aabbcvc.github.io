@@ -2,7 +2,7 @@
 title: "Aeternum Loader: Inside the binary"
 classes: wide
 header:
-  teaser: /assets/images/block/logo2.png
+  teaser: /assets/images/covers/aeternum-binary.png
 ribbon: black
 description: "Our attempt at reversing Aeternum Loader to extract contract addresses and reveal functionality."
 categories:

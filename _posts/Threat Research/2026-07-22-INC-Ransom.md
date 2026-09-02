@@ -3,7 +3,7 @@ title: "INC Ransomware affiliate targets ESXi & NAS Devices in AD environments"
 classes: wide
 ribbon: black
 header:
-  teaser: /assets/images/inc/logo.png
+  teaser: /assets/images/covers/inc-ransomware.png
 description: "Exposed operator tooling shows an INC affiliate using likely LLM-generated scripts to enumerate, pivot, and deploy ransomware against network storage"
 categories:
   - Threat Research

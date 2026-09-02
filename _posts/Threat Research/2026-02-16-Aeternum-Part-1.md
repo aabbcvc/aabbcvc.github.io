@@ -2,7 +2,7 @@
 title: "Aeternum Loader: When your C2 lives forever"
 classes: wide
 header:
-  teaser: /assets/images/block/logo1.png
+  teaser: /assets/images/covers/aeternum-c2.png
 ribbon: black
 description: "An exposed operator panel revealed how Aeternum Loader abuses Polygon smart contracts for C2, allowing us to view all C2 commands ever sent." 
 categories:

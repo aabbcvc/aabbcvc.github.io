@@ -2,7 +2,7 @@
 title: "Diesel Vortex: Exploring connections to Russian LLCs"
 classes: wide
 header:
-  teaser: /assets/images/cargo/logo.png
+  teaser: /assets/images/covers/diesel-vortex.png
 ribbon: black
 description: "OSINT analysis of entities potentially linked to the 'Global Profit' PHaaS platform"
 categories:

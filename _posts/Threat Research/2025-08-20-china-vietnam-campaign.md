@@ -2,7 +2,7 @@
 title: "From Campus to C2: Tracking a Persistent Chinese Operation Against Vietnamese Universities"
 classes: wide
 header:
-  teaser: /assets/images/china/raw.png
+  teaser: /assets/images/covers/china-vietnam-campaign.png
 ribbon: black
 description: "Chinese threat actor targets Vietnemse universities in extensive campaign."
 categories:
