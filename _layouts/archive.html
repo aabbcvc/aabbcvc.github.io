@@ -20,7 +20,7 @@ layout: default
     </label>
     <p class="search-count" aria-live="polite"><span id="searchCount">{{ site.posts | size }}</span> reports</p>
   </div>
-  <div class="research-grid" id="researchGrid">
+  <div class="research-grid" id="researchGrid" data-search-index="{{ '/search.json' | relative_url }}">
     {% for post in site.posts %}
       {% include post-card.html post=post reveal=true %}
     {% endfor %}

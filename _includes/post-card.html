@@ -6,7 +6,8 @@
   data-search-title="{{ p.title | strip_html | downcase | escape }}"
   data-search-description="{{ p.description | default: p.excerpt | strip_html | normalize_whitespace | downcase | escape }}"
   data-search-category="{{ p.categories | join: ' ' | downcase | escape }}"
-  data-search-tags="{{ p.tags | join: ' ' | downcase | escape }}">
+  data-search-tags="{{ p.tags | join: ' ' | downcase | escape }}"
+  data-search-url="{{ p.url | relative_url }}">
   <a class="cover" href="{{ p.url | relative_url }}" aria-label="{{ p.title | strip_html | escape }}">
     <img src="{{ p.header.teaser | relative_url }}" alt="" loading="lazy" width="1731" height="909">
     <span class="type">{{ p.categories | first | default: 'Threat Research' }}</span>

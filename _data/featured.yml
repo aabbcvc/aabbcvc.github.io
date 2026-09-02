@@ -1,14 +1,24 @@
-# Popular Research — controls which posts appear in the homepage carousel
-# and in what order. Use the post slug (filename without date and .md extension).
-# Reorder or remove entries to control what visitors see first.
+# Featured Articles — controls which posts appear on the homepage and in what
+# order. Use the post slug (filename without its date and extension).
 
+- slug: Gentlemen
+- slug: INC-Ransom
+- slug: VoidBlizzard
 - slug: FancyBear
 - slug: MuddyWater
-- slug: china-vietnam-campaign
-- slug: FortiWeb-Sliver
-- slug: DPRK-Crypto-Heist
-- slug: Devman-RaaS
 - slug: DieselVortex
+- slug: china-vietnam-campaign
+- slug: Qilin
+- slug: Wordpress
+- slug: SEA-CPanel
+- slug: FudCrypt-analysis-1
+- slug: KongTuke-ClickFix
+- slug: ProxyPCP
+- slug: Devman-RaaS
+- slug: DPRK-Crypto-Heist
+- slug: BuddyBoss-2
+- slug: BuddyBoss-1
+- slug: FortiWeb-Sliver
 - slug: Aeternum-Part-1
 - slug: Aeternum-Part-2
 - slug: ErrTraffic

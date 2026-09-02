@@ -30,6 +30,22 @@
   var research = document.getElementById("researchGrid");
   var count = document.getElementById("searchCount");
   var empty = document.getElementById("searchEmpty");
+  var fullTextByUrl = Object.create(null);
+
+  function loadSearchIndex() {
+    if (!research || !research.getAttribute("data-search-index")) return Promise.resolve();
+    return fetch(research.getAttribute("data-search-index"), { cache: "no-store" })
+      .then(function (response) {
+        if (!response.ok) throw new Error("Search index request failed");
+        return response.json();
+      })
+      .then(function (entries) {
+        entries.forEach(function (entry) {
+          fullTextByUrl[entry.url] = entry.content || "";
+        });
+      })
+      .catch(function () {});
+  }
 
   function filterResearch() {
     if (!search || !research) return;
@@ -42,7 +58,8 @@
         card.getAttribute("data-search-title") || "",
         card.getAttribute("data-search-description") || "",
         card.getAttribute("data-search-category") || "",
-        card.getAttribute("data-search-tags") || ""
+        card.getAttribute("data-search-tags") || "",
+        fullTextByUrl[card.getAttribute("data-search-url")] || ""
       ].join(" ");
       var matches = terms.every(function (term) { return haystack.indexOf(term) !== -1; });
       card.hidden = !matches;
@@ -54,7 +71,11 @@
   }
 
   if (search && research) {
+    var searchIndex = loadSearchIndex();
     search.addEventListener("input", filterResearch);
+    searchIndex.then(function () {
+      if (search.value.trim()) filterResearch();
+    });
     document.addEventListener("keydown", function (event) {
       var tag = document.activeElement && document.activeElement.tagName;
       if (event.key === "/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(tag || "")) {
