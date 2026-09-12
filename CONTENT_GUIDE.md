@@ -73,6 +73,7 @@ python -m pip install -r scripts/requirements.txt
 python -m unittest discover -s tests
 python scripts/build_iocs.py
 bundle exec jekyll build
+python scripts/check_site.py _site
 ```
 
 Commit the refreshed `_data/iocs.json` alongside content edits. Run

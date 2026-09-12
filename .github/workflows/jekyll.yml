@@ -36,6 +36,8 @@ jobs:
         with:
           source: ./
           destination: ./_site
+      - name: Check rendered IOC feed and source links
+        run: python scripts/check_site.py _site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
   deploy:

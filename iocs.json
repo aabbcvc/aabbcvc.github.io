@@ -10,7 +10,7 @@ permalink: /iocs.json
     "published": {{ post.date | date: '%Y-%m-%d' | jsonify }},
     "tags": {{ post.tags | jsonify }},
     "kind": {{ post.content_type | jsonify }},
-    "indicators": {{ site.data.iocs[post.path] | default: empty | jsonify }}
+    "indicators": {% if site.data.iocs[post.path] %}{{ site.data.iocs[post.path] | jsonify }}{% else %}[]{% endif %}
   }{% unless forloop.last %},{% endunless %}
 {% endfor %}
 ]
