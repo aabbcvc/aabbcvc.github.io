@@ -11,10 +11,11 @@
     {% include seo.html %}
     <link rel="alternate" type="application/atom+xml" title="{{ site.title }} Feed" href="{{ '/feed.xml' | relative_url }}">
     <link rel="stylesheet" href="{{ '/assets/css/theme.css' | relative_url }}?v={{ asset_version }}">
+    <noscript><style>.reveal { opacity: 1; transform: none; }</style></noscript>
     {% include analytics.html %}
     {% include head/custom.html %}
   </head>
-  <body class="layout--{{ page.layout | default: layout.layout }}">
+  <body class="layout--{{ page.layout | default: layout.layout }}" data-ioc-path="{{ '/iocs/' | relative_url }}">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header" id="siteHeader">
       <div class="shell nav">

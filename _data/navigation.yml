@@ -2,5 +2,9 @@
 main:
   - title: "Research"
     url: /research/
+  - title: "Bulletins"
+    url: /bulletins/
+  - title: "IOCs"
+    url: /iocs/
   - title: "About"
     url: /about/

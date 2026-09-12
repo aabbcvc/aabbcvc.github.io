@@ -2,14 +2,16 @@
 layout: default
 ---
 
-{% if page.date and page.header.teaser %}
+{% if page.date %}
   {% assign words = content | number_of_words %}
   {% assign mins = words | divided_by: site.words_per_minute %}
   {% if mins < 1 %}{% assign mins = 1 %}{% endif %}
   <article class="story" itemscope itemtype="https://schema.org/Article">
-    <header class="story-hero">
+    <header class="story-hero{% if page.content_type == 'bulletin' or page.header.teaser == nil %} story-hero--plain{% endif %}">
+      {% if page.header.teaser and page.content_type != 'bulletin' %}
       <img class="story-hero__image" src="{{ page.header.teaser | relative_url }}" alt="" width="1731" height="909">
       <div class="story-hero__veil"></div>
+      {% endif %}
       <div class="shell story-hero__inner">
         <p class="eyebrow">{{ page.categories | first | default: 'Threat Research' }}</p>
         <h1 itemprop="headline">{{ page.title | markdownify | remove: '<p>' | remove: '</p>' }}</h1>
@@ -18,6 +20,7 @@ layout: default
           <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%B %-d, %Y' }}</time>
           <span>·</span><span>{{ mins }} min read</span>
         </div>
+        {% include publication-tags.html post=page %}
       </div>
     </header>
     <div class="story-shell shell" id="postShell">

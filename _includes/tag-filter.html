@@ -1,0 +1,13 @@
+{% assign filter_tags = include.posts | map: 'tags' | join: ',' | split: ',' | uniq | sort_natural %}
+<details class="tag-filter" id="tagFilter">
+  <summary>Tags <span id="selectedTagCount"></span></summary>
+  <div class="tag-filter__panel">
+    <p>Match all selected tags</p>
+    <div class="tag-filter__options">
+      {% for tag in filter_tags %}
+        <label><input type="checkbox" name="tag" value="{{ tag | escape }}"> {{ tag | escape }}</label>
+      {% endfor %}
+    </div>
+    <button type="button" class="text-button" id="clearTags">Clear tags</button>
+  </div>
+</details>

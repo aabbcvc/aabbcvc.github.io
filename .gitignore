@@ -11,3 +11,5 @@ vendor/
 # Ignore theme folders
 docs/
 test/
+tmp/
+__pycache__/

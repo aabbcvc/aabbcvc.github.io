@@ -138,6 +138,10 @@ exclude:
   - Rakefile
   - README
   - tmp
+  - scripts
+  - tests
+  - CONTENT_GUIDE.md
+  - templates
   - /docs # ignore Minimal Mistakes /docs
   - /test # ignore Minimal Mistakes /test
 keep_files:
@@ -240,6 +244,13 @@ defaults:
       comments: false
       share: false
       related: false
+      content_type: research
+  - scope:
+      path: "_posts/Bulletins"
+      type: posts
+    values:
+      content_type: bulletin
+      permalink: /bulletins/:title/
   # Threat Research posts - use /research/ prefix in URLs
   - scope:
       path: "_posts/Threat Research"

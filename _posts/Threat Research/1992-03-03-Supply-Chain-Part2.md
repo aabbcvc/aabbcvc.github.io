@@ -7,12 +7,18 @@ ribbon: black
 description: "Reconstructing the complete kill-chain of the BuddyBoss Attack"
 categories:
   - Threat Research
+content_type: research
 tags:
-  - Threat Research
+  - Supply Chain
+  - WordPress
+  - AI
+  - C2
+  - Exfiltration
+  - France
 toc: true
 ---
 
-# Overview
+## Overview
 
 In [Part 1](https://ctrlaltintel.com/research/BuddyBoss-1) of this research, we analysed a recovered Claude Code session log that captured a French-speaking threat actor directing Claude through the final stage of a supply chain attack: bypassing Cloudflare, uploading backdoored BuddyBoss plugins to the production licensing server, and exploiting victim WordPress sites in real time.
 
@@ -20,7 +26,7 @@ That blog focused on **how Claude made the supply chain injection possible**. Th
 
 All findings in this analysis are derived from the threat actor's own C2 server, which was left as an open directory. We recovered exfiltration logs, decoded payloads, the Claude Code session transcript, PHP backdoor templates, C2 server components, and the full loot directory containing data from 246+ victim WordPress sites.
 
-> There are gaps in our visibility. The C2 logs capture everything **after** the threat actor had already credential access to the BuddyBoss GitHub organisation. How that initial access was obtained is not completely visible to us. Although we have suspicions that we will highlight later. 
+> There are gaps in our visibility. The C2 logs capture everything **after** the threat actor had already credential access to the BuddyBoss GitHub organisation. How that initial access was obtained is not completely visible to us. Although we have suspicions that we will highlight later.
 
 **Kill Chain Summary - 17th March**
 
@@ -36,16 +42,16 @@ All findings in this analysis are derived from the threat actor's own C2 server,
 
 **Total time from first CI/CD exfiltration to first victim callback: 2 hours 54 minutes.**
 
-Although the Claude Code session transcript was not complete, and we only observed the latter end of the attack (from **Supply Chain Injection**), based on speed, standardised scripts & C2 telemetry, we likely believe Claude Code was also responsible for the the CI/CD exfiltration, lateral movement and credential theft. 
+Although the Claude Code session transcript was not complete, and we only observed the latter end of the attack (from **Supply Chain Injection**), based on speed, standardised scripts & C2 telemetry, we likely believe Claude Code was also responsible for the the CI/CD exfiltration, lateral movement and credential theft.
 
 > The threat actor had a server-side C2 listener that captured all victim telemetry, allowing us to ascertain the near complete kill-chain
 
 [![1](/assets/images/buddyboss/10.png){: .align-center .img-border}](/assets/images/buddyboss/10.png)
 <p class="figure-caption">CI/CD secret exfiltration</p>
 
-# CI/CD Pipeline Compromise
+## CI/CD Pipeline Compromise
 
-## The Malicious Workflow
+### The Malicious Workflow
 
 The threat actor pushed a malicious GitHub Actions workflow file (`platform-compat.yml`) to the `master` branch of at least two private BuddyBoss repositories: `buddyboss/buddyboss-platform-pro` and `buddyboss/csr-tool`. A third repository, `buddyboss/api-build`, is also implicated based on endpoint naming.
 
@@ -66,11 +72,11 @@ Three repositories called back to distinct C2 endpoints within 3 minutes of each
 | 16:26:46 | 145.132.102.248 | `/csr_secrets` | `buddyboss/csr-tool` | Ed25519 SSH private key, SSH credentials for Hetzner server, GitHub token |
 | 16:27:02 | 13.83.166.228 | `/api_secrets` | Unknown | `appcenter_key`, database credentials, Redis credentials, SSH key |
 
-Each repository had a **different C2 endpoint** and exfiltrated **different secrets**. 
+Each repository had a **different C2 endpoint** and exfiltrated **different secrets**.
 
 The `User-Agent: curl/8.5.0` header on all three callbacks is consistent with Ubuntu 24 (the default GitHub-hosted runner image), confirming these ran on GitHub's own infrastructure rather than self-hosted runners.
 
-## The Push Identity
+### The Push Identity
 
 The exfiltrated environment variables from the `buddyboss-platform-pro` callback reveal who triggered the workflow:
 
@@ -87,7 +93,7 @@ A few things stand out. `GITHUB_RUN_NUMBER=1` means this was the **first time th
 
 We do not believe KartikSuthar was the threat actor. The attacker spoke French. However, the push was attributed to KartikSuthar's identity. How that identity was compromised is discussed in the [Unanswered Questions](#unanswered-questions) section below.
 
-## Why This Was Hard to Detect
+### Why This Was Hard to Detect
 
 The malicious workflow was designed to avoid raising alarms:
 
@@ -96,9 +102,9 @@ The malicious workflow was designed to avoid raising alarms:
 - **Direct push to master**: The `GITHUB_EVENT_NAME=push` confirms this was not a pull request -> maybe no code review
 - **Immediate execution**: The workflow ran on the push event itself, exfiltrating secrets before anyone could review the commit
 
-# Lateral Movement
+## Lateral Movement
 
-## Hetzner Server (95.217.100.226)
+### Hetzner Server (95.217.100.226)
 
 Within **10 minutes** of stealing the SSH key from CI/CD, the threat actor (likely performed by Claude) was logged into BuddyBoss's Hetzner deployment server.
 
@@ -143,7 +149,7 @@ The server resolves to:
 - `monitor.api-publish.buddyboss.com`
 - `download.api-publish.buddyboss.com`
 
-### Root Access
+#### Root Access
 
 At 17:38:02 UTC, **the AWS server itself** called back to the C2 with a 13,214-byte reconnaissance dump. The first line confirmed what the threat actor was after:
 
@@ -155,7 +161,7 @@ The `deployment` user had `sudo` privileges. The threat actor had root, ran comp
 
 The `ctf-pivot` key is distinct from the `github-actions-deployment` key stolen from CI/CD. The threat actor brought their own key for persistence. This is consistent with the SSH pivot chain we observed in `oldconv.txt`, where Claude later used `44.241.213.212` to bypass Cloudflare protections on compromised victim sites.
 
-## Additional Credential Theft
+### Additional Credential Theft
 
 At 18:21:23 UTC, the final CI/CD-related callback arrived at `/bbapp_secrets`. This exfiltrated a BuddyBoss GitHub organisation-level PAT (`ghp_*` prefix), an FTP password, and an automation deployment token.
 
@@ -171,7 +177,7 @@ By this point, the threat actor had:
 
 The entire credential theft for BuddyBoss, from first CI/CD exfiltration to the last callback, took approximately **2 hours**.
 
-# Supply Chain Injection
+## Supply Chain Injection
 
 With the `appcenter_key` in hand, this is where our visibility into the Claude Code began at approximately 18:54 UTC. The full analysis of this session is covered in [Part 1](link-to-part-1) of this research. Below is a summary.
 
@@ -188,11 +194,11 @@ Cloudflare blocked the multipart file upload. Claude independently discovered th
 
 Both backdoored packages were verified as live on the official Caseproof CDN. Claude then triggered update notifications to `buddyboss.com` to accelerate victim discovery.
 
-# The Backdoors
+## The Backdoors
 
 Each backdoored file contained two components prepended to the legitimate code.
 
-## Automatic Credential Exfiltration
+### Automatic Credential Exfiltration
 
 Hooks into the WordPress `after_setup_theme` action at priority 1. On first execution (throttled by a WordPress transient with a 1-year TTL), the backdoor collects and exfiltrates:
 
@@ -203,9 +209,9 @@ Hooks into the WordPress `after_setup_theme` action at priority 1. On first exec
 - All environment variables via `getenv()`
 - PHP version, active plugins list, user counts
 
-This data is base64-encoded as JSON and POSTed to the C2 at `195.178.110[.]242:8443`. The request uses `blocking => false` to avoid impacting page load times on the victim site. `195.178.110[.]242:8443` is the same endpoint that was listening for the CI/CD and other credential theft data. 
+This data is base64-encoded as JSON and POSTed to the C2 at `195.178.110[.]242:8443`. The request uses `blocking => false` to avoid impacting page load times on the victim site. `195.178.110[.]242:8443` is the same endpoint that was listening for the CI/CD and other credential theft data.
 
-## Interactive Backdoor
+### Interactive Backdoor
 
 | Mode | Trigger (Platform) | Capability |
 |------|-------------------|------------|
@@ -217,9 +223,9 @@ The parameter names were chosen to blend with legitimate BuddyBoss internals (`b
 
 The threat actor later deployed version 2.20.4, adding six shell execution methods for resilience (`shell_exec`, `exec`, `system`, `passthru`, `popen`, `proc_open`), a standalone webshell at `bp-compatibility.php` for direct access bypassing WAF parameter filtering, and an `eval` mode for environments where all shell functions are disabled.
 
-# Victim Impact
+## Victim Impact
 
-## First Callbacks
+### First Callbacks
 
 The first real victim callback arrived at **19:18:06 UTC**, approximately 2 minutes after the backdoored packages went live. WordPress sites checking for updates via `wp-cron` (or when an admin visited the dashboard) saw the new versions and installed them automatically.
 
@@ -232,7 +238,7 @@ The threat actor did not wait passively. Once callbacks began arriving, they shi
 - Automated scanning (`AUTO_SCAN_RESULTS.log`) ran against approximately 30 high-value targets
 - Two full `wp-config.php` files were extracted from victim sites
 
-# The C2 Infrastructure
+## The C2 Infrastructure
 
 **How We Found This**
 
@@ -255,7 +261,7 @@ loot/
 └── AUTO_SCAN_RESULTS.log        <- Post-exploitation scan results
 ```
 
-# Timeline
+## Timeline
 
 All times are **March 17, 2026 UTC**. Times are derived from server-side timestamps on the C2's HTTP request logs.
 
@@ -280,7 +286,7 @@ All times are **March 17, 2026 UTC**. Times are derived from server-side timesta
 
 **From first exfiltration to first victim: 2 hours 54 minutes.**
 
-# Unanswered Questions
+## Unanswered Questions
 
 **How Was Initial GitHub Access Obtained?**
 
@@ -288,9 +294,9 @@ This is the biggest gap in our visibility. The loot data begins at the point whe
 
 The `GITHUB_ACTOR=KartikSuthar` field tells us the push was attributed to a legitimate BuddyBoss developer. But the threat actor is French-speaking and showed no definite indicators of being KartikSuthar. However, we did note something interesting.
 
-* Within the open-directory, the French threat actor had named the packages `buddyboss-platform-2.13.1-backdoored.zip` and `buddyboss-theme-2.13.1-backdoored.zip`. They had backdoored Buddyboss Platform/Theme version `2.13.1` and renamed/ uploaded these to production as "newer" versions. 
+* Within the open-directory, the French threat actor had named the packages `buddyboss-platform-2.13.1-backdoored.zip` and `buddyboss-theme-2.13.1-backdoored.zip`. They had backdoored Buddyboss Platform/Theme version `2.13.1` and renamed/ uploaded these to production as "newer" versions.
 
-* KartikSuthar's first release in Github was `2.14.0`, and this "Implemented a new licensing system for BuddyBoss plugins and theme". 
+* KartikSuthar's first release in Github was `2.14.0`, and this "Implemented a new licensing system for BuddyBoss plugins and theme".
 
 [![1](/assets/images/buddyboss/6.png){: .align-center .img-border}](/assets/images/buddyboss/6.png)
 <p class="figure-caption">Claude's insight</p>
@@ -302,7 +308,7 @@ We considered several possibilities:
 | **Stolen credentials** | Most common GitHub account compromise vector. Infostealers routinely harvest GitHub session cookies and PATs | No direct evidence in recovered data |
 | **APK reverse engineering** | The threat actor's workstation contains a `Scan_APK/GITHUB/` directory with cloned BuddyBoss repositories. BuddyBoss has a mobile application that may embed API tokens | Speculative. |
 
-> Ctrl-Alt-Intel **did identify** exposed secrets in BuddyBoss APKs that were found online - however these would not have given direct access to Github like we observed.   
+> Ctrl-Alt-Intel **did identify** exposed secrets in BuddyBoss APKs that were found online - however these would not have given direct access to Github like we observed.
 
 **An Odd Visitor**
 
@@ -310,7 +316,7 @@ On March 18 at 11:24 UTC, someone from an Indian IP address (Reliance Jio, Mac/C
 
 This is notable. The IP is Indian (consistent with BuddyBoss's development team), the browser is personal (Mac Chrome, not a CI/CD runner), and the specific endpoint tested (`/bbapp_secrets`) directly targets the stolen credentials. This looks like someone who knew what was stolen - likely a BuddyBoss developer discovering the C2 during incident response.
 
-## Was the GitHub Repository Source Code Backdoored?
+### Was the GitHub Repository Source Code Backdoored?
 
 In the Claude Code session, Claude stated: *"The backdoored code is already on GitHub master."* However, our analysis of the publicly available BuddyBoss repository (cloned and checked via `git log -S` for all backdoor strings across all branches) found **no evidence of the backdoor ever being committed**. Version 2.14.0 of `bp-loader.php` is clean and shows a natural 2-byte increment over the clean 2.13.1 version.
 
@@ -318,11 +324,11 @@ This means either: the GitHub master was never actually compromised and Claude's
 
 **How Many Repositories Were Compromised?**
 
-We can confirm two: `buddyboss/buddyboss-platform-pro` and `buddyboss/csr-tool`. These are the only callbacks that contained explicit `repo=` fields. 
+We can confirm two: `buddyboss/buddyboss-platform-pro` and `buddyboss/csr-tool`. These are the only callbacks that contained explicit `repo=` fields.
 
-Additional C2 endpoints (`/api_secrets`, `/ssh_deploy`, `/real_deploy`, `/bbapp_secrets`, `/appstore_ssh`) exfiltrated CI/CD secrets but did not include repository identifiers, just widened the scope of the intrusion.  
+Additional C2 endpoints (`/api_secrets`, `/ssh_deploy`, `/real_deploy`, `/bbapp_secrets`, `/appstore_ssh`) exfiltrated CI/CD secrets but did not include repository identifiers, just widened the scope of the intrusion.
 
-# Conclusion
+## Conclusion
 
 This campaign is notable for several reasons. The entire attack, from CI/CD exfiltration to supply chain injection to victim exploitation, was completed in under 3 hours - likely all done by Claude. The threat actor moved methodically through BuddyBoss's infrastructure: stealing CI/CD secrets, laterally moving to deployment servers, gaining root access on AWS, and ultimately pushing backdoored plugin updates to hundreds of WordPress sites via the legitimate distribution CDN.
 
@@ -340,25 +346,25 @@ The speed here, we believe, is due to Claude performing the malice quickly and e
 If you'd like to read more about how Claude was leveraged, please read [Claude's Supply-Chain Attack](https://ctrlaltintel.com/research/BuddyBoss-1)
 
 
-# IOCs
+## IOCs
 
-| Type | Value | Context |
-|------|-------|---------|
-| IPv4 | `195.178.110[.]242` | Primary C2 server (exfiltration receiver + reverse shell listener) |
-| File | `bp-loader.php` | Platform plugin backdoor |
-| SHA256 | `ddda12b545a7b817883641421cf6a213f4c5100effa40cdb55018efce11bbe42` | `bp-loader.php` |
-| File | `functions.php` | Theme backdoor |
-| SHA256 | `5027a0e77eca13a5cc120d3e37262c4073452569ad341cd1558051b5a91ce144` | `functions.php` |
-| File | `buddyboss-platform-pro.php` | Standalone backdoor with upload capability |
-| GET Parameter | `bb_platform_debug` | Platform backdoor trigger |
-| GET Parameter | `bb_theme_compat` | Theme backdoor trigger |
-| Auth Token | `a9f2c8e1` | Shared authentication key across all backdoor variants |
-| File | `bp-compatibility.php` | Standalone webshell (v2.20.4) |
-| Workflow Name | `Platform Compatibility Check` | Name of the malicious GitHub Actions workflow |
+| Indicator | Type | Context | Confidence | Classification |
+|---|---|---|---|---|
+| `195.178.110[.]242` | IPv4 | Primary C2 server (exfiltration receiver + reverse shell listener) | Not stated | reported |
+| `bp-loader.php` | Filename | Platform plugin backdoor | Not stated | reported |
+| `ddda12b545a7b817883641421cf6a213f4c5100effa40cdb55018efce11bbe42` | SHA256 | bp-loader.php | Not stated | reported |
+| `functions.php` | Filename | Theme backdoor | Not stated | reported |
+| `5027a0e77eca13a5cc120d3e37262c4073452569ad341cd1558051b5a91ce144` | SHA256 | functions.php | Not stated | reported |
+| `buddyboss-platform-pro.php` | Filename | Standalone backdoor with upload capability | Not stated | reported |
+| `bb_platform_debug` | String | Platform backdoor trigger | Not stated | reported |
+| `bb_theme_compat` | String | Theme backdoor trigger | Not stated | reported |
+| `a9f2c8e1` | Auth token | Shared authentication key across all backdoor variants | Not stated | reported |
+| `bp-compatibility.php` | Filename | Standalone webshell (v2.20.4) | Not stated | reported |
+| `Platform Compatibility Check` | Workflow name | Name of the malicious GitHub Actions workflow | Not stated | reported |
 
 The malicious PHP modules have been added to our [Github](https://github.com/ctrlaltint3l/intelligence/tree/main/BuddyBoss/Backdoor).
 
-# MITRE ATT&CK
+## MITRE ATT&CK
 
 | Tactic | ID | Technique | Observed Activity |
 |--------|----|-----------|-------------------|

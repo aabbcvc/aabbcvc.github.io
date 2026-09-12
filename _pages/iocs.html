@@ -1,0 +1,38 @@
+---
+title: "IOCs"
+layout: default
+permalink: /iocs/
+---
+<section class="archive-hero ioc-hero">
+  <div class="shell">
+    <p class="eyebrow">Indicators of Compromise</p>
+    <h1>IOCs</h1>
+    <p>Campaign indicators, with the evidence behind them. Search, inspect and export observations from our research and bulletins.</p>
+  </div>
+</section>
+<section class="shell ioc-section" id="iocExplorer" data-index="{{ '/iocs.json' | relative_url }}">
+  <form class="ioc-toolbar" id="iocFilters" role="search">
+    <label class="research-search" for="iocSearch"><span class="sr-only">Search indicators and context</span><input id="iocSearch" name="q" type="search" placeholder="Search an indicator, campaign or context…" autocomplete="off"></label>
+    <label class="compact-select">Type<select id="iocType" name="type"><option value="">All types</option></select></label>
+    <label class="compact-select">Tag<select id="iocTag" name="tag"><option value="">All tags</option></select></label>
+    <label class="compact-select">Source<select id="iocSource" name="source"><option value="">All publications</option></select></label>
+    <label class="compact-select">Classification<select id="iocClassification" name="classification"><option value="">All classifications</option></select></label>
+    <button type="reset" class="text-button">Reset</button>
+  </form>
+  <div class="ioc-results-bar">
+    <p id="iocStatus" role="status">Loading indicators…</p>
+    <div class="ioc-exports" aria-label="Export filtered results">
+      <span>Export filtered</span>
+      <button type="button" data-export="csv" disabled>CSV</button>
+      <button type="button" data-export="json" disabled>JSON</button>
+      <button type="button" data-export="txt" disabled>TXT</button>
+    </div>
+  </div>
+  <p class="ioc-help">Expand an indicator for its role and source. Dates refer to publication, not first or last seen. CSV and JSON retain context; TXT contains unique, refanged values.</p>
+  <div class="ioc-list" id="iocList"></div>
+  <div class="ioc-pagination" id="iocPagination" hidden>
+    <button type="button" id="iocPrevious">← Previous</button><span id="iocPage"></span><button type="button" id="iocNext">Next →</button>
+  </div>
+  <noscript><p>Enable JavaScript to search and export indicators, or read the <a href="{{ '/research/' | relative_url }}">IOC sections in our research</a>. The <a href="{{ '/iocs.json' | relative_url }}">complete JSON index</a> is also available.</p></noscript>
+</section>
+<script src="{{ '/assets/js/iocs.js' | relative_url }}" defer></script>

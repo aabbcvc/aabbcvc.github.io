@@ -1,0 +1,7 @@
+<div class="publication-tags" aria-label="Tags">
+  {% for tag in include.post.tags %}
+    {% assign archive_url = '/research/' %}
+    {% if include.post.content_type == 'bulletin' %}{% assign archive_url = '/bulletins/' %}{% endif %}
+    <a class="tag" href="{{ archive_url | relative_url }}?tag={{ tag | url_encode }}">{{ tag | escape }}</a>
+  {% endfor %}
+</div>

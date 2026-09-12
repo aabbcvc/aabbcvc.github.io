@@ -58,6 +58,9 @@
   var count = document.getElementById("searchCount");
   var empty = document.getElementById("searchEmpty");
   var fullTextByUrl = Object.create(null);
+  var tagFilter = document.getElementById("tagFilter");
+  var tagInputs = tagFilter ? Array.from(tagFilter.querySelectorAll("input[name=tag]")) : [];
+  var selectedTagCount = document.getElementById("selectedTagCount");
 
   function loadSearchIndex() {
     if (!research || !research.getAttribute("data-search-index")) return Promise.resolve();
@@ -79,8 +82,10 @@
     var query = search.value.trim().toLowerCase();
     var terms = query.split(/\s+/).filter(Boolean);
     var visible = 0;
+    var selectedTags = tagInputs.filter(function (input) { return input.checked; }).map(function (input) { return input.value; });
+    if (selectedTagCount) selectedTagCount.textContent = selectedTags.length ? "(" + selectedTags.length + ")" : "";
 
-    research.querySelectorAll(".research-card").forEach(function (card) {
+    research.querySelectorAll("[data-publication]").forEach(function (card) {
       var haystack = [
         card.getAttribute("data-search-title") || "",
         card.getAttribute("data-search-description") || "",
@@ -89,22 +94,36 @@
         fullTextByUrl[card.getAttribute("data-search-url")] || ""
       ].join(" ");
       var matches = terms.every(function (term) { return haystack.indexOf(term) !== -1; });
+      var tags = JSON.parse(card.getAttribute("data-tags") || "[]");
+      matches = matches && selectedTags.every(function (tag) { return tags.indexOf(tag) !== -1; });
       card.hidden = !matches;
       if (matches) visible += 1;
     });
 
     if (count) count.textContent = visible;
-    if (empty) empty.hidden = visible !== 0;
+    if (empty) empty.hidden = visible !== 0 || (!terms.length && !selectedTags.length);
+  }
+
+  function updateResearch() {
+    filterResearch();
+    var params = new URLSearchParams(window.location.search);
+    params.delete("q"); params.delete("tag");
+    if (search.value.trim()) params.set("q", search.value.trim());
+    tagInputs.forEach(function (input) { if (input.checked) params.append("tag", input.value); });
+    window.history.replaceState(null, "", window.location.pathname + (params.size ? "?" + params : "") + window.location.hash);
   }
 
   if (search && research) {
     var initialQuery = new URLSearchParams(window.location.search).get("q") || "";
-    if (initialQuery) {
-      search.value = initialQuery;
-      filterResearch();
-    }
+    search.value = initialQuery;
+    var initialTags = new URLSearchParams(window.location.search).getAll("tag");
+    tagInputs.forEach(function (input) { input.checked = initialTags.includes(input.value); input.addEventListener("change", updateResearch); });
+    var clearTags = document.getElementById("clearTags");
+    if (clearTags) clearTags.addEventListener("click", function () { tagInputs.forEach(function (input) { input.checked = false; }); updateResearch(); });
+    search.closest("form").addEventListener("submit", function (event) { event.preventDefault(); updateResearch(); });
+    filterResearch();
     var searchIndex = loadSearchIndex();
-    search.addEventListener("input", filterResearch);
+    search.addEventListener("input", updateResearch);
     searchIndex.then(function () {
       if (search.value.trim()) filterResearch();
     });
@@ -119,7 +138,7 @@
       }
       if (event.key === "Escape" && document.activeElement === shortcutSearch) {
         shortcutSearch.value = "";
-        if (search && research) filterResearch();
+        if (search && research) updateResearch();
         shortcutSearch.blur();
       }
     });
@@ -129,6 +148,22 @@
   if (!content) return;
 
   content.querySelectorAll("table").forEach(function (table) {
+    var headers = Array.from(table.querySelectorAll("thead th")).map(function (cell) { return cell.textContent.trim(); });
+    if (headers.join("|") === "Indicator|Type|Context|Confidence|Classification") {
+      table.querySelectorAll("tbody tr").forEach(function (row) {
+        var cells = row.querySelectorAll("td");
+        if (cells.length !== 5) return;
+        var value = cells[0].textContent.trim();
+        var type = cells[1].textContent.trim();
+        var link = document.createElement("a");
+        var iocPath = document.querySelector("[data-ioc-path]");
+        link.href = (iocPath ? iocPath.dataset.iocPath : "/iocs/") + "?" + new URLSearchParams({q: value, type: type});
+        link.className = "ioc-inspect";
+        link.setAttribute("aria-label", "Inspect " + value + " and related observations");
+        while (cells[0].firstChild) link.appendChild(cells[0].firstChild);
+        cells[0].appendChild(link);
+      });
+    }
     if (table.parentElement && table.parentElement.classList.contains("table-wrap")) return;
     var wrap = document.createElement("div");
     wrap.className = "table-wrap";

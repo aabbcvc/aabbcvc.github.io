@@ -7,19 +7,25 @@ ribbon: black
 description: "OSINT analysis of entities potentially linked to the 'Global Profit' PHaaS platform"
 categories:
   - Threat Research
+content_type: research
 tags:
-  - Threat Research
+  - Russia
+  - Armenia
+  - Phishing
+  - PhaaS
+  - OSINT
+  - Fraud
 toc: true
 redirect_from:
   - /threat%20research/DieselVortex/
   - /threat research/DieselVortex/
 ---
 
-# Overview
+## Overview
 
 In February 2026, *Ctrl-Alt-Intel* and *Have I Been Squatted* identified a financially motivated threat actor we've tracked as **Diesel Vortex**. The group operate a phishing-as-a-service platform branded *Global Profit* or *MC Profit Always* and harvested more than 1,600 unique credentials belonging to Western logistics, trucking, and transportation companies.
 
-*Have I Been Squatted* retrieved and analysed source code from the *Global Profit* phishing platform, which provided visibility into both infrastructure and operations. Telegram webhook logs embedded within the platform exposed months of internal coordination between operators. 
+*Have I Been Squatted* retrieved and analysed source code from the *Global Profit* phishing platform, which provided visibility into both infrastructure and operations. Telegram webhook logs embedded within the platform exposed months of internal coordination between operators.
 
 Linguistic analysis of those logs indicates Armenian-speaking operators targeting companies in the logistics sector. While the initial access vector is phishing, the conversations show a fraud workflow: impersonating carriers and brokers, bypassing verification calls using spoofed/virtual numbers, and coordinating access to freight systems. Multiple messages align with double-brokering mechanics (booking loads under a stolen carrier identity, obscuring the chain, and re-assigning or diverting freight).
 
@@ -30,9 +36,9 @@ During infrastructure analysis, *Ctrl-Alt-Intel* identified a domain registratio
 
 > This research is based solely on open-source intelligence (OSINT) and analysis of materials obtained during technical investigation. References to individuals and Russian-registered limited liability companies (LLCs) are provided for research context only, based on publicly available records and observed technical artifacts. Any linkages described are hypotheses derived from correlational indicators and should not be interpreted as findings of guilt, intent, or legal liability.
 
-## Key Terminology
+### Key Terminology
 
-Before taking a look at the private conversations of Armenian fraudsters, or the links to Russian LLCs, we will define some key terminology which is relevant to this industry. 
+Before taking a look at the private conversations of Armenian fraudsters, or the links to Russian LLCs, we will define some key terminology which is relevant to this industry.
 
 | Term | Definition |
 |------|-----------|
@@ -44,16 +50,16 @@ Before taking a look at the private conversations of Armenian fraudsters, or the
 | **Double Brokering** | A fraud scheme where a threat actor operates a malicious carrier, books a load from a broker, then either re-brokers it to an actual carrier at a lower rate (pocketing the difference) or diverting the cargo entirely. |
 | **Blind Shipment** | A legitimate logistics term for a shipment where the shipper or receiver's identity is hidden from the driver. **Diesel Vortex** operators exploited this mechanism to obscure the fraud chain and prevent drivers from contacting the real broker. |
 
-To perform **Double Brokering**, criminal gangs might attempt to impersonate known and trusted Motor Carrier (MCs), or have their own Motor Carrier registered as a legitimate LLCs within the United States. 
+To perform **Double Brokering**, criminal gangs might attempt to impersonate known and trusted Motor Carrier (MCs), or have their own Motor Carrier registered as a legitimate LLCs within the United States.
 
 Regardless of the method, these schemes typically require two capabilities:
 
-1. Access to freight systems 
-2. A credible carrier persona (MC/DOT + email + phone presence) 
+1. Access to freight systems
+2. A credible carrier persona (MC/DOT + email + phone presence)
 
-# Phishing in Yerevan
+## Phishing in Yerevan
 
-Within the recovered source code, developers logged all Telegram webhook calls to a file named `apidata-full.txt`. The logs correspond to a prior campaign deployment and span from 22 November 2024 through 25 April 2025.  
+Within the recovered source code, developers logged all Telegram webhook calls to a file named `apidata-full.txt`. The logs correspond to a prior campaign deployment and span from 22 November 2024 through 25 April 2025.
 
 Four Telegram chats were captured:
 
@@ -88,9 +94,9 @@ Although 14 unique Telegram user IDs registered to the platform, the majority of
 | 5321390016 | GTPOCO_2 | 6 |
 | 389288453 | Mc100Mc | 4 |
 | 5712841521 | gts10 | 3 |
-| ... | ... | ... | 
+| ... | ... | ... |
 
-## Translated conversations analysis
+### Translated conversations analysis
 
 Most messages were written in Armenian using Latin script. Where possible, we translated them to better understand campaign context. Seeing how they speak to each other, on the day to day, provided a lot of insight to the operation. For some reason, some accounts only had their Telegram ID and not username. I've named these `TA1` and `TA2`. The other usernames were found within the logs.
 
@@ -99,7 +105,7 @@ Most messages were written in Armenian using Latin script. Where possible, we tr
 
 Two members of **Diesel Vortex** discussed, "do we have an MC with 250k cargo?". This suggests they’re looking for a usable carrier identity (or a compromised carrier account) suitable for high-value freight. In the freight ecosystem, higher cargo values typically mean stricter verification and insurance requirements, indicating the group is planning for higher-trust, higher-value loads rather than relying on opportunistic phishing alone.
 
-### Links to Armenia 
+#### Links to Armenia
 
 Besides conversing in Armenian Latin script, analysis of the Telegram webhook log reveals the below Armenian resedential IP addresses accessed the platform:
 
@@ -113,14 +119,14 @@ Additionally, on the 22nd of April a member of this chat revealed he was in *Kom
 [![1](/assets/images/cargo/22.png){: .align-center .img-border}](/assets/images/cargo/22.png)
 <p class="figure-caption">Chat Log showing an operator within Komitas, Armenia</p>
 
-# The Infrastructure Pivot
+## The Infrastructure Pivot
 
 Within the phishing panel source code, the file `njhTghagTGgYT\template\footer.php` contained a reference to the domain `yasomawork[.]space`. The domain was embedded within the login panel of the phishing-kit.
 
 [![1](/assets/images/cargo/1.png){: .align-center .img-border}](/assets/images/cargo/1.png)
 <p class="figure-caption"> Source Code Excerpt</p>
 
-Historical DNS records show `yasomawork[.]space` resolving to `45.130.41[.]81` on 14 February 2025. The domain itself was registered three days earlier, on 11 February 2025 at 16:51:57 GMT. We can see, from the chat logs, Diesel Vortex was active during this time. 
+Historical DNS records show `yasomawork[.]space` resolving to `45.130.41[.]81` on 14 February 2025. The domain itself was registered three days earlier, on 11 February 2025 at 16:51:57 GMT. We can see, from the chat logs, Diesel Vortex was active during this time.
 
 RDAP data shows the domain was registered through the Russian provider *BEGET-RU*. The associated IP address was also hosted on infrastructure allocated to Beget.
 
@@ -133,7 +139,7 @@ Unlike anonymized registrations commonly used in phishing operations, this domai
 * A phone number
 * An email address
 
-# From Infra to Identity
+## From Infra to Identity
 
 The registrant email address exposed in the RDAP record was reused across multiple services and corporate filings. We used the platform [osint.industries](https://www.osint.industries/) to pivot on the email and phone number to find profiles under the names:
 
@@ -141,11 +147,11 @@ The registrant email address exposed in the RDAP record was reused across multip
 <p class="figure-caption">Screenshot from osint.industries platform</p>
 
 * Yura Ivlev
-* Yuri Ivlev 
+* Yuri Ivlev
 * Yuri Ivlev Konstantinovich
 * Юрий Ивлев Константинович
 
-We will use the name **Yuri** or **Yuri Ivlev** for the remainder of this analysis. 
+We will use the name **Yuri** or **Yuri Ivlev** for the remainder of this analysis.
 
 Publicly accessible social media accounts contain photos dating from 2014 through 2023. The same email address was used to register the domain `unx-defence[.]ru` on 8 December 2021, also via *Beget*.
 
@@ -168,7 +174,7 @@ From `2014` to `2025`, **Yuri** was a founder or co-founder of the 5 registered 
 | 13th July 2023         | ТЕРМИНАЛ ИКС  | Terminal X     | [9726049122](https://www.tbank.ru/business/contractor/legal/1237700473581/) | nkazarinov[@]yandex[.]ru | Warehousing/Storage | 67%       |
 | 10th Oct 2025          | ПСМ           | PSM            | [5044145482](https://www.tbank.ru/business/contractor/legal/1255000093116/) | y.ivlev[@]gmail[.]com    | Wholesale trade     | 100%      |
 
-## UNIX GROUP LLC 
+### UNIX GROUP LLC
 
 *UNIX Group LLC* was registered on 30 September 2021. On 8 December 2021, the domain `unx-defence[.]ru` was registered using the same email address identified in the phishing panel RDAP record. In June 2022, **Yuri Ivlev** assumed ownership of the company.
 
@@ -207,9 +213,9 @@ On 23 March 2022, *UNIX Group LLC* was issued an [official trade certificate](ht
 [![10](/assets/images/cargo/7.png){: .align-center .img-border}](/assets/images/cargo/7.png)
 <p class="figure-caption"><a href="https://swis.trade.kg/Doc/171c9c78-4b33-47d9-af94-74dbcec88700">Kyrgyz trade certificate</a></p>
 
-### Rapid Growth
+#### Rapid Growth
 
-Using 1 Ruble = 0.013 USD: 
+Using 1 Ruble = 0.013 USD:
 
 | **Year** | **Revenue (USD)** | **Net Profit (USD)** |
 | -------- | ----------------- | -------------------- |
@@ -218,7 +224,7 @@ Using 1 Ruble = 0.013 USD:
 | 2023     | $95,180,000       | $16,270,000          |
 | 2024     | $154,890,000      | $10,910,000          |
 
-[T-Bank - ООО "ЮНИКС ГРУПП" (UNIX GROUP LLC)](https://www.tbank.ru/business/contractor/legal/1217700463529/)   
+[T-Bank - ООО "ЮНИКС ГРУПП" (UNIX GROUP LLC)](https://www.tbank.ru/business/contractor/legal/1217700463529/)
 
 Between 2021 and 2024, *UNIX Group LLC* scaled from sub-million revenue to more than $150 million annually. Net profit margins in 2023 exceeded 17 percent.
 
@@ -227,13 +233,13 @@ We have no evidence to prove these funds have originated from cargo theft, nor i
 [![11](/assets/images/cargo/14.png){: .align-center .img-border}](/assets/images/cargo/14.png)
 <p class="figure-caption">Correlation Graph #1</p>
 
-## Terminal X and Shared Ownership
+### Terminal X and Shared Ownership
 
 *Terminal X* was registered on 13 July 2023.
 
 Ownership at formation:
 
-* **Yuri Ivlev** - 67% 
+* **Yuri Ivlev** - 67%
 * **Nikita Kazarinov** - 33%
 
 [![12](/assets/images/cargo/8.png){: .align-center .img-border}](/assets/images/cargo/8.png)
@@ -254,7 +260,7 @@ On 20 February 2026, just days prior to publication of this report, **Nikita Kaz
 
 *Terminal X* serves as the bridge between **Yuri Ivlev** and **Nikita Kazarinov** within the corporate network.
 
-# Shuttle Logistic and the "Terminal" Network
+## Shuttle Logistic and the "Terminal" Network
 
 Nikita Kazarinov previously founded or owned several logistics-related entities, including:
 
@@ -281,7 +287,7 @@ Industry media coverage from Russian logistics publications references Kazarinov
 [![15](/assets/images/cargo/13.png){: .align-center .img-border}](/assets/images/cargo/13.png)
 <p class="figure-caption"><a href="https://logirus.ru/articles/week_results/indiyskiy_kryuk-_parallelnyy_import_i_konteynery_-na_stope.html?sphrase_id=11323822">Screenshot from logirus.ru website</a></p>
 
-See below for the full list of registered entities with corresponding email addresses. 
+See below for the full list of registered entities with corresponding email addresses.
 
 
 | **Registration Date**  | **LLC Name**    | **Translation** | **ИНН/Tax ID** | **Email**                | **Sector**           | **Ownership at incorporation** |
@@ -291,7 +297,7 @@ See below for the full list of registered entities with corresponding email addr
 | 26th Aug 2021           | ТЕРМИНАЛ БРОКЕР | Terminal Broker | [7726481674](https://www.tbank.ru/business/contractor/legal/1217700400741/)     | info[@]shuttle-logistic[.]ru | Transportation       | 100%          |
 | 13th July 2023         | ТЕРМИНАЛ ИКС    | *Terminal X*      | [9726049122](https://www.tbank.ru/business/contractor/legal/1237700473581/)     | nkazarinov[@]yandex[.]ru     | Warehousing/storage  | 67%           |
 
-# Address Clustering in Moscow
+## Address Clustering in Moscow
 
 Five of the six identified LLCs are registered at the same address:
 
@@ -304,7 +310,7 @@ In October 2025, a newly registered LLC diverged from this pattern, listing an a
 
 The concentration of logistics-oriented entities at a single Moscow address reinforces the structural connectivity within the network.
 
-# Sector Convergence 
+## Sector Convergence
 
 The Telegram logs recovered from the phishing platform showed Armenian operators targeting:
 
@@ -318,25 +324,25 @@ The Russian LLCs associated with **Yuri Ivlev** and **Nikita Kazarinov** list OK
 
 * Wholesale trade
 * Transportation of cargo
-* Warehousing and storage 
+* Warehousing and storage
 * Auxiliary transportation services
 
 Public websites for these companies advertise:
 
-* International freight handling 
+* International freight handling
 * Warehousing capacity
 * Cross-border trade coordination
 
-The sector alignment is direct. This report does not assert that the corporate revenue is being derived from phishing or diversion activity. 
+The sector alignment is direct. This report does not assert that the corporate revenue is being derived from phishing or diversion activity.
 
-However, the same email identified used to register phishing infrastructure appears in corporate filings for logistics companies operating in the same vertical targeted by **Diesel Vortex**. 
+However, the same email identified used to register phishing infrastructure appears in corporate filings for logistics companies operating in the same vertical targeted by **Diesel Vortex**.
 
-## What we can establish
+### What we can establish
 
 Based on the technical artifacts and public records, the following claims can be made:
 
 1. **Diesel Vortex** operated a phishing platform targeting logistics-sector companies.
-2. Telegram logs show Armenian-speaking operators discussing credential harvesting and cargo-related activity. 
+2. Telegram logs show Armenian-speaking operators discussing credential harvesting and cargo-related activity.
 3. The phishing panel contained a domain registered with identifiable personal information.
 4. That email identifier appears in Russian corporate filings for multiple logistics-oriented LLCs.
 5. Several of these companies share sector classifications and a common Moscow address.
@@ -344,7 +350,7 @@ Based on the technical artifacts and public records, the following claims can be
 
 Each data point is independently verifiable through infrastructure records and public corporate registries.
 
-# Conclusion
+## Conclusion
 
 The investigation into **Diesel Vortex** began with a phishing platform targeting Western logistics companies. Source code recovered by *Have I Been Squatted* exposed not only credential harvesting mechanisms, but operational Telegram logs that revealed Armenian-language coordination tied to freight impersonation, mailbox compromise, and activity consistent with double-brokering or cargo diversion.
 
@@ -353,3 +359,7 @@ The [technical analysis](https://haveibeensquatted.com/blog/diesel-vortex-inside
 A domain embedded within the phishing panel created an infrastructure pivot. The registration record exposed an email identifier. That same identifier appears in the corporate filings of multiple Russian LLCs operating in wholesale trade, warehousing, and transportation. Several of these entities report substantial revenue and share both sector classifications, executive-leadership history and registration addresses.
 
 It is possible that the domain registration reflects negligence, unrelated administrative overlap, or another explanation not visible through open-source analysis. At present, the evidence supports correlation, not attribution.
+
+## IOCs
+
+No individual indicators were listed in an IOC section for this publication.

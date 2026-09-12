@@ -7,15 +7,20 @@ ribbon: black
 description: "Analysis of a fully-featured AiTM phishing platform with collective intelligence & licensing system"
 categories:
   - Threat Research
+content_type: research
 tags:
-  - Threat Research
+  - Phishing
+  - PhaaS
+  - AiTM
+  - Credential Theft
+  - AI
 toc: true
 redirect_from:
   - /threat%20research/UPMI-phishing/
   - /threat research/UPMI-phishing/
 ---
 
-# Overview
+## Overview
 
 Ctrl-Alt-Intel researchers identified and analysed the full source code of an AI-developed Adversary-in-the-Middle (AiTM) phishing platform branded **"UPMI ULTIMATE"**, operated by a group calling themselves **"Team Unlimited"**. The codebase was recovered from an exposed server, the central node that all licensed client instances phone home to for licensing, intelligence sharing, and remote control.
 
@@ -28,7 +33,7 @@ The platform provides an end-to-end capablities: phishing email composition and 
 
 We observed developers testing UPMI's platform as early as March 12, 2026. Hardcoded credentials for the operator dashboard, SMTP accounts, Azure AD applications, and the developer's Telegram bot token were all recovered from the source code.
 
-# Attack Chain
+## Attack Chain
 
 The full attack chain is explicitly documented in the threat actor's own `knowledge-base.js`:
 
@@ -44,11 +49,11 @@ attackChain: [
   '8. Session token = full account access (bypasses MFA)',
 ]
 ```
-# Sending Infrastructure (MX Sender)
+## Sending Infrastructure (MX Sender)
 
-The platform supports three distinct delivery methods, with automatic failover between them. 
+The platform supports three distinct delivery methods, with automatic failover between them.
 
-## Reconnaissance
+### Reconnaissance
 
 Before any emails are sent, `osint-recon.js` performs passive DNS reconnaissance against each target domain, gathering:
 
@@ -64,7 +69,7 @@ Before any emails are sent, `osint-recon.js` performs passive DNS reconnaissance
 
 Each domain is assigned a risk score from 0–100 combining filter difficulty, DMARC strictness, and SPF configuration. The score determines which delivery method is selected and whether full domain spoofing is viable. Domains with `p=none` and no enterprise filter can be spoofed directly; domains with `p=reject` behind Proofpoint route to O365 relay with display-name-only spoofing.
 
-## Sending emails
+### Sending emails
 
 **Direct MX (Port 25)**
 
@@ -72,7 +77,7 @@ Connects directly to the victim's mail server with full domain spoofing capabili
 
 **Office 365 SMTP Relay**
 
-Uses `smtp.office365.com:587` with O365 accounts. The framework allowed for Display-name spoofing only, since O365 enforces FROM address matching. This method achieves the highest inbox rate for O365-to-O365 delivery. 
+Uses `smtp.office365.com:587` with O365 accounts. The framework allowed for Display-name spoofing only, since O365 enforces FROM address matching. This method achieves the highest inbox rate for O365-to-O365 delivery.
 
 **Microsoft Graph API**
 
@@ -108,7 +113,7 @@ A dedicated warmup engine (`warmup.js`) manages sending volume from fresh IPs on
 State is persisted to `warmup-state.json` with per-day send counts. A fresh IP that attempts bulk sending before warming will be rate-limited or blocklisted before reaching any significant volume.
 
 
-# The Xverginia Dashboard
+## The Xverginia Dashboard
 
 Operators purchasing access to UPMI receive a web dashboard branded **"Xverginia - Evilginx Session Manager"**. The login page for version 4.1 lists `@andrew_z12` as the contact for license renewal and support.
 
@@ -124,7 +129,7 @@ The dashboard provides visibility into visitors, active sessions, and real-time 
 
 The dashboard has its own licensing system, separate from the mailer, using port 4444 and a license key format of `DASH:<iv_hex>:<auth_tag_hex>:<encrypted_payload_hex>`. It supports offline activation via a local key file, indicating the developers designed for modularity across different phishing configurations.
 
-## Live Deployments
+### Live Deployments
 
 The Login Panel exposed the string "Login — Xverginia" within the HTTP response body. We can use the Censys query `web.endpoints.http.body:"Login — Xverginia` to identify 6 Xverginia deployments on 29/03/2026:
 
@@ -143,9 +148,9 @@ The Login Panel exposed the string "Login — Xverginia" within the HTTP respons
 [![1](/assets/images/UPMI/NewVersion.png){: .align-center .img-border}](/assets/images/UPMI/NewVersion.png)
 <p class="figure-caption">New Xverginia version login page, on port 2030</p>
 
-# LinkShield
+## LinkShield
 
-The UPMI platform has multiple features, including **MX Sender**, advertised as a "Intelligent Email Security Assessment Platform" used to send the phishing emails to recipient mailboxes. 
+The UPMI platform has multiple features, including **MX Sender**, advertised as a "Intelligent Email Security Assessment Platform" used to send the phishing emails to recipient mailboxes.
 
 Within the emails themselves are the phishing links - which is managed purely by "LinkShield", advertised as "Advanced link management with CAPTCHA protection, click tracking, smart redirects, and real-time analytics. All in one powerful platform".
 
@@ -159,24 +164,24 @@ From the website, it lists the below features:
 
 Every phishing link is encrypted with AES-256-GCM using a shared secret between the sender and the LinkShield decryption server. The encrypted payload contains the destination URL, a timestamp, the recipient email, and a random nonce. No automated scanner can determine the destination without the decryption key. The shared encryption secret recovered from the source: `qVLPQpK8d6xseWkQRw0S2u/mNUrTT/XRZUh4qCfoeCw=`
 
-On the LinkShield panel, we observed how an operator would generate URLs that would be used in campaigns: 
+On the LinkShield panel, we observed how an operator would generate URLs that would be used in campaigns:
 
 [![1](/assets/images/UPMI/7.png){: .align-center .img-border}](/assets/images/UPMI/7.png)
 <p class="figure-caption">LinkShield Link Creation</p>
 
-Additionally, LinkShield offered the capability to generate "GOOGLE PROTECTED URLs" that would stage the phishing link via an initial trusted google.com domain: 
+Additionally, LinkShield offered the capability to generate "GOOGLE PROTECTED URLs" that would stage the phishing link via an initial trusted google.com domain:
 
 [![1](/assets/images/UPMI/3.png){: .align-center .img-border}](/assets/images/UPMI/3.png)
 <p class="figure-caption">LinkShield Google Redirection</p>
 
-## Live Deployments
+### Live Deployments
 
 Using the Censys query, `host.services.endpoints.http.html_title:"LinkShield - Professional Link Management"`, we can identify 1 deployment of LinkShield on the IP address `104.131.106[.]42`
 
 [![1](/assets/images/UPMI/12.png){: .align-center .img-border}](/assets/images/UPMI/12.png)
 <p class="figure-caption">LinkShield Link Creation</p>
 
-# Defence Evasion / Anti-Analysis 
+## Defence Evasion / Anti-Analysis
 
 **Scanner Detection**
 
@@ -236,9 +241,9 @@ The sender cycles through the pool in round-robin order - each email increments 
 [![1](/assets/images/UPMI/DomainRotated.png){: .align-center .img-border}](/assets/images/UPMI/DomainRotated.png)
 <p class="figure-caption">Domain rotation and standby domain count Telegram notification</p>
 
-# License and Remote Control
+## License and Remote Control
 
-## Architecture
+### Architecture
 
 The developer sells this as a licensed product. License keys are bound to a SHA-256 hash of the client machine's CPU model, core count, hostname, username, platform, architecture, total memory, and MAC addresses. The license format is `MXLIC:<iv_hex>:<auth_tag_hex>:<encrypted_payload_hex>`, with AES-256-GCM encryption and HMAC-SHA256 signing.
 
@@ -260,7 +265,7 @@ At runtime, `secure-loader.js` derives a decryption key using `scryptSync(master
 
 This means a filesystem snapshot of a running operator instance reveals no readable campaign logic - only encrypted blobs that are useless without the master secret bound to a valid license.
 
-# Collective Intelligence
+## Collective Intelligence
 
 This is arguably the most interesting component of the platform. Every deployed MX Sender instance participates in a shared intelligence network. Before each campaign, the instance pulls global intelligence from the master server (`/api/intel/pull`). After each campaign, it pushes results back (`/api/intel/push`).
 
@@ -272,7 +277,7 @@ The developer has pre-loaded `knowledge-base.js` with extensive intelligence on 
 
 The system automatically selects the optimal delivery method per target domain based on this intelligence. O365 targets get the O365 relay (same-ecosystem trust). Proofpoint targets get the O365 relay for Microsoft reputation. cPanel and GoDaddy targets get Port 25 direct delivery to save relay quota for harder targets.
 
-# Phishing Templates
+## Phishing Templates
 
 Seven templates were included in the source code, each designed for specific social engineering scenarios. These ranged from SharePoint/OneDrive document sharing notifications, to corporate IT password expiration notices, to security alert notifications about unusual logins, to enterprise voicemail notifications.
 
@@ -280,7 +285,7 @@ One template (`voicemail-image.html`) renders the entire email body as a dynamic
 
 All templates support dynamic placeholders for recipient name, email, domain, sender name, landing URL, current date/time, and random numbers. The subject lines are randomised with variable elements to prevent pattern-based detection.
 
-## HTML Attachments
+### HTML Attachments
 
 Two HTML attachment variants were recovered (`e32afa656bf7-SharedDocument.html`, `4ed20f25ac8c-DocumentViewer.html`). Both render a blurred document preview in the browser, fake line elements and a metadata table visible beneath a blur filter, overlaid with a lock badge and the message *"This document is protected. Verify your identity to access the contents."*
 
@@ -295,7 +300,7 @@ function go(){ ... window.location.href=_d(_d14f4a10f2d6492a,8) }
 
 A 1.2-second loading spinner reading *"Connecting to authentication portal..."* plays before the redirect fires.
 
-## PDF Attachments
+### PDF Attachments
 
 `pdf-generator.js` produces password-protected PDFs across four templates: voicemail notification, invoice, document review, and security alert. Passwords are randomly selected from a wordlist (e.g. `Review1234`, `Access5678`) and distributed in the email body. Document metadata is spoofed:
 
@@ -306,13 +311,13 @@ Creator: Microsoft Office
 
 Permissions are set to block copying and modification, restricting recipients to read-only and print access.
 
-# Leads
+## Leads
 
 Several lead files were recovered from the source code, including `Leads-20k.txt` containing approximately 20,000 email addresses. Processed lead data in JSON format within the `dashboard-data/leads/` directory included `@wellsfargo.com` targets.
 
 The `knowledge-base.js` confirmed successful inbox delivery against several potential test domains including `shreekrishnarubber[.]com` (Bluehost), `crewchiefpb[.]com` (cPanel), `basamat[.]org`, and `gatsbydominicana[.]com`.
 
-# Evilginx Phishlets
+## Evilginx Phishlets
 
 | Phishlet | VPS | Target |
 |----------|-----|--------|
@@ -321,9 +326,9 @@ The `knowledge-base.js` confirmed successful inbox delivery against several pote
 | `roundcube` | `cybernt[.]us` / `64.95.13[.]174` | Roundcube webmail login |
 | `office-working` | `sso.ventraqcloud[.]com` / `104.131.106[.]42` | Microsoft 365 login |
 
-# AI-Assisted Development
+## AI-Assisted Development
 
-Despite its capabilities, analysis of the source code strongly suggests this platform was developed with heavy assistance from a Large Language Model (LLM). 
+Despite its capabilities, analysis of the source code strongly suggests this platform was developed with heavy assistance from a Large Language Model (LLM).
 
 **Sanitised Framing**
 
@@ -360,53 +365,53 @@ Across **16,284 lines** of JavaScript spread over 38 source files, the code exhi
 // ─── Scan single domain's MX records ────────────────────────────────────────
 ```
 
-**Emoji in source code strings** appears **99 times** across the codebase, used heavily in `console.log` output, Telegram messages, and UI elements. The license bot alone uses over 40 distinct emoji characters in its output strings (`💀`, `✅`, `🆕`, `🔑`, `💻`, `🌐`, `📊`, `🧠`, `⚡`, etc.). 
+**Emoji in source code strings** appears **99 times** across the codebase, used heavily in `console.log` output, Telegram messages, and UI elements. The license bot alone uses over 40 distinct emoji characters in its output strings (`💀`, `✅`, `🆕`, `🔑`, `💻`, `🌐`, `📊`, `🧠`, `⚡`, etc.).
 
-## What This Means
+### What This Means
 
 None of this diminishes the platform's operational capability. The attack chain works. The Evilginx integration captures session tokens. The collective intelligence system aggregates campaign data. AI-assisted development lowered the barrier to building a fully-featured PhaaS platform, allowing a developer who may not have been capable of building this from scratch to produce a commercially viable product.
 
-# Conclusion
+## Conclusion
 
-This marks another step in Phishing-as-a-Service platforms. What makes UPMI notable is the AI-assisted development, which included collective intelligence gathering across licensed operators, where every campaign improves evasion effectiveness for the entire network. 
+This marks another step in Phishing-as-a-Service platforms. What makes UPMI notable is the AI-assisted development, which included collective intelligence gathering across licensed operators, where every campaign improves evasion effectiveness for the entire network.
 
 The exposed master server gave us full visibility into the developer's operation, including their licensing model, intelligence sharing infrastructure, operator dashboard, and the credentials tying it all together. We hope sharing this analysis helps defenders detect and disrupt campaigns leveraging this platform.
 
-# IOCs
+## IOCs
 
-| Type | Value | Context |
-|------|-------|---------|
-| IP Address | `143.198.27[.]52` | XVerginia deployment |
-| IP Address | `147.182.195[.]233` | XVerginia deployment |
-| IP Address | `104.194.152[.]178` | XVerginia deployment |
-| IP Address | `157.250.207[.]92` | XVerginia deployment |
-| IP Address | `212.52.6[.]239` | XVerginia deployment |
-| IP Address | `205.198.88[.]186` | XVerginia deployment | 
-| IP Address | `104.131.106[.]42` | Master server: license server, LinkShield, intelligence API |
-| IP Address | `45.61.136[.]190` | Evilginx VPS #1 (`tms.ac`) |
-| IP Address | `64.95.13[.]174` | Evilginx VPS #2 (`cybernt.us`) |
-| IP Address | `193.111.125[.]137` | Primary sending server (Kamatera) |
-| IP Address | `103.101.202[.]72` | Secondary sending server (Kamatera) |
-| Domain | `tms[.]ac` | Evilginx phishing domain |
-| Domain | `cybernt[.]us` | Evilginx phishing domain (standby) |
-| Domain | `docviewportal[.]com` | LinkShield encrypted URL decryption |
-| Domain | `go.docviewportal[.]com` | Primary LinkShield endpoint |
-| Domain | `webmail.tms[.]ac` | Primary Evilginx lure URL |
-| Domain | `pablotechnostore[.]com` | Primary sender domain |
-| Domain | `bowhead-transport[.]com` | Sender domain (DKIM-signed) |
-| Domain | `workplaceoutreach[.]online` | Sender domain (DKIM-signed) |
-| Domain | `vvearcon[.]com` | Sender domain (DKIM-signed) |
-| Domain | `trns[.]live` | Sender domain (DKIM-signed) |
-| Domain | `professionalinsurancesolutions[.]com` | Graph API sender domain |
-| Domain | `ventrisecure[.]com` | Sender domain (DKIM keys present) |
-| Domain | `ventracloud[.]com` | Evilginx phishing domain |
-| Domain | `brevantic[.]com` | Evilginx phishing domain |
-| Bot Username | `Mxlicense_control_bot` | License management bot |
-| Bot Username | `UPMi035bot` | Tracker alert bot |
-| URL Pattern | `go.docviewportal[.]com/d/<base64url_token>` | Encrypted phishing link |
-| URL Pattern | `webmail.tms[.]ac/djMfuXoi` | Default Evilginx lure URL |
+| Indicator | Type | Context | Confidence | Classification |
+|---|---|---|---|---|
+| `143.198.27[.]52` | IPv4 | XVerginia deployment | Not stated | reported |
+| `147.182.195[.]233` | IPv4 | XVerginia deployment | Not stated | reported |
+| `104.194.152[.]178` | IPv4 | XVerginia deployment | Not stated | reported |
+| `157.250.207[.]92` | IPv4 | XVerginia deployment | Not stated | reported |
+| `212.52.6[.]239` | IPv4 | XVerginia deployment | Not stated | reported |
+| `205.198.88[.]186` | IPv4 | XVerginia deployment | Not stated | reported |
+| `104.131.106[.]42` | IPv4 | Master server: license server, LinkShield, intelligence API | Not stated | reported |
+| `45.61.136[.]190` | IPv4 | Evilginx VPS #1 (tms.ac) | Not stated | reported |
+| `64.95.13[.]174` | IPv4 | Evilginx VPS #2 (cybernt.us) | Not stated | reported |
+| `193.111.125[.]137` | IPv4 | Primary sending server (Kamatera) | Not stated | reported |
+| `103.101.202[.]72` | IPv4 | Secondary sending server (Kamatera) | Not stated | reported |
+| `tms[.]ac` | Domain | Evilginx phishing domain | Not stated | reported |
+| `cybernt[.]us` | Domain | Evilginx phishing domain (standby) | Not stated | reported |
+| `docviewportal[.]com` | Domain | LinkShield encrypted URL decryption | Not stated | reported |
+| `go.docviewportal[.]com` | Domain | Primary LinkShield endpoint | Not stated | reported |
+| `webmail.tms[.]ac` | Domain | Primary Evilginx lure URL | Not stated | reported |
+| `pablotechnostore[.]com` | Domain | Primary sender domain | Not stated | reported |
+| `bowhead-transport[.]com` | Domain | Sender domain (DKIM-signed) | Not stated | reported |
+| `workplaceoutreach[.]online` | Domain | Sender domain (DKIM-signed) | Not stated | reported |
+| `vvearcon[.]com` | Domain | Sender domain (DKIM-signed) | Not stated | reported |
+| `trns[.]live` | Domain | Sender domain (DKIM-signed) | Not stated | reported |
+| `professionalinsurancesolutions[.]com` | Domain | Graph API sender domain | Not stated | reported |
+| `ventrisecure[.]com` | Domain | Sender domain (DKIM keys present) | Not stated | reported |
+| `ventracloud[.]com` | Domain | Evilginx phishing domain | Not stated | reported |
+| `brevantic[.]com` | Domain | Evilginx phishing domain | Not stated | reported |
+| `Mxlicense_control_bot` | Bot username | License management bot | Not stated | reported |
+| `UPMi035bot` | Bot username | Tracker alert bot | Not stated | reported |
+| `go.docviewportal[.]com/d/<base64url_token>` | URL pattern | Encrypted phishing link | Not stated | reported |
+| `webmail.tms[.]ac/djMfuXoi` | URL pattern | Default Evilginx lure URL | Not stated | reported |
 
-# MITRE ATT&CK
+## MITRE ATT&CK
 
 | Tactic | ID | Technique | Observed Activity |
 |--------|----|-----------|-------------------|

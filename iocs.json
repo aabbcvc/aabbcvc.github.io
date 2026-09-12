@@ -1,0 +1,16 @@
+---
+layout: null
+permalink: /iocs.json
+---
+[
+{% for post in site.posts %}
+  {
+    "title": {{ post.title | strip_html | jsonify }},
+    "url": {{ post.url | relative_url | jsonify }},
+    "published": {{ post.date | date: '%Y-%m-%d' | jsonify }},
+    "tags": {{ post.tags | jsonify }},
+    "kind": {{ post.content_type | jsonify }},
+    "indicators": {{ site.data.iocs[post.path] | default: empty | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}
+]

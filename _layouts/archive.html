@@ -1,29 +1,37 @@
 ---
 layout: default
 ---
+{% assign publications = site.posts | where: 'content_type', page.content_type %}
+{% assign is_bulletin = false %}
+{% if page.content_type == 'bulletin' %}{% assign is_bulletin = true %}{% endif %}
 
 <section class="archive-hero">
   <div class="shell">
-    <p class="eyebrow">Research Archive</p>
+    <p class="eyebrow">{% if is_bulletin %}Field Notes{% else %}Research Archive{% endif %}</p>
     <h1>{{ page.title }}</h1>
-    <p>{{ site.posts | size }} reports documenting adversary operations, malware, infrastructure and tradecraft.</p>
+    <p>{% if is_bulletin %}Short research and analysis on emerging threats, infrastructure and tradecraft.{% else %}Reports documenting adversary operations, malware, infrastructure and tradecraft.{% endif %}</p>
   </div>
 </section>
 <section class="shell research-section">
   {{ content }}
-  <form class="research-toolbar" action="{{ '/research/' | relative_url }}" method="get" role="search">
+  <form class="research-toolbar" action="{{ page.url | relative_url }}" method="get" role="search">
     <label class="research-search" for="researchSearch">
       <svg aria-hidden="true" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
-      <span class="sr-only">Search research</span>
-      <input id="researchSearch" name="q" type="search" placeholder="Search reports, actors, malware, tags…" autocomplete="off">
+      <span class="sr-only">Search {{ page.title | downcase }}</span>
+      <input id="researchSearch" name="q" type="search" placeholder="Search titles, actors, malware…" autocomplete="off">
       <kbd>/</kbd>
     </label>
-    <p class="search-count" aria-live="polite"><span id="searchCount">{{ site.posts | size }}</span> reports</p>
+    {% include tag-filter.html posts=publications %}
+    <p class="search-count" aria-live="polite"><span id="searchCount">{{ publications | size }}</span> {% if is_bulletin %}bulletins{% else %}reports{% endif %}</p>
   </form>
-  <div class="research-grid" id="researchGrid" data-search-index="{{ '/search.json' | relative_url }}">
-    {% for post in site.posts %}
-      {% include post-card.html post=post reveal=true %}
+  <div class="{% if is_bulletin %}bulletin-list{% else %}research-grid{% endif %}" id="researchGrid" data-search-index="{{ '/search.json' | relative_url }}">
+    {% for post in publications %}
+      {% if is_bulletin %}{% include bulletin-row.html post=post %}{% else %}{% include post-card.html post=post reveal=true %}{% endif %}
     {% endfor %}
   </div>
-  <p class="search-empty" id="searchEmpty" hidden>No research matched that search._</p>
+  {% if publications.size == 0 %}
+    <div class="archive-empty"><p class="eyebrow">Ready for the next finding</p><h2>Bulletins are on the way.</h2><p>New short-form research will appear here. <a href="{{ '/research/' | relative_url }}">Explore the research archive →</a></p></div>
+  {% endif %}
+  <p class="search-empty" id="searchEmpty" hidden>No {{ page.title | downcase }} matched those filters. Clear the search or choose different tags.</p>
+  <noscript><p>All publications are shown. Enable JavaScript to filter by text and tags.</p></noscript>
 </section>

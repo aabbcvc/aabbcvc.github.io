@@ -7,16 +7,22 @@ ribbon: black
 description: "How Claude infiltrated the supply-chain, compromising 200+ websites for fraud"
 categories:
   - Threat Research
+content_type: research
 tags:
-  - Threat Research
+  - Supply Chain
+  - WordPress
+  - AI
+  - C2
+  - Exfiltration
+  - France
 toc: true
 ---
 
-# Overview
+## Overview
 
 Threat actors are increasingly using commercial AI tooling to perform successful attacks against production infrastructure belonging to **real victims**. [AI enabled attacks have increased year-over-year by 89%](https://www.crowdstrike.com/explore/2026-global-threat-report) which will only continues to grow as AI's capabilities improve.
 
-At Ctrl-Alt-Intel, we've observed threat actors using Anthrophic's Claude to enable cyber attacks against real world victims. Threat actors used Claude Code to compromise **multiple government departments**, providing instructions on performing lateral movement, privilege escalation and the exfiltration of data. The use of Claude additionally allowed the threat actors to orchestrate **novel attack chains against American universities** located within the Middle East. 
+At Ctrl-Alt-Intel, we've observed threat actors using Anthrophic's Claude to enable cyber attacks against real world victims. Threat actors used Claude Code to compromise **multiple government departments**, providing instructions on performing lateral movement, privilege escalation and the exfiltration of data. The use of Claude additionally allowed the threat actors to orchestrate **novel attack chains against American universities** located within the Middle East.
 
 Within this blog, we will focus on a French threat actor who has used Claude to perform a successful supply-chain attack against the BuddyBoss WordPress ecosystem. BuddyBoss is a WordPress-based platform for building online communities and learning sites, often used by businesses to sell courses and memberships through integrations with payment processors. Its plugins are used by tens of thousands of websites.
 
@@ -27,16 +33,16 @@ This research will be split into two blogs, in this blog, *Claude's Supply-Chain
 1. **Claude Prompt Analysis** - An analysis of the **French** threat actors prompts used to infiltrate the supply-chain
 2. **Victimology** - An analysis of the victims & the data stolen successfully stolen by threat actors
 
-In the second blog, [Full Incident Analysis](https://ctrlaltintel.com/research/BuddyBoss-2), we will attempt to deep-dive the entire CI/CD attack chain, from initial access, to lateral movement, to actions on objectives. In this blog we will also analyse the plugins themselves, and this threat actors other attempts at targeting Wordpress sites.   
+In the second blog, [Full Incident Analysis](https://ctrlaltintel.com/research/BuddyBoss-2), we will attempt to deep-dive the entire CI/CD attack chain, from initial access, to lateral movement, to actions on objectives. In this blog we will also analyse the plugins themselves, and this threat actors other attempts at targeting Wordpress sites.
 
-# Claude's Supply Chain Attack
+## Claude's Supply Chain Attack
 
 This supply chain attack was first reported publicly by [Cybernews](https://cybernews.com/security/buddyboss-hack-compromises-hundreds-of-websites/) on March 24, 2026, and has since been covered by outlets including [Security Boulevard](https://securityboulevard.com/2026/03/buddyboss-platform-compromised-as-hundreds-of-websites-are-hacked/). Ctrl-Alt-Intel researcher [@ice_wzl_cyber](https://x.com/ice_wzl_cyber) independently discovered the attacker's infrastructure on 18th March 2026 and obtained the complete Claude chat logs used to develop and execute the attack chain, providing a unique window into how the threat actor leveraged commercial AI tooling to conduct this compromise:
 
 [![1](/assets/images/buddyboss/7.png){: .align-center .img-border}](/assets/images/buddyboss/7.png)
 <p class="figure-caption">@ice_wzl_cyber finds the exposed TA infrastructure</p>
 
-From 19/03/2026 07:06 UTC, we independently disclosed to Buddyboss, Caseproof, and company linked on the Caseproof website - "Memberpress". We never receieved a response. 
+From 19/03/2026 07:06 UTC, we independently disclosed to Buddyboss, Caseproof, and company linked on the Caseproof website - "Memberpress". We never receieved a response.
 
 The prompts and responses are conducted entirely in French, with the threat actor issuing short, direct instructions and Claude responding with code, analysis, and operational guidance. We've translated and analysed the key exchanges below.
 
@@ -45,7 +51,7 @@ The prompts and responses are conducted entirely in French, with the threat acto
 [![1](/assets/images/buddyboss/9.png){: .align-center .img-border}](/assets/images/buddyboss/9.png)
 <p class="figure-caption">Breaking down the kill-chain</p>
 
-## Understanding the Upload Mechanism
+### Understanding the Upload Mechanism
 
 The session opens with a failed attempt. Claude had been trying to upload the backdoored ZIP to the Caseproof Mothership (`licenses.caseproof.com`) using `cloudscraper`, a Python library designed to bypass Cloudflare browser checks. The upload times out after 90 seconds. Cloudflare was blocking the multipart file upload.
 
@@ -63,9 +69,9 @@ Claude then formulates the attack strategy. Translated from French:
 
 This reveals an important detail: in a Claude prior session, they had already successfully created version 2.20.1 on the **production** Mothership via the API, proving they possessed valid API credentials. The only remaining obstacle was uploading the actual 22MB backdoored ZIP file, as Cloudflare was blocking multipart uploads.
 
-In our the second blog, [Full Incident Analysis](https://ctrlaltintel.com/research/BuddyBoss-2), we detail how the threat actors stole the API keys via compromising the Github Actions CI/CI pipeline. Claude, instructed by the threat actor, laterally moved over SSH, compromising production deployment infrastructure.   
+In our the second blog, [Full Incident Analysis](https://ctrlaltintel.com/research/BuddyBoss-2), we detail how the threat actors stole the API keys via compromising the Github Actions CI/CI pipeline. Claude, instructed by the threat actor, laterally moved over SSH, compromising production deployment infrastructure.
 
-## Failed Attempts
+### Failed Attempts
 
 Claude tried multiple approaches to get the real backdoored file into the Mothership. It attempted to create a new version (2.20.2), uploading only a 54-byte dummy ZIP (the minimum valid ZIP header), and then tried to PATCH the download URL to point to the threat actor's own server. The API rejected the URL field.
 
@@ -77,7 +83,7 @@ Claude then made a notable observation. Translated from French:
 
 > **Claude (translated):** *"The backdoored code is already on GitHub master... When CI/CD repackages the plugin from master, our code will be included."*
 
-## Bypassing Cloudflare
+### Bypassing Cloudflare
 
 The threat actor pushes Claude forward:
 
@@ -99,7 +105,7 @@ Claude then deploys the version by PATCHing its status from `pending` to `deploy
 
 Claude then instructs the threat actor to start the C2 infrastructure, providing the exact commands for the exfiltration receiver, the reverse shell handler, and the flag detection monitor.
 
-## Theme Deployment
+### Theme Deployment
 
 The threat actor confirms the C2 servers are already running and issues the next instruction:
 
@@ -124,7 +130,7 @@ The threat actor asks Claude to verify:
 
 Claude downloads both packages from the official CDN, decompresses them, and confirms the backdoor payloads (telemetry exfiltration, reverse shell, command execution) are present and functional in both.
 
-## Triggering Client Updates
+### Triggering Client Updates
 
 Not content to wait for WordPress sites to discover the update on their own schedule, the threat actor asks:
 
@@ -138,7 +144,7 @@ Claude reads the BuddyBoss update centre source code and discovers the exact API
 
 Claude then identifies that 24 parent products reference the BuddyBoss Platform loader file, meaning all clients of those products would see version 2.20.3 as an available update.
 
-## Local Testing
+### Local Testing
 
 Before waiting for real victims, the threat actor asks Claude to validate the entire chain locally:
 
@@ -151,11 +157,11 @@ Claude spins up a complete WordPress test environment (WordPress 6.4 + MariaDB v
 [![1](/assets/images/buddyboss/1.png){: .align-center .img-border}](/assets/images/buddyboss/1.png)
 <p class="figure-caption">Confirmed local test victim</p>
 
-> This was our first indication of Claude doing this attack for a "CTF", they embedded the flag themselves in a Docker container running WordPress using the plugin they backdoored and infiltrated the supply-chain with 
+> This was our first indication of Claude doing this attack for a "CTF", they embedded the flag themselves in a Docker container running WordPress using the plugin they backdoored and infiltrated the supply-chain with
 
 Claude then tests the reverse shell and command execution endpoints, confirming full remote code execution as `www-data`.
 
-## Telegram Relay and Real Victims
+### Telegram Relay and Real Victims
 
 With the supply chain attack live and validated, the threat actor provides their personal Telegram bot token and chat ID, asking Claude to build a real-time notification system:
 
@@ -173,7 +179,7 @@ Shortly after, real victim callbacks begin arriving. Claude parses the incoming 
 
 Claude successfully exfiltrates live Stripe API keys from at least one victim site, along with database credentials and WordPress configuration files from multiple others.
 
-# What Claude Made Possible From These Logs
+## What Claude Made Possible From These Logs
 
 * **Reverse-engineering** the BuddyBoss update mechanism from stolen source code
 * **Strategising** the attack approach when direct methods failed
@@ -186,7 +192,7 @@ Claude successfully exfiltrates live Stripe API keys from at least one victim si
 * **Pivoting** through compromised sites to find high-value data like Stripe keys
 * **Iterating** on payload robustness (the threat actor later had Claude deploy v2.20.4 with six shell execution methods and a standalone webshell for resilience)
 
-**Claude's Outlook** 
+**Claude's Outlook**
 
 We used Claude to help analyse and translate the `oldconv.txt` file. After analysing the attack, we asked it this question:
 
@@ -197,7 +203,7 @@ We used Claude to help analyse and translate the `oldconv.txt` file. After analy
 
 > We want to emphasise that the recovered conversation begins mid-session. Prior sessions, where the API credentials were obtained, the backdoored ZIPs were initially crafted, the C2 infrastructure was built, and the GitHub repository was potentially compromised, were not captured. The full scope of Claude's involvement across the entire operation is not visible to us.
 
-# Victimology
+## Victimology
 
 From the C2 loot export, we identified callbacks from 246 unique victim Wordpress websites, with the majority compromised via wp-cron, WordPress's automatic update mechanism. Each callback exfiltrated the site's full database credentials, WordPress authentication keys and salts, admin session cookies, user counts by role, active plugin inventories, and server environment variables. Every callback was forwarded in real time to the threat actor's Telegram. 2,026 individual alerts were logged.
 
@@ -210,3 +216,7 @@ Multiple victims were running Wordfence and Patchstack. Neither detected the att
 ---
 
 If you managed to read to the end of this, we hope you'll like our [Full Incident Analysis](https://ctrlaltintel.com/research/BuddyBoss-2).
+
+## IOCs
+
+No individual indicators were listed in an IOC section for this publication.

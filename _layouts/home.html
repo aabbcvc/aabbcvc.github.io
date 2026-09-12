@@ -33,3 +33,14 @@ layout: default
     {% endfor %}
   </div>
 </section>
+{% assign bulletins = site.posts | where: 'content_type', 'bulletin' %}
+<section class="shell research-section home-bulletins">
+  <div class="section-head">
+    <div><p class="eyebrow">Short-form analysis</p><h2>Bulletins</h2></div>
+    <a class="section-link" href="{{ '/bulletins/' | relative_url }}">View bulletins <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="bulletin-list">
+    {% for post in bulletins limit: 3 %}{% include bulletin-row.html post=post %}{% endfor %}
+    {% if bulletins.size == 0 %}<p class="muted">Short research notes and emerging findings will appear here.</p>{% endif %}
+  </div>
+</section>
