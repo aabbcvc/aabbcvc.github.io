@@ -90,3 +90,7 @@ and source links; TXT is a unique list of refanged values. CSV formula-leading
 cells are escaped for spreadsheet import. IP lookup menus support VirusTotal,
 Hunt.io and AbuseIPDB; domain menus support VirusTotal and Hunt.io. URL menus
 look up the hostname. Hashes link to VirusTotal. The site does not contact IOC hosts.
+
+The lookup menus use locally stored service favicons in `assets/images/services/`:
+VirusTotal's `/gui/images/favicon.svg`, Hunt.io's favicon linked from its homepage,
+and AbuseIPDB's `/favicon-32x32.png`. These are the respective services' brand assets.

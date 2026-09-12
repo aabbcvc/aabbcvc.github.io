@@ -20,7 +20,14 @@
     return value.replace(/\[\.\]|\(\.\)/g, ".").replace(/\[:\]/g, ":").replace(/\[@\]/g, "@").replace(/^hxxp/i, "http");
   }
   function externalLink(label, url) {
-    var a = el("a", label); a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer"; return a;
+    var a = el("a", label); a.href = url; a.target = "_blank"; a.rel = "noopener noreferrer";
+    var icons = {"VirusTotal": "virustotal.svg", "Hunt.io": "hunt.png", "AbuseIPDB": "abuseipdb.png"};
+    if (icons[label]) {
+      var icon = el("img", null, "service-icon");
+      icon.src = root.dataset.icons + icons[label]; icon.alt = ""; icon.width = 16; icon.height = 16;
+      a.prepend(icon);
+    }
+    return a;
   }
   function options(select, values) {
     Array.from(new Set(values)).sort(function (a, b) { return a.localeCompare(b); }).forEach(function (value) {
