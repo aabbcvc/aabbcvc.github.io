@@ -5,89 +5,67 @@
       "value": "195.178.110.242",
       "display": "195.178.110[.]242",
       "type": "IPv4",
-      "context": "Primary C2 server (exfiltration receiver + reverse shell listener)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Primary C2 server (exfiltration receiver + reverse shell listener)"
     },
     {
       "value": "bp-loader.php",
       "display": "bp-loader.php",
       "type": "Filename",
-      "context": "Platform plugin backdoor",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Platform plugin backdoor"
     },
     {
       "value": "ddda12b545a7b817883641421cf6a213f4c5100effa40cdb55018efce11bbe42",
       "display": "ddda12b545a7b817883641421cf6a213f4c5100effa40cdb55018efce11bbe42",
       "type": "SHA256",
-      "context": "bp-loader.php",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "bp-loader.php"
     },
     {
       "value": "functions.php",
       "display": "functions.php",
       "type": "Filename",
-      "context": "Theme backdoor",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Theme backdoor"
     },
     {
       "value": "5027a0e77eca13a5cc120d3e37262c4073452569ad341cd1558051b5a91ce144",
       "display": "5027a0e77eca13a5cc120d3e37262c4073452569ad341cd1558051b5a91ce144",
       "type": "SHA256",
-      "context": "functions.php",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "functions.php"
     },
     {
       "value": "buddyboss-platform-pro.php",
       "display": "buddyboss-platform-pro.php",
       "type": "Filename",
-      "context": "Standalone backdoor with upload capability",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Standalone backdoor with upload capability"
     },
     {
       "value": "bb_platform_debug",
       "display": "bb_platform_debug",
       "type": "String",
-      "context": "Platform backdoor trigger",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Platform backdoor trigger"
     },
     {
       "value": "bb_theme_compat",
       "display": "bb_theme_compat",
       "type": "String",
-      "context": "Theme backdoor trigger",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Theme backdoor trigger"
     },
     {
       "value": "a9f2c8e1",
       "display": "a9f2c8e1",
       "type": "Auth token",
-      "context": "Shared authentication key across all backdoor variants",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Shared authentication key across all backdoor variants"
     },
     {
       "value": "bp-compatibility.php",
       "display": "bp-compatibility.php",
       "type": "Filename",
-      "context": "Standalone webshell (v2.20.4)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Standalone webshell (v2.20.4)"
     },
     {
       "value": "Platform Compatibility Check",
       "display": "Platform Compatibility Check",
       "type": "Workflow name",
-      "context": "Name of the malicious GitHub Actions workflow",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Name of the malicious GitHub Actions workflow"
     }
   ],
   "_posts/Threat Research/1992-1-1-UPMI-phishing.md": [
@@ -95,233 +73,175 @@
       "value": "143.198.27.52",
       "display": "143.198.27[.]52",
       "type": "IPv4",
-      "context": "XVerginia deployment",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "XVerginia deployment"
     },
     {
       "value": "147.182.195.233",
       "display": "147.182.195[.]233",
       "type": "IPv4",
-      "context": "XVerginia deployment",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "XVerginia deployment"
     },
     {
       "value": "104.194.152.178",
       "display": "104.194.152[.]178",
       "type": "IPv4",
-      "context": "XVerginia deployment",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "XVerginia deployment"
     },
     {
       "value": "157.250.207.92",
       "display": "157.250.207[.]92",
       "type": "IPv4",
-      "context": "XVerginia deployment",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "XVerginia deployment"
     },
     {
       "value": "212.52.6.239",
       "display": "212.52.6[.]239",
       "type": "IPv4",
-      "context": "XVerginia deployment",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "XVerginia deployment"
     },
     {
       "value": "205.198.88.186",
       "display": "205.198.88[.]186",
       "type": "IPv4",
-      "context": "XVerginia deployment",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "XVerginia deployment"
     },
     {
       "value": "104.131.106.42",
       "display": "104.131.106[.]42",
       "type": "IPv4",
-      "context": "Master server: license server, LinkShield, intelligence API",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Master server: license server, LinkShield, intelligence API"
     },
     {
       "value": "45.61.136.190",
       "display": "45.61.136[.]190",
       "type": "IPv4",
-      "context": "Evilginx VPS #1 (tms.ac)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Evilginx VPS #1 (tms.ac)"
     },
     {
       "value": "64.95.13.174",
       "display": "64.95.13[.]174",
       "type": "IPv4",
-      "context": "Evilginx VPS #2 (cybernt.us)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Evilginx VPS #2 (cybernt.us)"
     },
     {
       "value": "193.111.125.137",
       "display": "193.111.125[.]137",
       "type": "IPv4",
-      "context": "Primary sending server (Kamatera)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Primary sending server (Kamatera)"
     },
     {
       "value": "103.101.202.72",
       "display": "103.101.202[.]72",
       "type": "IPv4",
-      "context": "Secondary sending server (Kamatera)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Secondary sending server (Kamatera)"
     },
     {
       "value": "tms.ac",
       "display": "tms[.]ac",
       "type": "Domain",
-      "context": "Evilginx phishing domain",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Evilginx phishing domain"
     },
     {
       "value": "cybernt.us",
       "display": "cybernt[.]us",
       "type": "Domain",
-      "context": "Evilginx phishing domain (standby)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Evilginx phishing domain (standby)"
     },
     {
       "value": "docviewportal.com",
       "display": "docviewportal[.]com",
       "type": "Domain",
-      "context": "LinkShield encrypted URL decryption",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "LinkShield encrypted URL decryption"
     },
     {
       "value": "go.docviewportal.com",
       "display": "go.docviewportal[.]com",
       "type": "Domain",
-      "context": "Primary LinkShield endpoint",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Primary LinkShield endpoint"
     },
     {
       "value": "webmail.tms.ac",
       "display": "webmail.tms[.]ac",
       "type": "Domain",
-      "context": "Primary Evilginx lure URL",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Primary Evilginx lure URL"
     },
     {
       "value": "pablotechnostore.com",
       "display": "pablotechnostore[.]com",
       "type": "Domain",
-      "context": "Primary sender domain",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Primary sender domain"
     },
     {
       "value": "bowhead-transport.com",
       "display": "bowhead-transport[.]com",
       "type": "Domain",
-      "context": "Sender domain (DKIM-signed)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Sender domain (DKIM-signed)"
     },
     {
       "value": "workplaceoutreach.online",
       "display": "workplaceoutreach[.]online",
       "type": "Domain",
-      "context": "Sender domain (DKIM-signed)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Sender domain (DKIM-signed)"
     },
     {
       "value": "vvearcon.com",
       "display": "vvearcon[.]com",
       "type": "Domain",
-      "context": "Sender domain (DKIM-signed)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Sender domain (DKIM-signed)"
     },
     {
       "value": "trns.live",
       "display": "trns[.]live",
       "type": "Domain",
-      "context": "Sender domain (DKIM-signed)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Sender domain (DKIM-signed)"
     },
     {
       "value": "professionalinsurancesolutions.com",
       "display": "professionalinsurancesolutions[.]com",
       "type": "Domain",
-      "context": "Graph API sender domain",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Graph API sender domain"
     },
     {
       "value": "ventrisecure.com",
       "display": "ventrisecure[.]com",
       "type": "Domain",
-      "context": "Sender domain (DKIM keys present)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Sender domain (DKIM keys present)"
     },
     {
       "value": "ventracloud.com",
       "display": "ventracloud[.]com",
       "type": "Domain",
-      "context": "Evilginx phishing domain",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Evilginx phishing domain"
     },
     {
       "value": "brevantic.com",
       "display": "brevantic[.]com",
       "type": "Domain",
-      "context": "Evilginx phishing domain",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Evilginx phishing domain"
     },
     {
       "value": "Mxlicense_control_bot",
       "display": "Mxlicense_control_bot",
       "type": "Bot username",
-      "context": "License management bot",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "License management bot"
     },
     {
       "value": "UPMi035bot",
       "display": "UPMi035bot",
       "type": "Bot username",
-      "context": "Tracker alert bot",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Tracker alert bot"
     },
     {
       "value": "go.docviewportal.com/d/<base64url_token>",
       "display": "go.docviewportal[.]com/d/<base64url_token>",
       "type": "URL pattern",
-      "context": "Encrypted phishing link",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Encrypted phishing link"
     },
     {
       "value": "webmail.tms.ac/djMfuXoi",
       "display": "webmail.tms[.]ac/djMfuXoi",
       "type": "URL pattern",
-      "context": "Default Evilginx lure URL",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Default Evilginx lure URL"
     }
   ],
   "_posts/Threat Research/2024-04-04-ClickFix.md": [
@@ -329,73 +249,55 @@
       "value": "107.158.128.79",
       "display": "107.158.128[.]79",
       "type": "IPv4",
-      "context": "Exposed C2 panel and API server",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Exposed C2 panel and API server"
     },
     {
       "value": "45.141.26.73",
       "display": "45.141.26[.]73",
       "type": "IPv4",
-      "context": "ohshit.sh staging server, hosted Mirai payloads, Mirai C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ohshit.sh staging server, hosted Mirai payloads, Mirai C2"
     },
     {
       "value": "sceuppe.com",
       "display": "sceuppe[.]com",
       "type": "Domain",
-      "context": "Stage-one domain queried by malicious WordPress plugin z.php",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Stage-one domain queried by malicious WordPress plugin z.php"
     },
     {
       "value": "windlrr.com",
       "display": "windlrr[.]com",
       "type": "Domain",
-      "context": "ClickFix delivery domain hosting file.js and related endpoints",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix delivery domain hosting file.js and related endpoints"
     },
     {
       "value": "nitzschi.com",
       "display": "nitzschi[.]com",
       "type": "Domain",
-      "context": "Alternate ClickFix delivery domain serving near-identical file.js",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Alternate ClickFix delivery domain serving near-identical file.js"
     },
     {
       "value": "grabber.cy",
       "display": "grabber[.]cy",
       "type": "Domain",
-      "context": "HTTP-flood target; suspected infostealer MaaS / TOK Grabber infrastructure",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "HTTP-flood target; suspected infostealer MaaS / TOK Grabber infrastructure"
     },
     {
       "value": "z.php",
       "display": "z.php",
       "type": "Filename",
-      "context": "Malicious WordPress plugin that was attempted to be deployed across 217 compromised sites",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Malicious WordPress plugin that was attempted to be deployed across 217 compromised sites"
     },
     {
       "value": "ohshit.sh",
       "display": "ohshit.sh",
       "type": "Filename",
-      "context": "Shell script used to download architecture-specific sora* binaries",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Shell script used to download architecture-specific sora* binaries"
     },
     {
       "value": "FuckYou",
       "display": "FuckYou",
       "type": "Filename",
-      "context": "Executed filename used for downloaded Mirai payloads",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Executed filename used for downloaded Mirai payloads"
     }
   ],
   "_posts/Threat Research/2024-04-28-Qilin.md": [
@@ -403,345 +305,259 @@
       "value": "144.208.127.61",
       "display": "144.208.127.61",
       "type": "IPv4",
-      "context": "Command & Control; Open-directory / staging server",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Command & Control; Open-directory / staging server"
     },
     {
       "value": "185.208.158.147",
       "display": "185.208.158.147",
       "type": "IPv4",
-      "context": "Command & Control; Open-directory; Sliver-related infrastructure",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Command & Control; Open-directory; Sliver-related infrastructure"
     },
     {
       "value": "185.196.11.235",
       "display": "185.196.11.235",
       "type": "IPv4",
-      "context": "Command & Control; Open-directory; Flask exfil server; reverse shell staging; Chisel SOCKS endpoint; WatchGuard exploit callback host",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Command & Control; Open-directory; Flask exfil server; reverse shell staging; Chisel SOCKS endpoint; WatchGuard exploit callback host"
     },
     {
       "value": "194.59.30.9",
       "display": "194.59.30.9",
       "type": "IPv4",
-      "context": "Command & Control; Open-directory / staging server",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Command & Control; Open-directory / staging server"
     },
     {
       "value": "45.32.216.250",
       "display": "45.32.216.250",
       "type": "IPv4",
-      "context": "Command & Control; Open-directory",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Command & Control; Open-directory"
     },
     {
       "value": "79.110.49.146",
       "display": "79.110.49.146",
       "type": "IPv4",
-      "context": "Command & Control; Open-directory; observed reverse-shell / Sliver C2-related infrastructure",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Command & Control; Open-directory; observed reverse-shell / Sliver C2-related infrastructure"
     },
     {
       "value": "31.57.147.229",
       "display": "31.57.147.229",
       "type": "IPv4",
-      "context": "Command & Control; Sliver C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Command & Control; Sliver C2"
     },
     {
       "value": "31.57.38.155",
       "display": "31.57.38.155",
       "type": "IPv4",
-      "context": "Command & Control; Sliver C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Command & Control; Sliver C2"
     },
     {
       "value": "23.27.140.108",
       "display": "23.27.140.108",
       "type": "IPv4",
-      "context": "Command & Control; Sliver C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Command & Control; Sliver C2"
     },
     {
       "value": "23.27.143.170",
       "display": "23.27.143.170",
       "type": "IPv4",
-      "context": "Command & Control; Sliver C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Command & Control; Sliver C2"
     },
     {
       "value": "yxaxsxdy3gz64ylh4jdjf3gliawpwe5dqvkv6t3ehgkhbrekt4dma7id.onion",
       "display": "yxaxsxdy3gz64ylh4jdjf3gliawpwe5dqvkv6t3ehgkhbrekt4dma7id.onion",
       "type": "Onion",
-      "context": "Leak site / Qilin login portal; qusar",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak site / Qilin login portal; qusar"
     },
     {
       "value": "sfnqkt2tffq3vuzshe4gd6glav2tfn235b3s6yoabiaeccsog5pdoaqd.onion",
       "display": "sfnqkt2tffq3vuzshe4gd6glav2tfn235b3s6yoabiaeccsog5pdoaqd.onion",
       "type": "Onion",
-      "context": "Leak site / Qilin login portal; sssd",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak site / Qilin login portal; sssd"
     },
     {
       "value": "caxtv5fnuidtcnmnbr7tb2v2zz75gkrpsa6dfaj2lxk3ylxipbi5klad.onion",
       "display": "caxtv5fnuidtcnmnbr7tb2v2zz75gkrpsa6dfaj2lxk3ylxipbi5klad.onion",
       "type": "Onion",
-      "context": "Leak site / Qilin login portal; tron",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak site / Qilin login portal; tron"
     },
     {
       "value": "remqvwjjx422lrvv5tuqsayh4vuorlioleipdt7zkvparlamwfwdbyyd.onion",
       "display": "remqvwjjx422lrvv5tuqsayh4vuorlioleipdt7zkvparlamwfwdbyyd.onion",
       "type": "Onion",
-      "context": "Leak site / Qilin login portal; kruss",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak site / Qilin login portal; kruss"
     },
     {
       "value": "3uteer64gvygdnjbdajmg7qidpspiucifa42fpfx63tdnqzpjbqdnjqd.onion",
       "display": "3uteer64gvygdnjbdajmg7qidpspiucifa42fpfx63tdnqzpjbqdnjqd.onion",
       "type": "Onion",
-      "context": "Leak site / Qilin login portal; locker",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak site / Qilin login portal; locker"
     },
     {
       "value": "qde2yglcehbwnpsdrfdkkyd5elfaopfxky2bwpo3jizdrctmw6bld3ad.onion",
       "display": "qde2yglcehbwnpsdrfdkkyd5elfaopfxky2bwpo3jizdrctmw6bld3ad.onion",
       "type": "Onion",
-      "context": "Leak site / Qilin login portal; test\\linux",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak site / Qilin login portal; test\\linux"
     },
     {
       "value": "jgky27wbidsvpblonrn3gy2ep265hazqyablovpukgav52bv2trlu3id.onion",
       "display": "jgky27wbidsvpblonrn3gy2ep265hazqyablovpukgav52bv2trlu3id.onion",
       "type": "Onion",
-      "context": "Leak site / Qilin login portal; test\\gra_linux",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak site / Qilin login portal; test\\gra_linux"
     },
     {
       "value": "os7yir2k4yzdg32h2vrjyj6woo6jpo5wty44mkojfs36wr4hsxbswlad.onion",
       "display": "os7yir2k4yzdg32h2vrjyj6woo6jpo5wty44mkojfs36wr4hsxbswlad.onion",
       "type": "Onion",
-      "context": "Leak site / Qilin login portal; test\\sbise",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak site / Qilin login portal; test\\sbise"
     },
     {
       "value": "kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion",
       "display": "kbsqoivihgdmwczmxkbovk7ss2dcynitwhhfu5yw725dboqo5kthfaad.onion",
       "type": "Onion",
-      "context": "Leak site / Qilin login portal; Embedded blog link",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak site / Qilin login portal; Embedded blog link"
     },
     {
       "value": "ijzn3sicrcy7guixkzjkib4ukbiilwc3xhnmby4mcbccnsd7j2rekvqd.onion",
       "display": "ijzn3sicrcy7guixkzjkib4ukbiilwc3xhnmby4mcbccnsd7j2rekvqd.onion",
       "type": "Onion",
-      "context": "Leak site / Qilin login portal; Embedded blog link",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak site / Qilin login portal; Embedded blog link"
     },
     {
       "value": "2495c8024bf0497bd5faf70b6c99ce4bf52350b8a7fcfb7de8e66d3966e84a55",
       "display": "2495C8024BF0497BD5FAF70B6C99CE4BF52350B8A7FCFB7DE8E66D3966E84A55",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Qilin sample; file: 185.196.11.235\\kruss; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Qilin sample; file: 185.196.11.235\\kruss; Source note: included for pivoting, not detection content."
     },
     {
       "value": "c73ae27924d0335dfc4d172cba31458ffecece80dc27e7b2ab6fc7c41fd2ae29",
       "display": "C73AE27924D0335DFC4D172CBA31458FFECECE80DC27E7B2AB6FC7C41FD2AE29",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Qilin sample; file: 45.32.216.250_443\\locker; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Qilin sample; file: 45.32.216.250_443\\locker; Source note: included for pivoting, not detection content."
     },
     {
       "value": "dc9f6a3a6d769b9af3b6972542960ccf43326280ed2732ad12d6700446908ace",
       "display": "DC9F6A3A6D769B9AF3B6972542960CCF43326280ED2732AD12D6700446908ACE",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Qilin sample; file: 45.32.216.250_443\\test\\linux; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Qilin sample; file: 45.32.216.250_443\\test\\linux; Source note: included for pivoting, not detection content."
     },
     {
       "value": "2d49ad1dae92372fb2c4b696eae35bd982b88d88fc1a0d449a2277eca70307ba",
       "display": "2D49AD1DAE92372FB2C4B696EAE35BD982B88D88FC1A0D449A2277ECA70307BA",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Qilin sample; file: 45.32.216.250_443\\test\\gra_linux; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Qilin sample; file: 45.32.216.250_443\\test\\gra_linux; Source note: included for pivoting, not detection content."
     },
     {
       "value": "9588446206f405a539761d4743d48ab2dec20ae69a9c91ff57a139ece60504b5",
       "display": "9588446206F405A539761D4743D48AB2DEC20AE69A9C91FF57A139ECE60504B5",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Qilin sample; file: 45.32.216.250_443\\test\\sbise; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Qilin sample; file: 45.32.216.250_443\\test\\sbise; Source note: included for pivoting, not detection content."
     },
     {
       "value": "c599dd1af4c13993aa1746a55aa1c7e9ad0aa0d56659e3d4b43d7d5a22698266",
       "display": "C599DD1AF4C13993AA1746A55AA1C7E9AD0AA0D56659E3D4B43D7D5A22698266",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Large ELF64; related payload/helper; file: 45.32.216.250_443\\test\\esxi; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Large ELF64; related payload/helper; file: 45.32.216.250_443\\test\\esxi; Source note: included for pivoting, not detection content."
     },
     {
       "value": "51ccbfe5321c6c27ef38f491e5aa00e38ecdbebe8d0ecb0b8760c765749554bf",
       "display": "51CCBFE5321C6C27EF38F491E5AA00E38ECDBEBE8D0ECB0B8760C765749554BF",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; UPX-packed ELF32; file: 45.32.216.250_443\\linux; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; UPX-packed ELF32; file: 45.32.216.250_443\\linux; Source note: included for pivoting, not detection content."
     },
     {
       "value": "fa865b9544acfbe0d5fa9985edfce7e24bdaec4d8aa813bbf1ae9891ad52c517",
       "display": "FA865B9544ACFBE0D5FA9985EDFCE7E24BDAEC4D8AA813BBF1AE9891AD52C517",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Likely rclone; file: 45.32.216.250_443\\test\\rclone_linux; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Likely rclone; file: 45.32.216.250_443\\test\\rclone_linux; Source note: included for pivoting, not detection content."
     },
     {
       "value": "3b06e9166a5771130e343e3d1015e554b5f7217d3586cd3e5bb997f4a81089e8",
       "display": "3B06E9166A5771130E343E3D1015E554B5F7217D3586CD3E5BB997F4A81089E8",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Sliver binary; file: 185.208.158.147\\sliver; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Sliver binary; file: 185.208.158.147\\sliver; Source note: included for pivoting, not detection content."
     },
     {
       "value": "75fc431ce030047e6dafc6c5d787ef5d8a4a23c9da3ba8fb239d869d46784dc7",
       "display": "75FC431CE030047E6DAFC6C5D787EF5D8A4A23C9DA3BA8FB239D869D46784DC7",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Chisel; file: 144.208.127.61\\chisel; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Chisel; file: 144.208.127.61\\chisel; Source note: included for pivoting, not detection content."
     },
     {
       "value": "75fc431ce030047e6dafc6c5d787ef5d8a4a23c9da3ba8fb239d869d46784dc7",
       "display": "75FC431CE030047E6DAFC6C5D787EF5D8A4A23C9DA3BA8FB239D869D46784DC7",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Chisel; file: 185.196.11.235\\chisel; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Chisel; file: 185.196.11.235\\chisel; Source note: included for pivoting, not detection content."
     },
     {
       "value": "75fc431ce030047e6dafc6c5d787ef5d8a4a23c9da3ba8fb239d869d46784dc7",
       "display": "75FC431CE030047E6DAFC6C5D787EF5D8A4A23C9DA3BA8FB239D869D46784DC7",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Renamed Chisel; file: 185.196.11.235\\fos; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Renamed Chisel; file: 185.196.11.235\\fos; Source note: included for pivoting, not detection content."
     },
     {
       "value": "75fc431ce030047e6dafc6c5d787ef5d8a4a23c9da3ba8fb239d869d46784dc7",
       "display": "75FC431CE030047E6DAFC6C5D787EF5D8A4A23C9DA3BA8FB239D869D46784DC7",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Chisel; file: 185.208.158.147\\chisel; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Chisel; file: 185.208.158.147\\chisel; Source note: included for pivoting, not detection content."
     },
     {
       "value": "c9a9d563edd2d7c3b80e70e0c324895fdb5f849076e66a25457c22901f18ac3d",
       "display": "C9A9D563EDD2D7C3B80E70E0C324895FDB5F849076E66A25457C22901F18AC3D",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Python reverse shell; file: 185.196.11.235\\events.py; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Python reverse shell; file: 185.196.11.235\\events.py; Source note: included for pivoting, not detection content."
     },
     {
       "value": "e862d9792d116f1da8139c58abb10e18feea38b524055c1e3cc73f8bdb65a9af",
       "display": "E862D9792D116F1DA8139C58ABB10E18FEEA38B524055C1E3CC73F8BDB65A9AF",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Reverse-shell launcher; file: 185.196.11.235\\test.py; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Reverse-shell launcher; file: 185.196.11.235\\test.py; Source note: included for pivoting, not detection content."
     },
     {
       "value": "e95fb018308751a380a7b48c11e365c6452ee87b11bcac80df791b09f2c4d867",
       "display": "E95FB018308751A380A7B48C11E365C6452EE87B11BCAC80DF791B09F2C4D867",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Flask exfil handler; file: 185.196.11.235\\serverPOST.py; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Flask exfil handler; file: 185.196.11.235\\serverPOST.py; Source note: included for pivoting, not detection content."
     },
     {
       "value": "e95fb018308751a380a7b48c11e365c6452ee87b11bcac80df791b09f2c4d867",
       "display": "E95FB018308751A380A7B48C11E365C6452EE87B11BCAC80DF791B09F2C4D867",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Flask exfil handler; file: 144.208.127.61\\forti\\serverPOST.py; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Flask exfil handler; file: 144.208.127.61\\forti\\serverPOST.py; Source note: included for pivoting, not detection content."
     },
     {
       "value": "eb00ddfa8acc4bed939ba77ca23af5396ca406c8bb0c14ee79932c6d00bb16f3",
       "display": "EB00DDFA8ACC4BED939BA77CA23AF5396CA406C8BB0C14EE79932C6D00BB16F3",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Flask exfil handler; file: 144.208.127.61\\serverPOST.py; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Flask exfil handler; file: 144.208.127.61\\serverPOST.py; Source note: included for pivoting, not detection content."
     },
     {
       "value": "eb00ddfa8acc4bed939ba77ca23af5396ca406c8bb0c14ee79932c6d00bb16f3",
       "display": "EB00DDFA8ACC4BED939BA77CA23AF5396CA406C8BB0C14EE79932C6D00BB16F3",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Flask exfil handler; file: 185.208.158.147\\serverPOST.py; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Flask exfil handler; file: 185.208.158.147\\serverPOST.py; Source note: included for pivoting, not detection content."
     },
     {
       "value": "5df410797d8f089fdd0e902f3e765e9732d780329f2435052c7797bb2c2f67fb",
       "display": "5DF410797D8F089FDD0E902F3E765E9732D780329F2435052C7797BB2C2F67FB",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; FortiGate recon script; file: 185.208.158.147\\TargetInfoPrinter.py; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; FortiGate recon script; file: 185.208.158.147\\TargetInfoPrinter.py; Source note: included for pivoting, not detection content."
     },
     {
       "value": "a83724ecd01a024fb0b6c8fb247c8414b881dab3bd49ae6b82cc30fe1671ef2a",
       "display": "A83724ECD01A024FB0B6C8FB247C8414B881DAB3BD49AE6B82CC30FE1671EF2A",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Sliver client config; file: 185.196.11.235\\client_31.57.147.229.cfg; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Sliver client config; file: 185.196.11.235\\client_31.57.147.229.cfg; Source note: included for pivoting, not detection content."
     },
     {
       "value": "d8f1f3414610841c56d176545ada03f7ad0fd063bfbaf9f33e20e88bb53adf19",
       "display": "D8F1F3414610841C56D176545ADA03F7AD0FD063BFBAF9F33E20E88BB53ADF19",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Sliver client config; file: 185.196.11.235\\Y_23.27.140.108.cfg; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Sliver client config; file: 185.196.11.235\\Y_23.27.140.108.cfg; Source note: included for pivoting, not detection content."
     },
     {
       "value": "9f7fd7f9b7929f30d15c7f18bd782a93e7bd5145f2178d3a00f5187bdab36e86",
       "display": "9F7FD7F9B7929F30D15C7F18BD782A93E7BD5145F2178D3A00F5187BDAB36E86",
       "type": "SHA256",
-      "context": "Payloads, Scripts & Configurations; Sliver client config; file: 185.208.158.147\\HariAdm_185.208.158.147.cfg; Source note: included for pivoting, not detection content.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Payloads, Scripts & Configurations; Sliver client config; file: 185.208.158.147\\HariAdm_185.208.158.147.cfg; Source note: included for pivoting, not detection content."
     }
   ],
   "_posts/Threat Research/2025-04-10-ProxyPCP-2.md": [
@@ -749,161 +565,121 @@
       "value": "108.129.153.172",
       "display": "108.129.153[.]172",
       "type": "IPv4",
-      "context": "ShadowLink C2; AWS EC2; staging server for microsocks and shell scripts; ASUS payload hosted on port 80",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ShadowLink C2; AWS EC2; staging server for microsocks and shell scripts; ASUS payload hosted on port 80"
     },
     {
       "value": "91.214.78.178",
       "display": "91.214.78[.]178",
       "type": "IPv4",
-      "context": "Xygeni supply-chain C2; accessed via nip.io wildcard DNS",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Xygeni supply-chain C2; accessed via nip.io wildcard DNS"
     },
     {
       "value": "67.217.57.240",
       "display": "67.217.57[.]240",
       "type": "IPv4",
-      "context": "TeamPCP C2; payload staging (port 666); FRP tunnel (port 888); Starkiller (port 1337); Honeypot dashboard (port 8081)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "TeamPCP C2; payload staging (port 666); FRP tunnel (port 888); Starkiller (port 1337); Honeypot dashboard (port 8081)"
     },
     {
       "value": "security-verify.91.214.78.178.nip.io",
       "display": "security-verify.91.214.78.178.nip[.]io",
       "type": "Domain",
-      "context": "Xygeni C2 domain; nip.io wildcard DNS resolving to 91.214.78[.]178",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Xygeni C2 domain; nip.io wildcard DNS resolving to 91.214.78[.]178"
     },
     {
       "value": "sL5x#9kR!vQ2$mN7",
       "display": "sL5x#9kR!vQ2$mN7",
       "type": "Auth token",
-      "context": "ShadowLink X-B header value; shared across all four variants",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ShadowLink X-B header value; shared across all four variants"
     },
     {
       "value": "sL5x%239kR%21vQ2%24mN7",
       "display": "sL5x%239kR%21vQ2%24mN7",
       "type": "Auth token",
-      "context": "URL-encoded variant; used in beacon poll query strings",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "URL-encoded variant; used in beacon poll query strings"
     },
     {
       "value": "/b/in",
       "display": "/b/in",
       "type": "URI path",
-      "context": "ShadowLink registration endpoint (POST)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ShadowLink registration endpoint (POST)"
     },
     {
       "value": "/b/q",
       "display": "/b/q",
       "type": "URI path",
-      "context": "ShadowLink command polling endpoint (GET)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ShadowLink command polling endpoint (GET)"
     },
     {
       "value": "/b/r",
       "display": "/b/r",
       "type": "URI path",
-      "context": "ShadowLink result exfiltration endpoint (POST)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ShadowLink result exfiltration endpoint (POST)"
     },
     {
       "value": "/tmp/.m",
       "display": "/tmp/.m",
       "type": "File path",
-      "context": "microsocks binary on compromised TP-Link routers",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "microsocks binary on compromised TP-Link routers"
     },
     {
       "value": "/tmp/.s",
       "display": "/tmp/.s",
       "type": "File path",
-      "context": "Stager persistence copy on TP-Link routers",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Stager persistence copy on TP-Link routers"
     },
     {
       "value": "/tmp/.bp",
       "display": "/tmp/.bp",
       "type": "File path",
-      "context": "Beacon PID file on TP-Link routers",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Beacon PID file on TP-Link routers"
     },
     {
       "value": "/tmp/.bid",
       "display": "/tmp/.bid",
       "type": "File path",
-      "context": "Beacon ID file on TP-Link routers",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Beacon ID file on TP-Link routers"
     },
     {
       "value": "[kworker/0:1]",
       "display": "[kworker/0:1]",
       "type": "Process name",
-      "context": "Process masquerade used by microsocks on TP-Link",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Process masquerade used by microsocks on TP-Link"
     },
     {
       "value": "tplink_stager.sh",
       "display": "tplink_stager.sh",
       "type": "Filename",
-      "context": "TP-Link residential proxy stager",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "TP-Link residential proxy stager"
     },
     {
       "value": "b.sh",
       "display": "b.sh",
       "type": "Filename",
-      "context": "Generic ShadowLink beacon",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Generic ShadowLink beacon"
     },
     {
       "value": "proxy.sh",
       "display": "proxy.sh",
       "type": "Filename",
-      "context": "TeamPCP server-side proxy deployment script",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "TeamPCP server-side proxy deployment script"
     },
     {
       "value": "ed8f066f4539feb19f59e74b4429ece7469e5ef088b7f4aaef0fc2bf226ae5f0",
       "display": "ed8f066f4539feb19f59e74b4429ece7469e5ef088b7f4aaef0fc2bf226ae5f0",
       "type": "SHA256",
-      "context": "b.sh",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "b.sh"
     },
     {
       "value": "80729e37f797da2b5a177867306318626e52b675f44fa441c256d139e88f69df",
       "display": "80729e37f797da2b5a177867306318626e52b675f44fa441c256d139e88f69df",
       "type": "SHA256",
-      "context": "proxy.sh",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "proxy.sh"
     },
     {
       "value": "9984e2b8fa6401f84f76e38e3b97888a4df25dc8cdf28981d088515d03a72037",
       "display": "9984e2b8fa6401f84f76e38e3b97888a4df25dc8cdf28981d088515d03a72037",
       "type": "SHA256",
-      "context": "tplink_stager.sh",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "tplink_stager.sh"
     }
   ],
   "_posts/Threat Research/2025-08-20-china-vietnam-campaign.md": [
@@ -911,641 +687,481 @@
       "value": "103.215.77.214",
       "display": "103[.]215[.]77[.]214",
       "type": "IPv4",
-      "context": "Cobalt Strike teamserver and FRP server; primary exposed operator host.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Cobalt Strike teamserver and FRP server; primary exposed operator host."
     },
     {
       "value": "122.10.198.X",
       "display": "122[.]10[.]198[.]X",
       "type": "IP pattern",
-      "context": "Redacted IP in the linked IPs.txt list; not an exact host indicator.",
-      "confidence": "Not stated",
-      "classification": "reference-only"
+      "context": "Redacted IP in the linked IPs.txt list; not an exact host indicator."
     },
     {
       "value": "38.181.79.15",
       "display": "38[.]181[.]79[.]15",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "103.56.52.142",
       "display": "103[.]56[.]52[.]142",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "103.56.52.61",
       "display": "103[.]56[.]52[.]61",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "27.219.79.226",
       "display": "27[.]219[.]79[.]226",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "39.85.164.6",
       "display": "39[.]85[.]164[.]6",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "27.210.226.254",
       "display": "27[.]210[.]226[.]254",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "221.2.22.145",
       "display": "221[.]2[.]22[.]145",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "156.59.13.38",
       "display": "156[.]59[.]13[.]38",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "27.150.112.38",
       "display": "27[.]150[.]112[.]38",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "123.132.37.188",
       "display": "123[.]132[.]37[.]188",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "119.165.225.129",
       "display": "119[.]165[.]225[.]129",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "27.210.0.131",
       "display": "27[.]210[.]0[.]131",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "27.199.77.113",
       "display": "27[.]199[.]77[.]113",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "27.150.113.183",
       "display": "27[.]150[.]113[.]183",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "27.150.113.1",
       "display": "27[.]150[.]113[.]1",
       "type": "IPv4",
-      "context": "Imported from the linked IPs.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked IPs.txt list; individual role not specified in that list."
     },
     {
       "value": "microsoft-symantec.art",
       "display": "microsoft-symantec[.]art",
       "type": "Domain",
-      "context": "VShell listener and SNOWLIGHT payload staging on port 8848.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "VShell listener and SNOWLIGHT payload staging on port 8848."
     },
     {
       "value": "microsoft-defend.club",
       "display": "microsoft-defend[.]club",
       "type": "Domain",
-      "context": "Parent domain of the reported Cobalt Strike C2.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Parent domain of the reported Cobalt Strike C2."
     },
     {
       "value": "micrcs.microsoft-defend.club",
       "display": "micrcs[.]microsoft-defend[.]club",
       "type": "Domain",
-      "context": "Cobalt Strike C2 domain configured in CDN.profile; proxied through Cloudflare.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Cobalt Strike C2 domain configured in CDN.profile; proxied through Cloudflare."
     },
     {
       "value": "0659f21cb8422c830af696a947eeff6c",
       "display": "0659f21cb8422c830af696a947eeff6c",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "0aa8a3cd0ac247d5eeca2661e88f71b7",
       "display": "0aa8a3cd0ac247d5eeca2661e88f71b7",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "0b2e3a199df127abba4e1f468d674cbe",
       "display": "0b2e3a199df127abba4e1f468d674cbe",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "0d4ee255c91405a9f270c94862ea1361",
       "display": "0d4ee255c91405a9f270c94862ea1361",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "131e9c99a7be59afb2f8763e07963c69",
       "display": "131e9c99a7be59afb2f8763e07963c69",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "140a0f81a7b1e76efa914dd688edc5e5",
       "display": "140a0f81a7b1e76efa914dd688edc5e5",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "1415c48ad7d8848191b0cd7a122a7cfb",
       "display": "1415c48ad7d8848191b0cd7a122a7cfb",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "1643a53dc2a0117e0a66612bb3f341fe",
       "display": "1643a53dc2a0117e0a66612bb3f341fe",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "2058842e1799195a2f3c9971e4dea24e",
       "display": "2058842e1799195a2f3c9971e4dea24e",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "298f5096cda09151bd6b10ab605f0e7c",
       "display": "298f5096cda09151bd6b10ab605f0e7c",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "29efd64dd3c7fe1e2b022b7ad73a1ba5",
       "display": "29efd64dd3c7fe1e2b022b7ad73a1ba5",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "3388b033f6a92e22f47f094b3c38df4f",
       "display": "3388b033f6a92e22f47f094b3c38df4f",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "351a765b352730fe5b66baaef6410cbd",
       "display": "351a765b352730fe5b66baaef6410cbd",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "38ecb8e7ff4a034618082b3bb6116f90",
       "display": "38ecb8e7ff4a034618082b3bb6116f90",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "3fed1004befb9834b699a88ccdce757e",
       "display": "3fed1004befb9834b699a88ccdce757e",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "40b96d9df310d5f448c0908c3231ff4e",
       "display": "40b96d9df310d5f448c0908c3231ff4e",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "4facb81f57e515a508040270849bcd35",
       "display": "4facb81f57e515a508040270849bcd35",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "5982a720a2f0834e5d04ea4ad49900dd",
       "display": "5982a720a2f0834e5d04ea4ad49900dd",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "5c106ea9a277b8489be3059750c3f6ec",
       "display": "5c106ea9a277b8489be3059750c3f6ec",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "5d882e918248790794a07cabe72cf2b1",
       "display": "5d882e918248790794a07cabe72cf2b1",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "61cd12c70e9b6125a8d8b5784bdefc4b",
       "display": "61cd12c70e9b6125a8d8b5784bdefc4b",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "64aa88125366a1787919b5ec61befa1d",
       "display": "64aa88125366a1787919b5ec61befa1d",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "650be782605daa164ad7d1f971ef76a3",
       "display": "650be782605daa164ad7d1f971ef76a3",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "698d51a19d8a121ce581499d7b701668",
       "display": "698d51a19d8a121ce581499d7b701668",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "69f40aa49b4ac18700c3499f167bd845",
       "display": "69f40aa49b4ac18700c3499f167bd845",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "6ba0dbcd2db8f44243799c891dbd2a59",
       "display": "6ba0dbcd2db8f44243799c891dbd2a59",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "6fe223ce568d919f80bea233738d0628",
       "display": "6fe223ce568d919f80bea233738d0628",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "723d364d402760641ec172e27e9b6a56",
       "display": "723d364d402760641ec172e27e9b6a56",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "75341ae79be66b2e09d578fcd6fa8441",
       "display": "75341ae79be66b2e09d578fcd6fa8441",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "78b1fa873aabd54c1d73e2f7cd664a31",
       "display": "78b1fa873aabd54c1d73e2f7cd664a31",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "7d372351d7629ab7bf694812d03674c5",
       "display": "7d372351d7629ab7bf694812d03674c5",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "809f3a686c379e3567db71585b169d4d",
       "display": "809f3a686c379e3567db71585b169d4d",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "875cd28cf7b4fa7abd0d4e079a13bf26",
       "display": "875cd28cf7b4fa7abd0d4e079a13bf26",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "895d4e39649399d7e7010510ae17750b",
       "display": "895d4e39649399d7e7010510ae17750b",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "8bc54a3ae402e1c3e158010169e97c38",
       "display": "8bc54a3ae402e1c3e158010169e97c38",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "9b0e4652a0317e6e4da66f29a74b5ad7",
       "display": "9b0e4652a0317e6e4da66f29a74b5ad7",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "9e0e6f3e82a1a09228987ef496b5b9f3",
       "display": "9e0e6f3e82a1a09228987ef496b5b9f3",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "a11a1d761d757d367146f0f772632d8c",
       "display": "a11a1d761d757d367146f0f772632d8c",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "a28ab9f7acdf3ced769ee44f47828504",
       "display": "a28ab9f7acdf3ced769ee44f47828504",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "a39696e95a34a017be1435db7ff139d5",
       "display": "a39696e95a34a017be1435db7ff139d5",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "a65b99553494cd178c72b2bc7ae44554",
       "display": "a65b99553494cd178c72b2bc7ae44554",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "ab59a40273401b69d019877be0190fce",
       "display": "ab59a40273401b69d019877be0190fce",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "abcf9d28603eee7630ed93ef9f729888",
       "display": "abcf9d28603eee7630ed93ef9f729888",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "ae3e7304122469f2de3ecbd920a768d1",
       "display": "ae3e7304122469f2de3ecbd920a768d1",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "bb7326689f40a1190676770dd59a3ca9",
       "display": "bb7326689f40a1190676770dd59a3ca9",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "bed7058beeeefc3efeb8b408ec68e5fa",
       "display": "bed7058beeeefc3efeb8b408ec68e5fa",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "c1b11a39ef693fa6bf1bb3282fafb640",
       "display": "c1b11a39ef693fa6bf1bb3282fafb640",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "c82698395e6a30cad74c0bc0a6cd51af",
       "display": "c82698395e6a30cad74c0bc0a6cd51af",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "cbdc6e33deb4daac12bdce086165c8f1",
       "display": "cbdc6e33deb4daac12bdce086165c8f1",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "ceff651b3a7cbb667799510fe1d5d2c3",
       "display": "ceff651b3a7cbb667799510fe1d5d2c3",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "d41d8cd98f00b204e9800998ecf8427e",
       "display": "d41d8cd98f00b204e9800998ecf8427e",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "e06aacd6139288d5bea4a676ee0c2404",
       "display": "e06aacd6139288d5bea4a676ee0c2404",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "ea5705041c355cc87c4aaedca6203840",
       "display": "ea5705041c355cc87c4aaedca6203840",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "eb80f7bddb699784baa9fbf2941eaf4a",
       "display": "eb80f7bddb699784baa9fbf2941eaf4a",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "ec76edde147207156f6de31f6ecc5bef",
       "display": "ec76edde147207156f6de31f6ecc5bef",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "f5de3ac3f12a2eee62a58d7ec77693dd",
       "display": "f5de3ac3f12a2eee62a58d7ec77693dd",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "f87afacff9c44b94db109e3e956a4b33",
       "display": "f87afacff9c44b94db109e3e956a4b33",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "f91cc2b904a778d77da1ca2f0772c1b1",
       "display": "f91cc2b904a778d77da1ca2f0772c1b1",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "fc48ee15a4d16cee6cac9805cf8d0ec4",
       "display": "fc48ee15a4d16cee6cac9805cf8d0ec4",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     },
     {
       "value": "fd6d0f45fab383257462a2b91fb7b169",
       "display": "fd6d0f45fab383257462a2b91fb7b169",
       "type": "MD5",
-      "context": "Imported from the linked hashes.txt list; individual role not specified in that list.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Imported from the linked hashes.txt list; individual role not specified in that list."
     }
   ],
   "_posts/Threat Research/2025-12-08-React2Shell-Exploitation.md": [
@@ -1553,449 +1169,337 @@
       "value": "180.210.220.54",
       "display": "180.210.220[.]54",
       "type": "IPv4",
-      "context": "Chinese TA 1: VPS",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 1: VPS"
     },
     {
       "value": "198.252.107.249",
       "display": "198.252.107[.]249",
       "type": "IPv4",
-      "context": "Chinese TA 1: VShell C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 1: VShell C2"
     },
     {
       "value": "bd79a967f2b525faf54ffeea94bf7abb9926209dc105dd1179231a02cee83f08",
       "display": "bd79a967f2b525faf54ffeea94bf7abb9926209dc105dd1179231a02cee83f08",
       "type": "SHA256",
-      "context": "Chinese TA 1: libhttp - VShell loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 1: libhttp - VShell loader"
     },
     {
       "value": "58c5ba117fec8531f3558bb6209ab3684038893da139e9c0e051c94f6a3c135d",
       "display": "58c5ba117fec8531f3558bb6209ab3684038893da139e9c0e051c94f6a3c135d",
       "type": "SHA256",
-      "context": "Chinese TA 1: vmtoolsd - VShell loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 1: vmtoolsd - VShell loader"
     },
     {
       "value": "bbea420e7c10c6194555c735c94b3017bd267650d923203fa26be788652302d9",
       "display": "bbea420e7c10c6194555c735c94b3017bd267650d923203fa26be788652302d9",
       "type": "SHA256",
-      "context": "Chinese TA 2: 1.bat",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: 1.bat"
     },
     {
       "value": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
       "display": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
       "type": "SHA256",
-      "context": "Chinese TA 2: 1.txt",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: 1.txt"
     },
     {
       "value": "4884efc18a91c4c759138d0ec2adc14133ac373fba9d849233dc87d3ce53c0d7",
       "display": "4884efc18a91c4c759138d0ec2adc14133ac373fba9d849233dc87d3ce53c0d7",
       "type": "SHA256",
-      "context": "Chinese TA 2: 2.bat",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: 2.bat"
     },
     {
       "value": "2b7188f3d130594a39d06aebc2d5fced5f6fcf51771fcac31280455e71c91868",
       "display": "2b7188f3d130594a39d06aebc2d5fced5f6fcf51771fcac31280455e71c91868",
       "type": "SHA256",
-      "context": "Chinese TA 2: 4.bat",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: 4.bat"
     },
     {
       "value": "352bf84d5a502033ba2f287893fca7e1c215091b7be5026ab0b2881a277724d0",
       "display": "352bf84d5a502033ba2f287893fca7e1c215091b7be5026ab0b2881a277724d0",
       "type": "SHA256",
-      "context": "Chinese TA 2: 336.exe",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: 336.exe"
     },
     {
       "value": "4b73e036302efa51c243584b8d8b0aa460e43a95ce641b62c378892279a620c8",
       "display": "4b73e036302efa51c243584b8d8b0aa460e43a95ce641b62c378892279a620c8",
       "type": "SHA256",
-      "context": "Chinese TA 2: bd.exe - BitDefender binary",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: bd.exe - BitDefender binary"
     },
     {
       "value": "d064ded9a077e372d4b5b7422f32972c4c9243b3664b97870cff9e4b174b9aee",
       "display": "d064ded9a077e372d4b5b7422f32972c4c9243b3664b97870cff9e4b174b9aee",
       "type": "SHA256",
-      "context": "Chinese TA 2: bdimgui.exe - BitDefender binary",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: bdimgui.exe - BitDefender binary"
     },
     {
       "value": "53dc6061d8bd8bb25c29e6f9c7dba688a64007bf841a4c4ad5ed10abe3f2774e",
       "display": "53dc6061d8bd8bb25c29e6f9c7dba688a64007bf841a4c4ad5ed10abe3f2774e",
       "type": "SHA256",
-      "context": "Chinese TA 2: calc.inf",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: calc.inf"
     },
     {
       "value": "1244bd02a203bec1b1e0ab85ed8ed83501ec4d17e613f1934951abeb7956abb0",
       "display": "1244bd02a203bec1b1e0ab85ed8ed83501ec4d17e613f1934951abeb7956abb0",
       "type": "SHA256",
-      "context": "Chinese TA 2: D.exe",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: D.exe"
     },
     {
       "value": "57271e30c6fd242ef10dd2a05bc56779055111148f38a4a67292316f4af3ea80",
       "display": "57271e30c6fd242ef10dd2a05bc56779055111148f38a4a67292316f4af3ea80",
       "type": "SHA256",
-      "context": "Chinese TA 2: dxcapsviewer.exe",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: dxcapsviewer.exe"
     },
     {
       "value": "fd2cb0cef901a891103695456316b9838b7968db2e35c2858dd614e9aa451a61",
       "display": "fd2cb0cef901a891103695456316b9838b7968db2e35c2858dd614e9aa451a61",
       "type": "SHA256",
-      "context": "Chinese TA 2: graphedt.exe",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: graphedt.exe"
     },
     {
       "value": "ab03ac6609b58b8024acb80e95f7e3e88344639cce7e333d62c851a37e29e72c",
       "display": "ab03ac6609b58b8024acb80e95f7e3e88344639cce7e333d62c851a37e29e72c",
       "type": "SHA256",
-      "context": "Chinese TA 2: imguiym.dll - Hijacked DLL",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: imguiym.dll - Hijacked DLL"
     },
     {
       "value": "af5b81c6ba5e79b9d3ecd3934192b3f194f99a06c26b9f79334086effd2c83a9",
       "display": "af5b81c6ba5e79b9d3ecd3934192b3f194f99a06c26b9f79334086effd2c83a9",
       "type": "SHA256",
-      "context": "Chinese TA 2: log.dll - Hijacked DLL",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: log.dll - Hijacked DLL"
     },
     {
       "value": "d63d4fe7910abcb1c19506461f80b9a434799aa31ec203bece942510d02df839",
       "display": "d63d4fe7910abcb1c19506461f80b9a434799aa31ec203bece942510d02df839",
       "type": "SHA256",
-      "context": "Chinese TA 2: new.exe",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: new.exe"
     },
     {
       "value": "faed8a7dce9b0ee3a9c94407ea437eb5172ace56bdcfbfc6a8da4e2d4dae5a75",
       "display": "faed8a7dce9b0ee3a9c94407ea437eb5172ace56bdcfbfc6a8da4e2d4dae5a75",
       "type": "SHA256",
-      "context": "Chinese TA 2: W.exe",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: W.exe"
     },
     {
       "value": "d451970d27f70a17174cbd63b98a7f254a81d52042c96d2c46f9254865f9e7bc",
       "display": "d451970d27f70a17174cbd63b98a7f254a81d52042c96d2c46f9254865f9e7bc",
       "type": "SHA256",
-      "context": "Chinese TA 2: ws_linux_amd64 -VShell",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: ws_linux_amd64 -VShell"
     },
     {
       "value": "dd223e36dd914034fb9a56e8ab97523abc67cddf80c8d220dfd8edd41ad7402b",
       "display": "dd223e36dd914034fb9a56e8ab97523abc67cddf80c8d220dfd8edd41ad7402b",
       "type": "SHA256",
-      "context": "Chinese TA 2: ws_linux_i386- VShell",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: ws_linux_i386- VShell"
     },
     {
       "value": "47.85.90.94",
       "display": "47.85.90[.]94",
       "type": "IPv4",
-      "context": "Chinese TA 2: VShell C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: VShell C2"
     },
     {
       "value": "47.77.218.13",
       "display": "47.77.218[.]13",
       "type": "IPv4",
-      "context": "Chinese TA 2: ValleyRAT C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: ValleyRAT C2"
     },
     {
       "value": "146.88.129.138",
       "display": "146.88.129[.]138",
       "type": "IPv4",
-      "context": "Chinese TA 2: VPS",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Chinese TA 2: VPS"
     },
     {
       "value": "http://216.158.232.43:12000/sex.sh",
       "display": "hXXp://216.158.232[.]43:12000/sex.sh",
       "type": "URL",
-      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ"
     },
     {
       "value": "http://212.69.85.41/sex.sh",
       "display": "hXXp://212.69.85[.]41/sex.sh",
       "type": "URL",
-      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ"
     },
     {
       "value": "http://212.69.85.41/sex.sh.1",
       "display": "hXXp://212.69.85[.]41/sex.sh.1",
       "type": "URL",
-      "context": "Cryptomining: 8BWy7pgane96sLATF7nESM4ehZEtYAFNpYFAm88zftVsJ5jxFBdGVBrd1igptedXejfomPEpJvGUKU1etmkNBXmU5HkPR6e",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Cryptomining: 8BWy7pgane96sLATF7nESM4ehZEtYAFNpYFAm88zftVsJ5jxFBdGVBrd1igptedXejfomPEpJvGUKU1etmkNBXmU5HkPR6e"
     },
     {
       "value": "http://57.128.216.24:8881/sex.sh",
       "display": "hXXp://57.128.216[.]24:8881/sex.sh",
       "type": "URL",
-      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ"
     },
     {
       "value": "http://177.84.130.195/sex.sh",
       "display": "hXXp://177.84.130[.]195/sex.sh",
       "type": "URL",
-      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ"
     },
     {
       "value": "http://68.178.168.171/sex.sh",
       "display": "hXXp://68.178.168[.]171/sex.sh",
       "type": "URL",
-      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ"
     },
     {
       "value": "http://146.190.35.87/sex.sh",
       "display": "hXXp://146.190.35[.]87/sex.sh",
       "type": "URL",
-      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Cryptomining: 88tGYBwhWNzGesQs5QkwE1PdBa1tXGb9dcjxrdwujU3SEs3i7psaoJc4KmrDvv4VPTNtXazDWGkvGGfqurdBggvPEhZ43DJ"
     },
     {
       "value": "205.185.121.141:23",
       "display": "205.185.121[.]141:23",
       "type": "IP:port",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/mips",
       "display": "hXXp://209.141.49[.]251/mips",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/mipsel",
       "display": "hXXp://209.141.49[.]251/mipsel",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/sh4",
       "display": "hXXp://209.141.49[.]251/sh4",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/x86",
       "display": "hXXp://209.141.49[.]251/x86",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/arm61",
       "display": "hXXp://209.141.49[.]251/arm61",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/i686",
       "display": "hXXp://209.141.49[.]251/i686",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/ppc",
       "display": "hXXp://209.141.49[.]251/ppc",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/586",
       "display": "hXXp://209.141.49[.]251/586",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/m68k",
       "display": "hXXp://209.141.49[.]251/m68k",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/dc",
       "display": "hXXp://209.141.49[.]251/dc",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/dss",
       "display": "hXXp://209.141.49[.]251/dss",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/co",
       "display": "hXXp://209.141.49[.]251/co",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "http://209.141.49.251/scar",
       "display": "hXXp://209.141.49[.]251/scar",
       "type": "URL",
-      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified.",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: Listed in the linked campaign IOC file; individual role not specified."
     },
     {
       "value": "962c7912c44af279cd7879402913ca17968a64788b041b855867d42bf0441387",
       "display": "962c7912c44af279cd7879402913ca17968a64788b041b855867d42bf0441387",
       "type": "SHA256",
-      "context": "Botnet: x86",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: x86"
     },
     {
       "value": "bcc239c8ac93b5b198fd4c5be8da9a252ef9149fcc3c13986d364826a9c8d900",
       "display": "bcc239c8ac93b5b198fd4c5be8da9a252ef9149fcc3c13986d364826a9c8d900",
       "type": "SHA256",
-      "context": "Botnet: mipsel",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: mipsel"
     },
     {
       "value": "729fdb587dd9b93b8d689209d68b2ef32678cb3263177d79e443046fb278c93c",
       "display": "729fdb587dd9b93b8d689209d68b2ef32678cb3263177d79e443046fb278c93c",
       "type": "SHA256",
-      "context": "Botnet: dss",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: dss"
     },
     {
       "value": "995e632e29a9c2635cfc9f693950e3ad07ae18028968e1427b306bb72e573a00",
       "display": "995e632e29a9c2635cfc9f693950e3ad07ae18028968e1427b306bb72e573a00",
       "type": "SHA256",
-      "context": "Botnet: ppc",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: ppc"
     },
     {
       "value": "5bb6b335d5df8e953dafe382ef810d5629fa15f959655c1fcbe2af815ad4bb13",
       "display": "5bb6b335d5df8e953dafe382ef810d5629fa15f959655c1fcbe2af815ad4bb13",
       "type": "SHA256",
-      "context": "Botnet: i686",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: i686"
     },
     {
       "value": "e4393a49350ed5e410e1cf286c4b8b6df29224348c9972aadcded5cb74874fba",
       "display": "e4393a49350ed5e410e1cf286c4b8b6df29224348c9972aadcded5cb74874fba",
       "type": "SHA256",
-      "context": "Botnet: arm61",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: arm61"
     },
     {
       "value": "684668d3065daad253570100f3b947a50aad9be3e4429d02c156176899e23e60",
       "display": "684668d3065daad253570100f3b947a50aad9be3e4429d02c156176899e23e60",
       "type": "SHA256",
-      "context": "Botnet: m68k",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: m68k"
     },
     {
       "value": "e6e0d5334a6b305ecb60f563aa16cb5d47ffa420a03799c030ac51d3ab869ff3",
       "display": "e6e0d5334a6b305ecb60f563aa16cb5d47ffa420a03799c030ac51d3ab869ff3",
       "type": "SHA256",
-      "context": "Botnet: sh4",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: sh4"
     },
     {
       "value": "a33aa07b8f51e7bfee450b08b563fb72d93834f9955ad189795a49532f3cce97",
       "display": "a33aa07b8f51e7bfee450b08b563fb72d93834f9955ad189795a49532f3cce97",
       "type": "SHA256",
-      "context": "Botnet: 586",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: 586"
     },
     {
       "value": "cf9a897fadec97206fe1f75f6978a04c333d37ac418fc1525bcabe3f13f225a0",
       "display": "cf9a897fadec97206fe1f75f6978a04c333d37ac418fc1525bcabe3f13f225a0",
       "type": "SHA256",
-      "context": "Botnet: co",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: co"
     },
     {
       "value": "c1083f406437651d99f4b0a6fdbb3dc57f7268fc3c1f071b8330007ca9f36de6",
       "display": "c1083f406437651d99f4b0a6fdbb3dc57f7268fc3c1f071b8330007ca9f36de6",
       "type": "SHA256",
-      "context": "Botnet: mips",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Botnet: mips"
     }
   ],
   "_posts/Threat Research/2025-12-08-Scanning-CVE-2025-55182-for-the-greater-good.md": [],
@@ -2004,25 +1508,19 @@
       "value": "203.91.74.97",
       "display": "203.91.74[.]97",
       "type": "IPv4",
-      "context": "Rocket.Chat; ASN: 400619",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Rocket.Chat; ASN: 400619"
     },
     {
       "value": "86.106.85.183",
       "display": "86.106.85[.]183",
       "type": "IPv4",
-      "context": "Sliver C2 (31337); ASN: 9009",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Sliver C2 (31337); ASN: 9009"
     },
     {
       "value": "86.106.85.183",
       "display": "86.106.85[.]183",
       "type": "IPv4",
-      "context": "Leak Site; ASN: 9009",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Leak Site; ASN: 9009"
     }
   ],
   "_posts/Threat Research/2025-12-31-FortiWeb-Sliver.md": [
@@ -2030,201 +1528,151 @@
       "value": "4086057b9a0f9898c07318e093814ae9cfdaaf6ad71a45b2d0d4cd75e57f9354",
       "display": "4086057b9a0f9898c07318e093814ae9cfdaaf6ad71a45b2d0d4cd75e57f9354",
       "type": "SHA256",
-      "context": "Payloads / Tooling; C2: testing.caai[.]in; type: Sliver implant; name: DECENT_WATERBED; created: 10/12/25 12:34",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Payloads / Tooling; C2: testing.caai[.]in; type: Sliver implant; name: DECENT_WATERBED; created: 10/12/25 12:34"
     },
     {
       "value": "964473ffbd593fc52a779b1d699c79cc66b459cf842c2e6221703e2e6a2322c0",
       "display": "964473ffbd593fc52a779b1d699c79cc66b459cf842c2e6221703e2e6a2322c0",
       "type": "SHA256",
-      "context": "Payloads / Tooling; C2: testing.caai[.]in; type: Sliver implant; name: ESTIMATED_FOOT; created: 22/12/25 07:03",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Payloads / Tooling; C2: testing.caai[.]in; type: Sliver implant; name: ESTIMATED_FOOT; created: 22/12/25 07:03"
     },
     {
       "value": "172a9ee9601ef0eb6fbd2676742edfb201c10369712dbf721e5d105aa1320a32",
       "display": "172a9ee9601ef0eb6fbd2676742edfb201c10369712dbf721e5d105aa1320a32",
       "type": "SHA256",
-      "context": "Payloads / Tooling; C2: ns1.bafairforce[.]army; type: Sliver implant; name: DAMAGED_COPYRIGHT; created: 22/12/25 07:04",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Payloads / Tooling; C2: ns1.bafairforce[.]army; type: Sliver implant; name: DAMAGED_COPYRIGHT; created: 22/12/25 07:04"
     },
     {
       "value": "3c24f30f2ca89d408d42293cab8fbb81cb9c2b0801074ef40f0a79770dac5956",
       "display": "3c24f30f2ca89d408d42293cab8fbb81cb9c2b0801074ef40f0a79770dac5956",
       "type": "SHA256",
-      "context": "Payloads / Tooling; C2: ns1.bafairforce[.]army; type: Sliver implant; name: ELEGANT_GO-KART; created: 22/12/25 07:04",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Payloads / Tooling; C2: ns1.bafairforce[.]army; type: Sliver implant; name: ELEGANT_GO-KART; created: 22/12/25 07:04"
     },
     {
       "value": "2897ee24de4cca2a4c6a085cf6fdccb6a89c6c23978529d81b4f4e6db46b0b96",
       "display": "2897ee24de4cca2a4c6a085cf6fdccb6a89c6c23978529d81b4f4e6db46b0b96",
       "type": "SHA256",
-      "context": "Payloads / Tooling; C2: ns1.ubunutpackages[.]store; type: Sliver implant; name: ARTIFICIAL_SUPPORT; created: 26/12/25 (10:45 in implant table)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Payloads / Tooling; C2: ns1.ubunutpackages[.]store; type: Sliver implant; name: ARTIFICIAL_SUPPORT; created: 26/12/25 (10:45 in implant table)"
     },
     {
       "value": "dafc7517669e931de858464966af995c44c2e7c6bdf684d53c54d6503cd48a38",
       "display": "dafc7517669e931de858464966af995c44c2e7c6bdf684d53c54d6503cd48a38",
       "type": "SHA256",
-      "context": "Payloads / Tooling; “microsocks” proxy, port 515; creds: Monkhood6703:64d9cb9c5f075dfaa371a6f; type: Proxy binary; name: cups_lpd; created: —",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Payloads / Tooling; “microsocks” proxy, port 515; creds: Monkhood6703:64d9cb9c5f075dfaa371a6f; type: Proxy binary; name: cups_lpd; created: —"
     },
     {
       "value": "https://ns1.ubunutpackages.store",
       "display": "https://ns1.ubunutpackages[.]store",
       "type": "URL",
-      "context": "Network; Targeting FortiWeb instances; observed from 195.20.17[.]253; domain registered 2025-12-26",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Targeting FortiWeb instances; observed from 195.20.17[.]253; domain registered 2025-12-26"
     },
     {
       "value": "https://ns1.bafairforce.army",
       "display": "https://ns1.bafairforce[.]army",
       "type": "URL",
-      "context": "Network; Targeting FortiWeb + React2Shell; observed from 193.233.201[.]12; domain registered 2025-09-24",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Targeting FortiWeb + React2Shell; observed from 193.233.201[.]12; domain registered 2025-09-24"
     },
     {
       "value": "193.233.201.12",
       "display": "193.233.201[.]12",
       "type": "IPv4",
-      "context": "Network; Sliver C2; open directory observed; AS 62005",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Sliver C2; open directory observed; AS 62005"
     },
     {
       "value": "195.20.17.253",
       "display": "195.20.17[.]253",
       "type": "IPv4",
-      "context": "Network; Sliver C2; open directory observed; AS 62005",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Sliver C2; open directory observed; AS 62005"
     },
     {
       "value": "45.150.108.43",
       "display": "45.150.108[.]43",
       "type": "IPv4",
-      "context": "Network; Sliver C2; AS 62005",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Sliver C2; AS 62005"
     },
     {
       "value": "45.143.167.7",
       "display": "45.143.167[.]7",
       "type": "IPv4",
-      "context": "Network; Sliver C2; open directory observed; AS 62005",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Sliver C2; open directory observed; AS 62005"
     },
     {
       "value": "80.78.18.142",
       "display": "80.78.18[.]142",
       "type": "IPv4",
-      "context": "Network; Sliver C2; AS 39287",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Sliver C2; AS 39287"
     },
     {
       "value": "192.81.210.81",
       "display": "192.81.210[.]81",
       "type": "IPv4",
-      "context": "Network; Sliver C2; AS 14061",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Sliver C2; AS 14061"
     },
     {
       "value": "45.83.181.160",
       "display": "45.83.181[.]160",
       "type": "IPv4",
-      "context": "Network; Fast Reverse Proxy (FRP) server; open directory observed; AS 44559",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Fast Reverse Proxy (FRP) server; open directory observed; AS 44559"
     },
     {
       "value": "ns1.ubunutpackages.store",
       "display": "ns1.ubunutpackages[.]store",
       "type": "Domain",
-      "context": "registration (reported): 2025-12-26; c2 ip: 195.20.17[.]253; status/notes: active (31/12/25); asn: 62005",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "registration (reported): 2025-12-26; c2 ip: 195.20.17[.]253; status/notes: active (31/12/25); asn: 62005"
     },
     {
       "value": "195.20.17.253",
       "display": "195.20.17[.]253",
       "type": "IPv4",
-      "context": "C2 for ns1.ubunutpackages[.]store; registration (reported): 2025-12-26; c2 ip: 195.20.17[.]253; status/notes: active (31/12/25); asn: 62005",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "C2 for ns1.ubunutpackages[.]store; registration (reported): 2025-12-26; c2 ip: 195.20.17[.]253; status/notes: active (31/12/25); asn: 62005"
     },
     {
       "value": "ns1.bafairforce.army",
       "display": "ns1.bafairforce[.]army",
       "type": "Domain",
-      "context": "registration (reported): 2025-09-24; c2 ip: 193.233.201[.]12; status/notes: active (31/12/25); asn: 62005",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "registration (reported): 2025-09-24; c2 ip: 193.233.201[.]12; status/notes: active (31/12/25); asn: 62005"
     },
     {
       "value": "193.233.201.12",
       "display": "193.233.201[.]12",
       "type": "IPv4",
-      "context": "C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 193.233.201[.]12; status/notes: active (31/12/25); asn: 62005",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 193.233.201[.]12; status/notes: active (31/12/25); asn: 62005"
     },
     {
       "value": "ns1.bafairforce.army",
       "display": "ns1.bafairforce[.]army",
       "type": "Domain",
-      "context": "registration (reported): 2025-09-24; c2 ip: 45.150.108[.]43; status/notes: historic; asn: 62005",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "registration (reported): 2025-09-24; c2 ip: 45.150.108[.]43; status/notes: historic; asn: 62005"
     },
     {
       "value": "45.150.108.43",
       "display": "45.150.108[.]43",
       "type": "IPv4",
-      "context": "C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 45.150.108[.]43; status/notes: historic; asn: 62005",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 45.150.108[.]43; status/notes: historic; asn: 62005"
     },
     {
       "value": "ns1.bafairforce.army",
       "display": "ns1.bafairforce[.]army",
       "type": "Domain",
-      "context": "registration (reported): 2025-09-24; c2 ip: 80.78.18[.]142; status/notes: historic; asn: 39287",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "registration (reported): 2025-09-24; c2 ip: 80.78.18[.]142; status/notes: historic; asn: 39287"
     },
     {
       "value": "80.78.18.142",
       "display": "80.78.18[.]142",
       "type": "IPv4",
-      "context": "C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 80.78.18[.]142; status/notes: historic; asn: 39287",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 80.78.18[.]142; status/notes: historic; asn: 39287"
     },
     {
       "value": "ns1.bafairforce.army",
       "display": "ns1.bafairforce[.]army",
       "type": "Domain",
-      "context": "registration (reported): 2025-09-24; c2 ip: 192.81.210[.]81; status/notes: historic; asn: 14061",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "registration (reported): 2025-09-24; c2 ip: 192.81.210[.]81; status/notes: historic; asn: 14061"
     },
     {
       "value": "192.81.210.81",
       "display": "192.81.210[.]81",
       "type": "IPv4",
-      "context": "C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 192.81.210[.]81; status/notes: historic; asn: 14061",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 192.81.210[.]81; status/notes: historic; asn: 14061"
     }
   ],
   "_posts/Threat Research/2026-01-21-KazakRAT.md": [
@@ -2232,225 +1680,169 @@
       "value": "server.fsocmicrsoft.com",
       "display": "server.fsocmicrsoft[.]com",
       "type": "Domain",
-      "context": "Network; Windows RAT C2 over HTTP",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Windows RAT C2 over HTTP"
     },
     {
       "value": "dns.freiesasien.com",
       "display": "dns.freiesasien[.]com",
       "type": "Domain",
-      "context": "Network; Windows RAT C2 domain (HTTP); The article reports this domain was acquired and sinkholed by the researchers.",
-      "confidence": "Not stated",
-      "classification": "researcher-controlled"
+      "context": "Network; Windows RAT C2 domain (HTTP); The article reports this domain was acquired and sinkholed by the researchers."
     },
     {
       "value": "dsn.mamurigovaf.site",
       "display": "dsn.mamurigovaf[.]site",
       "type": "Domain",
-      "context": "Network; Windows RAT C2 domain (HTTP)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Windows RAT C2 domain (HTTP)"
     },
     {
       "value": "dns.microbwt.team",
       "display": "dns.microbwt[.]team",
       "type": "Domain",
-      "context": "Network; Related C2 domain",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Related C2 domain"
     },
     {
       "value": "181.174.164.193",
       "display": "181.174.164[.]193",
       "type": "IPv4",
-      "context": "Network; Active C2 IP (03/01/25) for server.fsocmicrsoft[.]com",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Active C2 IP (03/01/25) for server.fsocmicrsoft[.]com"
     },
     {
       "value": "190.14.37.114",
       "display": "190.14.37[.]114",
       "type": "IPv4",
-      "context": "Network; Historical C2 IP (then) for server.fsocmicrsoft[.]com",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Historical C2 IP (then) for server.fsocmicrsoft[.]com"
     },
     {
       "value": "193.57.138.41",
       "display": "193.57.138[.]41",
       "type": "IPv4",
-      "context": "Network; Historical C2 IP (then) for dns.freiesasien[.]com",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Historical C2 IP (then) for dns.freiesasien[.]com"
     },
     {
       "value": "190.14.37.113",
       "display": "190.14.37[.]113",
       "type": "IPv4",
-      "context": "Network; Historical C2 IP (then) for dns.freiesasien[.]com",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Historical C2 IP (then) for dns.freiesasien[.]com"
     },
     {
       "value": "181.174.164.55",
       "display": "181.174.164[.]55",
       "type": "IPv4",
-      "context": "Network; Historical C2 IP (then) for dns.freiesasien[.]com",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Historical C2 IP (then) for dns.freiesasien[.]com"
     },
     {
       "value": "181.174.164.111",
       "display": "181.174.164[.]111",
       "type": "IPv4",
-      "context": "Network; Active C2 IP (03/01/25) for dsn.mamurigovaf[.]site",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Active C2 IP (03/01/25) for dsn.mamurigovaf[.]site"
     },
     {
       "value": "http://<C2>/as/include.php",
       "display": "hXXp://<C2>/as/include.php",
       "type": "URL pattern",
-      "context": "Network; Beacon/command polling endpoint (HTTP POST)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network; Beacon/command polling endpoint (HTTP POST)"
     },
     {
       "value": "312c9c3241409ec4ce4a75fb0e207aeb7de8004d0096b24bc727aa723eb47c54",
       "display": "312c9c3241409ec4ce4a75fb0e207aeb7de8004d0096b24bc727aa723eb47c54",
       "type": "SHA256",
-      "context": "File System; Installer; file name: 5573fa.msi",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; Installer; file name: 5573fa.msi"
     },
     {
       "value": "4e6f2ed696460c98b9148cb66ef8249bccd8b809b13b02100fcb444f1d13b228",
       "display": "4e6f2ed696460c98b9148cb66ef8249bccd8b809b13b02100fcb444f1d13b228",
       "type": "SHA256",
-      "context": "File System; Installer; file name: Document_Online_PDF_converter_XLSX.msi",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; Installer; file name: Document_Online_PDF_converter_XLSX.msi"
     },
     {
       "value": "a7287c732c0559d49b9ad22f4fa843d3a837b33122e9195650e7f5331c27cf29",
       "display": "a7287c732c0559d49b9ad22f4fa843d3a837b33122e9195650e7f5331c27cf29",
       "type": "SHA256",
-      "context": "File System; Installer; file name: Instruction.msi",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; Installer; file name: Instruction.msi"
     },
     {
       "value": "df7b92b717abe121fb536a0eeb8e323cc9153f70250656dfc670c9650776afa7",
       "display": "df7b92b717abe121fb536a0eeb8e323cc9153f70250656dfc670c9650776afa7",
       "type": "SHA256",
-      "context": "File System; Installer; file name: Microsoft Word Document.msi",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; Installer; file name: Microsoft Word Document.msi"
     },
     {
       "value": "c164dcb81a6590b70ee6c0ab6a62da6e7a7c803bdc13a060beb84b33bd42c223",
       "display": "c164dcb81a6590b70ee6c0ab6a62da6e7a7c803bdc13a060beb84b33bd42c223",
       "type": "SHA256",
-      "context": "File System; Dropper/loader; file name: SysDrive.exe",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; Dropper/loader; file name: SysDrive.exe"
     },
     {
       "value": "c19b7adff6876fb527cc05f10137b8ada81ea8afc3dee760b5aa2016350bb3af",
       "display": "c19b7adff6876fb527cc05f10137b8ada81ea8afc3dee760b5aa2016350bb3af",
       "type": "SHA256",
-      "context": "File System; Dropper/loader; file name: Word.exe",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; Dropper/loader; file name: Word.exe"
     },
     {
       "value": "4551133e1cb63a7a2470c677d060ab255deb5c7242113079ea210e7f5a4880d0",
       "display": "4551133e1cb63a7a2470c677d060ab255deb5c7242113079ea210e7f5a4880d0",
       "type": "SHA256",
-      "context": "File System; Container; file name: Docuemnt_Word.zip",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; Container; file name: Docuemnt_Word.zip"
     },
     {
       "value": "0dd99aa29a8dc919fba9060efa771e6b825a7681f46a5bdc01b319348c19b69c",
       "display": "0dd99aa29a8dc919fba9060efa771e6b825a7681f46a5bdc01b319348c19b69c",
       "type": "SHA256",
-      "context": "File System; Decoy document (Kazakh themed); file name: flReport.doc",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; Decoy document (Kazakh themed); file name: flReport.doc"
     },
     {
       "value": "d9e99210f813b0b265c3a5aa236128fe5cab5eb56da9a9551cd3f849d7b9405d",
       "display": "d9e99210f813b0b265c3a5aa236128fe5cab5eb56da9a9551cd3f849d7b9405d",
       "type": "SHA256",
-      "context": "File System; Decoy document (Afghan themed); file name: MY.DOC",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; Decoy document (Afghan themed); file name: MY.DOC"
     },
     {
       "value": "291f364c0abece2454e9674f0b1f6721ed2a66d58420eb48f896883c6eb0717a",
       "display": "291f364c0abece2454e9674f0b1f6721ed2a66d58420eb48f896883c6eb0717a",
       "type": "SHA256",
-      "context": "File System; Decoy document (Kazakh themed); file name: MY.DOC",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; Decoy document (Kazakh themed); file name: MY.DOC"
     },
     {
       "value": "0aa58a9fe4d78a20e7b4c77fc1df759953fbc2cff7403941aaa0e0fa136f9683",
       "display": "0aa58a9fe4d78a20e7b4c77fc1df759953fbc2cff7403941aaa0e0fa136f9683",
       "type": "SHA256",
-      "context": "File System; RAT DLL (A); file name: SysDriveLib.dll",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; RAT DLL (A); file name: SysDriveLib.dll"
     },
     {
       "value": "0669ad73c27e8c7eecf28db3a04ef1fd1738c2d11f1765c0e68444abd3ce7246",
       "display": "0669ad73c27e8c7eecf28db3a04ef1fd1738c2d11f1765c0e68444abd3ce7246",
       "type": "SHA256",
-      "context": "File System; RAT DLL (C); file name: NT.dll",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; RAT DLL (C); file name: NT.dll"
     },
     {
       "value": "5e60ccf20044148cbb58c063c245979a19db6be1cfed6a3a018c7430a0c75e44",
       "display": "5e60ccf20044148cbb58c063c245979a19db6be1cfed6a3a018c7430a0c75e44",
       "type": "SHA256",
-      "context": "File System; RAT DLL (B); file name: NT.dll",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; RAT DLL (B); file name: NT.dll"
     },
     {
       "value": "3a7685e59bb3e2a4d7e8f2e1b8cadcb030829b94d0a79ed1cefe648b7efb3d5a",
       "display": "3a7685e59bb3e2a4d7e8f2e1b8cadcb030829b94d0a79ed1cefe648b7efb3d5a",
       "type": "SHA256",
-      "context": "File System; RAT DLL (B); file name: NT.dll",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; RAT DLL (B); file name: NT.dll"
     },
     {
       "value": "b269225f6ff9e3b18ddd22df508b4daf26556b013b1527a809dc87eaca108ea9",
       "display": "b269225f6ff9e3b18ddd22df508b4daf26556b013b1527a809dc87eaca108ea9",
       "type": "SHA256",
-      "context": "File System; RAT DLL (D); file name: NT.dll",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; RAT DLL (D); file name: NT.dll"
     },
     {
       "value": "683e8fedff2360d8fd4a5e0dfd4a5bc8b6d84fc7bcbff6bd86d1add19ce74133",
       "display": "683e8fedff2360d8fd4a5e0dfd4a5bc8b6d84fc7bcbff6bd86d1add19ce74133",
       "type": "SHA256",
-      "context": "File System; RAT DLL (C); file name: NT.dll",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; RAT DLL (C); file name: NT.dll"
     },
     {
       "value": "445eca3da9e518139ab6aa89bbd42998deb897f85e7c713bc997fe4d14d46492",
       "display": "445eca3da9e518139ab6aa89bbd42998deb897f85e7c713bc997fe4d14d46492",
       "type": "SHA256",
-      "context": "File System; RAT DLL (B); file name: NT.dll",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File System; RAT DLL (B); file name: NT.dll"
     }
   ],
   "_posts/Threat Research/2026-01-28-ErrTraffic.md": [],
@@ -2459,361 +1851,271 @@
       "value": "mega.nz/file/j8wAiL5C#SaSUZoLwnhFxPNWaeInDx0x5Teh2lpGmSMpcdK-b_yI",
       "display": "mega[.]nz/file/j8wAiL5C#SaSUZoLwnhFxPNWaeInDx0x5Teh2lpGmSMpcdK-b_yI",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "github.com/lencod/lencod/raw/refs/heads/main/Dll2.dll",
       "display": "github[.]com/lencod/lencod/raw/refs/heads/main/Dll2[.]dll",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "github.com/lencod/lencod/raw/refs/heads/main/putty.exe",
       "display": "github[.]com/lencod/lencod/raw/refs/heads/main/putty[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "github.com/ooocyber_sabanoms/puttytest/raw/refs/heads/main/putty.exe",
       "display": "github[.]com/ooocyber_sabanoms/puttytest/raw/refs/heads/main/putty[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "clouddefenderai.com/7a9c4f2e8b1d6h3g5k0m9n2p4q7r8s1t",
       "display": "clouddefenderai[.]com/7a9c4f2e8b1d6h3g5k0m9n2p4q7r8s1t",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "github.com/DIGLKAYT/test/raw/refs/heads/main/STEALLER.exe",
       "display": "github[.]com/DIGLKAYT/test/raw/refs/heads/main/STEALLER[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "l.station307.com/J12VDRxm1rpS2SPZwmoSK8/Logs.exe",
       "display": "l[.]station307[.]com/J12VDRxm1rpS2SPZwmoSK8/Logs[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "github.com/caldop/test/raw/refs/heads/main/Logs.exe",
       "display": "github[.]com/caldop/test/raw/refs/heads/main/Logs[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "github.com/caldop/test/raw/refs/heads/main/rat1411empty.exe",
       "display": "github[.]com/caldop/test/raw/refs/heads/main/rat1411empty[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "l.station307.com/7JjDE5knnozgYoubgCLxsk/rat1411empty.exe",
       "display": "l[.]station307[.]com/7JjDE5knnozgYoubgCLxsk/rat1411empty[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "github.com/caldop/test/raw/refs/heads/main/Logs.exe",
       "display": "github[.]com/caldop/test/raw/refs/heads/main/Logs[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "l.station307.com/7JjDE5knnozgYoubgCLxsk/rat1411empty.exe",
       "display": "l[.]station307[.]com/7JjDE5knnozgYoubgCLxsk/rat1411empty[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "wdfiles.ru/2atSW",
       "display": "wdfiles[.]ru/2atSW",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "github.com/pafke123/a/releases/download/z/Build.exe",
       "display": "github[.]com/pafke123/a/releases/download/z/Build[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "155.138.193.225/calc.exe",
       "display": "155[.]138[.]193[.]225/calc[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "github.com/pafke123/aa/raw/d3cd0602a7211e54f59e1b674f6d4fc35e097bc4/limero.dll",
       "display": "github[.]com/pafke123/aa/raw/d3cd0602a7211e54f59e1b674f6d4fc35e097bc4/limero[.]dll",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "zalupan.kozow.com:3000/files/zalupan2.exe",
       "display": "zalupan[.]kozow[.]com:3000/files/zalupan2[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "rpc-framework-check.cfd/putty.exe",
       "display": "rpc-framework-check[.]cfd/putty[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "rpc-framework-check.cfd/123.exe",
       "display": "rpc-framework-check[.]cfd/123[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "github.com/ooocyber_bunerkdl/ttt/raw/refs/heads/main/123.exe",
       "display": "github[.]com/ooocyber_bunerkdl/ttt/raw/refs/heads/main/123[.]exe",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "shared-service"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "rpc-framework-check.cfd/1.ps1",
       "display": "rpc-framework-check[.]cfd/1[.]ps1",
       "type": "URL",
-      "context": "Hosting malware ran by Aeternum Loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Hosting malware ran by Aeternum Loader"
     },
     {
       "value": "bootstrap-css-framework.cfd/",
       "display": "bootstrap-css-framework[.]cfd/",
       "type": "URL",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "winupdate.cfd/",
       "display": "winupdate[.]cfd/",
       "type": "URL",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "winupdateconf.cfd/",
       "display": "winupdateconf[.]cfd/",
       "type": "URL",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "nascdn-js.life/",
       "display": "nascdn-js[.]life/",
       "type": "URL",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "berlof.shop/",
       "display": "berlof[.]shop/",
       "type": "URL",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "cdn-server-styles.cfd/",
       "display": "cdn-server-styles[.]cfd/",
       "type": "URL",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "ferlik.shop/",
       "display": "ferlik[.]shop/",
       "type": "URL",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "captcha-cds.cfd",
       "display": "captcha-cds[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "nascdn-js.life",
       "display": "nascdn-js[.]life",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "fonts-fontawesome.cfd",
       "display": "fonts-fontawesome[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "cloud-safe.cfd",
       "display": "cloud-safe[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "fontawesome-cdn.cfd",
       "display": "fontawesome-cdn[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "cdn-clodflare-fotns.cfd",
       "display": "cdn-clodflare-fotns[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "sdn-cloudflare-js-botstrup.cfd",
       "display": "sdn-cloudflare-js-botstrup[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "sdn-cloudflare-js.cfd",
       "display": "sdn-cloudflare-js[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "sdn-cloudflare-js-css.cfd",
       "display": "sdn-cloudflare-js-css[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "rpc-framework-check.cfd",
       "display": "rpc-framework-check[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "servupdt.com",
       "display": "servupdt[.]com",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "captcha-cds.cfd",
       "display": "captcha-cds[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "captcha-cds.click",
       "display": "captcha-cds[.]click",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "sdn-cloudflare-js-css.cfd",
       "display": "sdn-cloudflare-js-css[.]cfd",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "sdn-cloudflare-js-css.click",
       "display": "sdn-cloudflare-js-css[.]click",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "nascdn-js.life",
       "display": "nascdn-js[.]life",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     },
     {
       "value": "nascdn-js.click",
       "display": "nascdn-js[.]click",
       "type": "Domain",
-      "context": "ClickFix/ErrTraffic related domains",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "ClickFix/ErrTraffic related domains"
     }
   ],
   "_posts/Threat Research/2026-02-16-Aeternum-Part-2.md": [],
@@ -2823,25 +2125,19 @@
       "value": "64.176.226.36",
       "display": "64.176.226[.]36",
       "type": "IPv4",
-      "context": "Primary VPS",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Primary VPS"
     },
     {
       "value": "2401:c080:1c01:c6:5400:5ff:fec1:ccc9",
       "display": "2401:c080:1c01:c6:5400:5ff:fec1[:]ccc9",
       "type": "IPv6",
-      "context": "VPS IPv6",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "VPS IPv6"
     },
     {
       "value": "itemnania.com",
       "display": "itemnania[.]com",
       "type": "Domain",
-      "context": "Associated with primary server; registered in South Korea",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Associated with primary server; registered in South Korea"
     }
   ],
   "_posts/Threat Research/2026-03-04-MuddyWater.md": [
@@ -2849,121 +2145,91 @@
       "value": "185.236.25.119",
       "display": "185.236.25[.]119",
       "type": "IPv4",
-      "context": "Tsundere Bot WebSocket C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Tsundere Bot WebSocket C2"
     },
     {
       "value": "193.17.183.126",
       "display": "193.17.183[.]126",
       "type": "IPv4",
-      "context": "Tsundere Bot WebSocket C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Tsundere Bot WebSocket C2"
     },
     {
       "value": "162.0.230.185",
       "display": "162.0.230[.]185",
       "type": "IPv4",
-      "context": "MuddyWater C2 / Open Directory",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "MuddyWater C2 / Open Directory"
     },
     {
       "value": "157.20.182.49",
       "display": "157.20.182[.]49",
       "type": "IPv4",
-      "context": "Open Directory",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Open Directory"
     },
     {
       "value": "209.74.87.100",
       "display": "209.74.87[.]100",
       "type": "IPv4",
-      "context": "Open Directory",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Open Directory"
     },
     {
       "value": "18.223.24.218",
       "display": "18.223.24[.]218",
       "type": "IPv4",
-      "context": "Exfiltration Server",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Exfiltration Server"
     },
     {
       "value": "194.11.246.101",
       "display": "194.11.246[.]101",
       "type": "IPv4",
-      "context": "Fortigate POC IP",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Fortigate POC IP"
     },
     {
       "value": "www.xt24.com",
       "display": "www.xt24[.]com",
       "type": "Domain",
-      "context": "Open Directory",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Open Directory"
     },
     {
       "value": "reset.ps1",
       "display": "reset.ps1",
       "type": "Filename",
-      "context": "Tsundere Bot PowerShell loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Tsundere Bot PowerShell loader"
     },
     {
       "value": "0x2B77671cfEE4907776a95abbb9681eee598c102E",
       "display": "0x2B77671cfEE4907776a95abbb9681eee598c102E",
       "type": "Wallet",
-      "context": "Smart Contract Address",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Smart Contract Address"
     },
     {
       "value": "7ab597ff0b1a5e6916cad1662b49f58231867a1d4fa91a4edf7ecb73c3ec7fe6",
       "display": "7ab597ff0b1a5e6916cad1662b49f58231867a1d4fa91a4edf7ecb73c3ec7fe6",
       "type": "SHA256",
-      "context": "reset.ps1 - Tsundere Bot PowerShell loader",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "reset.ps1 - Tsundere Bot PowerShell loader"
     },
     {
       "value": "VfZUSQi6oerKau.js",
       "display": "VfZUSQi6oerKau.js",
       "type": "Filename",
-      "context": "Tsundere Bot persistence / launcher script",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Tsundere Bot persistence / launcher script"
     },
     {
       "value": "c8589ca999526f247db4d3902ade8a85619f8f82338c6230d1b935f413ddcb3d",
       "display": "c8589ca999526f247db4d3902ade8a85619f8f82338c6230d1b935f413ddcb3d",
       "type": "SHA256",
-      "context": "VfZUSQi6oerKau.js",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "VfZUSQi6oerKau.js"
     },
     {
       "value": "sysuu2etiprun.js",
       "display": "sysuu2etiprun.js",
       "type": "Filename",
-      "context": "Tsundere Bot main payload",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Tsundere Bot main payload"
     },
     {
       "value": "bedb882c6e2cf896e14ecf12c90aaa6638f780017d1b8687a40b4a81956e230f",
       "display": "bedb882c6e2cf896e14ecf12c90aaa6638f780017d1b8687a40b4a81956e230f",
       "type": "SHA256",
-      "context": "sysuu2etiprun.js",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "sysuu2etiprun.js"
     }
   ],
   "_posts/Threat Research/2026-03-16-FancyBear.md": [
@@ -2971,233 +2237,175 @@
       "value": "203.161.50.145",
       "display": "203.161.50[.]145",
       "type": "IPv4",
-      "context": "FancyBear C2 (NameCheap VPS); CERT-UA attribution; Roundcube exploitation (CVE-2023-43770), ClickFix; Operation Roundish opendir on port 8889",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "FancyBear C2 (NameCheap VPS); CERT-UA attribution; Roundcube exploitation (CVE-2023-43770), ClickFix; Operation Roundish opendir on port 8889"
     },
     {
       "value": "162.0.236.189",
       "display": "162.0.236[.]189",
       "type": "IPv4",
-      "context": "NameCheap VPS; Typosquat domain gov.vppdr[.]com resolves to this IP",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "NameCheap VPS; Typosquat domain gov.vppdr[.]com resolves to this IP"
     },
     {
       "value": "209.74.89.76",
       "display": "209.74.89[.]76",
       "type": "IPv4",
-      "context": "NameCheap VPS; Typosquat domain mail.govmk[.]com resolves to this IP",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "NameCheap VPS; Typosquat domain mail.govmk[.]com resolves to this IP"
     },
     {
       "value": "zhblz.com",
       "display": "zhblz[.]com",
       "type": "Domain",
-      "context": "Primary C2 domain; hosts XSS payloads, JS modules, C2 logging, credential phishing, lure PDFs; resolves to 203.161.50[.]145",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Primary C2 domain; hosts XSS payloads, JS modules, C2 logging, credential phishing, lure PDFs; resolves to 203.161.50[.]145"
     },
     {
       "value": "gov.vppdr.com",
       "display": "gov.vppdr[.]com",
       "type": "Domain",
-      "context": "Attacker-controlled; observed in testing SquirrelMail",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Attacker-controlled; observed in testing SquirrelMail"
     },
     {
       "value": "gov.vppdr.com",
       "display": "gov.vppdr[.]com",
       "type": "Domain",
-      "context": "Attacker-controlled; typosquat of vppdr.gp.gov.ua; Sieve redirect target and SquirrelMail victim addresses (e.g. pru.mik@gov.vppdr.com)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Attacker-controlled; typosquat of vppdr.gp.gov.ua; Sieve redirect target and SquirrelMail victim addresses (e.g. pru.mik@gov.vppdr.com)"
     },
     {
       "value": "advenwolf@proton.me",
       "display": "advenwolf@proton[.]me",
       "type": "Email",
-      "context": "Primary exfil/collection mailbox; Sieve forwarding target in worker.js/old_worker.js/scriptTaker; referenced in Hunt.io and CERT-UA",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Primary exfil/collection mailbox; Sieve forwarding target in worker.js/old_worker.js/scriptTaker; referenced in Hunt.io and CERT-UA"
     },
     {
       "value": "/zJ2w9x",
       "display": "/zJ2w9x",
       "type": "URI path",
-      "context": "C2 telemetry logging endpoint (GET ?log=); used by worker.js, old_worker.js, worker2.js",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "C2 telemetry logging endpoint (GET ?log=); used by worker.js, old_worker.js, worker2.js"
     },
     {
       "value": "/zJ2w9xP8cVb3D4s1mQe7rX6fT5yLg0HhKjNuAoIiZpCkRlOvBtWnYqMUEaSdvGbJ",
       "display": "/zJ2w9xP8cVb3D4s1mQe7rX6fT5yLg0HhKjNuAoIiZpCkRlOvBtWnYqMUEaSdvGbJ",
       "type": "URI path",
-      "context": "Long C2 logging path variant used by scriptTaker.js; telemetry in url.txt",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Long C2 logging path variant used by scriptTaker.js; telemetry in url.txt"
     },
     {
       "value": "SystemHealthChek",
       "display": "SystemHealthChek",
       "type": "String",
-      "context": "Roundcube Sieve filter name in scriptTaker.js; seen in CERT-UA reporting",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Roundcube Sieve filter name in scriptTaker.js; seen in CERT-UA reporting"
     },
     {
       "value": "SystemProtect",
       "display": "SystemProtect",
       "type": "String",
-      "context": "Roundcube Sieve filter name in addRedirectMailBox.js",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Roundcube Sieve filter name in addRedirectMailBox.js"
     },
     {
       "value": "/zJ2w9x/uploadfile/",
       "display": "/zJ2w9x/uploadfile/",
       "type": "URI path",
-      "context": "Roundcube email exfiltration (POST .eml files)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Roundcube email exfiltration (POST .eml files)"
     },
     {
       "value": "/authentification.php",
       "display": "/authentification.php",
       "type": "URI path",
-      "context": "Phishing form action",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Phishing form action"
     },
     {
       "value": "/worker",
       "display": "/worker",
       "type": "URI path",
-      "context": "Roundcube XSS payload delivery (worker.js)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Roundcube XSS payload delivery (worker.js)"
     },
     {
       "value": "/worker2",
       "display": "/worker2",
       "type": "URI path",
-      "context": "SquirrelMail XSS payload delivery (worker2.js)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "SquirrelMail XSS payload delivery (worker2.js)"
     },
     {
       "value": "/addRedirectMailBox.js",
       "display": "/addRedirectMailBox.js",
       "type": "URI path",
-      "context": "Sieve rule module (Roundcube)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Sieve rule module (Roundcube)"
     },
     {
       "value": "/getUserCredentials.js",
       "display": "/getUserCredentials.js",
       "type": "URI path",
-      "context": "Credential-stealer module (worker2)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Credential-stealer module (worker2)"
     },
     {
       "value": "/getUserCredentialsOLD.js",
       "display": "/getUserCredentialsOLD.js",
       "type": "URI path",
-      "context": "Credential-stealer module (worker/old_worker)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Credential-stealer module (worker/old_worker)"
     },
     {
       "value": "/keyTwoAuth.js",
       "display": "/keyTwoAuth.js",
       "type": "URI path",
-      "context": "2FA/TOTP extraction module (Roundcube twofactor_gauthenticator)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "2FA/TOTP extraction module (Roundcube twofactor_gauthenticator)"
     },
     {
       "value": "/adbook.js",
       "display": "/adbook.js",
       "type": "URI path",
-      "context": "Roundcube address book exfil module",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Roundcube address book exfil module"
     },
     {
       "value": "/delTwoAuth.js",
       "display": "/delTwoAuth.js",
       "type": "URI path",
-      "context": "2FA deletion/manipulation module",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "2FA deletion/manipulation module"
     },
     {
       "value": "Adob_Scan_15_ian._2025.pdf",
       "display": "Adob_Scan_15_ian._2025[.]pdf",
       "type": "Filename",
-      "context": "Romanian air-force lure; post–phishing-login redirect target on zhblz.com",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Romanian air-force lure; post–phishing-login redirect target on zhblz.com"
     },
     {
       "value": "defense.pdf",
       "display": "defense[.]pdf",
       "type": "Filename",
-      "context": "Ukrainian defense support lure",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Ukrainian defense support lure"
     },
     {
       "value": "dokladMVR.pdf",
       "display": "dokladMVR[.]pdf",
       "type": "Filename",
-      "context": "Bulgarian Interior Ministry report lure",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Bulgarian Interior Ministry report lure"
     },
     {
       "value": "energetikamk.pdf",
       "display": "energetikamk[.]pdf",
       "type": "Filename",
-      "context": "North Macedonian energy sector lure",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "North Macedonian energy sector lure"
     },
     {
       "value": "oborona.pdf",
       "display": "oborona[.]pdf",
       "type": "Filename",
-      "context": "Ukrainian/defense lure",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Ukrainian/defense lure"
     },
     {
       "value": "secure: bigdick",
       "display": "secure: bigdick",
       "type": "HTTP header",
-      "context": "Optional C2 auth header in servertest.py and backuBDMS/worker.js",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Optional C2 auth header in servertest.py and backuBDMS/worker.js"
     },
     {
       "value": "roundcube.html",
       "display": "roundcube[.]html",
       "type": "Filename",
-      "context": "Phishing landing (Romanian Airforce Roundcube)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Phishing landing (Romanian Airforce Roundcube)"
     },
     {
       "value": "logon.html",
       "display": "logon[.]html",
       "type": "Filename",
-      "context": "Phishing landing (Ascentio clone)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Phishing landing (Ascentio clone)"
     }
   ],
   "_posts/Threat Research/2026-04-10-ProxyPCP.md": [],
@@ -3206,97 +2414,73 @@
       "value": "95.111.250.175",
       "display": "95.111.250[.]175",
       "type": "IPv4",
-      "context": "Primary attacker VPS; OpenVPN, reverse shell, and pivot infrastructure",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Primary attacker VPS; OpenVPN, reverse shell, and pivot infrastructure"
     },
     {
       "value": "delicate-dew.serveftp.com",
       "display": "delicate-dew.serveftp[.]com",
       "type": "Domain",
-      "context": "Domain associated with the same infrastructure; present in recovered certificate material",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Domain associated with the same infrastructure; present in recovered certificate material"
     },
     {
       "value": "systemd-update.service",
       "display": "systemd-update.service",
       "type": "Filename",
-      "context": "Masqueraded Linux persistence service",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Masqueraded Linux persistence service"
     },
     {
       "value": "/usr/local/bin/.netmon/systemd-helper",
       "display": "/usr/local/bin/.netmon/systemd-helper",
       "type": "File path",
-      "context": "Hidden Linux reverse-connect payload path",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Hidden Linux reverse-connect payload path"
     },
     {
       "value": "init.ps1",
       "display": "init.ps1",
       "type": "Filename",
-      "context": "PowerShell reverse shell payload",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "PowerShell reverse shell payload"
     },
     {
       "value": "64674342041873dbb18b1dd9bb1ca391af85b5e755deffb4c1612ef668349325",
       "display": "64674342041873DBB18B1DD9BB1CA391AF85B5E755DEFFB4C1612EF668349325",
       "type": "SHA256",
-      "context": "init.ps1",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "init.ps1"
     },
     {
       "value": "exploit_siak_bahasa.py",
       "display": "exploit_siak_bahasa.py",
       "type": "Filename",
-      "context": "Custom authenticated SQLi -> PostgreSQL RCE exploit",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Custom authenticated SQLi -> PostgreSQL RCE exploit"
     },
     {
       "value": "974e272ad1dc7d5aadc3c7a48ec00eb201d04ba59ec5b0b17c2f8e9cd2f9c9cd",
       "display": "974E272AD1DC7D5AADC3C7A48EC00EB201D04BA59EC5B0B17C2F8E9CD2F9C9CD",
       "type": "SHA256",
-      "context": "exploit_siak_bahasa.py",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "exploit_siak_bahasa.py"
     },
     {
       "value": "exfil_docs_v2.sh",
       "display": "exfil_docs_v2.sh",
       "type": "Filename",
-      "context": "Custom SFTP / lftp document exfiltration script",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Custom SFTP / lftp document exfiltration script"
     },
     {
       "value": "734f0d04dc2683e19e629b8ec7f55349b5bcff4eb4f2f36f6adbbde1c023a24f",
       "display": "734F0D04DC2683E19E629B8EC7F55349B5BCFF4EB4F2F36F6ADBBDE1C023A24F",
       "type": "SHA256",
-      "context": "exfil_docs_v2.sh",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "exfil_docs_v2.sh"
     },
     {
       "value": "1",
       "display": "1",
       "type": "Filename",
-      "context": "Linux ELF reverse-connect / pivot payload recovered alongside the custom exploit chain",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Linux ELF reverse-connect / pivot payload recovered alongside the custom exploit chain"
     },
     {
       "value": "1cfeadf01d24182362887b7c5f683e8bdb0e84cddce03e3b7564b2d9ab5d15cf",
       "display": "1CFEADF01D24182362887B7C5F683E8BDB0E84CDDCE03E3B7564B2D9AB5D15CF",
       "type": "SHA256",
-      "context": "1",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "1"
     }
   ],
   "_posts/Threat Research/2026-06-22-Exposure.md": [],
@@ -3305,113 +2489,85 @@
       "value": "213.176.114.6",
       "display": "213.176.114.6",
       "type": "IPv4",
-      "context": "Receiver used for confirmed AD hive and ntds.dit uploads",
-      "confidence": "Not stated",
-      "classification": "confirmed-attacker"
+      "context": "Receiver used for confirmed AD hive and ntds.dit uploads"
     },
     {
       "value": "http://213.176.114.6:7777/SAM",
       "display": "http://213.176.114.6:7777/SAM",
       "type": "URL",
-      "context": "Direct exfiltration endpoint",
-      "confidence": "Not stated",
-      "classification": "confirmed-attacker"
+      "context": "Direct exfiltration endpoint"
     },
     {
       "value": "http://213.176.114.6:7777/ntds.dit",
       "display": "http://213.176.114.6:7777/ntds.dit",
       "type": "URL",
-      "context": "Direct exfiltration endpoint",
-      "confidence": "Not stated",
-      "classification": "confirmed-attacker"
+      "context": "Direct exfiltration endpoint"
     },
     {
       "value": "WinUpdate",
       "display": "WinUpdate",
       "type": "Scheduled task",
-      "context": "Task name used to launch the NAS locker batch wrapper",
-      "confidence": "Not stated",
-      "classification": "confirmed-attacker"
+      "context": "Task name used to launch the NAS locker batch wrapper"
     },
     {
       "value": "C:\\Windows\\Temp\\go.bat",
       "display": "C:\\Windows\\Temp\\go.bat",
       "type": "File path",
-      "context": "Batch wrapper written before scheduled execution",
-      "confidence": "Not stated",
-      "classification": "confirmed-attacker"
+      "context": "Batch wrapper written before scheduled execution"
     },
     {
       "value": "locker.exe",
       "display": "locker.exe",
       "type": "Filename",
-      "context": "Locker executable invoked against mapped shares",
-      "confidence": "Not stated",
-      "classification": "confirmed-attacker"
+      "context": "Locker executable invoked against mapped shares"
     },
     {
       "value": "10.86.56.16",
       "display": "10.86.56.16",
       "type": "IPv4",
-      "context": "Internal pivot host that ties the workflow together",
-      "confidence": "Not stated",
-      "classification": "victim-owned"
+      "context": "Internal pivot host that ties the workflow together"
     },
     {
       "value": "10.31.8.15",
       "display": "10.31.8.15",
       "type": "IPv4",
-      "context": "NAS host targeted for mapped-share encryption",
-      "confidence": "Not stated",
-      "classification": "victim-owned"
+      "context": "NAS host targeted for mapped-share encryption"
     },
     {
       "value": "vpnehv.v-silicon.com",
       "display": "vpnehv.v-silicon.com",
       "type": "Domain",
-      "context": "GlobalProtect gateway used in the preserved VPN session",
-      "confidence": "Not stated",
-      "classification": "victim-owned"
+      "context": "GlobalProtect gateway used in the preserved VPN session"
     },
     {
       "value": "58.33.189.90",
       "display": "58.33.189.90",
       "type": "IPv4",
-      "context": "Source IP recorded by the attacker-side receiver during AD uploads",
-      "confidence": "Not stated",
-      "classification": "unverified"
+      "context": "Source IP recorded by the attacker-side receiver during AD uploads"
     },
     {
       "value": "0206a670243efa0f736e3725c4c7c8879b262cb07af47a8dcfa18bc9787cc1bd",
       "display": "0206a670243efa0f736e3725c4c7c8879b262cb07af47a8dcfa18bc9787cc1bd",
       "type": "SHA256",
-      "context": "vsilicon.zip; nested multi-platform payload bundle",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "vsilicon.zip; nested multi-platform payload bundle"
     },
     {
       "value": "ef394149c8da3af730c37d550027df8639a3aaa6feaccea60112461ae6955829",
       "display": "ef394149c8da3af730c37d550027df8639a3aaa6feaccea60112461ae6955829",
       "type": "SHA256",
-      "context": "l.exe; Windows locker payload",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "l.exe; Windows locker payload"
     },
     {
       "value": "753207ad5e72ddc6b13889132e5de18836b1a2acf954443655fea82b430e4c99",
       "display": "753207ad5e72ddc6b13889132e5de18836b1a2acf954443655fea82b430e4c99",
       "type": "SHA256",
-      "context": "x86_64-unknown-linux-esxi; ESXi-targeted locker payload",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "x86_64-unknown-linux-esxi; ESXi-targeted locker payload"
     },
     {
       "value": "c616e11a2ce7feb3207c1808714d056c9c216f429ad6b840e781f3494ac8485d",
       "display": "c616e11a2ce7feb3207c1808714d056c9c216f429ad6b840e781f3494ac8485d",
       "type": "SHA256",
-      "context": "x86_64-unknown-linux-gnu; Linux locker payload",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "x86_64-unknown-linux-gnu; Linux locker payload"
     }
   ],
   "_posts/Threat Research/2026-06-22-Wordpress.md": [
@@ -3419,233 +2575,175 @@
       "value": "137.175.93.126",
       "display": "137.175.93[.]126",
       "type": "IPv4",
-      "context": "Network indicators; exploitation and payload-hosting infrastructure",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network indicators; exploitation and payload-hosting infrastructure"
     },
     {
       "value": "xs.xxooonline.eu.cc",
       "display": "xs.xxooonline.eu[.]cc",
       "type": "Domain",
-      "context": "Network indicators; Operator-side VShell C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network indicators; Operator-side VShell C2"
     },
     {
       "value": "43.108.17.80",
       "display": "43.108.17[.]80",
       "type": "IPv4",
-      "context": "Network indicators; Observed A-record for the operator-side VShell C2",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Network indicators; Observed A-record for the operator-side VShell C2"
     },
     {
       "value": ".bd.php",
       "display": ".bd.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": ".wp-log.php",
       "display": ".wp-log.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": ".sys_log.php",
       "display": ".sys_log.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": "sfl_bk.php",
       "display": "sfl_bk.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": ".auto.php",
       "display": ".auto.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": ".sd.php",
       "display": ".sd.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": ".sd_*.php",
       "display": ".sd_*.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": ".leo_*.php",
       "display": ".leo_*.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": ".brq-*.php",
       "display": ".brq-*.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": ".wvp-*.php",
       "display": ".wvp-*.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": ".cc-*.php",
       "display": ".cc-*.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": ".nf-log.php",
       "display": ".nf-log.php",
       "type": "Filename",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": "/wp-content/uploads/breeze/gravatars/",
       "display": "/wp-content/uploads/breeze/gravatars/",
       "type": "File path",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": "/wp-content/uploads/trx_addons/",
       "display": "/wp-content/uploads/trx_addons/",
       "type": "File path",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": "/wp-content/cache/berqwp/",
       "display": "/wp-content/cache/berqwp/",
       "type": "File path",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": "/wp-content/uploads/simple-file-list/",
       "display": "/wp-content/uploads/simple-file-list/",
       "type": "File path",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": "/wp-content/uploads/ninja-forms/",
       "display": "/wp-content/uploads/ninja-forms/",
       "type": "File path",
-      "context": "File and path indicators; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File and path indicators; recurring artefact reported in the campaign"
     },
     {
       "value": "84f7e396a48913851a10cc78c5cc22a25634564abd0694465236d2f365e2bdee",
       "display": "84F7E396A48913851A10CC78C5CC22A25634564ABD0694465236D2F365E2BDEE",
       "type": "SHA256",
-      "context": "File hashes; file: down.php",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File hashes; file: down.php"
     },
     {
       "value": "e4ad72b1d7a727ffccf0e2a9ddf7b08c993826c17eb4b9f49c9734fc54b00b2a",
       "display": "E4AD72B1D7A727FFCCF0E2A9DDF7B08C993826C17EB4B9F49C9734FC54B00B2A",
       "type": "SHA256",
-      "context": "File hashes; file: new_shell.php",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File hashes; file: new_shell.php"
     },
     {
       "value": "58b17ef746d6fcd9f2e5738486d5af7c4c02b6732176369536b9782d644ec119",
       "display": "58B17EF746D6FCD9F2E5738486D5AF7C4C02B6732176369536B9782D644EC119",
       "type": "SHA256",
-      "context": "File hashes; file: new_shell_bypass.php",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File hashes; file: new_shell_bypass.php"
     },
     {
       "value": "f14285507192fb7643597e4ffaab006f9a3021e045999c1114e4e37bda843b18",
       "display": "F14285507192FB7643597E4FFAAB006F9A3021E045999C1114E4E37BDA843B18",
       "type": "SHA256",
-      "context": "File hashes; file: new_shell_short.php",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File hashes; file: new_shell_short.php"
     },
     {
       "value": "36be47426e90899c56221f9521dde0a20be3aefe780753c7dbe8efee4d59916e",
       "display": "36BE47426E90899C56221F9521DDE0A20BE3AEFE780753C7DBE8EFEE4D59916E",
       "type": "SHA256",
-      "context": "File hashes; file: loader_shell.php",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File hashes; file: loader_shell.php"
     },
     {
       "value": "54953d3eecc8887f39ac0fda4d33c84bcb6170144dbd1d133470d757595beaec",
       "display": "54953D3EECC8887F39AC0FDA4D33C84BCB6170144DBD1D133470D757595BEAEC",
       "type": "SHA256",
-      "context": "File hashes; file: gls.php",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File hashes; file: gls.php"
     },
     {
       "value": "0b23404491caff35fd5a7a3a3d89f66a5fb48f4baa57b6c450c15230a0d53181",
       "display": "0B23404491CAFF35FD5A7A3A3D89F66A5FB48F4BAA57B6C450C15230A0D53181",
       "type": "SHA256",
-      "context": "File hashes; file: gls_fixed.php",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File hashes; file: gls_fixed.php"
     },
     {
       "value": "7496c08e0bb24a89814ac83f83551d8159802ea91789c2be8bb8c9e57c6c3264",
       "display": "7496C08E0BB24A89814AC83F83551D8159802EA91789C2BE8BB8C9E57C6C3264",
       "type": "SHA256",
-      "context": "File hashes; file: xs.zip",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File hashes; file: xs.zip"
     },
     {
       "value": "65e8f2315488670526f055169d7d8496c63a39c452ed74cae2da1cb0193969b0",
       "display": "65E8F2315488670526F055169D7D8496C63A39C452ED74CAE2DA1CB0193969B0",
       "type": "SHA256",
-      "context": "File hashes; file: shell-deploy.zip",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File hashes; file: shell-deploy.zip"
     }
   ],
   "_posts/Threat Research/2026-07-14-VoidBlizzard.md": [],
@@ -3654,361 +2752,271 @@
       "value": "213.176.114.6",
       "display": "213.176.114[.]6",
       "type": "IPv4",
-      "context": "Network Indicators; Affiliate-controlled C2/staging server; open directory on TCP/8888 and confirmed HTTP PUT exfiltration receiver on TCP/7777",
-      "confidence": "High",
-      "classification": "reported"
+      "context": "Network Indicators; Affiliate-controlled C2/staging server; open directory on TCP/8888 and confirmed HTTP PUT exfiltration receiver on TCP/7777"
     },
     {
       "value": "incblog6qu4y4mm4zvw5nrmue6qbwtgjsxpw6b7ixzssu36tsajldoad.onion",
       "display": "incblog6qu4y4mm4zvw5nrmue6qbwtgjsxpw6b7ixzssu36tsajldoad[.]onion",
       "type": "Onion",
-      "context": "Network Indicators; INC data-leak site embedded in the payloads",
-      "confidence": "High",
-      "classification": "reported"
+      "context": "Network Indicators; INC data-leak site embedded in the payloads"
     },
     {
       "value": "incblog.su",
       "display": "incblog[.]su",
       "type": "Domain",
-      "context": "Network Indicators; INC clearnet leak-site address embedded in the payloads",
-      "confidence": "High",
-      "classification": "reported"
+      "context": "Network Indicators; INC clearnet leak-site address embedded in the payloads"
     },
     {
       "value": "C:\\Windows\\Temp\\locker.exe",
       "display": "C:\\Windows\\Temp\\locker.exe",
       "type": "File path",
-      "context": "Host, Task, and Service Artefacts; Windows INC encryptor staged under the deployment name",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Windows INC encryptor staged under the deployment name"
     },
     {
       "value": "l.exe",
       "display": "l.exe",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; Name of the recovered Windows INC encryptor on affiliate infrastructure",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Name of the recovered Windows INC encryptor on affiliate infrastructure"
     },
     {
       "value": "C:\\Windows\\Temp\\go.bat",
       "display": "C:\\Windows\\Temp\\go.bat",
       "type": "File path",
-      "context": "Host, Task, and Service Artefacts; Batch file used to map shares and launch the encryptor",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Batch file used to map shares and launch the encryptor"
     },
     {
       "value": "INC-README.txt",
       "display": "INC-README.txt",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; Ransom note created by the INC payload",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Ransom note created by the INC payload"
     },
     {
       "value": ".INC",
       "display": ".INC",
       "type": "Extension",
-      "context": "Host, Task, and Service Artefacts; Encrypted-file extension/marker; validate with local telemetry",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Encrypted-file extension/marker; validate with local telemetry"
     },
     {
       "value": "C:\\Users\\Public\\mimi.exe",
       "display": "C:\\Users\\Public\\mimi.exe",
       "type": "File path",
-      "context": "Host, Task, and Service Artefacts; Mimikatz path explicitly checked by the affiliate's credential-harvesting script",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Mimikatz path explicitly checked by the affiliate's credential-harvesting script"
     },
     {
       "value": "WinUpdate",
       "display": "WinUpdate",
       "type": "Scheduled task",
-      "context": "Host, Task, and Service Artefacts; Highest-privilege task used to launch go.bat",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Highest-privilege task used to launch go.bat"
     },
     {
       "value": "TunnelPorts",
       "display": "TunnelPorts",
       "type": "Firewall rule",
-      "context": "Host, Task, and Service Artefacts; Allowed inbound access to the affiliate's port-proxy listeners",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Allowed inbound access to the affiliate's port-proxy listeners"
     },
     {
       "value": "HTTP9999",
       "display": "HTTP9999",
       "type": "Firewall rule",
-      "context": "Host, Task, and Service Artefacts; Opened TCP/9999 for temporary HTTP access to staged files",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Opened TCP/9999 for temporary HTTP access to staged files"
     },
     {
       "value": "TSM-SSH",
       "display": "TSM-SSH",
       "type": "Service",
-      "context": "Host, Task, and Service Artefacts; Started through pyVmomi to enable direct ESXi SSH access",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Started through pyVmomi to enable direct ESXi SSH access"
     },
     {
       "value": "pw-reset-temp",
       "display": "pw-reset-temp",
       "type": "Snapshot",
-      "context": "Host, Task, and Service Artefacts; Snapshot name used by the attempted vCenter password-reset workflow",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; Snapshot name used by the attempted vCenter password-reset workflow"
     },
     {
       "value": "l.exe",
       "display": "l.exe",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "locker.exe",
       "display": "locker.exe",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "x86_64-pc-windows-gnu",
       "display": "x86_64-pc-windows-gnu",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "x86_64-unknown-linux-esxi",
       "display": "x86_64-unknown-linux-esxi",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "x86_64-unknown-linux-gnu",
       "display": "x86_64-unknown-linux-gnu",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "x86_64-unknown-linux-musl",
       "display": "x86_64-unknown-linux-musl",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "aarch64-unknown-linux-gnu",
       "display": "aarch64-unknown-linux-gnu",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "arm-unknown-linux-gnueabi",
       "display": "arm-unknown-linux-gnueabi",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "arm-unknown-linux-gnueabihf",
       "display": "arm-unknown-linux-gnueabihf",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "armv7-unknown-linux-gnueabi",
       "display": "armv7-unknown-linux-gnueabi",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "armv7-unknown-linux-gnueabihf",
       "display": "armv7-unknown-linux-gnueabihf",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "powerpc-unknown-linux-gnu",
       "display": "powerpc-unknown-linux-gnu",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "powerpc64-unknown-linux-gnu",
       "display": "powerpc64-unknown-linux-gnu",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "riscv64gc-unknown-linux-gnu",
       "display": "riscv64gc-unknown-linux-gnu",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "s390x-unknown-linux-gnu",
       "display": "s390x-unknown-linux-gnu",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "sparc64-unknown-linux-gnu",
       "display": "sparc64-unknown-linux-gnu",
       "type": "Filename",
-      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "Host, Task, and Service Artefacts; recurring artefact reported in the campaign"
     },
     {
       "value": "ef394149c8da3af730c37d550027df8639a3aaa6feaccea60112461ae6955829",
       "display": "ef394149c8da3af730c37d550027df8639a3aaa6feaccea60112461ae6955829",
       "type": "SHA256",
-      "context": "File Hashes; artefact: Windows INC encryptor recovered as l.exe",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: Windows INC encryptor recovered as l.exe"
     },
     {
       "value": "0206a670243efa0f736e3725c4c7c8879b262cb07af47a8dcfa18bc9787cc1bd",
       "display": "0206a670243efa0f736e3725c4c7c8879b262cb07af47a8dcfa18bc9787cc1bd",
       "type": "SHA256",
-      "context": "File Hashes; artefact: Multi-platform INC payload archive (original name withheld)",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: Multi-platform INC payload archive (original name withheld)"
     },
     {
       "value": "034ac761c0a2baf754f9cc200824ab29fe7124402469d38afc3c5422567d17c8",
       "display": "034ac761c0a2baf754f9cc200824ab29fe7124402469d38afc3c5422567d17c8",
       "type": "SHA256",
-      "context": "File Hashes; artefact: aarch64-unknown-linux-gnu",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: aarch64-unknown-linux-gnu"
     },
     {
       "value": "3ac3fa5f39372c2dd2822ee63f38852f6ec34a74bdbc46e34a142f8033ccb969",
       "display": "3ac3fa5f39372c2dd2822ee63f38852f6ec34a74bdbc46e34a142f8033ccb969",
       "type": "SHA256",
-      "context": "File Hashes; artefact: arm-unknown-linux-gnueabi",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: arm-unknown-linux-gnueabi"
     },
     {
       "value": "7dc832f876ace2d6b763f7c19f29a206dd74a5265a76dc9009fde9e8c0846656",
       "display": "7dc832f876ace2d6b763f7c19f29a206dd74a5265a76dc9009fde9e8c0846656",
       "type": "SHA256",
-      "context": "File Hashes; artefact: arm-unknown-linux-gnueabihf",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: arm-unknown-linux-gnueabihf"
     },
     {
       "value": "db29c0b4d16a4f02bb1631a2eca6e589e13fb6470f20453a393604954b53562e",
       "display": "db29c0b4d16a4f02bb1631a2eca6e589e13fb6470f20453a393604954b53562e",
       "type": "SHA256",
-      "context": "File Hashes; artefact: armv7-unknown-linux-gnueabi",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: armv7-unknown-linux-gnueabi"
     },
     {
       "value": "b3ec3e4e7ab1cae84d9c4cdd63425318588e5d94c2dd720387842969b3bb8507",
       "display": "b3ec3e4e7ab1cae84d9c4cdd63425318588e5d94c2dd720387842969b3bb8507",
       "type": "SHA256",
-      "context": "File Hashes; artefact: armv7-unknown-linux-gnueabihf",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: armv7-unknown-linux-gnueabihf"
     },
     {
       "value": "5341a686d27b38b7ee580febddcd5817aeef5f94815ff291e508ecaf78cb1070",
       "display": "5341a686d27b38b7ee580febddcd5817aeef5f94815ff291e508ecaf78cb1070",
       "type": "SHA256",
-      "context": "File Hashes; artefact: powerpc-unknown-linux-gnu",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: powerpc-unknown-linux-gnu"
     },
     {
       "value": "4aaa4cc22addcf3bb54c5ffa16bd2be4b0b0b0437edb29b844b496abc64b9eec",
       "display": "4aaa4cc22addcf3bb54c5ffa16bd2be4b0b0b0437edb29b844b496abc64b9eec",
       "type": "SHA256",
-      "context": "File Hashes; artefact: powerpc64-unknown-linux-gnu",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: powerpc64-unknown-linux-gnu"
     },
     {
       "value": "4e83e8236ad7ef73ba0197ffe72b595c29e3ce5efd5c6c98c7663ad55e1646d0",
       "display": "4e83e8236ad7ef73ba0197ffe72b595c29e3ce5efd5c6c98c7663ad55e1646d0",
       "type": "SHA256",
-      "context": "File Hashes; artefact: riscv64gc-unknown-linux-gnu",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: riscv64gc-unknown-linux-gnu"
     },
     {
       "value": "e9ccbb0df3f01ed4a94f7677c802a032edfe8d23c5769522482f94016c81b507",
       "display": "e9ccbb0df3f01ed4a94f7677c802a032edfe8d23c5769522482f94016c81b507",
       "type": "SHA256",
-      "context": "File Hashes; artefact: s390x-unknown-linux-gnu",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: s390x-unknown-linux-gnu"
     },
     {
       "value": "7477da223bbb0752653f32e60c05eb5c03daf3a5afe89d6565958525a274e211",
       "display": "7477da223bbb0752653f32e60c05eb5c03daf3a5afe89d6565958525a274e211",
       "type": "SHA256",
-      "context": "File Hashes; artefact: sparc64-unknown-linux-gnu",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: sparc64-unknown-linux-gnu"
     },
     {
       "value": "753207ad5e72ddc6b13889132e5de18836b1a2acf954443655fea82b430e4c99",
       "display": "753207ad5e72ddc6b13889132e5de18836b1a2acf954443655fea82b430e4c99",
       "type": "SHA256",
-      "context": "File Hashes; artefact: x86_64-unknown-linux-esxi",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: x86_64-unknown-linux-esxi"
     },
     {
       "value": "c616e11a2ce7feb3207c1808714d056c9c216f429ad6b840e781f3494ac8485d",
       "display": "c616e11a2ce7feb3207c1808714d056c9c216f429ad6b840e781f3494ac8485d",
       "type": "SHA256",
-      "context": "File Hashes; artefact: x86_64-unknown-linux-gnu",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: x86_64-unknown-linux-gnu"
     },
     {
       "value": "126597ea3130600a83ba2ced62e70abb985fcd401ab70525650bb9a1354ca955",
       "display": "126597ea3130600a83ba2ced62e70abb985fcd401ab70525650bb9a1354ca955",
       "type": "SHA256",
-      "context": "File Hashes; artefact: x86_64-unknown-linux-musl",
-      "confidence": "Not stated",
-      "classification": "reported"
+      "context": "File Hashes; artefact: x86_64-unknown-linux-musl"
     }
   ],
   "_posts/Threat Research/2026-07-22-INC-V2.md": []

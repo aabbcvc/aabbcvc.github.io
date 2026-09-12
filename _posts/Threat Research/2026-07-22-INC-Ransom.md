@@ -361,53 +361,53 @@ The exposed directory shows an INC affiliate using LLM-generated scripts to conn
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `213.176.114[.]6` | IPv4 | Network Indicators; Affiliate-controlled C2/staging server; open directory on TCP/8888 and confirmed HTTP PUT exfiltration receiver on TCP/7777 | High | reported |
-| `incblog6qu4y4mm4zvw5nrmue6qbwtgjsxpw6b7ixzssu36tsajldoad[.]onion` | Onion | Network Indicators; INC data-leak site embedded in the payloads | High | reported |
-| `incblog[.]su` | Domain | Network Indicators; INC clearnet leak-site address embedded in the payloads | High | reported |
-| `C:\Windows\Temp\locker.exe` | File path | Host, Task, and Service Artefacts; Windows INC encryptor staged under the deployment name | Not stated | reported |
-| `l.exe` | Filename | Host, Task, and Service Artefacts; Name of the recovered Windows INC encryptor on affiliate infrastructure | Not stated | reported |
-| `C:\Windows\Temp\go.bat` | File path | Host, Task, and Service Artefacts; Batch file used to map shares and launch the encryptor | Not stated | reported |
-| `INC-README.txt` | Filename | Host, Task, and Service Artefacts; Ransom note created by the INC payload | Not stated | reported |
-| `.INC` | Extension | Host, Task, and Service Artefacts; Encrypted-file extension/marker; validate with local telemetry | Not stated | reported |
-| `C:\Users\Public\mimi.exe` | File path | Host, Task, and Service Artefacts; Mimikatz path explicitly checked by the affiliate's credential-harvesting script | Not stated | reported |
-| `WinUpdate` | Scheduled task | Host, Task, and Service Artefacts; Highest-privilege task used to launch go.bat | Not stated | reported |
-| `TunnelPorts` | Firewall rule | Host, Task, and Service Artefacts; Allowed inbound access to the affiliate's port-proxy listeners | Not stated | reported |
-| `HTTP9999` | Firewall rule | Host, Task, and Service Artefacts; Opened TCP/9999 for temporary HTTP access to staged files | Not stated | reported |
-| `TSM-SSH` | Service | Host, Task, and Service Artefacts; Started through pyVmomi to enable direct ESXi SSH access | Not stated | reported |
-| `pw-reset-temp` | Snapshot | Host, Task, and Service Artefacts; Snapshot name used by the attempted vCenter password-reset workflow | Not stated | reported |
-| `l.exe` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `locker.exe` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `x86_64-pc-windows-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `x86_64-unknown-linux-esxi` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `x86_64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `x86_64-unknown-linux-musl` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `aarch64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `arm-unknown-linux-gnueabi` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `arm-unknown-linux-gnueabihf` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `armv7-unknown-linux-gnueabi` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `armv7-unknown-linux-gnueabihf` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `powerpc-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `powerpc64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `riscv64gc-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `s390x-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `sparc64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign | Not stated | reported |
-| `ef394149c8da3af730c37d550027df8639a3aaa6feaccea60112461ae6955829` | SHA256 | File Hashes; artefact: Windows INC encryptor recovered as l.exe | Not stated | reported |
-| `0206a670243efa0f736e3725c4c7c8879b262cb07af47a8dcfa18bc9787cc1bd` | SHA256 | File Hashes; artefact: Multi-platform INC payload archive (original name withheld) | Not stated | reported |
-| `034ac761c0a2baf754f9cc200824ab29fe7124402469d38afc3c5422567d17c8` | SHA256 | File Hashes; artefact: aarch64-unknown-linux-gnu | Not stated | reported |
-| `3ac3fa5f39372c2dd2822ee63f38852f6ec34a74bdbc46e34a142f8033ccb969` | SHA256 | File Hashes; artefact: arm-unknown-linux-gnueabi | Not stated | reported |
-| `7dc832f876ace2d6b763f7c19f29a206dd74a5265a76dc9009fde9e8c0846656` | SHA256 | File Hashes; artefact: arm-unknown-linux-gnueabihf | Not stated | reported |
-| `db29c0b4d16a4f02bb1631a2eca6e589e13fb6470f20453a393604954b53562e` | SHA256 | File Hashes; artefact: armv7-unknown-linux-gnueabi | Not stated | reported |
-| `b3ec3e4e7ab1cae84d9c4cdd63425318588e5d94c2dd720387842969b3bb8507` | SHA256 | File Hashes; artefact: armv7-unknown-linux-gnueabihf | Not stated | reported |
-| `5341a686d27b38b7ee580febddcd5817aeef5f94815ff291e508ecaf78cb1070` | SHA256 | File Hashes; artefact: powerpc-unknown-linux-gnu | Not stated | reported |
-| `4aaa4cc22addcf3bb54c5ffa16bd2be4b0b0b0437edb29b844b496abc64b9eec` | SHA256 | File Hashes; artefact: powerpc64-unknown-linux-gnu | Not stated | reported |
-| `4e83e8236ad7ef73ba0197ffe72b595c29e3ce5efd5c6c98c7663ad55e1646d0` | SHA256 | File Hashes; artefact: riscv64gc-unknown-linux-gnu | Not stated | reported |
-| `e9ccbb0df3f01ed4a94f7677c802a032edfe8d23c5769522482f94016c81b507` | SHA256 | File Hashes; artefact: s390x-unknown-linux-gnu | Not stated | reported |
-| `7477da223bbb0752653f32e60c05eb5c03daf3a5afe89d6565958525a274e211` | SHA256 | File Hashes; artefact: sparc64-unknown-linux-gnu | Not stated | reported |
-| `753207ad5e72ddc6b13889132e5de18836b1a2acf954443655fea82b430e4c99` | SHA256 | File Hashes; artefact: x86_64-unknown-linux-esxi | Not stated | reported |
-| `c616e11a2ce7feb3207c1808714d056c9c216f429ad6b840e781f3494ac8485d` | SHA256 | File Hashes; artefact: x86_64-unknown-linux-gnu | Not stated | reported |
-| `126597ea3130600a83ba2ced62e70abb985fcd401ab70525650bb9a1354ca955` | SHA256 | File Hashes; artefact: x86_64-unknown-linux-musl | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `213.176.114[.]6` | IPv4 | Network Indicators; Affiliate-controlled C2/staging server; open directory on TCP/8888 and confirmed HTTP PUT exfiltration receiver on TCP/7777 |
+| `incblog6qu4y4mm4zvw5nrmue6qbwtgjsxpw6b7ixzssu36tsajldoad[.]onion` | Onion | Network Indicators; INC data-leak site embedded in the payloads |
+| `incblog[.]su` | Domain | Network Indicators; INC clearnet leak-site address embedded in the payloads |
+| `C:\Windows\Temp\locker.exe` | File path | Host, Task, and Service Artefacts; Windows INC encryptor staged under the deployment name |
+| `l.exe` | Filename | Host, Task, and Service Artefacts; Name of the recovered Windows INC encryptor on affiliate infrastructure |
+| `C:\Windows\Temp\go.bat` | File path | Host, Task, and Service Artefacts; Batch file used to map shares and launch the encryptor |
+| `INC-README.txt` | Filename | Host, Task, and Service Artefacts; Ransom note created by the INC payload |
+| `.INC` | Extension | Host, Task, and Service Artefacts; Encrypted-file extension/marker; validate with local telemetry |
+| `C:\Users\Public\mimi.exe` | File path | Host, Task, and Service Artefacts; Mimikatz path explicitly checked by the affiliate's credential-harvesting script |
+| `WinUpdate` | Scheduled task | Host, Task, and Service Artefacts; Highest-privilege task used to launch go.bat |
+| `TunnelPorts` | Firewall rule | Host, Task, and Service Artefacts; Allowed inbound access to the affiliate's port-proxy listeners |
+| `HTTP9999` | Firewall rule | Host, Task, and Service Artefacts; Opened TCP/9999 for temporary HTTP access to staged files |
+| `TSM-SSH` | Service | Host, Task, and Service Artefacts; Started through pyVmomi to enable direct ESXi SSH access |
+| `pw-reset-temp` | Snapshot | Host, Task, and Service Artefacts; Snapshot name used by the attempted vCenter password-reset workflow |
+| `l.exe` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `locker.exe` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `x86_64-pc-windows-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `x86_64-unknown-linux-esxi` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `x86_64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `x86_64-unknown-linux-musl` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `aarch64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `arm-unknown-linux-gnueabi` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `arm-unknown-linux-gnueabihf` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `armv7-unknown-linux-gnueabi` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `armv7-unknown-linux-gnueabihf` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `powerpc-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `powerpc64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `riscv64gc-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `s390x-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `sparc64-unknown-linux-gnu` | Filename | Host, Task, and Service Artefacts; recurring artefact reported in the campaign |
+| `ef394149c8da3af730c37d550027df8639a3aaa6feaccea60112461ae6955829` | SHA256 | File Hashes; artefact: Windows INC encryptor recovered as l.exe |
+| `0206a670243efa0f736e3725c4c7c8879b262cb07af47a8dcfa18bc9787cc1bd` | SHA256 | File Hashes; artefact: Multi-platform INC payload archive (original name withheld) |
+| `034ac761c0a2baf754f9cc200824ab29fe7124402469d38afc3c5422567d17c8` | SHA256 | File Hashes; artefact: aarch64-unknown-linux-gnu |
+| `3ac3fa5f39372c2dd2822ee63f38852f6ec34a74bdbc46e34a142f8033ccb969` | SHA256 | File Hashes; artefact: arm-unknown-linux-gnueabi |
+| `7dc832f876ace2d6b763f7c19f29a206dd74a5265a76dc9009fde9e8c0846656` | SHA256 | File Hashes; artefact: arm-unknown-linux-gnueabihf |
+| `db29c0b4d16a4f02bb1631a2eca6e589e13fb6470f20453a393604954b53562e` | SHA256 | File Hashes; artefact: armv7-unknown-linux-gnueabi |
+| `b3ec3e4e7ab1cae84d9c4cdd63425318588e5d94c2dd720387842969b3bb8507` | SHA256 | File Hashes; artefact: armv7-unknown-linux-gnueabihf |
+| `5341a686d27b38b7ee580febddcd5817aeef5f94815ff291e508ecaf78cb1070` | SHA256 | File Hashes; artefact: powerpc-unknown-linux-gnu |
+| `4aaa4cc22addcf3bb54c5ffa16bd2be4b0b0b0437edb29b844b496abc64b9eec` | SHA256 | File Hashes; artefact: powerpc64-unknown-linux-gnu |
+| `4e83e8236ad7ef73ba0197ffe72b595c29e3ce5efd5c6c98c7663ad55e1646d0` | SHA256 | File Hashes; artefact: riscv64gc-unknown-linux-gnu |
+| `e9ccbb0df3f01ed4a94f7677c802a032edfe8d23c5769522482f94016c81b507` | SHA256 | File Hashes; artefact: s390x-unknown-linux-gnu |
+| `7477da223bbb0752653f32e60c05eb5c03daf3a5afe89d6565958525a274e211` | SHA256 | File Hashes; artefact: sparc64-unknown-linux-gnu |
+| `753207ad5e72ddc6b13889132e5de18836b1a2acf954443655fea82b430e4c99` | SHA256 | File Hashes; artefact: x86_64-unknown-linux-esxi |
+| `c616e11a2ce7feb3207c1808714d056c9c216f429ad6b840e781f3494ac8485d` | SHA256 | File Hashes; artefact: x86_64-unknown-linux-gnu |
+| `126597ea3130600a83ba2ced62e70abb985fcd401ab70525650bb9a1354ca955` | SHA256 | File Hashes; artefact: x86_64-unknown-linux-musl |
 
 The following patterns have been defanged and stripped of victim-specific values:
 

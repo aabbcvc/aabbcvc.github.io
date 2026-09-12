@@ -348,19 +348,19 @@ If you'd like to read more about how Claude was leveraged, please read [Claude's
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `195.178.110[.]242` | IPv4 | Primary C2 server (exfiltration receiver + reverse shell listener) | Not stated | reported |
-| `bp-loader.php` | Filename | Platform plugin backdoor | Not stated | reported |
-| `ddda12b545a7b817883641421cf6a213f4c5100effa40cdb55018efce11bbe42` | SHA256 | bp-loader.php | Not stated | reported |
-| `functions.php` | Filename | Theme backdoor | Not stated | reported |
-| `5027a0e77eca13a5cc120d3e37262c4073452569ad341cd1558051b5a91ce144` | SHA256 | functions.php | Not stated | reported |
-| `buddyboss-platform-pro.php` | Filename | Standalone backdoor with upload capability | Not stated | reported |
-| `bb_platform_debug` | String | Platform backdoor trigger | Not stated | reported |
-| `bb_theme_compat` | String | Theme backdoor trigger | Not stated | reported |
-| `a9f2c8e1` | Auth token | Shared authentication key across all backdoor variants | Not stated | reported |
-| `bp-compatibility.php` | Filename | Standalone webshell (v2.20.4) | Not stated | reported |
-| `Platform Compatibility Check` | Workflow name | Name of the malicious GitHub Actions workflow | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `195.178.110[.]242` | IPv4 | Primary C2 server (exfiltration receiver + reverse shell listener) |
+| `bp-loader.php` | Filename | Platform plugin backdoor |
+| `ddda12b545a7b817883641421cf6a213f4c5100effa40cdb55018efce11bbe42` | SHA256 | bp-loader.php |
+| `functions.php` | Filename | Theme backdoor |
+| `5027a0e77eca13a5cc120d3e37262c4073452569ad341cd1558051b5a91ce144` | SHA256 | functions.php |
+| `buddyboss-platform-pro.php` | Filename | Standalone backdoor with upload capability |
+| `bb_platform_debug` | String | Platform backdoor trigger |
+| `bb_theme_compat` | String | Theme backdoor trigger |
+| `a9f2c8e1` | Auth token | Shared authentication key across all backdoor variants |
+| `bp-compatibility.php` | Filename | Standalone webshell (v2.20.4) |
+| `Platform Compatibility Check` | Workflow name | Name of the malicious GitHub Actions workflow |
 
 The malicious PHP modules have been added to our [Github](https://github.com/ctrlaltint3l/intelligence/tree/main/BuddyBoss/Backdoor).
 

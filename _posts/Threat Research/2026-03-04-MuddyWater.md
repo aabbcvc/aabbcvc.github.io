@@ -515,23 +515,23 @@ It was interesting to see the same indicator that inspired this blog, used in th
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `185.236.25[.]119` | IPv4 | Tsundere Bot WebSocket C2 | Not stated | reported |
-| `193.17.183[.]126` | IPv4 | Tsundere Bot WebSocket C2 | Not stated | reported |
-| `162.0.230[.]185` | IPv4 | MuddyWater C2 / Open Directory | Not stated | reported |
-| `157.20.182[.]49` | IPv4 | Open Directory | Not stated | reported |
-| `209.74.87[.]100` | IPv4 | Open Directory | Not stated | reported |
-| `18.223.24[.]218` | IPv4 | Exfiltration Server | Not stated | reported |
-| `194.11.246[.]101` | IPv4 | Fortigate POC IP | Not stated | reported |
-| `www.xt24[.]com` | Domain | Open Directory | Not stated | reported |
-| `reset.ps1` | Filename | Tsundere Bot PowerShell loader | Not stated | reported |
-| `0x2B77671cfEE4907776a95abbb9681eee598c102E` | Wallet | Smart Contract Address | Not stated | reported |
-| `7ab597ff0b1a5e6916cad1662b49f58231867a1d4fa91a4edf7ecb73c3ec7fe6` | SHA256 | reset.ps1 - Tsundere Bot PowerShell loader | Not stated | reported |
-| `VfZUSQi6oerKau.js` | Filename | Tsundere Bot persistence / launcher script | Not stated | reported |
-| `c8589ca999526f247db4d3902ade8a85619f8f82338c6230d1b935f413ddcb3d` | SHA256 | VfZUSQi6oerKau.js | Not stated | reported |
-| `sysuu2etiprun.js` | Filename | Tsundere Bot main payload | Not stated | reported |
-| `bedb882c6e2cf896e14ecf12c90aaa6638f780017d1b8687a40b4a81956e230f` | SHA256 | sysuu2etiprun.js | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `185.236.25[.]119` | IPv4 | Tsundere Bot WebSocket C2 |
+| `193.17.183[.]126` | IPv4 | Tsundere Bot WebSocket C2 |
+| `162.0.230[.]185` | IPv4 | MuddyWater C2 / Open Directory |
+| `157.20.182[.]49` | IPv4 | Open Directory |
+| `209.74.87[.]100` | IPv4 | Open Directory |
+| `18.223.24[.]218` | IPv4 | Exfiltration Server |
+| `194.11.246[.]101` | IPv4 | Fortigate POC IP |
+| `www.xt24[.]com` | Domain | Open Directory |
+| `reset.ps1` | Filename | Tsundere Bot PowerShell loader |
+| `0x2B77671cfEE4907776a95abbb9681eee598c102E` | Wallet | Smart Contract Address |
+| `7ab597ff0b1a5e6916cad1662b49f58231867a1d4fa91a4edf7ecb73c3ec7fe6` | SHA256 | reset.ps1 - Tsundere Bot PowerShell loader |
+| `VfZUSQi6oerKau.js` | Filename | Tsundere Bot persistence / launcher script |
+| `c8589ca999526f247db4d3902ade8a85619f8f82338c6230d1b935f413ddcb3d` | SHA256 | VfZUSQi6oerKau.js |
+| `sysuu2etiprun.js` | Filename | Tsundere Bot main payload |
+| `bedb882c6e2cf896e14ecf12c90aaa6638f780017d1b8687a40b4a81956e230f` | SHA256 | sysuu2etiprun.js |
 
 ## MITRE ATT&CK
 

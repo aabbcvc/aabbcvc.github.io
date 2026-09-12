@@ -7,14 +7,14 @@ from build_iocs import extract, refang, build, HEADER
 
 
 def document(rows):
-    return "## IOCs\n\n| " + " | ".join(HEADER) + " |\n|---|---|---|---|---|\n" + rows
+    return "## IOCs\n\n| " + " | ".join(HEADER) + " |\n|---|---|---|\n" + rows
 
 
 class IOCExtractionTests(unittest.TestCase):
     def test_ipv6_and_defanged_urls(self):
         records = extract(document(
-            "| `2401:c080:1c01:c6:5400:5ff:fec1[:]ccc9` | IPv6 | VPS IPv6 | Not stated | reported |\n"
-            "| `hXXps://example[.]com/a` | URL | Payload path | High | shared-service |\n"))
+            "| `2401:c080:1c01:c6:5400:5ff:fec1[:]ccc9` | IPv6 | VPS IPv6 |\n"
+            "| `hXXps://example[.]com/a` | URL | Payload path |\n"))
         self.assertEqual(records[0]["value"], "2401:c080:1c01:c6:5400:5ff:fec1:ccc9")
         self.assertEqual(records[1]["value"], "https://example.com/a")
         self.assertEqual(records[1]["display"], "hXXps://example[.]com/a")
@@ -23,18 +23,18 @@ class IOCExtractionTests(unittest.TestCase):
         body = "## Analysis\n192.0.2.1\n```text\n## IOCs\n```\n## IOCs\nNo indicators listed.\n## References\nhttps://example.com\n"
         self.assertEqual(extract(body), [])
 
-    def test_preserves_observation_context_and_classification(self):
+    def test_preserves_distinct_observation_context(self):
         records = extract(document(
-            "| `10.0.0.1` | IPv4 | Victim pivot \\| internal only | Not stated | victim-owned |\n"
-            "| `10.0.0.1` | IPv4 | Different observation | Low | unverified |\n"))
+            "| `10.0.0.1` | IPv4 | Victim pivot \\| internal only |\n"
+            "| `10.0.0.1` | IPv4 | Different observation |\n"))
         self.assertEqual(len(records), 2)
         self.assertEqual(records[0]["context"], "Victim pivot | internal only")
-        self.assertEqual(records[1]["classification"], "unverified")
+        self.assertEqual(records[1]["context"], "Different observation")
 
     def test_rejects_invalid_hashes_instead_of_silent_truncation(self):
         with self.assertRaisesRegex(ValueError, "Invalid hash"):
-            extract(document("| `abcdef` | SHA256 | Incomplete | Not stated | reported |\n"))
-        records = extract(document("| `abcdef` | Hash fragment | Source truncated | Not stated | reference-only |\n"))
+            extract(document("| `abcdef` | SHA256 | Incomplete |\n"))
+        records = extract(document("| `abcdef` | Hash fragment | Source truncated |\n"))
         self.assertEqual(records[0]["type"], "Hash fragment")
 
     def test_rejects_malformed_or_missing_schema(self):
@@ -47,7 +47,7 @@ class IOCExtractionTests(unittest.TestCase):
         for source, rows in result.items():
             for row in rows:
                 self.assertTrue(row["context"], source)
-                self.assertTrue(row["classification"], source)
+                self.assertEqual(set(row), {"value", "display", "type", "context"}, source)
 
 
 if __name__ == "__main__":

@@ -361,11 +361,11 @@ More importantly, since the start of the “devman” brand, recurring sysadmin 
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `203.91.74[.]97` | IPv4 | Rocket.Chat; ASN: 400619 | Not stated | reported |
-| `86.106.85[.]183` | IPv4 | Sliver C2 (31337); ASN: 9009 | Not stated | reported |
-| `86.106.85[.]183` | IPv4 | Leak Site; ASN: 9009 | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `203.91.74[.]97` | IPv4 | Rocket.Chat; ASN: 400619 |
+| `86.106.85[.]183` | IPv4 | Sliver C2 (31337); ASN: 9009 |
+| `86.106.85[.]183` | IPv4 | Leak Site; ASN: 9009 |
 
 [Devman Rocket.Chat Export](https://raw.githubusercontent.com/ctrlaltint3l/intelligence/refs/heads/main/devman/devman-announcements-rocket.chat)
 

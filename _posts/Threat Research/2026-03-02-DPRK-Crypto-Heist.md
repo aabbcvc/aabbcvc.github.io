@@ -418,11 +418,11 @@ The convergence of crypto supply-chain targeting, sophisticated AWS tradecraft, 
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `64.176.226[.]36` | IPv4 | Primary VPS | Not stated | reported |
-| `2401:c080:1c01:c6:5400:5ff:fec1[:]ccc9` | IPv6 | VPS IPv6 | Not stated | reported |
-| `itemnania[.]com` | Domain | Associated with primary server; registered in South Korea | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `64.176.226[.]36` | IPv4 | Primary VPS |
+| `2401:c080:1c01:c6:5400:5ff:fec1[:]ccc9` | IPv6 | VPS IPv6 |
+| `itemnania[.]com` | Domain | Associated with primary server; registered in South Korea |
 
 ## MITRE ATT&CK
 

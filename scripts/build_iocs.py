@@ -13,14 +13,12 @@ from urllib.parse import urlsplit
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-HEADER = ["Indicator", "Type", "Context", "Confidence", "Classification"]
+HEADER = ["Indicator", "Type", "Context"]
 TYPES = {"IPv4", "IPv6", "Domain", "Onion", "URL", "URL pattern", "IP:port",
          "SHA256", "SHA1", "MD5", "Hash fragment", "IP pattern", "Filename",
          "File path", "URI path", "Email", "Wallet", "String", "Command pattern",
          "Scheduled task", "Service", "Extension", "HTTP header", "Auth token",
          "Bot username", "Process name", "Workflow name", "Firewall rule", "Snapshot"}
-CLASSIFICATIONS = {"reported", "confirmed-attacker", "victim-owned", "unverified",
-                   "shared-service", "researcher-controlled", "reference-only"}
 
 
 def refang(value):
@@ -95,21 +93,20 @@ def extract(body, source="post"):
             headers = row
             continue
         if len(row) != len(HEADER):
-            raise ValueError(f"{source}:{number}: expected five IOC cells")
-        original, kind, context, confidence, classification = map(plain, row)
+            raise ValueError(f"{source}:{number}: expected three IOC cells")
+        original, kind, context = map(plain, row)
         value = refang(original)
-        if kind not in TYPES or classification not in CLASSIFICATIONS:
-            raise ValueError(f"{source}:{number}: unknown IOC type/classification: {kind}/{classification}")
-        if confidence not in {"High", "Medium", "Low", "Not stated"} or not context or not value:
-            raise ValueError(f"{source}:{number}: missing IOC context/value or invalid confidence")
+        if kind not in TYPES:
+            raise ValueError(f"{source}:{number}: unknown IOC type: {kind}")
+        if not context or not value:
+            raise ValueError(f"{source}:{number}: missing IOC context/value")
         try:
             validate_value(value, kind)
         except ValueError as exc:
             raise ValueError(f"{source}:{number}: {value}: {exc}") from exc
         if kind in {"Domain", "Onion", "MD5", "SHA1", "SHA256"}:
             value = value.lower()
-        records.append(dict(value=value, display=original, type=kind, context=context,
-                            confidence=confidence, classification=classification))
+        records.append(dict(value=value, display=original, type=kind, context=context))
     if sections != 1:
         raise ValueError(f"{source}: expected exactly one '## IOCs' section")
     return records

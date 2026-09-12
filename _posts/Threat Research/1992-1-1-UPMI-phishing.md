@@ -379,37 +379,37 @@ The exposed master server gave us full visibility into the developer's operation
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `143.198.27[.]52` | IPv4 | XVerginia deployment | Not stated | reported |
-| `147.182.195[.]233` | IPv4 | XVerginia deployment | Not stated | reported |
-| `104.194.152[.]178` | IPv4 | XVerginia deployment | Not stated | reported |
-| `157.250.207[.]92` | IPv4 | XVerginia deployment | Not stated | reported |
-| `212.52.6[.]239` | IPv4 | XVerginia deployment | Not stated | reported |
-| `205.198.88[.]186` | IPv4 | XVerginia deployment | Not stated | reported |
-| `104.131.106[.]42` | IPv4 | Master server: license server, LinkShield, intelligence API | Not stated | reported |
-| `45.61.136[.]190` | IPv4 | Evilginx VPS #1 (tms.ac) | Not stated | reported |
-| `64.95.13[.]174` | IPv4 | Evilginx VPS #2 (cybernt.us) | Not stated | reported |
-| `193.111.125[.]137` | IPv4 | Primary sending server (Kamatera) | Not stated | reported |
-| `103.101.202[.]72` | IPv4 | Secondary sending server (Kamatera) | Not stated | reported |
-| `tms[.]ac` | Domain | Evilginx phishing domain | Not stated | reported |
-| `cybernt[.]us` | Domain | Evilginx phishing domain (standby) | Not stated | reported |
-| `docviewportal[.]com` | Domain | LinkShield encrypted URL decryption | Not stated | reported |
-| `go.docviewportal[.]com` | Domain | Primary LinkShield endpoint | Not stated | reported |
-| `webmail.tms[.]ac` | Domain | Primary Evilginx lure URL | Not stated | reported |
-| `pablotechnostore[.]com` | Domain | Primary sender domain | Not stated | reported |
-| `bowhead-transport[.]com` | Domain | Sender domain (DKIM-signed) | Not stated | reported |
-| `workplaceoutreach[.]online` | Domain | Sender domain (DKIM-signed) | Not stated | reported |
-| `vvearcon[.]com` | Domain | Sender domain (DKIM-signed) | Not stated | reported |
-| `trns[.]live` | Domain | Sender domain (DKIM-signed) | Not stated | reported |
-| `professionalinsurancesolutions[.]com` | Domain | Graph API sender domain | Not stated | reported |
-| `ventrisecure[.]com` | Domain | Sender domain (DKIM keys present) | Not stated | reported |
-| `ventracloud[.]com` | Domain | Evilginx phishing domain | Not stated | reported |
-| `brevantic[.]com` | Domain | Evilginx phishing domain | Not stated | reported |
-| `Mxlicense_control_bot` | Bot username | License management bot | Not stated | reported |
-| `UPMi035bot` | Bot username | Tracker alert bot | Not stated | reported |
-| `go.docviewportal[.]com/d/<base64url_token>` | URL pattern | Encrypted phishing link | Not stated | reported |
-| `webmail.tms[.]ac/djMfuXoi` | URL pattern | Default Evilginx lure URL | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `143.198.27[.]52` | IPv4 | XVerginia deployment |
+| `147.182.195[.]233` | IPv4 | XVerginia deployment |
+| `104.194.152[.]178` | IPv4 | XVerginia deployment |
+| `157.250.207[.]92` | IPv4 | XVerginia deployment |
+| `212.52.6[.]239` | IPv4 | XVerginia deployment |
+| `205.198.88[.]186` | IPv4 | XVerginia deployment |
+| `104.131.106[.]42` | IPv4 | Master server: license server, LinkShield, intelligence API |
+| `45.61.136[.]190` | IPv4 | Evilginx VPS #1 (tms.ac) |
+| `64.95.13[.]174` | IPv4 | Evilginx VPS #2 (cybernt.us) |
+| `193.111.125[.]137` | IPv4 | Primary sending server (Kamatera) |
+| `103.101.202[.]72` | IPv4 | Secondary sending server (Kamatera) |
+| `tms[.]ac` | Domain | Evilginx phishing domain |
+| `cybernt[.]us` | Domain | Evilginx phishing domain (standby) |
+| `docviewportal[.]com` | Domain | LinkShield encrypted URL decryption |
+| `go.docviewportal[.]com` | Domain | Primary LinkShield endpoint |
+| `webmail.tms[.]ac` | Domain | Primary Evilginx lure URL |
+| `pablotechnostore[.]com` | Domain | Primary sender domain |
+| `bowhead-transport[.]com` | Domain | Sender domain (DKIM-signed) |
+| `workplaceoutreach[.]online` | Domain | Sender domain (DKIM-signed) |
+| `vvearcon[.]com` | Domain | Sender domain (DKIM-signed) |
+| `trns[.]live` | Domain | Sender domain (DKIM-signed) |
+| `professionalinsurancesolutions[.]com` | Domain | Graph API sender domain |
+| `ventrisecure[.]com` | Domain | Sender domain (DKIM keys present) |
+| `ventracloud[.]com` | Domain | Evilginx phishing domain |
+| `brevantic[.]com` | Domain | Evilginx phishing domain |
+| `Mxlicense_control_bot` | Bot username | License management bot |
+| `UPMi035bot` | Bot username | Tracker alert bot |
+| `go.docviewportal[.]com/d/<base64url_token>` | URL pattern | Encrypted phishing link |
+| `webmail.tms[.]ac/djMfuXoi` | URL pattern | Default Evilginx lure URL |
 
 ## MITRE ATT&CK
 

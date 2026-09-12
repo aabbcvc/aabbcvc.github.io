@@ -149,10 +149,10 @@
 
   content.querySelectorAll("table").forEach(function (table) {
     var headers = Array.from(table.querySelectorAll("thead th")).map(function (cell) { return cell.textContent.trim(); });
-    if (headers.join("|") === "Indicator|Type|Context|Confidence|Classification") {
+    if (headers.join("|") === "Indicator|Type|Context") {
       table.querySelectorAll("tbody tr").forEach(function (row) {
         var cells = row.querySelectorAll("td");
-        if (cells.length !== 5) return;
+        if (cells.length !== 3) return;
         var value = cells[0].textContent.trim();
         var type = cells[1].textContent.trim();
         var link = document.createElement("a");

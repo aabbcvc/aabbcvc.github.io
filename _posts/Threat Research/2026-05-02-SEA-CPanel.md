@@ -241,20 +241,20 @@ Although we do not make a firm attribution, the combination of victimology, post
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `95.111.250[.]175` | IPv4 | Primary attacker VPS; OpenVPN, reverse shell, and pivot infrastructure | Not stated | reported |
-| `delicate-dew.serveftp[.]com` | Domain | Domain associated with the same infrastructure; present in recovered certificate material | Not stated | reported |
-| `systemd-update.service` | Filename | Masqueraded Linux persistence service | Not stated | reported |
-| `/usr/local/bin/.netmon/systemd-helper` | File path | Hidden Linux reverse-connect payload path | Not stated | reported |
-| `init.ps1` | Filename | PowerShell reverse shell payload | Not stated | reported |
-| `64674342041873DBB18B1DD9BB1CA391AF85B5E755DEFFB4C1612EF668349325` | SHA256 | init.ps1 | Not stated | reported |
-| `exploit_siak_bahasa.py` | Filename | Custom authenticated SQLi -> PostgreSQL RCE exploit | Not stated | reported |
-| `974E272AD1DC7D5AADC3C7A48EC00EB201D04BA59EC5B0B17C2F8E9CD2F9C9CD` | SHA256 | exploit_siak_bahasa.py | Not stated | reported |
-| `exfil_docs_v2.sh` | Filename | Custom SFTP / lftp document exfiltration script | Not stated | reported |
-| `734F0D04DC2683E19E629B8EC7F55349B5BCFF4EB4F2F36F6ADBBDE1C023A24F` | SHA256 | exfil_docs_v2.sh | Not stated | reported |
-| `1` | Filename | Linux ELF reverse-connect / pivot payload recovered alongside the custom exploit chain | Not stated | reported |
-| `1CFEADF01D24182362887B7C5F683E8BDB0E84CDDCE03E3B7564B2D9AB5D15CF` | SHA256 | 1 | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `95.111.250[.]175` | IPv4 | Primary attacker VPS; OpenVPN, reverse shell, and pivot infrastructure |
+| `delicate-dew.serveftp[.]com` | Domain | Domain associated with the same infrastructure; present in recovered certificate material |
+| `systemd-update.service` | Filename | Masqueraded Linux persistence service |
+| `/usr/local/bin/.netmon/systemd-helper` | File path | Hidden Linux reverse-connect payload path |
+| `init.ps1` | Filename | PowerShell reverse shell payload |
+| `64674342041873DBB18B1DD9BB1CA391AF85B5E755DEFFB4C1612EF668349325` | SHA256 | init.ps1 |
+| `exploit_siak_bahasa.py` | Filename | Custom authenticated SQLi -> PostgreSQL RCE exploit |
+| `974E272AD1DC7D5AADC3C7A48EC00EB201D04BA59EC5B0B17C2F8E9CD2F9C9CD` | SHA256 | exploit_siak_bahasa.py |
+| `exfil_docs_v2.sh` | Filename | Custom SFTP / lftp document exfiltration script |
+| `734F0D04DC2683E19E629B8EC7F55349B5BCFF4EB4F2F36F6ADBBDE1C023A24F` | SHA256 | exfil_docs_v2.sh |
+| `1` | Filename | Linux ELF reverse-connect / pivot payload recovered alongside the custom exploit chain |
+| `1CFEADF01D24182362887B7C5F683E8BDB0E84CDDCE03E3B7564B2D9AB5D15CF` | SHA256 | 1 |
 
 ## MITRE ATT&CK
 

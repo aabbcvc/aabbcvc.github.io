@@ -5,7 +5,7 @@
   var list = document.getElementById("iocList");
   var status = document.getElementById("iocStatus");
   var form = document.getElementById("iocFilters");
-  var fields = {q: document.getElementById("iocSearch"), type: document.getElementById("iocType"), tag: document.getElementById("iocTag"), source: document.getElementById("iocSource"), classification: document.getElementById("iocClassification")};
+  var fields = {q: document.getElementById("iocSearch"), type: document.getElementById("iocType"), tag: document.getElementById("iocTag"), source: document.getElementById("iocSource")};
   var publications = [], filtered = [], page = 0, pageSize = 40;
   var previous = document.getElementById("iocPrevious"), next = document.getElementById("iocNext");
   var exports = Array.from(root.querySelectorAll("[data-export]"));
@@ -80,7 +80,7 @@
     indicator.observations.forEach(function (observation) {
       var item = el("section", null, "ioc-observation");
       var source = el("a", observation.title, "ioc-source-link"); source.href = observation.url + "#iocs";
-      item.append(source, el("p", "Published " + observation.published + " · " + observation.classification + " · Confidence: " + observation.confidence, "ioc-source-meta"), el("p", observation.context));
+      item.append(source, el("p", "Published " + observation.published, "ioc-source-meta"), el("p", observation.context));
       var tags = el("div", null, "publication-tags");
       observation.tags.forEach(function (tag) {
         var button = el("button", tag, "tag"); button.type = "button";
@@ -129,12 +129,11 @@
       if (fields.tag.value && !post.tags.includes(fields.tag.value)) return;
       (post.indicators || []).forEach(function (ioc) {
         if (fields.type.value && ioc.type !== fields.type.value) return;
-        if (fields.classification.value && ioc.classification !== fields.classification.value) return;
-        var haystack = refang([ioc.value, ioc.display, ioc.context, post.title, post.tags.join(" "), ioc.type, ioc.classification].join(" ")).toLowerCase();
+        var haystack = refang([ioc.value, ioc.display, ioc.context, post.title, post.tags.join(" "), ioc.type].join(" ")).toLowerCase();
         if (!terms.every(function (term) { return haystack.includes(term); })) return;
         var key = ioc.type + "\u0000" + ioc.value;
         if (!groups.has(key)) groups.set(key, {value: ioc.value, display: ioc.display, type: ioc.type, observations: []});
-        var observation = {title: post.title, url: post.url, published: post.published, tags: post.tags, context: ioc.context, confidence: ioc.confidence, classification: ioc.classification};
+        var observation = {title: post.title, url: post.url, published: post.published, tags: post.tags, context: ioc.context};
         var observations = groups.get(key).observations;
         if (!observations.some(function (existing) { return JSON.stringify(existing) === JSON.stringify(observation); })) observations.push(observation);
       });
@@ -157,8 +156,8 @@
     if (format === "json") { content = JSON.stringify(filtered, null, 2) + "\n"; mime = "application/json"; }
     if (format === "txt") { content = Array.from(new Set(filtered.map(function (ioc) { return ioc.value; }))).join("\n") + "\n"; mime = "text/plain"; }
     if (format === "csv") {
-      var rows = [["indicator", "type", "context", "classification", "confidence", "source_title", "source_url", "published", "tags"]];
-      filtered.forEach(function (ioc) { ioc.observations.forEach(function (o) { rows.push([ioc.value, ioc.type, o.context, o.classification, o.confidence, o.title, new URL(o.url + "#iocs", window.location.href).href, o.published, o.tags.join("; ")]); }); });
+      var rows = [["indicator", "type", "context", "source_title", "source_url", "published", "tags"]];
+      filtered.forEach(function (ioc) { ioc.observations.forEach(function (o) { rows.push([ioc.value, ioc.type, o.context, o.title, new URL(o.url + "#iocs", window.location.href).href, o.published, o.tags.join("; ")]); }); });
       content = "\uFEFF" + rows.map(function (row) { return row.map(csvCell).join(","); }).join("\r\n") + "\r\n"; mime = "text/csv";
     }
     var url = URL.createObjectURL(new Blob([content], {type: mime + ";charset=utf-8"}));
@@ -182,7 +181,6 @@
     var indicators = publications.flatMap(function (post) { return post.indicators; });
     options(fields.type, indicators.map(function (ioc) { return ioc.type; }));
     options(fields.tag, publications.flatMap(function (post) { return post.tags; }));
-    options(fields.classification, indicators.map(function (ioc) { return ioc.classification; }));
     publications.forEach(function (post) { var option = el("option", post.title); option.value = post.url; fields.source.appendChild(option); });
     var initial = new URLSearchParams(window.location.search);
     Object.keys(fields).forEach(function (key) { if (initial.has(key)) fields[key].value = initial.get(key); });

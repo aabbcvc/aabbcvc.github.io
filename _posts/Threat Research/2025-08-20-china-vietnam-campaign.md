@@ -992,88 +992,88 @@ These threat actors desperately wanted long-term persistent access to victim Vie
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `103[.]215[.]77[.]214` | IPv4 | Cobalt Strike teamserver and FRP server; primary exposed operator host. | Not stated | reported |
-| `122[.]10[.]198[.]X` | IP pattern | Redacted IP in the linked IPs.txt list; not an exact host indicator. | Not stated | reference-only |
-| `38[.]181[.]79[.]15` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `103[.]56[.]52[.]142` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `103[.]56[.]52[.]61` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `27[.]219[.]79[.]226` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `39[.]85[.]164[.]6` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `27[.]210[.]226[.]254` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `221[.]2[.]22[.]145` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `156[.]59[.]13[.]38` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `27[.]150[.]112[.]38` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `123[.]132[.]37[.]188` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `119[.]165[.]225[.]129` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `27[.]210[.]0[.]131` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `27[.]199[.]77[.]113` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `27[.]150[.]113[.]183` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `27[.]150[.]113[.]1` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. | Not stated | reported |
-| `microsoft-symantec[.]art` | Domain | VShell listener and SNOWLIGHT payload staging on port 8848. | Not stated | reported |
-| `microsoft-defend[.]club` | Domain | Parent domain of the reported Cobalt Strike C2. | Not stated | reported |
-| `micrcs[.]microsoft-defend[.]club` | Domain | Cobalt Strike C2 domain configured in CDN.profile; proxied through Cloudflare. | Not stated | reported |
-| `0659f21cb8422c830af696a947eeff6c` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `0aa8a3cd0ac247d5eeca2661e88f71b7` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `0b2e3a199df127abba4e1f468d674cbe` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `0d4ee255c91405a9f270c94862ea1361` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `131e9c99a7be59afb2f8763e07963c69` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `140a0f81a7b1e76efa914dd688edc5e5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `1415c48ad7d8848191b0cd7a122a7cfb` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `1643a53dc2a0117e0a66612bb3f341fe` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `2058842e1799195a2f3c9971e4dea24e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `298f5096cda09151bd6b10ab605f0e7c` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `29efd64dd3c7fe1e2b022b7ad73a1ba5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `3388b033f6a92e22f47f094b3c38df4f` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `351a765b352730fe5b66baaef6410cbd` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `38ecb8e7ff4a034618082b3bb6116f90` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `3fed1004befb9834b699a88ccdce757e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `40b96d9df310d5f448c0908c3231ff4e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `4facb81f57e515a508040270849bcd35` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `5982a720a2f0834e5d04ea4ad49900dd` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `5c106ea9a277b8489be3059750c3f6ec` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `5d882e918248790794a07cabe72cf2b1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `61cd12c70e9b6125a8d8b5784bdefc4b` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `64aa88125366a1787919b5ec61befa1d` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `650be782605daa164ad7d1f971ef76a3` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `698d51a19d8a121ce581499d7b701668` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `69f40aa49b4ac18700c3499f167bd845` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `6ba0dbcd2db8f44243799c891dbd2a59` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `6fe223ce568d919f80bea233738d0628` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `723d364d402760641ec172e27e9b6a56` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `75341ae79be66b2e09d578fcd6fa8441` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `78b1fa873aabd54c1d73e2f7cd664a31` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `7d372351d7629ab7bf694812d03674c5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `809f3a686c379e3567db71585b169d4d` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `875cd28cf7b4fa7abd0d4e079a13bf26` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `895d4e39649399d7e7010510ae17750b` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `8bc54a3ae402e1c3e158010169e97c38` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `9b0e4652a0317e6e4da66f29a74b5ad7` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `9e0e6f3e82a1a09228987ef496b5b9f3` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `a11a1d761d757d367146f0f772632d8c` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `a28ab9f7acdf3ced769ee44f47828504` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `a39696e95a34a017be1435db7ff139d5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `a65b99553494cd178c72b2bc7ae44554` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `ab59a40273401b69d019877be0190fce` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `abcf9d28603eee7630ed93ef9f729888` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `ae3e7304122469f2de3ecbd920a768d1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `bb7326689f40a1190676770dd59a3ca9` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `bed7058beeeefc3efeb8b408ec68e5fa` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `c1b11a39ef693fa6bf1bb3282fafb640` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `c82698395e6a30cad74c0bc0a6cd51af` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `cbdc6e33deb4daac12bdce086165c8f1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `ceff651b3a7cbb667799510fe1d5d2c3` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `d41d8cd98f00b204e9800998ecf8427e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `e06aacd6139288d5bea4a676ee0c2404` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `ea5705041c355cc87c4aaedca6203840` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `eb80f7bddb699784baa9fbf2941eaf4a` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `ec76edde147207156f6de31f6ecc5bef` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `f5de3ac3f12a2eee62a58d7ec77693dd` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `f87afacff9c44b94db109e3e956a4b33` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `f91cc2b904a778d77da1ca2f0772c1b1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `fc48ee15a4d16cee6cac9805cf8d0ec4` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
-| `fd6d0f45fab383257462a2b91fb7b169` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `103[.]215[.]77[.]214` | IPv4 | Cobalt Strike teamserver and FRP server; primary exposed operator host. |
+| `122[.]10[.]198[.]X` | IP pattern | Redacted IP in the linked IPs.txt list; not an exact host indicator. |
+| `38[.]181[.]79[.]15` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `103[.]56[.]52[.]142` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `103[.]56[.]52[.]61` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `27[.]219[.]79[.]226` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `39[.]85[.]164[.]6` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `27[.]210[.]226[.]254` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `221[.]2[.]22[.]145` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `156[.]59[.]13[.]38` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `27[.]150[.]112[.]38` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `123[.]132[.]37[.]188` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `119[.]165[.]225[.]129` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `27[.]210[.]0[.]131` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `27[.]199[.]77[.]113` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `27[.]150[.]113[.]183` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `27[.]150[.]113[.]1` | IPv4 | Imported from the linked IPs.txt list; individual role not specified in that list. |
+| `microsoft-symantec[.]art` | Domain | VShell listener and SNOWLIGHT payload staging on port 8848. |
+| `microsoft-defend[.]club` | Domain | Parent domain of the reported Cobalt Strike C2. |
+| `micrcs[.]microsoft-defend[.]club` | Domain | Cobalt Strike C2 domain configured in CDN.profile; proxied through Cloudflare. |
+| `0659f21cb8422c830af696a947eeff6c` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `0aa8a3cd0ac247d5eeca2661e88f71b7` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `0b2e3a199df127abba4e1f468d674cbe` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `0d4ee255c91405a9f270c94862ea1361` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `131e9c99a7be59afb2f8763e07963c69` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `140a0f81a7b1e76efa914dd688edc5e5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `1415c48ad7d8848191b0cd7a122a7cfb` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `1643a53dc2a0117e0a66612bb3f341fe` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `2058842e1799195a2f3c9971e4dea24e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `298f5096cda09151bd6b10ab605f0e7c` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `29efd64dd3c7fe1e2b022b7ad73a1ba5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `3388b033f6a92e22f47f094b3c38df4f` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `351a765b352730fe5b66baaef6410cbd` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `38ecb8e7ff4a034618082b3bb6116f90` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `3fed1004befb9834b699a88ccdce757e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `40b96d9df310d5f448c0908c3231ff4e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `4facb81f57e515a508040270849bcd35` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `5982a720a2f0834e5d04ea4ad49900dd` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `5c106ea9a277b8489be3059750c3f6ec` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `5d882e918248790794a07cabe72cf2b1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `61cd12c70e9b6125a8d8b5784bdefc4b` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `64aa88125366a1787919b5ec61befa1d` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `650be782605daa164ad7d1f971ef76a3` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `698d51a19d8a121ce581499d7b701668` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `69f40aa49b4ac18700c3499f167bd845` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `6ba0dbcd2db8f44243799c891dbd2a59` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `6fe223ce568d919f80bea233738d0628` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `723d364d402760641ec172e27e9b6a56` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `75341ae79be66b2e09d578fcd6fa8441` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `78b1fa873aabd54c1d73e2f7cd664a31` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `7d372351d7629ab7bf694812d03674c5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `809f3a686c379e3567db71585b169d4d` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `875cd28cf7b4fa7abd0d4e079a13bf26` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `895d4e39649399d7e7010510ae17750b` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `8bc54a3ae402e1c3e158010169e97c38` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `9b0e4652a0317e6e4da66f29a74b5ad7` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `9e0e6f3e82a1a09228987ef496b5b9f3` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `a11a1d761d757d367146f0f772632d8c` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `a28ab9f7acdf3ced769ee44f47828504` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `a39696e95a34a017be1435db7ff139d5` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `a65b99553494cd178c72b2bc7ae44554` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `ab59a40273401b69d019877be0190fce` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `abcf9d28603eee7630ed93ef9f729888` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `ae3e7304122469f2de3ecbd920a768d1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `bb7326689f40a1190676770dd59a3ca9` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `bed7058beeeefc3efeb8b408ec68e5fa` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `c1b11a39ef693fa6bf1bb3282fafb640` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `c82698395e6a30cad74c0bc0a6cd51af` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `cbdc6e33deb4daac12bdce086165c8f1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `ceff651b3a7cbb667799510fe1d5d2c3` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `d41d8cd98f00b204e9800998ecf8427e` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `e06aacd6139288d5bea4a676ee0c2404` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `ea5705041c355cc87c4aaedca6203840` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `eb80f7bddb699784baa9fbf2941eaf4a` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `ec76edde147207156f6de31f6ecc5bef` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `f5de3ac3f12a2eee62a58d7ec77693dd` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `f87afacff9c44b94db109e3e956a4b33` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `f91cc2b904a778d77da1ca2f0772c1b1` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `fc48ee15a4d16cee6cac9805cf8d0ec4` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
+| `fd6d0f45fab383257462a2b91fb7b169` | MD5 | Imported from the linked hashes.txt list; individual role not specified in that list. |
 
 * [SNOWLIGHT samples](https://github.com/ctrlaltint3l/intelligence/tree/main/VietnameseCampaign/Malware/VShell)
 * [Hashes.txt](https://github.com/ctrlaltint3l/intelligence/raw/refs/heads/main/VietnameseCampaign/IOCs/hashes.txt)

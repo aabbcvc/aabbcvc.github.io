@@ -16,7 +16,6 @@ permalink: /iocs/
     <label class="compact-select">Type<select id="iocType" name="type"><option value="">All types</option></select></label>
     <label class="compact-select">Tag<select id="iocTag" name="tag"><option value="">All tags</option></select></label>
     <label class="compact-select">Source<select id="iocSource" name="source"><option value="">All publications</option></select></label>
-    <label class="compact-select">Classification<select id="iocClassification" name="classification"><option value="">All classifications</option></select></label>
     <button type="reset" class="text-button">Reset</button>
   </form>
   <div class="ioc-results-bar">
@@ -35,4 +34,4 @@ permalink: /iocs/
   </div>
   <noscript><p>Enable JavaScript to search and export indicators, or read the <a href="{{ '/research/' | relative_url }}">IOC sections in our research</a>. The <a href="{{ '/iocs.json' | relative_url }}">complete JSON index</a> is also available.</p></noscript>
 </section>
-<script src="{{ '/assets/js/iocs.js' | relative_url }}" defer></script>
+<script src="{{ '/assets/js/iocs.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

@@ -330,52 +330,52 @@ The hardest part of this research was getting the first contract address. In the
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `mega[.]nz/file/j8wAiL5C#SaSUZoLwnhFxPNWaeInDx0x5Teh2lpGmSMpcdK-b_yI` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `github[.]com/lencod/lencod/raw/refs/heads/main/Dll2[.]dll` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `github[.]com/lencod/lencod/raw/refs/heads/main/putty[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `github[.]com/ooocyber_sabanoms/puttytest/raw/refs/heads/main/putty[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `clouddefenderai[.]com/7a9c4f2e8b1d6h3g5k0m9n2p4q7r8s1t` | URL | Hosting malware ran by Aeternum Loader | Not stated | reported |
-| `github[.]com/DIGLKAYT/test/raw/refs/heads/main/STEALLER[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `l[.]station307[.]com/J12VDRxm1rpS2SPZwmoSK8/Logs[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `github[.]com/caldop/test/raw/refs/heads/main/Logs[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `github[.]com/caldop/test/raw/refs/heads/main/rat1411empty[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `l[.]station307[.]com/7JjDE5knnozgYoubgCLxsk/rat1411empty[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `github[.]com/caldop/test/raw/refs/heads/main/Logs[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `l[.]station307[.]com/7JjDE5knnozgYoubgCLxsk/rat1411empty[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `wdfiles[.]ru/2atSW` | URL | Hosting malware ran by Aeternum Loader | Not stated | reported |
-| `github[.]com/pafke123/a/releases/download/z/Build[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `155[.]138[.]193[.]225/calc[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | reported |
-| `github[.]com/pafke123/aa/raw/d3cd0602a7211e54f59e1b674f6d4fc35e097bc4/limero[.]dll` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `zalupan[.]kozow[.]com:3000/files/zalupan2[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | reported |
-| `rpc-framework-check[.]cfd/putty[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | reported |
-| `rpc-framework-check[.]cfd/123[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | reported |
-| `github[.]com/ooocyber_bunerkdl/ttt/raw/refs/heads/main/123[.]exe` | URL | Hosting malware ran by Aeternum Loader | Not stated | shared-service |
-| `rpc-framework-check[.]cfd/1[.]ps1` | URL | Hosting malware ran by Aeternum Loader | Not stated | reported |
-| `bootstrap-css-framework[.]cfd/` | URL | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `winupdate[.]cfd/` | URL | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `winupdateconf[.]cfd/` | URL | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `nascdn-js[.]life/` | URL | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `berlof[.]shop/` | URL | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `cdn-server-styles[.]cfd/` | URL | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `ferlik[.]shop/` | URL | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `captcha-cds[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `nascdn-js[.]life` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `fonts-fontawesome[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `cloud-safe[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `fontawesome-cdn[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `cdn-clodflare-fotns[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `sdn-cloudflare-js-botstrup[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `sdn-cloudflare-js[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `sdn-cloudflare-js-css[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `rpc-framework-check[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `servupdt[.]com` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `captcha-cds[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `captcha-cds[.]click` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `sdn-cloudflare-js-css[.]cfd` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `sdn-cloudflare-js-css[.]click` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `nascdn-js[.]life` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
-| `nascdn-js[.]click` | Domain | ClickFix/ErrTraffic related domains | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `mega[.]nz/file/j8wAiL5C#SaSUZoLwnhFxPNWaeInDx0x5Teh2lpGmSMpcdK-b_yI` | URL | Hosting malware ran by Aeternum Loader |
+| `github[.]com/lencod/lencod/raw/refs/heads/main/Dll2[.]dll` | URL | Hosting malware ran by Aeternum Loader |
+| `github[.]com/lencod/lencod/raw/refs/heads/main/putty[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `github[.]com/ooocyber_sabanoms/puttytest/raw/refs/heads/main/putty[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `clouddefenderai[.]com/7a9c4f2e8b1d6h3g5k0m9n2p4q7r8s1t` | URL | Hosting malware ran by Aeternum Loader |
+| `github[.]com/DIGLKAYT/test/raw/refs/heads/main/STEALLER[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `l[.]station307[.]com/J12VDRxm1rpS2SPZwmoSK8/Logs[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `github[.]com/caldop/test/raw/refs/heads/main/Logs[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `github[.]com/caldop/test/raw/refs/heads/main/rat1411empty[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `l[.]station307[.]com/7JjDE5knnozgYoubgCLxsk/rat1411empty[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `github[.]com/caldop/test/raw/refs/heads/main/Logs[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `l[.]station307[.]com/7JjDE5knnozgYoubgCLxsk/rat1411empty[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `wdfiles[.]ru/2atSW` | URL | Hosting malware ran by Aeternum Loader |
+| `github[.]com/pafke123/a/releases/download/z/Build[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `155[.]138[.]193[.]225/calc[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `github[.]com/pafke123/aa/raw/d3cd0602a7211e54f59e1b674f6d4fc35e097bc4/limero[.]dll` | URL | Hosting malware ran by Aeternum Loader |
+| `zalupan[.]kozow[.]com:3000/files/zalupan2[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `rpc-framework-check[.]cfd/putty[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `rpc-framework-check[.]cfd/123[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `github[.]com/ooocyber_bunerkdl/ttt/raw/refs/heads/main/123[.]exe` | URL | Hosting malware ran by Aeternum Loader |
+| `rpc-framework-check[.]cfd/1[.]ps1` | URL | Hosting malware ran by Aeternum Loader |
+| `bootstrap-css-framework[.]cfd/` | URL | ClickFix/ErrTraffic related domains |
+| `winupdate[.]cfd/` | URL | ClickFix/ErrTraffic related domains |
+| `winupdateconf[.]cfd/` | URL | ClickFix/ErrTraffic related domains |
+| `nascdn-js[.]life/` | URL | ClickFix/ErrTraffic related domains |
+| `berlof[.]shop/` | URL | ClickFix/ErrTraffic related domains |
+| `cdn-server-styles[.]cfd/` | URL | ClickFix/ErrTraffic related domains |
+| `ferlik[.]shop/` | URL | ClickFix/ErrTraffic related domains |
+| `captcha-cds[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `nascdn-js[.]life` | Domain | ClickFix/ErrTraffic related domains |
+| `fonts-fontawesome[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `cloud-safe[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `fontawesome-cdn[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `cdn-clodflare-fotns[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `sdn-cloudflare-js-botstrup[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `sdn-cloudflare-js[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `sdn-cloudflare-js-css[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `rpc-framework-check[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `servupdt[.]com` | Domain | ClickFix/ErrTraffic related domains |
+| `captcha-cds[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `captcha-cds[.]click` | Domain | ClickFix/ErrTraffic related domains |
+| `sdn-cloudflare-js-css[.]cfd` | Domain | ClickFix/ErrTraffic related domains |
+| `sdn-cloudflare-js-css[.]click` | Domain | ClickFix/ErrTraffic related domains |
+| `nascdn-js[.]life` | Domain | ClickFix/ErrTraffic related domains |
+| `nascdn-js[.]click` | Domain | ClickFix/ErrTraffic related domains |
 
 We have uploaded the complete dump of commands timestamped to our [Github](https://github.com/ctrlaltint3l/intelligence/blob/main/Aeternum%20Loader/Smart%20Contract%20Log.csv).

@@ -697,37 +697,37 @@ They evolved their indicators after CERT-UA's October 2024 disclosure, potential
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `203.161.50[.]145` | IPv4 | FancyBear C2 (NameCheap VPS); CERT-UA attribution; Roundcube exploitation (CVE-2023-43770), ClickFix; Operation Roundish opendir on port 8889 | Not stated | reported |
-| `162.0.236[.]189` | IPv4 | NameCheap VPS; Typosquat domain gov.vppdr[.]com resolves to this IP | Not stated | reported |
-| `209.74.89[.]76` | IPv4 | NameCheap VPS; Typosquat domain mail.govmk[.]com resolves to this IP | Not stated | reported |
-| `zhblz[.]com` | Domain | Primary C2 domain; hosts XSS payloads, JS modules, C2 logging, credential phishing, lure PDFs; resolves to 203.161.50[.]145 | Not stated | reported |
-| `gov.vppdr[.]com` | Domain | Attacker-controlled; observed in testing SquirrelMail | Not stated | reported |
-| `gov.vppdr[.]com` | Domain | Attacker-controlled; typosquat of vppdr.gp.gov.ua; Sieve redirect target and SquirrelMail victim addresses (e.g. pru.mik@gov.vppdr.com) | Not stated | reported |
-| `advenwolf@proton[.]me` | Email | Primary exfil/collection mailbox; Sieve forwarding target in worker.js/old_worker.js/scriptTaker; referenced in Hunt.io and CERT-UA | Not stated | reported |
-| `/zJ2w9x` | URI path | C2 telemetry logging endpoint (GET ?log=); used by worker.js, old_worker.js, worker2.js | Not stated | reported |
-| `/zJ2w9xP8cVb3D4s1mQe7rX6fT5yLg0HhKjNuAoIiZpCkRlOvBtWnYqMUEaSdvGbJ` | URI path | Long C2 logging path variant used by scriptTaker.js; telemetry in url.txt | Not stated | reported |
-| `SystemHealthChek` | String | Roundcube Sieve filter name in scriptTaker.js; seen in CERT-UA reporting | Not stated | reported |
-| `SystemProtect` | String | Roundcube Sieve filter name in addRedirectMailBox.js | Not stated | reported |
-| `/zJ2w9x/uploadfile/` | URI path | Roundcube email exfiltration (POST .eml files) | Not stated | reported |
-| `/authentification.php` | URI path | Phishing form action | Not stated | reported |
-| `/worker` | URI path | Roundcube XSS payload delivery (worker.js) | Not stated | reported |
-| `/worker2` | URI path | SquirrelMail XSS payload delivery (worker2.js) | Not stated | reported |
-| `/addRedirectMailBox.js` | URI path | Sieve rule module (Roundcube) | Not stated | reported |
-| `/getUserCredentials.js` | URI path | Credential-stealer module (worker2) | Not stated | reported |
-| `/getUserCredentialsOLD.js` | URI path | Credential-stealer module (worker/old_worker) | Not stated | reported |
-| `/keyTwoAuth.js` | URI path | 2FA/TOTP extraction module (Roundcube twofactor_gauthenticator) | Not stated | reported |
-| `/adbook.js` | URI path | Roundcube address book exfil module | Not stated | reported |
-| `/delTwoAuth.js` | URI path | 2FA deletion/manipulation module | Not stated | reported |
-| `Adob_Scan_15_ian._2025[.]pdf` | Filename | Romanian air-force lure; post–phishing-login redirect target on zhblz.com | Not stated | reported |
-| `defense[.]pdf` | Filename | Ukrainian defense support lure | Not stated | reported |
-| `dokladMVR[.]pdf` | Filename | Bulgarian Interior Ministry report lure | Not stated | reported |
-| `energetikamk[.]pdf` | Filename | North Macedonian energy sector lure | Not stated | reported |
-| `oborona[.]pdf` | Filename | Ukrainian/defense lure | Not stated | reported |
-| `secure: bigdick` | HTTP header | Optional C2 auth header in servertest.py and backuBDMS/worker.js | Not stated | reported |
-| `roundcube[.]html` | Filename | Phishing landing (Romanian Airforce Roundcube) | Not stated | reported |
-| `logon[.]html` | Filename | Phishing landing (Ascentio clone) | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `203.161.50[.]145` | IPv4 | FancyBear C2 (NameCheap VPS); CERT-UA attribution; Roundcube exploitation (CVE-2023-43770), ClickFix; Operation Roundish opendir on port 8889 |
+| `162.0.236[.]189` | IPv4 | NameCheap VPS; Typosquat domain gov.vppdr[.]com resolves to this IP |
+| `209.74.89[.]76` | IPv4 | NameCheap VPS; Typosquat domain mail.govmk[.]com resolves to this IP |
+| `zhblz[.]com` | Domain | Primary C2 domain; hosts XSS payloads, JS modules, C2 logging, credential phishing, lure PDFs; resolves to 203.161.50[.]145 |
+| `gov.vppdr[.]com` | Domain | Attacker-controlled; observed in testing SquirrelMail |
+| `gov.vppdr[.]com` | Domain | Attacker-controlled; typosquat of vppdr.gp.gov.ua; Sieve redirect target and SquirrelMail victim addresses (e.g. pru.mik@gov.vppdr.com) |
+| `advenwolf@proton[.]me` | Email | Primary exfil/collection mailbox; Sieve forwarding target in worker.js/old_worker.js/scriptTaker; referenced in Hunt.io and CERT-UA |
+| `/zJ2w9x` | URI path | C2 telemetry logging endpoint (GET ?log=); used by worker.js, old_worker.js, worker2.js |
+| `/zJ2w9xP8cVb3D4s1mQe7rX6fT5yLg0HhKjNuAoIiZpCkRlOvBtWnYqMUEaSdvGbJ` | URI path | Long C2 logging path variant used by scriptTaker.js; telemetry in url.txt |
+| `SystemHealthChek` | String | Roundcube Sieve filter name in scriptTaker.js; seen in CERT-UA reporting |
+| `SystemProtect` | String | Roundcube Sieve filter name in addRedirectMailBox.js |
+| `/zJ2w9x/uploadfile/` | URI path | Roundcube email exfiltration (POST .eml files) |
+| `/authentification.php` | URI path | Phishing form action |
+| `/worker` | URI path | Roundcube XSS payload delivery (worker.js) |
+| `/worker2` | URI path | SquirrelMail XSS payload delivery (worker2.js) |
+| `/addRedirectMailBox.js` | URI path | Sieve rule module (Roundcube) |
+| `/getUserCredentials.js` | URI path | Credential-stealer module (worker2) |
+| `/getUserCredentialsOLD.js` | URI path | Credential-stealer module (worker/old_worker) |
+| `/keyTwoAuth.js` | URI path | 2FA/TOTP extraction module (Roundcube twofactor_gauthenticator) |
+| `/adbook.js` | URI path | Roundcube address book exfil module |
+| `/delTwoAuth.js` | URI path | 2FA deletion/manipulation module |
+| `Adob_Scan_15_ian._2025[.]pdf` | Filename | Romanian air-force lure; post–phishing-login redirect target on zhblz.com |
+| `defense[.]pdf` | Filename | Ukrainian defense support lure |
+| `dokladMVR[.]pdf` | Filename | Bulgarian Interior Ministry report lure |
+| `energetikamk[.]pdf` | Filename | North Macedonian energy sector lure |
+| `oborona[.]pdf` | Filename | Ukrainian/defense lure |
+| `secure: bigdick` | HTTP header | Optional C2 auth header in servertest.py and backuBDMS/worker.js |
+| `roundcube[.]html` | Filename | Phishing landing (Romanian Airforce Roundcube) |
+| `logon[.]html` | Filename | Phishing landing (Ascentio clone) |
 
 ## MITRE
 

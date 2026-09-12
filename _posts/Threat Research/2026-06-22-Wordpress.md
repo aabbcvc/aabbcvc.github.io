@@ -696,37 +696,37 @@ The operator also built dedicated workflows for deploying *Godzilla (哥斯拉)*
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `137.175.93[.]126` | IPv4 | Network indicators; exploitation and payload-hosting infrastructure | Not stated | reported |
-| `xs.xxooonline.eu[.]cc` | Domain | Network indicators; Operator-side VShell C2 | Not stated | reported |
-| `43.108.17[.]80` | IPv4 | Network indicators; Observed A-record for the operator-side VShell C2 | Not stated | reported |
-| `.bd.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `.wp-log.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `.sys_log.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `sfl_bk.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `.auto.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `.sd.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `.sd_*.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `.leo_*.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `.brq-*.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `.wvp-*.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `.cc-*.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `.nf-log.php` | Filename | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `/wp-content/uploads/breeze/gravatars/` | File path | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `/wp-content/uploads/trx_addons/` | File path | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `/wp-content/cache/berqwp/` | File path | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `/wp-content/uploads/simple-file-list/` | File path | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `/wp-content/uploads/ninja-forms/` | File path | File and path indicators; recurring artefact reported in the campaign | Not stated | reported |
-| `84F7E396A48913851A10CC78C5CC22A25634564ABD0694465236D2F365E2BDEE` | SHA256 | File hashes; file: down.php | Not stated | reported |
-| `E4AD72B1D7A727FFCCF0E2A9DDF7B08C993826C17EB4B9F49C9734FC54B00B2A` | SHA256 | File hashes; file: new_shell.php | Not stated | reported |
-| `58B17EF746D6FCD9F2E5738486D5AF7C4C02B6732176369536B9782D644EC119` | SHA256 | File hashes; file: new_shell_bypass.php | Not stated | reported |
-| `F14285507192FB7643597E4FFAAB006F9A3021E045999C1114E4E37BDA843B18` | SHA256 | File hashes; file: new_shell_short.php | Not stated | reported |
-| `36BE47426E90899C56221F9521DDE0A20BE3AEFE780753C7DBE8EFEE4D59916E` | SHA256 | File hashes; file: loader_shell.php | Not stated | reported |
-| `54953D3EECC8887F39AC0FDA4D33C84BCB6170144DBD1D133470D757595BEAEC` | SHA256 | File hashes; file: gls.php | Not stated | reported |
-| `0B23404491CAFF35FD5A7A3A3D89F66A5FB48F4BAA57B6C450C15230A0D53181` | SHA256 | File hashes; file: gls_fixed.php | Not stated | reported |
-| `7496C08E0BB24A89814AC83F83551D8159802EA91789C2BE8BB8C9E57C6C3264` | SHA256 | File hashes; file: xs.zip | Not stated | reported |
-| `65E8F2315488670526F055169D7D8496C63A39C452ED74CAE2DA1CB0193969B0` | SHA256 | File hashes; file: shell-deploy.zip | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `137.175.93[.]126` | IPv4 | Network indicators; exploitation and payload-hosting infrastructure |
+| `xs.xxooonline.eu[.]cc` | Domain | Network indicators; Operator-side VShell C2 |
+| `43.108.17[.]80` | IPv4 | Network indicators; Observed A-record for the operator-side VShell C2 |
+| `.bd.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `.wp-log.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `.sys_log.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `sfl_bk.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `.auto.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `.sd.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `.sd_*.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `.leo_*.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `.brq-*.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `.wvp-*.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `.cc-*.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `.nf-log.php` | Filename | File and path indicators; recurring artefact reported in the campaign |
+| `/wp-content/uploads/breeze/gravatars/` | File path | File and path indicators; recurring artefact reported in the campaign |
+| `/wp-content/uploads/trx_addons/` | File path | File and path indicators; recurring artefact reported in the campaign |
+| `/wp-content/cache/berqwp/` | File path | File and path indicators; recurring artefact reported in the campaign |
+| `/wp-content/uploads/simple-file-list/` | File path | File and path indicators; recurring artefact reported in the campaign |
+| `/wp-content/uploads/ninja-forms/` | File path | File and path indicators; recurring artefact reported in the campaign |
+| `84F7E396A48913851A10CC78C5CC22A25634564ABD0694465236D2F365E2BDEE` | SHA256 | File hashes; file: down.php |
+| `E4AD72B1D7A727FFCCF0E2A9DDF7B08C993826C17EB4B9F49C9734FC54B00B2A` | SHA256 | File hashes; file: new_shell.php |
+| `58B17EF746D6FCD9F2E5738486D5AF7C4C02B6732176369536B9782D644EC119` | SHA256 | File hashes; file: new_shell_bypass.php |
+| `F14285507192FB7643597E4FFAAB006F9A3021E045999C1114E4E37BDA843B18` | SHA256 | File hashes; file: new_shell_short.php |
+| `36BE47426E90899C56221F9521DDE0A20BE3AEFE780753C7DBE8EFEE4D59916E` | SHA256 | File hashes; file: loader_shell.php |
+| `54953D3EECC8887F39AC0FDA4D33C84BCB6170144DBD1D133470D757595BEAEC` | SHA256 | File hashes; file: gls.php |
+| `0B23404491CAFF35FD5A7A3A3D89F66A5FB48F4BAA57B6C450C15230A0D53181` | SHA256 | File hashes; file: gls_fixed.php |
+| `7496C08E0BB24A89814AC83F83551D8159802EA91789C2BE8BB8C9E57C6C3264` | SHA256 | File hashes; file: xs.zip |
+| `65E8F2315488670526F055169D7D8496C63A39C452ED74CAE2DA1CB0193969B0` | SHA256 | File hashes; file: shell-deploy.zip |
 
 ## MITRE ATT&CK
 

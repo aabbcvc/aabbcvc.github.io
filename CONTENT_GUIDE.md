@@ -33,9 +33,9 @@ exact columns and one observation per row:
 ```markdown
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `192.0.2[.]1` | IPv4 | Example only: replace with a supported observation and its role. | Not stated | reference-only |
+| Indicator | Type | Context |
+|---|---|---|
+| `192.0.2[.]1` | IPv4 | Example only: replace with a supported observation and its role. |
 ```
 
 If no IOC section existed in a legacy article, it now explicitly says that no
@@ -47,18 +47,7 @@ Use `IPv4`, `IPv6`, `Domain`, `Onion`, `URL`, `URL pattern`, `IP:port`, `SHA256`
 `Scheduled task`, `Service`, `Extension`, `HTTP header`, `Auth token`,
 `Bot username`, `Process name`, `Workflow name`, `Firewall rule`, `Snapshot` or
 `Command pattern` as appropriate. `Hash fragment` and `IP pattern` preserve
-incomplete historical values as `reference-only`; never reconstruct missing data.
-
-Confidence is `High`, `Medium`, `Low` or `Not stated`. It belongs to the individual
-observation, not the article's overall attribution. Classification is one of:
-
-- `reported`: listed by the source without an explicit classification;
-- `confirmed-attacker`: the source explicitly establishes attacker control;
-- `victim-owned`: victim systems or internal scoping indicators;
-- `unverified`: the source expressly qualifies the observation;
-- `shared-service`: a specific resource on shared hosting or a legitimate service;
-- `researcher-controlled`: sinkholed or researcher-owned infrastructure;
-- `reference-only`: incomplete values, generic patterns or artefacts provided for pivoting.
+incomplete historical values for reference; never reconstruct missing data.
 
 Put the role, associated file, known observation dates and any source qualifications
 in Context. Do not substitute publication dates for first/last-seen times.
@@ -85,7 +74,7 @@ Markdown, with their original source links retained.
 The `/iocs.json` endpoint joins the extracted data to Jekyll's published posts.
 The IOC viewer groups identical type/value pairs and preserves all distinct
 source observations. Filters and exports operate on matching observations across
-all result pages. CSV and JSON include context, classification, confidence, tags
+all result pages. CSV and JSON include context, tags
 and source links; TXT is a unique list of refanged values. CSV formula-leading
 cells are escaped for spreadsheet import. IP lookup menus support VirusTotal,
 Hunt.io and AbuseIPDB; domain menus support VirusTotal and Hunt.io. URL menus

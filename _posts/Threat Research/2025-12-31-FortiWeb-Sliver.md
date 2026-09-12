@@ -197,30 +197,30 @@ Although the first C2 domain was registered 3 months earlier, recovered data ind
 
 ## IOCs
 
-| Indicator | Type | Context | Confidence | Classification |
-|---|---|---|---|---|
-| `4086057b9a0f9898c07318e093814ae9cfdaaf6ad71a45b2d0d4cd75e57f9354` | SHA256 | Payloads / Tooling; C2: testing.caai[.]in; type: Sliver implant; name: DECENT_WATERBED; created: 10/12/25 12:34 | Not stated | reported |
-| `964473ffbd593fc52a779b1d699c79cc66b459cf842c2e6221703e2e6a2322c0` | SHA256 | Payloads / Tooling; C2: testing.caai[.]in; type: Sliver implant; name: ESTIMATED_FOOT; created: 22/12/25 07:03 | Not stated | reported |
-| `172a9ee9601ef0eb6fbd2676742edfb201c10369712dbf721e5d105aa1320a32` | SHA256 | Payloads / Tooling; C2: ns1.bafairforce[.]army; type: Sliver implant; name: DAMAGED_COPYRIGHT; created: 22/12/25 07:04 | Not stated | reported |
-| `3c24f30f2ca89d408d42293cab8fbb81cb9c2b0801074ef40f0a79770dac5956` | SHA256 | Payloads / Tooling; C2: ns1.bafairforce[.]army; type: Sliver implant; name: ELEGANT_GO-KART; created: 22/12/25 07:04 | Not stated | reported |
-| `2897ee24de4cca2a4c6a085cf6fdccb6a89c6c23978529d81b4f4e6db46b0b96` | SHA256 | Payloads / Tooling; C2: ns1.ubunutpackages[.]store; type: Sliver implant; name: ARTIFICIAL_SUPPORT; created: 26/12/25 (10:45 in implant table) | Not stated | reported |
-| `dafc7517669e931de858464966af995c44c2e7c6bdf684d53c54d6503cd48a38` | SHA256 | Payloads / Tooling; “microsocks” proxy, port 515; creds: Monkhood6703:64d9cb9c5f075dfaa371a6f; type: Proxy binary; name: cups_lpd; created: — | Not stated | reported |
-| `https://ns1.ubunutpackages[.]store` | URL | Network; Targeting FortiWeb instances; observed from 195.20.17[.]253; domain registered 2025-12-26 | Not stated | reported |
-| `https://ns1.bafairforce[.]army` | URL | Network; Targeting FortiWeb + React2Shell; observed from 193.233.201[.]12; domain registered 2025-09-24 | Not stated | reported |
-| `193.233.201[.]12` | IPv4 | Network; Sliver C2; open directory observed; AS 62005 | Not stated | reported |
-| `195.20.17[.]253` | IPv4 | Network; Sliver C2; open directory observed; AS 62005 | Not stated | reported |
-| `45.150.108[.]43` | IPv4 | Network; Sliver C2; AS 62005 | Not stated | reported |
-| `45.143.167[.]7` | IPv4 | Network; Sliver C2; open directory observed; AS 62005 | Not stated | reported |
-| `80.78.18[.]142` | IPv4 | Network; Sliver C2; AS 39287 | Not stated | reported |
-| `192.81.210[.]81` | IPv4 | Network; Sliver C2; AS 14061 | Not stated | reported |
-| `45.83.181[.]160` | IPv4 | Network; Fast Reverse Proxy (FRP) server; open directory observed; AS 44559 | Not stated | reported |
-| `ns1.ubunutpackages[.]store` | Domain | registration (reported): 2025-12-26; c2 ip: 195.20.17[.]253; status/notes: active (31/12/25); asn: 62005 | Not stated | reported |
-| `195.20.17[.]253` | IPv4 | C2 for ns1.ubunutpackages[.]store; registration (reported): 2025-12-26; c2 ip: 195.20.17[.]253; status/notes: active (31/12/25); asn: 62005 | Not stated | reported |
-| `ns1.bafairforce[.]army` | Domain | registration (reported): 2025-09-24; c2 ip: 193.233.201[.]12; status/notes: active (31/12/25); asn: 62005 | Not stated | reported |
-| `193.233.201[.]12` | IPv4 | C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 193.233.201[.]12; status/notes: active (31/12/25); asn: 62005 | Not stated | reported |
-| `ns1.bafairforce[.]army` | Domain | registration (reported): 2025-09-24; c2 ip: 45.150.108[.]43; status/notes: historic; asn: 62005 | Not stated | reported |
-| `45.150.108[.]43` | IPv4 | C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 45.150.108[.]43; status/notes: historic; asn: 62005 | Not stated | reported |
-| `ns1.bafairforce[.]army` | Domain | registration (reported): 2025-09-24; c2 ip: 80.78.18[.]142; status/notes: historic; asn: 39287 | Not stated | reported |
-| `80.78.18[.]142` | IPv4 | C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 80.78.18[.]142; status/notes: historic; asn: 39287 | Not stated | reported |
-| `ns1.bafairforce[.]army` | Domain | registration (reported): 2025-09-24; c2 ip: 192.81.210[.]81; status/notes: historic; asn: 14061 | Not stated | reported |
-| `192.81.210[.]81` | IPv4 | C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 192.81.210[.]81; status/notes: historic; asn: 14061 | Not stated | reported |
+| Indicator | Type | Context |
+| --- | --- | --- |
+| `4086057b9a0f9898c07318e093814ae9cfdaaf6ad71a45b2d0d4cd75e57f9354` | SHA256 | Payloads / Tooling; C2: testing.caai[.]in; type: Sliver implant; name: DECENT_WATERBED; created: 10/12/25 12:34 |
+| `964473ffbd593fc52a779b1d699c79cc66b459cf842c2e6221703e2e6a2322c0` | SHA256 | Payloads / Tooling; C2: testing.caai[.]in; type: Sliver implant; name: ESTIMATED_FOOT; created: 22/12/25 07:03 |
+| `172a9ee9601ef0eb6fbd2676742edfb201c10369712dbf721e5d105aa1320a32` | SHA256 | Payloads / Tooling; C2: ns1.bafairforce[.]army; type: Sliver implant; name: DAMAGED_COPYRIGHT; created: 22/12/25 07:04 |
+| `3c24f30f2ca89d408d42293cab8fbb81cb9c2b0801074ef40f0a79770dac5956` | SHA256 | Payloads / Tooling; C2: ns1.bafairforce[.]army; type: Sliver implant; name: ELEGANT_GO-KART; created: 22/12/25 07:04 |
+| `2897ee24de4cca2a4c6a085cf6fdccb6a89c6c23978529d81b4f4e6db46b0b96` | SHA256 | Payloads / Tooling; C2: ns1.ubunutpackages[.]store; type: Sliver implant; name: ARTIFICIAL_SUPPORT; created: 26/12/25 (10:45 in implant table) |
+| `dafc7517669e931de858464966af995c44c2e7c6bdf684d53c54d6503cd48a38` | SHA256 | Payloads / Tooling; “microsocks” proxy, port 515; creds: Monkhood6703:64d9cb9c5f075dfaa371a6f; type: Proxy binary; name: cups_lpd; created: — |
+| `https://ns1.ubunutpackages[.]store` | URL | Network; Targeting FortiWeb instances; observed from 195.20.17[.]253; domain registered 2025-12-26 |
+| `https://ns1.bafairforce[.]army` | URL | Network; Targeting FortiWeb + React2Shell; observed from 193.233.201[.]12; domain registered 2025-09-24 |
+| `193.233.201[.]12` | IPv4 | Network; Sliver C2; open directory observed; AS 62005 |
+| `195.20.17[.]253` | IPv4 | Network; Sliver C2; open directory observed; AS 62005 |
+| `45.150.108[.]43` | IPv4 | Network; Sliver C2; AS 62005 |
+| `45.143.167[.]7` | IPv4 | Network; Sliver C2; open directory observed; AS 62005 |
+| `80.78.18[.]142` | IPv4 | Network; Sliver C2; AS 39287 |
+| `192.81.210[.]81` | IPv4 | Network; Sliver C2; AS 14061 |
+| `45.83.181[.]160` | IPv4 | Network; Fast Reverse Proxy (FRP) server; open directory observed; AS 44559 |
+| `ns1.ubunutpackages[.]store` | Domain | registration (reported): 2025-12-26; c2 ip: 195.20.17[.]253; status/notes: active (31/12/25); asn: 62005 |
+| `195.20.17[.]253` | IPv4 | C2 for ns1.ubunutpackages[.]store; registration (reported): 2025-12-26; c2 ip: 195.20.17[.]253; status/notes: active (31/12/25); asn: 62005 |
+| `ns1.bafairforce[.]army` | Domain | registration (reported): 2025-09-24; c2 ip: 193.233.201[.]12; status/notes: active (31/12/25); asn: 62005 |
+| `193.233.201[.]12` | IPv4 | C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 193.233.201[.]12; status/notes: active (31/12/25); asn: 62005 |
+| `ns1.bafairforce[.]army` | Domain | registration (reported): 2025-09-24; c2 ip: 45.150.108[.]43; status/notes: historic; asn: 62005 |
+| `45.150.108[.]43` | IPv4 | C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 45.150.108[.]43; status/notes: historic; asn: 62005 |
+| `ns1.bafairforce[.]army` | Domain | registration (reported): 2025-09-24; c2 ip: 80.78.18[.]142; status/notes: historic; asn: 39287 |
+| `80.78.18[.]142` | IPv4 | C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 80.78.18[.]142; status/notes: historic; asn: 39287 |
+| `ns1.bafairforce[.]army` | Domain | registration (reported): 2025-09-24; c2 ip: 192.81.210[.]81; status/notes: historic; asn: 14061 |
+| `192.81.210[.]81` | IPv4 | C2 for ns1.bafairforce[.]army; registration (reported): 2025-09-24; c2 ip: 192.81.210[.]81; status/notes: historic; asn: 14061 |
