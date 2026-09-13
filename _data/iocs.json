@@ -3019,5 +3019,85 @@
       "context": "File Hashes; artefact: x86_64-unknown-linux-musl"
     }
   ],
-  "_posts/Threat Research/2026-07-22-INC-V2.md": []
+  "_posts/Threat Research/2026-07-22-INC-V2.md": [],
+  "_posts/Threat Research/2026-09-13-government-open-directories.md": [
+    {
+      "value": "45.151.139.249:8765",
+      "display": "45.151.139[.]249:8765",
+      "type": "IP:port",
+      "context": "Unauthenticated staging and data server for the MChS and Russian commercial campaign; first observed by Hunt.io on 30 August 2026."
+    },
+    {
+      "value": "45.151.139.249:8888",
+      "display": "45.151.139[.]249:8888",
+      "type": "IP:port",
+      "context": "Redis cron callback listener configured in the same operator workspace."
+    },
+    {
+      "value": "207.148.64.94:8083",
+      "display": "207.148.64[.]94:8083",
+      "type": "IP:port",
+      "context": "Exposed staging service containing the Kyrgyz MFA records and historical C2 database; first observed by Hunt.io on 30 August 2026."
+    },
+    {
+      "value": "207.148.64.94:8084",
+      "display": "207.148.64[.]94:8084",
+      "type": "IP:port",
+      "context": "Staging and C2 endpoint embedded in the analysed Linux stage loader."
+    },
+    {
+      "value": "89.124.123.216:8080",
+      "display": "89.124.123[.]216:8080",
+      "type": "IP:port",
+      "context": "Exposed operator workspace and recurring callback destination; first observed by Hunt.io on 16 June 2026."
+    },
+    {
+      "value": "89.124.123.216:8081",
+      "display": "89.124.123[.]216:8081",
+      "type": "IP:port",
+      "context": "Alternate reverse-shell listener and callback port used by payloads in the same workspace."
+    },
+    {
+      "value": "f6ee6c03cead9ef26ad5e93f11437323c5e0acef0934468880ac740531234eaa",
+      "display": "f6ee6c03cead9ef26ad5e93f11437323c5e0acef0934468880ac740531234eaa",
+      "type": "SHA256",
+      "context": "VShell-compatible Linux payload variant present in the exposed MFA collection; exact execution location was not established."
+    },
+    {
+      "value": "d79f80b7b2b437f8d8de2e6df54d637080230377c0a07dee384112fe5ef4a81f",
+      "display": "d79f80b7b2b437f8d8de2e6df54d637080230377c0a07dee384112fe5ef4a81f",
+      "type": "SHA256",
+      "context": "Linux TCP stage loader that retrieves and memory-executes an XOR-decoded payload from the configured staging endpoint; execution on MFA was not proven."
+    },
+    {
+      "value": "576eed7cf2a6e8f900cc869b8b05620afb7609ed479412e32b139c8299847ada",
+      "display": "576eed7cf2a6e8f900cc869b8b05620afb7609ed479412e32b139c8299847ada",
+      "type": "SHA256",
+      "context": "VShell-compatible Linux forward-agent variant present in the exposed MFA collection; no victim-side hash match was retained."
+    },
+    {
+      "value": "6dceaa79c34ee2d6ea1734d77e1f1155292e9588f35427a6dcb18f7c0120187e",
+      "display": "6dceaa79c34ee2d6ea1734d77e1f1155292e9588f35427a6dcb18f7c0120187e",
+      "type": "SHA256",
+      "context": "VShell-compatible Linux forward agent whose hash was observed on the recorded MFA host with process evidence."
+    },
+    {
+      "value": "d0ec32e389f3ea70d70cad67061ed6fa125641925821ec0546ebc463709d8f39",
+      "display": "d0ec32e389f3ea70d70cad67061ed6fa125641925821ec0546ebc463709d8f39",
+      "type": "SHA256",
+      "context": "VShell-compatible Linux forward agent whose hash was observed at /tmp/.mfa-vshell-forward-8085 with process and listening-socket evidence."
+    },
+    {
+      "value": "/tmp/.mfa-vshell-forward-8085",
+      "display": "/tmp/.mfa-vshell-forward-8085",
+      "type": "File path",
+      "context": "Confirmed implant path in the supplied Kyrgyz MFA execution records."
+    },
+    {
+      "value": "/tmp/.mfa-vshell-forward-8086",
+      "display": "/tmp/.mfa-vshell-forward-8086",
+      "type": "File path",
+      "context": "Confirmed implant path for the second VShell-compatible MFA forward agent."
+    }
+  ]
 }
