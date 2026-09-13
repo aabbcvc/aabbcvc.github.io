@@ -104,7 +104,7 @@ The route behaviour showed inconsistent authorisation:
 
 The Atlas theft was primarily a loss of operational structure, configuration and credentials. It was not a complete export of live emergency records.
 
-We reviewed every member of `atlas_mchs_dump.tar.gz`, rather than treating the earlier samples as the complete collection. The archive contains 15 JSON exports totalling 3.32 MB uncompressed. Each archived member matched its unpacked copy byte for byte.
+The `atlas_mchs_dump.tar.gz` archive contains 15 JSON exports totalling 3.32 MB uncompressed.
 
 | Archived export | Complete retained contents |
 |---|---|
@@ -141,9 +141,9 @@ The retained form schemas show the types of information Atlas was designed to ho
 - **Airports:** municipality, location, characteristics, weather and major incidents.
 - **Civil-defence authorities:** authority name, address, public phone number and email address.
 
-The first collection contained only 12 form samples. A later full export captured all 1,059 form definitions, containing 6,667 fields in total. These remained schemas rather than populated object rows. They reveal the breadth and structure of information Atlas was designed to collect, but do not prove that every facility, incident or contact record was stolen.
+The archive contains 1,059 form definitions with 6,667 fields. These are schemas rather than populated object rows. They reveal the breadth and structure of information Atlas was designed to collect, but do not prove that every facility, incident or contact record was stolen.
 
-The complete form catalogue extended well beyond the initial examples. It included:
+The form catalogue included:
 
 - 73 forms associated with fires or fire-response infrastructure.
 - 61 forms whose names described hazardous locations or conditions.
@@ -613,7 +613,7 @@ The evidence supports this hierarchy:
 5. **Syrian Customs:** privileged C2 registrations with limited corroboration.
 6. **GKNB and other Russian targets:** repeated attempts, with no confirmed access in the supplied files.
 
-The exposure of the workspaces caused further harm. Stolen data, credentials, target lists and tools became available from the same servers. In the first collection, access logs show that unknown third parties downloaded material from the staging host, extending the breach beyond the original collector.
+The exposure of the workspaces caused further harm. Stolen data, credentials, target lists and tools became available from the same servers. Access logs from the first workspace show that unknown third parties downloaded material from the staging host, extending the breach beyond the original collector.
 
 ## IOCs
 
