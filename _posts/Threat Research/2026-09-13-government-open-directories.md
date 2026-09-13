@@ -41,7 +41,9 @@ Hunt.io first observed the open directories on these dates:
 
 These are discovery dates for the exposed infrastructure. They are not the start dates of the intrusions.
 
-We also found no evidence that all three directories belonged to one operator. Each workspace has a different evidence standard, so we assess success at the specific system or resource reached.
+> **Campaign separation:** These are three separate campaigns. We are not linking them to the same actor, group or sponsor. We compare them because each open directory exposed government targeting or compromise, not because we assess shared authorship.
+
+Each workspace has a different evidence standard, so we assess success at the specific system or resource reached.
 
 ## 1. Russia: MChS Atlas Access and Commercial Data Theft
 
@@ -156,7 +158,8 @@ Other stolen administrative data included:
 
 The files gave the operator a working blueprint of Atlas: its protected data catalogue, administrative model, regional organisation, integrations and map-service plumbing.
 
-> **Suggested screenshot:** A redacted composite showing the roleless profile beside the `/roles/search` response and one Kafka import definition. Blur UUIDs and remove all token values.
+[![1](/assets/images/government-open-directories/atlas-evidence.png){: .align-center .img-border}](/assets/images/government-open-directories/atlas-evidence.png)
+<p class="figure-caption">Redacted Atlas profile and Kafka import evidence</p>
 
 ### The operator changed Atlas state
 
@@ -172,7 +175,7 @@ The test layer pointed to an out-of-band callback service. A response collected 
 
 This supports unauthorised administrative reads, configuration changes and a demonstrated server-side request. It does not prove an operating-system shell, administrator promotion or access to cloud metadata.
 
-> **Suggested screenshot:** The three WMS snapshots in sequence, with the callback identifier redacted, plus the timestamped `SSRF Test` connection object.
+
 
 ### Union Travel: from default credentials to a private network
 
@@ -333,7 +336,8 @@ A separate 9,800-byte C loader was also staged. Static analysis showed it could:
 
 Those are confirmed capabilities of the file. Successful execution of that loader on MFA was not demonstrated.
 
-> **Suggested screenshot:** A redacted MFA proof response beside the two confirmed implant paths and a simple diagram of the PHP to Unix-socket to VShell relay.
+[![2](/assets/images/government-open-directories/mfa-execution.png){: .align-center .img-border}](/assets/images/government-open-directories/mfa-execution.png)
+<p class="figure-caption">Kyrgyz MFA execution proof and confirmed VShell-compatible implant paths</p>
 
 ### Lateral movement was broad but unsuccessful
 
@@ -429,7 +433,8 @@ Three Russian-language or Russian-linked mail hosts also appeared. One attempt r
 
 None of the commands has a retained success response. Even the validity of the supplied credentials cannot be confirmed from this directory.
 
-> **Suggested screenshot:** A short extract of the shell history showing the progression from `whoami` to encoded callbacks and reverse shells. Redact every username and password.
+[![3](/assets/images/government-open-directories/gknb-shell-history.png){: .align-center .img-border}](/assets/images/government-open-directories/gknb-shell-history.png)
+<p class="figure-caption">Sanitised GKNB exploitation commands from the exposed shell history</p>
 
 ### Other exploit tracks
 
@@ -460,7 +465,7 @@ This workspace shows opportunistic tradecraft and repeated manual experimentatio
 
 ## Comparative Analysis
 
-The three directories show a common interest in government systems, but their access paths and outcomes differ sharply.
+These are three separate campaigns, and we do not attribute them to a shared actor. We compare them because their exposed workspaces show different routes into government systems, different levels of operator access and different outcomes.
 
 | Dimension | MChS and Union Travel | Kyrgyz MFA and Syrian Customs | GKNB and Russian targets |
 |---|---|---|---|
