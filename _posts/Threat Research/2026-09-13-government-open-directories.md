@@ -48,6 +48,10 @@ Each workspace has a different evidence standard, so we assess success at the sp
 
 ## 1. Russia: EMERCOM Atlas Compromise and Wider Targeting
 
+[![Hunt.io AttackCapture view of the exposed EMERCOM and Russian-targeting workspace](/assets/images/government-open-directories/emercom-open-directory.png){: .align-center .img-border}](/assets/images/government-open-directories/emercom-open-directory.png)
+
+*Figure 1. Hunt.io AttackCapture view of the exposed `45.151.139[.]249:8765` workspace, showing 1,620 files across 11 subdirectories when captured.*
+
 The first open directory exposed a broad offensive workspace. It contained 1,195 original files and a discovery corpus of more than 5.2 million unique IP addresses.
 
 That scale reflects Internet-wide collection, not 5.2 million attacks or victims. Inside it, however, MChS received focused attention:
@@ -327,6 +331,10 @@ We found no ransomware, wiper or custom malware family in this collection. The p
 
 ## 2. Kyrgyz MFA Compromise and a Syrian Customs C2 Inventory
 
+[![Hunt.io AttackCapture view of the open directory linked to the Kyrgyz MFA compromise](/assets/images/government-open-directories/kyrgyz-mfa-open-directory.png){: .align-center .img-border}](/assets/images/government-open-directories/kyrgyz-mfa-open-directory.png)
+
+*Figure 2. Hunt.io AttackCapture view of the exposed `207.148.64[.]94:8083` workspace, showing 124 retained files associated with the Kyrgyz MFA investigation.*
+
 The second directory contained the clearest government server compromise.
 
 The first successful proof was timestamped 28 August 2026 at 16:29:16 UTC. It used an existing authenticated MFA backend session to upload a one-pixel GIF containing PHP through an embassy-image field.
@@ -468,6 +476,10 @@ If authentic, the records are consistent with broad privileged access in a Syria
 No Syrian Customs business-data dump or verified exfiltration volume was supplied. We treat this as a historical C2 inventory associated with Syrian Customs, rather than 98 proven victim systems.
 
 ## 3. Kyrgyz National Security and Russian Targets
+
+[![Hunt.io AttackCapture view of the workspace targeting Kyrgyz national security and Russian systems](/assets/images/government-open-directories/gknb-open-directory.png){: .align-center .img-border}](/assets/images/government-open-directories/gknb-open-directory.png)
+
+*Figure 3. Hunt.io AttackCapture view of the exposed `89.124.123[.]216:8080` workspace, showing 53 files and 11 subdirectories containing exploit material and shell history.*
 
 Hunt.io first observed the third open directory at `89.124.123[.]216:8080` on 16 June 2026.
 
