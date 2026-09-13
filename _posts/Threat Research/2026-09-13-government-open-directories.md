@@ -54,6 +54,21 @@ That scale reflects Internet-wide collection, not 5.2 million attacks or victims
 - Targets included mapping, authentication, dispatch, file-sharing and administrative services.
 - The strongest result came from Atlas, an emergency-management mapping platform.
 
+### What EMERCOM is
+
+EMERCOM is Russia's federal emergency ministry. Its full translated name is the Ministry of Civil Defence, Emergencies and Disaster Relief of the Russian Federation. Its remit covers civil defence, disaster relief and the coordination of responses to major emergencies.
+
+One EMERCOM subdepartment is the Information and Analytical Center of EMERCOM of Russia, commonly shortened to IAC EMERCOM. It is reportedly responsible for the ministry's internal IT and information security.
+
+IAC EMERCOM also appeared in our earlier research, [Burnt by Burgers: Highlighting Void Blizzard's Russian State Links](https://ctrlaltintel.com/research/VoidBlizzard/). That investigation found:
+
+- Identifiers attributed to suspected Void Blizzard member Denis Obrezko were connected to an IAC EMERCOM work number and repeated activity at EMERCOM facilities during 2021.
+- US filings allege that Obrezko previously worked for the FSB and later became deputy director of Yutek-NN.
+- The same filings link Yutek-NN to Void Blizzard, a Russian state-aligned cyberespionage group.
+- We identified three publicly declared career transitions between Yutek-NN and IAC EMERCOM personnel.
+
+These relationships make IAC EMERCOM a relevant suspected link to state-sponsored espionage. They do not establish that IAC EMERCOM, Atlas or the wider ministry directed or participated in Void Blizzard operations.
+
 ### A roleless Atlas account reached administrative data
 
 The retained profile identified a "Test Operator" account with no assigned roles or additional permissions:
@@ -517,6 +532,7 @@ The table contains operator infrastructure and malware or host artefacts support
 ## References
 
 - [Hunt.io](https://hunt.io/)
+- [Ctrl-Alt-Intel: Burnt by Burgers, Highlighting Void Blizzard's Russian State Links](https://ctrlaltintel.com/research/VoidBlizzard/)
 - [CWE-434: Unrestricted Upload of File with Dangerous Type](https://cwe.mitre.org/data/definitions/434.html)
 - [Roundcube security updates 1.6.11 and 1.5.10](https://roundcube.net/news/2025/06/01/security-updates-1.6.11-and-1.5.10)
 - [Palo Alto Networks advisory for CVE-2024-3400](https://security.paloaltonetworks.com/CVE-2024-3400)
