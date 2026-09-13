@@ -2,6 +2,7 @@
 title: "Three Open Directories Expose Government Targeting and Compromise"
 description: "Three exposed operator workspaces reveal government targeting, confirmed intrusions, stolen data and exploit attempts across Russia, Kyrgyzstan and Syria."
 content_type: research
+canonical_url: https://aabbcvc.github.io/research/government-open-directories/
 categories:
   - Threat Research
 tags:
@@ -15,6 +16,7 @@ tags:
   - Vulnerability Research
 header:
   teaser: /assets/images/covers/government-open-directories.png
+  og_image: https://aabbcvc.github.io/assets/images/covers/government-open-directories.png
 toc: true
 ---
 
