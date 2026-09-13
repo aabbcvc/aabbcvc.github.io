@@ -93,6 +93,9 @@ The route behaviour showed inconsistent authorisation:
 - Some requests added `X-Closed-Network: true`, apparently to claim an internal-network context.
 - The retained evidence does not prove that the header alone caused the bypass.
 
+[![1](/assets/images/government-open-directories/atlas-profile-raw.png){: .align-center .img-border}](/assets/images/government-open-directories/atlas-profile-raw.png)
+<p class="figure-caption">Raw Atlas profile response showing the Test Operator account without administrative roles</p>
+
 ### Samples of the stolen ATLAS data
 
 The Atlas theft was primarily a loss of operational structure, configuration and credentials. It was not a complete export of live emergency records.
@@ -158,8 +161,7 @@ Other stolen administrative data included:
 
 The files gave the operator a working blueprint of Atlas: its protected data catalogue, administrative model, regional organisation, integrations and map-service plumbing.
 
-[![1](/assets/images/government-open-directories/atlas-evidence.png){: .align-center .img-border}](/assets/images/government-open-directories/atlas-evidence.png)
-<p class="figure-caption">Redacted Atlas profile and Kafka import evidence</p>
+
 
 ### The operator changed Atlas state
 
@@ -257,6 +259,9 @@ This confirms command execution as the web-service account on a host named `mfa`
 
 The weakness is best described as authenticated executable file upload, consistent with CWE-434. The evidence does not support a specific CVE, and it does not show how the initial backend session was acquired.
 
+[![2](/assets/images/government-open-directories/mfa-proof-raw.png){: .align-center .img-border}](/assets/images/government-open-directories/mfa-proof-raw.png)
+<p class="figure-caption">Raw MFA proof record for the confirmed id command execution</p>
+
 ### What happened after execution
 
 The records show methodical post-exploitation from the web context.
@@ -336,8 +341,7 @@ A separate 9,800-byte C loader was also staged. Static analysis showed it could:
 
 Those are confirmed capabilities of the file. Successful execution of that loader on MFA was not demonstrated.
 
-[![2](/assets/images/government-open-directories/mfa-execution.png){: .align-center .img-border}](/assets/images/government-open-directories/mfa-execution.png)
-<p class="figure-caption">Kyrgyz MFA execution proof and confirmed VShell-compatible implant paths</p>
+
 
 ### Lateral movement was broad but unsuccessful
 
@@ -386,6 +390,9 @@ No Syrian Customs business-data dump or verified exfiltration volume was supplie
 
 Hunt.io first observed the third open directory at `89.124.123[.]216:8080` on 16 June 2026.
 
+[![3](/assets/images/government-open-directories/gknb-hunt-report-cover.png){: .align-center .img-border}](/assets/images/government-open-directories/gknb-hunt-report-cover.png)
+<p class="figure-caption">Hunt.io AttackCapture report for the exposed GKNB-targeting workspace</p>
+
 Its 146-line `.bash_history` captured a hands-on operator:
 
 - Cloning public exploit repositories.
@@ -433,8 +440,7 @@ Three Russian-language or Russian-linked mail hosts also appeared. One attempt r
 
 None of the commands has a retained success response. Even the validity of the supplied credentials cannot be confirmed from this directory.
 
-[![3](/assets/images/government-open-directories/gknb-shell-history.png){: .align-center .img-border}](/assets/images/government-open-directories/gknb-shell-history.png)
-<p class="figure-caption">Sanitised GKNB exploitation commands from the exposed shell history</p>
+
 
 ### Other exploit tracks
 
