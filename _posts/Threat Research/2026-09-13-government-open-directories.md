@@ -93,9 +93,6 @@ The route behaviour showed inconsistent authorisation:
 - Some requests added `X-Closed-Network: true`, apparently to claim an internal-network context.
 - The retained evidence does not prove that the header alone caused the bypass.
 
-[![1](/assets/images/government-open-directories/atlas-profile-raw.png){: .align-center .img-border}](/assets/images/government-open-directories/atlas-profile-raw.png)
-<p class="figure-caption">Raw Atlas profile response showing the Test Operator account without administrative roles</p>
-
 ### Samples of the stolen ATLAS data
 
 The Atlas theft was primarily a loss of operational structure, configuration and credentials. It was not a complete export of live emergency records.
@@ -259,9 +256,6 @@ This confirms command execution as the web-service account on a host named `mfa`
 
 The weakness is best described as authenticated executable file upload, consistent with CWE-434. The evidence does not support a specific CVE, and it does not show how the initial backend session was acquired.
 
-[![2](/assets/images/government-open-directories/mfa-proof-raw.png){: .align-center .img-border}](/assets/images/government-open-directories/mfa-proof-raw.png)
-<p class="figure-caption">Raw MFA proof record for the confirmed id command execution</p>
-
 ### What happened after execution
 
 The records show methodical post-exploitation from the web context.
@@ -389,9 +383,6 @@ No Syrian Customs business-data dump or verified exfiltration volume was supplie
 ## 3. Kyrgyz National Security and Russian Targets
 
 Hunt.io first observed the third open directory at `89.124.123[.]216:8080` on 16 June 2026.
-
-[![3](/assets/images/government-open-directories/gknb-hunt-report-cover.png){: .align-center .img-border}](/assets/images/government-open-directories/gknb-hunt-report-cover.png)
-<p class="figure-caption">Hunt.io AttackCapture report for the exposed GKNB-targeting workspace</p>
 
 Its 146-line `.bash_history` captured a hands-on operator:
 
