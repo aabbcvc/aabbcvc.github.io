@@ -1,5 +1,5 @@
 ---
-title: "Russian and Allied Government Systems Compromised: Evidence From Three Exposed Operator Workspaces"
+title: "Russian and Allied Government Systems Compromised in Targeted Campaigns"
 description: "Three exposed operator workspaces reveal confirmed access to Russian and Kyrgyz government systems, a Syrian Customs C2 inventory, stolen data and wider targeting of Russian state and industrial organisations."
 content_type: research
 canonical_url: https://aabbcvc.github.io/research/government-open-directories/
