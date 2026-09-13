@@ -3061,19 +3061,19 @@
       "value": "f6ee6c03cead9ef26ad5e93f11437323c5e0acef0934468880ac740531234eaa",
       "display": "f6ee6c03cead9ef26ad5e93f11437323c5e0acef0934468880ac740531234eaa",
       "type": "SHA256",
-      "context": "VShell-compatible Linux payload variant present in the exposed MFA collection; exact execution location was not established."
+      "context": "VShell-compatible Linux payload variant present in the exposed MFA collection; exact execution location remains unknown."
     },
     {
       "value": "d79f80b7b2b437f8d8de2e6df54d637080230377c0a07dee384112fe5ef4a81f",
       "display": "d79f80b7b2b437f8d8de2e6df54d637080230377c0a07dee384112fe5ef4a81f",
       "type": "SHA256",
-      "context": "Linux TCP stage loader that retrieves and memory-executes an XOR-decoded payload from the configured staging endpoint; execution on MFA was not proven."
+      "context": "Linux TCP stage loader that retrieves and memory-executes an XOR-decoded payload from the configured staging endpoint; MFA-side execution remains unverified."
     },
     {
       "value": "576eed7cf2a6e8f900cc869b8b05620afb7609ed479412e32b139c8299847ada",
       "display": "576eed7cf2a6e8f900cc869b8b05620afb7609ed479412e32b139c8299847ada",
       "type": "SHA256",
-      "context": "VShell-compatible Linux forward-agent variant present in the exposed MFA collection; no victim-side hash match was retained."
+      "context": "VShell-compatible Linux forward-agent variant present in the exposed MFA collection; victim-side hash matching remains unavailable."
     },
     {
       "value": "6dceaa79c34ee2d6ea1734d77e1f1155292e9588f35427a6dcb18f7c0120187e",
