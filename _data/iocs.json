@@ -3025,7 +3025,7 @@
       "value": "45.151.139.249:8765",
       "display": "45.151.139[.]249:8765",
       "type": "IP:port",
-      "context": "Unauthenticated staging and data server for the MChS and Russian commercial campaign; first observed by Hunt.io on 30 August 2026."
+      "context": "Unauthenticated staging and data server for the EMERCOM, UEC and wider Russian targeting campaign; first observed by Hunt.io on 30 August 2026."
     },
     {
       "value": "45.151.139.249:8888",

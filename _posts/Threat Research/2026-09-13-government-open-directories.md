@@ -1,6 +1,6 @@
 ---
 title: "Russian and Allied Government Systems Compromised: Evidence From Three Exposed Operator Workspaces"
-description: "Three exposed operator workspaces reveal confirmed access to Russian and Kyrgyz government systems, a Syrian Customs C2 inventory, stolen data and further exploitation attempts."
+description: "Three exposed operator workspaces reveal confirmed access to Russian and Kyrgyz government systems, a Syrian Customs C2 inventory, stolen data and wider targeting of Russian state and industrial organisations."
 content_type: research
 canonical_url: https://aabbcvc.github.io/research/government-open-directories/
 categories:
@@ -24,9 +24,10 @@ toc: true
 
 Using Hunt.io's AttackCapture, we identified three exposed operator workspaces linked to Russian, Kyrgyz and Syrian government systems. The directories preserved much more than target lists. They contained stolen application data, command output, malware, C2 records, exploit tools and an interactive shell history.
 
-The evidence supports three different outcomes:
+The evidence supports different outcomes:
 
 - **Confirmed application compromise:** A roleless account accessed protected administrative data in the Atlas platform used by Russia's Ministry of Emergency Situations, or MChS, and changed application state.
+- **Confirmed SharePoint compromise:** The same workspace contained evidence that a forged site-administrator token and a SharePoint exploit chain reached code execution at Russia's United Engine Corporation, or UEC. A later attempt to dump membership hashes failed.
 - **Confirmed server execution:** Uploaded PHP ran as `www-data` on a Kyrgyz Ministry of Foreign Affairs, or MFA, web host. VShell-compatible agents later ran from `/tmp`.
 - **Reported historical C2 access:** A separate database recorded Syrian Customs hostnames and privileged account contexts, but did not preserve the original intrusion path or host-specific commands.
 - **Repeated targeting without proof of success:** A third workspace repeatedly targeted Kyrgyzstan's national security webmail and Russian systems with public exploits and supplied credentials.
@@ -35,7 +36,7 @@ Hunt.io first observed the open directories on these dates:
 
 | Exposed directory | First observed by Hunt.io | Strongest government-related evidence |
 |---|---|---|
-| `45.151.139[.]249:8765` | 30 August 2026 | MChS Atlas administrative access and state changes |
+| `45.151.139[.]249:8765` | 30 August 2026 | MChS Atlas administrative access and state changes; UEC SharePoint code execution; Union Travel data theft |
 | `207.148.64[.]94:8083` | 30 August 2026 | Kyrgyz MFA command execution and implants; separate Syrian Customs C2 inventory |
 | `89.124.123[.]216:8080` | 16 June 2026 | Repeated exploit attempts against GKNB webmail and Russian targets |
 
@@ -45,7 +46,7 @@ These are discovery dates for the exposed infrastructure. They are not the start
 
 Each workspace has a different evidence standard, so we assess success at the specific system or resource reached.
 
-## 1. Russia: MChS Atlas Access and Commercial Data Theft
+## 1. Russia: EMERCOM Atlas Compromise and Wider Targeting
 
 The first open directory exposed a broad offensive workspace. It contained 1,195 original files and a discovery corpus of more than 5.2 million unique IP addresses.
 
@@ -97,7 +98,23 @@ The route behaviour showed inconsistent authorisation:
 
 The Atlas theft was primarily a loss of operational structure, configuration and credentials. It was not a complete export of live emergency records.
 
-The stolen category hierarchy contained 455 retained nodes. Of these, 396 were marked `authorizedOnly: true`.
+We reviewed every member of `atlas_mchs_dump.tar.gz`, rather than treating the earlier samples as the complete collection. The archive contains 15 JSON exports totalling 3.32 MB uncompressed. Each archived member matched its unpacked copy byte for byte.
+
+| Archived export | Complete retained contents |
+|---|---|
+| `categories.json` | 459 category records under 15 roots |
+| `object_forms.json` | 1,059 form schemas containing 6,667 fields |
+| `kafka_imports.json` | Nine import definitions, including field mappings, integration settings and counters |
+| `roles.json` and `permissions.json` | 20 roles and 100 permission definitions |
+| `my_profile.json` | The roleless, non-administrator `Test Operator` profile used for the requests |
+| `regions.json` | Eight federal-district records |
+| `metrics.json` and `field_types.json` | 45 environmental metrics and five supported field types |
+| `wms.json` | Six map-service configurations, four marked as published |
+| `settings_geo.json` and `settings_routes.json` | Eight geo-analysis layer references and three route-planning layer references |
+| `external_connections.json` | The legitimate Greenplum connection and the operator-created `SSRF Test` entry |
+| `notifications.json` and `orthophotomaps.json` | No notifications and no orthophotomap records in these two responses |
+
+The complete category hierarchy contained 459 nodes across 15 roots. Of these, 397 were marked `authorizedOnly: true`.
 
 | Stolen Atlas category | Retained nodes | What it describes |
 |---|---:|---|
@@ -118,15 +135,27 @@ The retained form schemas show the types of information Atlas was designed to ho
 - **Airports:** municipality, location, characteristics, weather and major incidents.
 - **Civil-defence authorities:** authority name, address, public phone number and email address.
 
-Only 12 of a reported 1,059 forms were retained. These were schemas, not populated object rows. They reveal what Atlas collects and how responders use it, but they do not prove theft of every facility or contact record.
+The first collection contained only 12 form samples. A later full export captured all 1,059 form definitions, containing 6,667 fields in total. These remained schemas rather than populated object rows. They reveal the breadth and structure of information Atlas was designed to collect, but do not prove that every facility, incident or contact record was stolen.
+
+The complete form catalogue extended well beyond the initial examples. It included:
+
+- 73 forms associated with fires or fire-response infrastructure.
+- 61 forms whose names described hazardous locations or conditions.
+- Radiation monitoring and radiation-hazard facilities.
+- Hospitals, medical organisations and vaccination sites.
+- Airports, aerodromes and helicopter landing sites.
+- Oil and gas pipelines, terminals, storage and pumping facilities.
+- Hydrotechnical structures, bridges and flood-prone infrastructure.
+- Electricity, heating and water-supply infrastructure.
+- Population evacuation and temporary accommodation.
 
 The operator also obtained all nine returned Kafka import definitions:
 
 | Data feed | Topic or schema name | State | Counter |
 |---|---|---|---:|
-| Road accidents | `gibdd_dtp` | work | 928,826 |
-| Ministry of Health incidents | `vsodchs` | work | 12,584 |
-| MChS emergencies | `wiki_chs_data` | work | 14,182 |
+| Road accidents | `gibdd_dtp` | work | 943,348 |
+| Ministry of Health incidents | `vsodchs` | work | 13,049 |
+| MChS emergencies | `wiki_chs_data` | work | 14,306 |
 | Water incidents | `gims_drown_request` | work | 9,189 |
 | Fire danger classes | `rosgidromet_kpo_forecast_inline` | stop | 1,234,168 |
 | Fire-danger forecast | `rosgidromet_ppo_forecast_inline` | stop | 824,746 |
@@ -134,7 +163,7 @@ The operator also obtained all nine returned Kafka import definitions:
 | Thermal hotspots | `kaskad_thermopoints` | stop | 178,972 |
 | Utilities accidents | `gkh_accidents` | stop | 153,763 |
 
-Together, those counters total about 3.74 million. They are application counters, not a verified count of exfiltrated records.
+Together, those counters total 3,757,775. They are application counters, not a verified count of exfiltrated records.
 
 The import objects disclosed:
 
@@ -149,10 +178,10 @@ We have withheld the tokens. They are the most immediately useful stolen items b
 
 Other stolen administrative data included:
 
-- 15 of 20 roles, including regional operators, a moderator and a super-user role.
+- All 20 returned roles, including regional operators, a moderator and a super-user role.
 - 100 permission definitions for users, roles, tokens, Kafka imports, WMS, external databases and layer import or export.
-- 20 of 45 environmental metric definitions.
-- 97 region nodes covering eight federal districts and 89 child regions.
+- All 45 returned environmental metric definitions.
+- Eight federal-district records, each parented to Russia.
 - Six legitimate WMS layer configurations and one temporary test layer.
 - 46 PNG attachments totalling 41.3 MB, mostly regional emblems and hazard or map icons.
 
@@ -173,6 +202,64 @@ A second snapshot sequence showed:
 The test layer pointed to an out-of-band callback service. A response collected through the Atlas tile proxy confirmed that the server fetched the operator-controlled URL.
 
 This supports unauthorised administrative reads, configuration changes and a demonstrated server-side request. It does not prove an operating-system shell, administrator promotion or access to cloud metadata.
+
+### Wider Russian targeting from the same workspace
+
+The Atlas evidence sat inside a much broader Russian target set. We treat a domain as targeted when it appeared in target-specific tooling or a follow-up exploit pool. Large passive discovery lists and certificate-transparency results are not counted as attacks by themselves.
+
+The clearest additional organisations were:
+
+| Organisation | What it does | What the operator attempted | Supported outcome |
+|---|---|---|---|
+| [Uralchem](https://www.uralchem.com/about/index.php) | A major Russian producer and exporter of nitrogen, potash and complex fertilisers | Password spraying and SharePoint probing at `surveys.uralchem.com`; Moodle abuse at `education.uralchem.com`; Remote Desktop gateway enumeration at `ts.uralchem.com`, `vpnazot.uralchem.com` and `tsgpmu.uralchem.com`; TrueConf and application probing at `conf.uralchem.com` and `cls-exp-e.uralchem.com`; email tests through `kmx.uralchem.com` | Extensive targeting; no retained proof of successful authentication or command execution |
+| [Bui Chemical Plant](https://bhz.ru/) at `bhz.ru` | A Russian producer of fertilisers, micronutrients and chemical products for agriculture and industry | Mail.ru corporate-login spraying, Bitrix administrator guessing, SSRF tests, PHP upload and webshell attempts, exposed-file searches and spoofed email | Targeting confirmed; the retained SSRF response rejected the URL and no shell or valid login was recorded |
+| [Directorate of the State Customer for Maritime Transport Development Programs](https://dgz.ru/index.html) at `dgz.ru` | A Russian federal institution that commissions state maritime-transport development programmes | Its Exchange host was tested for ProxyShell, ProxyLogon and ProxyNotShell vulnerabilities, including CVE-2021-34473, CVE-2021-34523, CVE-2021-31207, CVE-2021-26855 and CVE-2022-41040 | Exploitation attempts and adjacent-host reconnaissance; no successful response was retained |
+| [United Engine Corporation](https://uecrus.com/) at `uecrus.com` | A Rostec company that develops and manufactures engines for aviation, space, naval and energy applications | The operator forged SharePoint site-administrator tokens for `engineers2030.uecrus.com` using CVE-2023-29357, then used CVE-2023-24955-style Business Data Connectivity payloads to run C# and attempt webshell, file-read and database actions | The evidence supports authentication bypass and C# execution sufficient to publish an output file. A later SQL membership-hash dump failed because the `sqlcmd` invocation was malformed |
+| [Russian Institute for Strategic Studies](https://www.riss.ru/en/ob-institute/tseli-i-zadachi/) at `riss.ru` | A state political and security think tank founded by the Russian president to support national-security policy | Network and subdomain reconnaissance, Rocket.Chat password spraying, Bitrix CVE-2022-27228 file-write attempts, SSRF and open-redirect tests, WAF bypasses and scanning of nearby infrastructure | Persistent targeting; no working shell, authenticated chat session or stolen data was retained |
+
+The UEC artefacts went further than a scanner. The operator generated unsigned SharePoint tokens, queried administrative APIs, overwrote a Business Data Connectivity model with injected C#, triggered it through `ProcessQuery`, restored the original model and read results from `SiteAssets`. The final retained result shows the injected process attempted to launch `sqlcmd`, but failed before any membership hashes were returned.
+
+The attempted post-exploitation command targeted SharePoint's forms-based authentication database. Sensitive query details are shortened here, but the objective and result are clear:
+
+```text
+sqlcmd.exe -S [database host] -d aspnetdb -E -Q
+  "SELECT UserName, Password, PasswordFormat, PasswordSalt, Email, LastLoginDate ..."
+
+exit=1
+cmdout="C:\Program" is not recognized as an internal or external command
+no_outfile
+```
+
+Other named targets included:
+
+- `pmu.ru`, `kchk.ru`, `uralagro.ru` and `td.uralchem.ru`, all selected in the same fertiliser-sector workstream, were scanned for web, SSH, database and mail services. `pmu.ru` received a focused MySQL 5.7.21 password and anonymous-login attack. `bhz.kosnet.ru` and `bhz.com` were also tested as possible Bui Chemical Plant infrastructure, although the files do not establish ownership.
+- `gbi-24.ru`, a Russian supplier of reinforced-concrete products, was tested for FTP, SSH and mail exposure, SMTP user enumeration, relay behaviour and default IMAP credentials.
+- `eidosfilm.ru`, a Russian film and media-production site, received WordPress backup and installation checks, XML-RPC password guessing, pingback SSRF probes and mail-relay tests.
+- `stends.ra-riss.ru`, an RISS-associated hostname, received WordPress oEmbed, redirection, DNS-rebinding, Grafana and Portainer SSRF probes.
+- `zr.ru`, the Russian automotive publication Za Rulem, appeared in a Bitrix administrator password attack against associated infrastructure.
+- `aiggroup.ru`, `exelab.ru` and `i.nsk.ru` were selected as WordPress exploit candidates. The retained result marks every attempted shell deployment as unsuccessful.
+- `i.realty.ru` and `www.meta-invest.ru` were tested with Adminer file-write payloads. The only recorded shell URL returned `404`.
+- `200hramov.mos.ru`, `a.rgis.rk.gov.ru`, `ag.rgis.rk.gov.ru` and `gasu.gov.ru` were sent GeoServer data-store injection and operating-system command payloads. The retained results recorded zero shells and zero successful callback canaries.
+
+The workspace also held two APISIX route exports containing 1,151 entries. Many routes embedded Lua functions for arbitrary command execution, internal-port discovery, metadata-service access and SSH-key persistence. The export does not preserve a reliable domain-to-route mapping, so we cannot attribute those routes to a named Russian organisation or add them to the victim count.
+
+#### Mass Bitrix follow-up
+
+A separate automated lane moved 76 valid Russian domains into Bitrix follow-up or exploitation lists. The tooling attempted CVE-2022-27228 agent injection and PHP shell creation. The terms `confirmed` and `vuln` in the filenames describe product detection or operator triage, not confirmed compromise. A retained 100-host test logged zero shells.
+
+<details markdown="1">
+<summary>Show the 76 Bitrix follow-up domains</summary>
+
+- `ac.mos.ru`, `address.novgorod.ru`, `adm-bruhoveckaya.ru`, `admin-tih.ru`, `admin.economy.gov.ru`, `admkrai.krasnodar.ru`, `admnvrsk.ru`, `admsurgut.ru`, `admtobolsk.ru`, `aisarhiv.sev.gov.ru`
+- `aiso.mos.ru`, `antifrogen.msk.ru`, `antifrogen.spb.ru`, `ar.gov.ru`, `atmr.ru`, `audit-it.ru`, `autoprogress.msk.ru`, `b24.mtp.mos.ru`, `belebey-mr.ru`, `check.mbm.mos.ru`
+- `chelsosna.ru`, `cos.mos.ru`, `dc5.mos.ru`, `dommebeli.spb.ru`, `domod.ru`, `economy.gov.ru`, `edu.sochi.ru`, `ekb.ru`, `erp.roek.ryazan.ru`, `fgistp.economy.gov.ru`
+- `foto.mos.ru`, `ghosler.irkutsk.ru`, `gisp.gov.ru`, `gorgaz.ryazan.ru`, `gorodufa.ru`, `gup-krymenergo.crimea.ru`, `gzhi.kursk.ru`, `ivrayon.ru`, `kamyshlovsky-region.ru`, `klgd.ru`
+- `kpss.kaliningrad.ru`, `krasnoe.kostroma.gov.ru`, `krd.ru`, `krymsk-region.ru`, `ksp36.ru`, `kulturanoyabrsk.yanao.ru`, `kurgan-city.ru`, `mail.saratov.gov.ru`, `medic.tula.ru`, `mk.tula.ru`
+- `mkmcn.mos.ru`, `mosvelofest.mos.ru`, `october.tomsk.gov.ru`, `optimist.perm.ru`, `orel-adm.ru`, `orlmo.ru`, `ossig.mos.ru`, `pf.crimea.ru`, `programs.gov.ru`, `rmat.pskov.ru`
+- `saratov.gov.ru`, `saratovmer.ru`, `sevastopol.gov.ru`, `slavyansk.ru`, `sochi.ru`, `staradm.ru`, `termoform.perm.ru`, `test-task.tatarstan.ru`, `tm.sd.perm.ru`, `tuapseregion.ru`
+- `uizo.voronezh-city.ru`, `unica-test.mos.ru`, `uobr.ru`, `www.china.tomsk.ru`, `www.zelenograd.ru`, `yantarny.gov39.ru`
+
+</details>
 
 
 
@@ -464,13 +551,13 @@ This workspace shows opportunistic tradecraft and repeated manual experimentatio
 
 These are three separate campaigns, and we do not attribute them to a shared actor. We compare them because their exposed workspaces show different routes into government systems, different levels of operator access and different outcomes.
 
-| Dimension | MChS and Union Travel | Kyrgyz MFA and Syrian Customs | GKNB and Russian targets |
+| Dimension | EMERCOM, UEC and Russian commercial targets | Kyrgyz MFA and Syrian Customs | GKNB and Russian targets |
 |---|---|---|---|
-| Targeting | Focused MChS shortlist inside a mass-scan corpus | Government foothold followed by internal exploration; separate historical C2 cluster | Repeated webmail targeting inside a multi-product exploit workspace |
-| Initial access | Broken Atlas authorisation; default Zabbix credentials | Authenticated executable image upload | Public CVEs with supplied credentials |
-| Post-exploitation | Configuration theft, Zabbix commands, Chisel, fscan, SQL and audio collection | Webshell execution, secret discovery, local database access, VShell agents and a web relay | Callback listeners and payload iteration; no confirmed session |
-| Strongest success | Atlas data access and state changes; deep commercial compromise | Confirmed MFA execution and implants | Targeting and attempts only |
-| Government data | Atlas taxonomies, forms, privileges, integrations and two tokens | MFA application secrets and database schema; Syrian C2 identities | No retained stolen data |
+| Targeting | Focused EMERCOM and UEC activity alongside state, industrial and commercial follow-up | Government foothold followed by internal exploration; separate historical C2 cluster | Repeated webmail targeting inside a multi-product exploit workspace |
+| Initial access | Broken Atlas authorisation; forged SharePoint token and injected C# at UEC; default Zabbix credentials | Authenticated executable image upload | Public CVEs with supplied credentials |
+| Post-exploitation | Configuration theft, SharePoint API enumeration and code execution, Zabbix commands, Chisel, fscan, SQL and audio collection | Webshell execution, secret discovery, local database access, VShell agents and a web relay | Callback listeners and payload iteration; no confirmed session |
+| Strongest success | Atlas data access and state changes; UEC SharePoint code execution; deep commercial compromise | Confirmed MFA execution and implants | Targeting and attempts only |
+| Government data | Full Atlas taxonomies and form schemas, privileges, integrations and two tokens; no UEC business data retained | MFA application secrets and database schema; Syrian C2 identities | No retained stolen data |
 | Customisation | Short service-specific automation | Custom PHP and Python transport around VShell | Mostly public proof-of-concepts and stock shell tools |
 | Wider movement | Successful private-network pivot at Union Travel | Extensive discovery, but lateral logins failed | No target-side evidence of movement |
 
@@ -493,6 +580,8 @@ The third workspace was more manual and error-prone. Its shell history shows pub
 Focused government targeting and opportunistic scanning coexisted:
 
 - MChS was deliberately shortlisted inside a corpus of millions of IPs.
+- UEC received a tailored SharePoint chain, while Uralchem, Bui Chemical Plant, DGZ and RISS received service-specific attacks without retained proof of success.
+- Another 76 Russian domains entered automated Bitrix follow-up lists, but the retained 100-host test produced no shells.
 - GKNB webmail was retried many times inside a workspace covering unrelated products.
 - Union Travel was a commercial target where weak management credentials led to deeper access than most government probes.
 - The Syrian Customs cluster may represent earlier access, a reused C2 database or a mixed analysis environment.
@@ -505,9 +594,10 @@ The evidence supports this hierarchy:
 
 1. **Union Travel:** confirmed host execution, private-network pivot and theft of structured personal data and call audio.
 2. **Kyrgyz MFA:** confirmed web execution, application-secret collection, local database access and two running VShell-compatible agents.
-3. **MChS Atlas:** confirmed protected-data access and application-state modification, without a proven server shell.
-4. **Syrian Customs:** privileged C2 registrations with limited corroboration.
-5. **GKNB and other Russian targets:** repeated attempts, with no confirmed access in the supplied files.
+3. **UEC SharePoint:** confirmed authentication bypass and injected C# execution. The attempted database hash dump failed, and no business data was retained.
+4. **MChS Atlas:** confirmed protected-data access and application-state modification, without a proven server shell.
+5. **Syrian Customs:** privileged C2 registrations with limited corroboration.
+6. **GKNB and other Russian targets:** repeated attempts, with no confirmed access in the supplied files.
 
 The exposure of the workspaces caused further harm. Stolen data, credentials, target lists and tools became available from the same servers. In the first collection, access logs show that unknown third parties downloaded material from the staging host, extending the breach beyond the original collector.
 
@@ -517,7 +607,7 @@ The table contains operator infrastructure and malware or host artefacts support
 
 | Indicator | Type | Context |
 |---|---|---|
-| `45.151.139[.]249:8765` | IP:port | Unauthenticated staging and data server for the MChS and Russian commercial campaign; first observed by Hunt.io on 30 August 2026. |
+| `45.151.139[.]249:8765` | IP:port | Unauthenticated staging and data server for the EMERCOM, UEC and wider Russian targeting campaign; first observed by Hunt.io on 30 August 2026. |
 | `45.151.139[.]249:8888` | IP:port | Redis cron callback listener configured in the same operator workspace. |
 | `207.148.64[.]94:8083` | IP:port | Exposed staging service containing the Kyrgyz MFA records and historical C2 database; first observed by Hunt.io on 30 August 2026. |
 | `207.148.64[.]94:8084` | IP:port | Staging and C2 endpoint embedded in the analysed Linux stage loader. |
@@ -535,6 +625,13 @@ The table contains operator infrastructure and malware or host artefacts support
 
 - [Hunt.io](https://hunt.io/)
 - [Ctrl-Alt-Intel: Burnt by Burgers, Highlighting Void Blizzard's Russian State Links](https://ctrlaltintel.com/research/VoidBlizzard/)
+- [Uralchem: About the company](https://www.uralchem.com/about/index.php)
+- [Bui Chemical Plant](https://bhz.ru/)
+- [Directorate of the State Customer for Maritime Transport Development Programs](https://dgz.ru/index.html)
+- [United Engine Corporation](https://uecrus.com/)
+- [Russian Institute for Strategic Studies: Goals and objectives](https://www.riss.ru/en/ob-institute/tseli-i-zadachi/)
+- [Microsoft security update addressing CVE-2023-29357 in SharePoint Server 2019](https://support.microsoft.com/en-au/topic/description-of-the-security-update-for-sharepoint-server-2019-june-13-2023-kb5002402-c5d58925-f7be-4d16-a61b-8ce871bbe34d)
+- [Microsoft security update addressing CVE-2023-24955 in SharePoint Server Subscription Edition](https://support.microsoft.com/en-us/topic/description-of-the-security-update-for-sharepoint-server-subscription-edition-may-9-2023-kb5002390-5d150cf3-e42d-4a0e-b015-0b4357b8e5ea)
 - [CWE-434: Unrestricted Upload of File with Dangerous Type](https://cwe.mitre.org/data/definitions/434.html)
 - [Roundcube security updates 1.6.11 and 1.5.10](https://roundcube.net/news/2025/06/01/security-updates-1.6.11-and-1.5.10)
 - [Palo Alto Networks advisory for CVE-2024-3400](https://security.paloaltonetworks.com/CVE-2024-3400)
