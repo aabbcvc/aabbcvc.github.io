@@ -54,7 +54,9 @@ Each workspace has a different evidence standard, so we assess success at the sp
 
 The first open directory exposed a broad offensive workspace. It contained 1,195 original files and a discovery corpus of more than 5.2 million unique IP addresses.
 
-That scale reflects Internet-wide collection, not 5.2 million attacks or victims. Inside it, however, MChS received focused attention:
+Ukrainian-language strings appeared throughout the playbook, including scripts, comments and operator-facing text. We have not attributed this campaign to a particular group, and language artefacts alone do not establish the operator's identity or location.
+
+MChS received focused attention:
 
 - 18 ministry-related domains were shortlisted.
 - 18 public IP addresses were selected.
