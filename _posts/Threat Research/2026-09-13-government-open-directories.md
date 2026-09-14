@@ -22,12 +22,12 @@ toc: true
 
 ## Overview
 
-Using Hunt.io's AttackCapture, we identified three exposed operator workspaces linked to Russian, Kyrgyz and Syrian government systems. The directories preserved much more than target lists. They contained stolen application data, command output, malware, C2 records, exploit tools and an interactive shell history.
+Using Hunt.io's AttackCapture, we identified three exposed operator workspaces linked to compromises against Russian, Kyrgyz and Syrian government systems.
 
 The three workspaces document different outcomes:
 
 - **Confirmed application compromise:** A roleless account accessed protected administrative data in the Atlas platform used by Russia's Ministry of Emergency Situations, or MChS, and changed application state.
-- **Confirmed SharePoint compromise:** The same workspace contained evidence that a forged site-administrator token and a SharePoint exploit chain reached code execution at Russia's United Engine Corporation, or UEC. A later attempt to dump membership hashes failed.
+- **Confirmed SharePoint compromise:** The same workspace contained evidence that a forged site-administrator token and a SharePoint exploit chain reached code execution at Russia's United Engine Corporation, or UEC.
 - **Confirmed server execution:** Uploaded PHP ran as `www-data` on a Kyrgyz Ministry of Foreign Affairs, or MFA, web host. VShell-compatible agents later ran from `/tmp`.
 - **Reported historical C2 access:** A separate database recorded Syrian Customs hostnames and privileged account contexts.
 - **Repeated targeting:** A third workspace repeatedly targeted Kyrgyzstan's national security webmail and Russian systems with public exploits and supplied credentials.
@@ -40,21 +40,16 @@ Hunt.io first observed the open directories on these dates:
 | `207.148.64[.]94:8083` | 30 August 2026 | Kyrgyz MFA command execution and implants; separate Syrian Customs C2 inventory |
 | `89.124.123[.]216:8080` | 16 June 2026 | Repeated exploit attempts against GKNB webmail and Russian targets |
 
-These dates record Hunt.io's first observation of the exposed infrastructure.
-
 > **Campaign separation:** These are three separate campaigns. Attribution is assessed separately for each campaign. We compare them because each open directory exposed government targeting or compromise.
 
-Each workspace has a different evidence standard, so we assess success at the specific system or resource reached.
 
-## 1. Russia: EMERCOM Atlas Compromise and Wider Targeting
+## Russia: EMERCOM Atlas Compromise and Wider Targeting
 
 [![Hunt.io AttackCapture view of the exposed EMERCOM and Russian-targeting workspace](/assets/images/government-open-directories/emercom-open-directory.png){: .align-center .img-border}](/assets/images/government-open-directories/emercom-open-directory.png)
 
 *Figure 1. Hunt.io AttackCapture view of the exposed `45.151.139[.]249:8765` workspace, showing 1,620 files across 11 subdirectories when captured.*
 
-The first open directory exposed a broad offensive workspace. It contained 1,195 original files and a discovery corpus of more than 5.2 million unique IP addresses.
-
-Ukrainian-language strings appeared throughout the playbook, including scripts, comments and operator-facing text. Campaign attribution is open.
+The first open directory exposed a broad offensive workspace. Ukrainian-language strings appeared throughout the playbook, including scripts, comments and operator-facing text. Ctrl-Alt-Intel is not attributing this to any known group or threat actor.
 
 MChS received focused attention:
 
@@ -79,6 +74,12 @@ IAC EMERCOM also appeared in our earlier research, [Burnt by Burgers: Highlighti
 These relationships make IAC EMERCOM a relevant suspected link to state-sponsored espionage. The finding concerns personnel and organisational links between IAC EMERCOM and Yutek-NN.
 
 ### A roleless Atlas account reached administrative data
+
+Atlas is an internally developed official EMERCOM hazard and emergency-risk GIS with both public and restricted components.
+
+[![EMERCOM Atlas of Hazards and Risks interface](/assets/images/government-open-directories/atlas-hazards-and-risks.png){: .align-center .img-border}](/assets/images/government-open-directories/atlas-hazards-and-risks.png)
+
+> **From EMERCOM press center**: This year, the "Atlas of Hazards and Risks" information system successfully completed a pilot operation. It currently contains data on various natural and man-made hazards and threats currently affecting Russia's regions. These include, for example, wildfires, floods, power outages in populated areas, transportation disruptions, epidemics, and more. The information will be expanded and updated in the future. The service is already publicly available online.
 
 The retained profile identified a "Test Operator" account whose assigned-role and additional-permission arrays were empty:
 
@@ -170,17 +171,6 @@ The operator also obtained all nine returned Kafka import definitions:
 
 Together, those application counters total 3,757,775 and describe processing volume across the nine integrations.
 
-The import objects disclosed:
-
-- Topic and schema names.
-- Field mappings for coordinates and external IDs.
-- Linked form identifiers.
-- Start and stop timestamps.
-- External integration endpoints.
-- Two non-empty `X-AUTH-TOKEN` values in active integrations.
-
-We have withheld the tokens. They are the most immediately useful stolen items because they could provide access to connected services after the Atlas flaw is fixed.
-
 Other stolen administrative data included:
 
 - All 20 returned roles, including regional operators, a moderator and a super-user role.
@@ -191,8 +181,6 @@ Other stolen administrative data included:
 - 46 PNG attachments totalling 41.3 MB, mostly regional emblems and hazard or map icons.
 
 The files gave the operator a working blueprint of Atlas: its protected data catalogue, administrative model, regional organisation, integrations and map-service plumbing.
-
-
 
 ### The operator changed Atlas state
 
@@ -265,7 +253,6 @@ A separate automated lane moved 76 valid Russian domains into Bitrix follow-up o
 - `uizo.voronezh-city.ru`, `unica-test.mos.ru`, `uobr.ru`, `www.china.tomsk.ru`, `www.zelenograd.ru`, `yantarny.gov39.ru`
 
 </details>
-
 
 
 ### Union Travel: from default credentials to a private network
@@ -369,13 +356,6 @@ The proof metadata preserves `id` verbatim. Returned output from the longer one-
 - Inspected Bitdefender and Puppet components.
 - Tested SSH, Redis, PostgreSQL and MySQL credentials against internal systems.
 - Probed internal web applications and framework debug paths.
-
-A network-diagnostic response included:
-
-```text
-default via 10.51.6.65 dev ens192
-10.51.6.64/27 dev ens192 scope link src 10.51.6.93
-```
 
 A local PostgreSQL session returned `current_user=utn`, `current_database=utn` and PostgreSQL 15.3. Visible tables included:
 
