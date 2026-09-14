@@ -446,16 +446,6 @@ Five hostnames explicitly used `customs.gov.sy`:
 
 Nearby records described virtualisation, storage, monitoring, collaboration, ERP and Windows systems. Reported account contexts included `root`, `oracle`, `vsphere-ui` and `NT AUTHORITY\SYSTEM`.
 
-If authentic, the records are consistent with broad privileged access in a Syrian Customs environment. The limitations are substantial:
-
-- The database contains self-reported agent identities.
-- It lacks the original exploitation chain.
-- It lacks host-specific terminal history.
-- Repeated registrations inflate the row count.
-- Two Windows identities account for 60 of 98 records.
-- A probable test or analysis host named `PETER-PC` appears in the inventory.
-- The surrounding collection contains `ctf`, test and replay markers.
-
 The records support a historical C2 inventory of 98 agent rows associated with Syrian Customs.
 
 ## Kyrgyz National Security and Russian Targets
@@ -513,8 +503,6 @@ Three Russian-language or Russian-linked mail hosts also appeared. One attempt r
 
 The directory records credential-supplied commands against the target webmail systems.
 
-
-
 ### Other exploit tracks
 
 The operator moved quickly between public vulnerabilities and exposed services:
@@ -542,20 +530,6 @@ A 154-byte `upgrade.img` contained a one-line netcat reverse shell prepared for 
 
 This workspace shows opportunistic tradecraft and repeated manual experimentation. Mistyped commands, invalid option combinations and payload changes suggest an interactive, troubleshooting-heavy workflow with limited automation.
 
-## Comparative Analysis
-
-These are three separate campaigns. Campaign attribution is assessed independently. We compare them because their exposed workspaces show different routes into government systems, different levels of operator access and different outcomes.
-
-| Dimension | EMERCOM, UEC and Russian commercial targets | Kyrgyz MFA and Syrian Customs | GKNB and Russian targets |
-|---|---|---|---|
-| Targeting | Focused EMERCOM and UEC activity alongside state, industrial and commercial follow-up | Government foothold followed by internal exploration; separate historical C2 cluster | Repeated webmail targeting inside a multi-product exploit workspace |
-| Initial access | Broken Atlas authorisation; forged SharePoint token and injected C# at UEC; default Zabbix credentials | Authenticated executable image upload | Public CVEs with supplied credentials |
-| Post-exploitation | Configuration theft, SharePoint API enumeration and code execution, Zabbix commands, Chisel, fscan, SQL and audio collection | Webshell execution, secret discovery, local database access, VShell agents and a web relay | Callback listeners and payload iteration during targeting |
-| Strongest success | Atlas data access and state changes; UEC SharePoint code execution; deep commercial compromise | Confirmed MFA execution and implants | Exploit and credential targeting |
-| Government data | Full Atlas taxonomies and form schemas, privileges, integrations and two tokens; UEC SharePoint execution | MFA application secrets and database schema; Syrian C2 identities | Government-system targeting |
-| Customisation | Short service-specific automation | Custom PHP and Python transport around VShell | Mostly public proof-of-concepts and stock shell tools |
-| Wider movement | Successful private-network pivot at Union Travel | Extensive discovery; lateral login attempts failed | External-service targeting and callback preparation |
-
 ### Tradecraft
 
 The first workspace was efficient and repeatable. The operator converted exposed administration and default credentials into tunnels, internal discovery and collection.
@@ -568,7 +542,7 @@ The MFA records show more adaptive engineering:
 - C2 was carried through PHP, HTTPS, a Unix socket and Python.
 - The operator repeatedly repaired the relay.
 
-The third workspace was more manual and error-prone. Its shell history shows public tooling, syntax changes and repeated listeners. The evidentiary trail ends with operator-side activity.
+The third workspace was more manual and error-prone. Its shell history shows public tooling, syntax changes and repeated listeners. 
 
 ### Opportunism and targeting
 
@@ -581,8 +555,6 @@ Focused government targeting and opportunistic scanning coexisted:
 - Union Travel was a commercial target where weak management credentials led to deeper access than most government probes.
 - The Syrian Customs cluster may represent earlier access, a reused C2 database or a mixed analysis environment.
 
-Victim counts require evidence beyond target-list inclusion. Success came where ordinary controls failed: inconsistent authorisation, executable uploads, default credentials and reachable management functions.
-
 ### Success and impact
 
 The campaign outcomes form this hierarchy:
@@ -593,8 +565,6 @@ The campaign outcomes form this hierarchy:
 4. **MChS Atlas:** confirmed protected-data access and application-state modification.
 5. **Syrian Customs:** privileged C2 registrations with limited corroboration.
 6. **GKNB and other Russian targets:** repeated exploit, credential and reconnaissance targeting.
-
-The exposure of the workspaces caused further harm. Stolen data, credentials, target lists and tools became available from the same servers. Access logs from the first workspace show additional third-party downloads from the staging host, extending the breach beyond the original collector.
 
 ## IOCs
 
