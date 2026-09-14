@@ -47,7 +47,7 @@ Hunt.io first observed the open directories on these dates:
 
 [![Hunt.io AttackCapture view of the exposed EMERCOM and Russian-targeting workspace](/assets/images/government-open-directories/emercom-open-directory.png){: .align-center .img-border}](/assets/images/government-open-directories/emercom-open-directory.png)
 
-*Figure 1. Hunt.io AttackCapture view of the exposed `45.151.139[.]249:8765` workspace, showing 1,620 files across 11 subdirectories when captured.*
+<p class="figure-caption">Figure 1. Hunt.io AttackCapture view of the exposed <code>45.151.139[.]249:8765</code> workspace, showing 1,620 files across 11 subdirectories when captured.</p>
 
 The first open directory exposed a broad offensive workspace. Ukrainian-language strings appeared throughout the playbook, including scripts, comments and operator-facing text. Ctrl-Alt-Intel is not attributing this to any known group or threat actor.
 
@@ -78,6 +78,8 @@ These relationships make IAC EMERCOM a relevant suspected link to state-sponsore
 Atlas is an internally developed official EMERCOM hazard and emergency-risk GIS with both public and restricted components.
 
 [![EMERCOM Atlas of Hazards and Risks interface](/assets/images/government-open-directories/atlas-hazards-and-risks.png){: .align-center .img-border}](/assets/images/government-open-directories/atlas-hazards-and-risks.png)
+
+<p class="figure-caption">Figure 2. EMERCOM Atlas of Hazards and Risks interface.</p>
 
 > **From EMERCOM press center**: This year, the "Atlas of Hazards and Risks" information system successfully completed a pilot operation. It currently contains data on various natural and man-made hazards and threats currently affecting Russia's regions. These include, for example, wildfires, floods, power outages in populated areas, transportation disruptions, epidemics, and more. The information will be expanded and updated in the future. The service is already publicly available online.
 
@@ -317,11 +319,11 @@ This workspace favoured simple, repeatable tools:
 
 The collection shows discovery, weak credentials or exposed administration, command execution, tunnelling, internal discovery and data collection. Malware activity centred on tunnelling and remote-access tools.
 
-## 2. Kyrgyz MFA Compromise and a Syrian Customs C2 Inventory
+## Kyrgyz MFA Compromise and a Syrian Customs C2 Inventory
 
 [![Hunt.io AttackCapture view of the open directory linked to the Kyrgyz MFA compromise](/assets/images/government-open-directories/kyrgyz-mfa-open-directory.png){: .align-center .img-border}](/assets/images/government-open-directories/kyrgyz-mfa-open-directory.png)
 
-*Figure 2. Hunt.io AttackCapture view of the exposed `207.148.64[.]94:8083` workspace, showing 124 retained files associated with the Kyrgyz MFA investigation.*
+<p class="figure-caption">Figure 3. Hunt.io AttackCapture view of the exposed <code>207.148.64[.]94:8083</code> workspace, showing 124 retained files associated with the Kyrgyz MFA investigation.</p>
 
 The second directory contained the clearest government server compromise.
 
@@ -456,11 +458,11 @@ If authentic, the records are consistent with broad privileged access in a Syria
 
 The records support a historical C2 inventory of 98 agent rows associated with Syrian Customs.
 
-## 3. Kyrgyz National Security and Russian Targets
+## Kyrgyz National Security and Russian Targets
 
 [![Hunt.io AttackCapture view of the workspace targeting Kyrgyz national security and Russian systems](/assets/images/government-open-directories/gknb-open-directory.png){: .align-center .img-border}](/assets/images/government-open-directories/gknb-open-directory.png)
 
-*Figure 3. Hunt.io AttackCapture view of the exposed `89.124.123[.]216:8080` workspace, showing 53 files and 11 subdirectories containing exploit material and shell history.*
+<p class="figure-caption">Figure 4. Hunt.io AttackCapture view of the exposed <code>89.124.123[.]216:8080</code> workspace, showing 53 files and 11 subdirectories containing exploit material and shell history.</p>
 
 Hunt.io first observed the third open directory at `89.124.123[.]216:8080` on 16 June 2026.
 

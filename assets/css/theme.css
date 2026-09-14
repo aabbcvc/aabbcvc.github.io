@@ -173,7 +173,7 @@ select { font: inherit; }
 .post-content img { display: block; max-height: 82vh; margin: 2em auto; border: 1px solid var(--line); box-shadow: 0 12px 30px rgba(0, 0, 0, .2); }
 .post-content figure { margin: 2em 0; }
 .post-content figure img { margin-bottom: 0; }
-.post-content figcaption { margin-top: 10px; color: var(--quiet); text-align: center; font-size: 12px; }
+.post-content figcaption, .post-content .figure-caption { margin-top: 10px; color: var(--quiet); text-align: center; font-size: 12px; }
 .post-content iframe { width: 100%; border: 1px solid var(--line); }
 .post-content code { padding: .12em .38em; color: #a5ebcc; background: #0d1815; border: 1px solid #20362d; font: .86em ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .post-content pre { overflow: auto; margin: 0; padding: 22px; color: #d5ded9; background: #07100e; border: 1px solid var(--line); font: 13px/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
